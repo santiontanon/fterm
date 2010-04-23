@@ -1,0 +1,36 @@
+
+(Define-Ontology FAMILY-ONTOLOGY
+  (creator "IIIA-CSIC")
+  (description ""))
+
+(Define-sort (FAMILY-ONTOLOGY PERSON)
+  (FATHER ! MALE)
+  (MOTHER ! FEMALE)
+  (BROTHER ! MALE)
+  (SISTER ! FEMALE)
+  (SON ! MALE)
+  (DAUGHTER ! FEMALE)
+  (NIECE ! FEMALE)
+  (NEPHEW ! MALE)
+  (GRANDFATHER MALE)
+  (GRANDMOTHER FEMALE)
+  (UNCLE MALE)
+  (AUNT FEMALE))
+
+(Define-sort (PERSON MALE)
+  (WIFE ! FEMALE)
+)
+
+(Define-sort (PERSON FEMALE)
+  (HUSBAND ! MALE)
+)
+
+
+(Define-sort (FAMILY-ONTOLOGY uncle-solution))
+
+
+(Define-sort (FAMILY-ONTOLOGY uncle-problem)
+  (DESCRIPTION PERSON)
+  (SOLUTION uncle-solution))
+
+

@@ -1,0 +1,6 @@
+;; 22 - Noviembre - 2005
+
+(define-Domain-Model MONKS-DM
+  (creator "Santi Onta–—n (IIIA-CSIC)")
+  (description "Domain model for the MONKS identification problem")
+  (uses monks-ontology))

@@ -1,0 +1,18 @@
+;; 24 - Octubre - 2005
+
+(define-Domain-Model ROBOTS-DM
+  (creator "Santi Onta–—n (IIIA-CSIC)")
+  (description "Domain model for the ROBOTS identification problem")
+  (uses robots-ontology))
+
+
+(define (holding-object :id balloon))
+(define (holding-object :id flag))
+(define (holding-object :id sword))
+
+(define (shape :id square))
+(define (shape :id octagon))
+(define (shape :id round))
+
+(Define (robot-solution :id friendly))
+(Define (robot-solution :id unfriendly))

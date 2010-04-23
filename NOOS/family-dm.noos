@@ -1,0 +1,10 @@
+;; 29 - Enero - 2005
+
+(define-Domain-Model FAMILY-DM
+  (creator "Santi Ontañon (IIIA-CSIC)")
+  (description "")
+  (uses FAMILY-oontlogy))
+
+   
+(Define (uncle-solution :id is-uncle))
+(Define (uncle-solution :id is-not-uncle))

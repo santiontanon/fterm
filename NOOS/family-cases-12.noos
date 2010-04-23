@@ -1,0 +1,137 @@
+
+;; FAMILIA 1
+
+;;            CHRISTOPHER=PENELOPE           ANDREW=CHRISTINE
+;;                       !                          !
+;;            --------------------         -------------------
+;;            !                   !        !                 !
+;; MARGARET=ARTHUR              VICTORIA=JAMES          JENNIFER=CHARLES
+;;                                      !
+;;                              --------------
+;;                              !             !
+;;                            COLIN         CHARLOTTE
+
+(define-episode (male :id CHRISTOPHER)
+  (SON Arthur)
+  (DAUGHTER Victoria)
+  (WIFE Penelope))
+
+(define-episode (female :id PENELOPE)
+  (SON Arthur)
+  (DAUGHTER Victoria)
+  (HUSBAND Christopher))
+
+
+(define-episode (male :id ANDREW)
+  (SON James)
+  (DAUGHTER Jennifer)
+  (WIFE Christine))
+
+(define-episode (female :id CHRISTINE)
+  (SON James)
+  (DAUGHTER Jennifer)
+  (HUSBAND Andrew))
+
+(define-episode (female :id MARGARET)
+  (HUSBAND Arthur))
+
+(define-episode (male :id ARTHUR)
+  (WIFE Margaret)
+  (FATHER Christopher)
+  (MOTHER Penelope)
+  (SISTER Victoria))
+
+(define-episode (female :id VICTORIA)
+  (HUSBAND James)
+  (FATHER Christopher)
+  (MOTHER Penelope)
+  (BROTHER Arthur)
+  (SON Colin)
+  (DAUGHTER Charlotte))
+
+(define-episode (male :id JAMES)
+  (WIFE Victoria)
+  (FATHER Andrew)
+  (MOTHER Christine)
+  (SISTER Jennifer)
+  (SON Colin)
+  (DAUGHTER Charlotte))
+
+(define-episode (female :id JENNIFER)
+  (HUSBAND Charles)
+  (FATHER Andrew)
+  (MOTHER Christine)
+  (BROTHER James))
+
+(define-episode (male :id CHARLES)
+  (WIFE Jennifer))
+
+(define-episode (male :id COLIN)
+  (FATHER James)
+  (MOTHER Victoria)
+  (SISTER Charlotte))
+
+(define-episode (female :id CHARLOTTE)
+  (FATHER James)
+  (MOTHER Victoria)
+  (BROTHER Colin))
+
+
+(define-episode (uncle-problem :id E1)
+  (DESCRIPTION Christopher)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E2)
+  (DESCRIPTION Penelope)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E3)
+  (DESCRIPTION Arthur)
+  (SOLUTION is-uncle))
+
+
+(define-episode (uncle-problem :id E4)
+  (DESCRIPTION Victoria)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E5)
+  (DESCRIPTION James)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E6)
+  (DESCRIPTION Andrew)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E7)
+  (DESCRIPTION Christine)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E8)
+  (DESCRIPTION Jennifer)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E9)
+  (DESCRIPTION Charles)
+  (SOLUTION is-uncle))
+
+
+(define-episode (uncle-problem :id E10)
+  (DESCRIPTION Colin)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E11)
+  (DESCRIPTION Charlotte)
+  (SOLUTION is-not-uncle))
+
+(define-episode (uncle-problem :id E12)
+  (DESCRIPTION Margaret)
+  (SOLUTION is-not-uncle))
+

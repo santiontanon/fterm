@@ -1,0 +1,25 @@
+;; 24 - Octubre - 2005
+
+(Define-Ontology ROBOTS-ONTOLOGY
+  (creator "Santi Onta–—n (IIIA-CSIC)")
+  (description "Robots ontology"))
+
+
+(define-sort (ROBOTS-ONTOLOGY HOLDING-OBJECT))
+
+(define-sort (ROBOTS-ONTOLOGY SHAPE))
+
+(define-sort (ROBOTS-ONTOLOGY ROBOT-SOLUTION))
+
+(define-sort (ROBOTS-ONTOLOGY ROBOT-DESCRIPTION)
+  (smiling boolean)
+  (holding holding-object)
+  (has-tie boolean)
+  (head-shape shape)
+  (body-shape shape))
+
+(define-sort (ROBOTS-ONTOLOGY ROBOT-PROBLEM)
+  (description ROBOT-DESCRIPTION)
+  (solution ROBOT-SOLUTION))
+
+

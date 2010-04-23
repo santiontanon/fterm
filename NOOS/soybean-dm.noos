@@ -1,0 +1,173 @@
+;; 3 - Julio - 2003
+
+(define-Domain-Model SOYBEAN-DM
+  (creator "Santi Onta–—n (IIIA-CSIC)")
+  (description "Domain model for the SOYBEAN identification problem")
+  (uses SOYBEAN-ontology))
+
+(define (month :id JANUARY))
+(define (month :id FEBRUARY))
+(define (month :id MARCH))
+(define (month :id APRIL))
+(define (month :id MAY))
+(define (month :id JUNE))
+(define (month :id JULY))
+(define (month :id AUGUST))
+(define (month :id SEPTEMBER))
+(define (month :id OCTOBER))
+(define (month :id NOVEMBER))
+(define (month :id DECEMBER))
+
+(define (stand :id NORMAL-STAND))
+(define (stand :id LT-NORMAL))
+
+
+(define (precipitation :id LT-NORMAL-PRECIP))
+(define (precipitation :id NORMAL-PRECIP))
+(define (precipitation :id GT-NORMAL-PRECIP))
+
+
+(define (temperature :id LT-NORMAL-TEMP))
+(define (temperature :id NORMAL-TEMP))
+(define (temperature :id GT-NORMAL-TEMP))
+
+
+(define (hail? :id HAS-HAIL))
+(define (hail? :id NO-HAIL))
+
+
+(define (hist :id DIFF-LST-YEAR))
+(define (hist :id SAME-LST-YEAR))
+(define (hist :id SAME-LST-TWO-YRS))
+(define (hist :id SAME-LST-SEV-YRS))
+
+(define (area :id SCATTERED))
+(define (area :id LOW-AREAS))
+(define (area :id UPPER-AREAS))
+(define (area :id WHOLE-FIELD))
+
+(define (sev :id MINOR))
+(define (sev :id POT-SEVERE))
+(define (sev :id SEVERE))
+
+(define (tmt :id NORMAL-TMT))
+(define (tmt :id FUNGICIDE))
+(define (tmt :id OTHER))
+
+(define (germ :id MORE-90))
+(define (germ :id BETW-80-90))
+(define (germ :id LESS-80))
+
+(define (growth :id NORMAL-GROWTH))
+(define (growth :id ABNORMAL-GROWTH))
+
+(define (leaf :id NORMAL-LEAF))
+(define (leaf :id ABNORMAL-LEAF))
+
+(define (halo :id ABSENT-HALO))
+(define (halo :id YELLOW-HALO))
+(define (halo :id NO-YELLOW-HALO))
+
+(define (spot-marg :id WS-MARG))
+(define (spot-marg :id NO-W-1-MARG))
+(define (spot-marg :id DNA-MARG))
+
+(define (spot-size :id LT-1-8))
+(define (spot-size :id GT-1-8))
+(define (spot-size :id DNA-SIZE))
+
+(define (shread :id ABSENT-SHR))
+(define (shread :id PRESENT-SHR))
+
+(define (malf :id ABSENT-MALF))
+(define (malf :id PRESENT-MALF))
+
+(define (mild :id ABSENT-MILD))
+(define (mild :id UPPER-SURF))
+(define (mild :id LOWER-SURF))
+
+(define (kind-stem :id NORMAL-STEM))
+(define (kind-stem :id ABNORMAL-STEM))
+
+(define (lodg :id HAS-LODG))
+(define (lodg :id NO-LODG))
+
+(define (canker :id  ABSENT-CANKER))
+(define (canker :id  BELOW-SOIL))
+(define (canker :id  ABOVE-SOIL))
+(define (canker :id  ABOVE-SCD-NODE))
+
+(define (lesion :id  DNA-LESION))
+(define (lesion :id  BROWN))
+(define (lesion :id  DK-BROWN-BLK))
+(define (lesion :id  TAN))
+
+(define (fruit :id ABSENT-FRUIT))
+(define (fruit :id PRESENT-FRUIT))
+
+(define (decay :id ABSENT-DECAY))
+(define (decay :id FIRM-AND-DRY))
+(define (decay :id WATERY))
+
+(define (myc :id ABSENT-MYC))
+(define (myc :id PRESENT-MYC))
+
+(define (discolor :id NO-DISCOLOR))
+(define (discolor :id BROWN-DISCOLOR))
+(define (discolor :id BLACK-DISCOLOR))
+
+(define (scle :id ABSENT-SCLE))
+(define (scle :id PRESENT-SCLE))
+
+(define (pods :id NORMAL-PODS))
+(define (pods :id DISEASED-PODS))
+(define (pods :id FEW-PRESENT))
+(define (pods :id DNA-PODS))
+
+(define (spots :id NORMAL-SPOTS))
+(define (spots :id DISEASED-SPOTS))
+(define (spots :id BROWN-W/BLK-SPECKS))
+(define (spots :id DISTORT))
+(define (spots :id DNA-SPOTS))
+
+(define (kind-seed :id NORMAL-SEED))
+(define (kind-seed :id ABNORMAL-SEED))
+
+(define (mold :id ABSENT-MOLD))
+(define (mold :id PRESENT-MOLD))
+
+(define (seed-disc :id ABSENT-DISC))
+(define (seed-disc :id PRESENT-DISC))
+
+(define (seed-size :id NORMAL-SIZE))
+(define (seed-size :id LT-NORMAL-SIZE))
+
+(define (shrive :id ABSENT-SHRIVE))
+(define (shrive :id PRESENT-SHRIVE))
+
+(define (root :id NORMAL-ROOT))
+(define (root :id ROTTED))
+(define (root :id GALLS-CYSTS))
+
+
+(Define (soybean-solution :id diaporthe-stem-canker))
+(Define (soybean-solution :id charcoal-rot))
+(Define (soybean-solution :id rhizoctonia-root-rot))
+(Define (soybean-solution :id phytophthora-rot))
+(Define (soybean-solution :id brown-stem-rot))
+(Define (soybean-solution :id powdery-mildew))
+(Define (soybean-solution :id downy-mildew))
+(Define (soybean-solution :id brown-spot))
+(Define (soybean-solution :id bacterial-blight))
+(Define (soybean-solution :id bacterial-pustule))
+(Define (soybean-solution :id purple-seed-stain))
+(Define (soybean-solution :id anthracnose))
+(Define (soybean-solution :id phyllosticta-leaf-spot))
+(Define (soybean-solution :id alternarialeaf-spot))
+(Define (soybean-solution :id frog-eye-leaf-spot))
+(Define (soybean-solution :id diaporthe-pod-&-stem-blight))
+(Define (soybean-solution :id cyst-nematode))
+(Define (soybean-solution :id class-2-4-d-injury))
+(Define (soybean-solution :id herbicide-injury))
+
+

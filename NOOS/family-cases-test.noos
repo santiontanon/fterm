@@ -1,0 +1,37 @@
+
+;; FAMILIA 1
+
+
+;;								VICTORIA=JAMES          
+;;                                      !
+;;                              --------------
+;;                              !             !
+;;                            COLIN         CHARLOTTE
+
+
+
+
+
+
+
+(define-episode (female :id VICTORIA)
+  (HUSBAND James)
+  (SON Colin)
+  (DAUGHTER Charlotte))
+
+(define-episode (male :id JAMES)
+  (WIFE Victoria)
+  (SON Colin)
+  (DAUGHTER Charlotte))
+
+(define-episode (male :id COLIN)
+  (FATHER James)
+  (MOTHER Victoria)
+  (SISTER Charlotte))
+
+(define-episode (female :id CHARLOTTE)
+  (FATHER James)
+  (MOTHER Victoria)
+  (BROTHER Colin))
+
+

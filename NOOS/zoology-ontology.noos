@@ -1,0 +1,31 @@
+;; 3 - Julio - 2003
+
+
+(Define-Ontology ZOOLOGY-ONTOLOGY
+  (creator "Eva Armengol (IIIA-CSIC)")
+  (description "Zoology ontology"))
+
+(define-sort (ZOOLOGY-ONTOLOGY ANIMAL)
+  (HAIR ! integer)
+  (FEATHERS ! integer)
+  (EGSS ! integer)
+  (MILK ! integer)
+  (AIRBONE ! integer)
+  (AQUATIC ! integer)
+  (PREDATOR ! integer)
+  (TOOTHED ! integer)
+  (BACKBONE ! integer)
+  (BREATHES ! integer)
+  (VENOMOUS ! integer)
+  (FINS ! integer)
+  (LEGS ! integer)
+  (TAIL ! integer)
+  (DOMESTIC ! integer)
+  (CATSIZE ! integer))
+
+(define-sort (ZOOLOGY-ONTOLOGY ZOO-PROBLEM)
+  (description ! ANIMAL)
+  (solution ! integer)
+)
+
+  

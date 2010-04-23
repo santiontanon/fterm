@@ -1,0 +1,1 @@
+(define-Domain-Model Artificial-DM  (creator "Santi Onta–—n")  (description "Domain model for the Artificial Data")  (uses Artificial-ontology))(Define (artificial-solution :id A))(Define (artificial-solution :id B))(Define (artificial-solution :id C))

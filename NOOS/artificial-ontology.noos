@@ -1,0 +1,1 @@
+(Define-Ontology ARTIFICIAL-ONTOLOGY  (creator "IIIA-CSIC")  (description "Artificial Dataset ontology"))(Define-sort (ARTIFICIAL-ONTOLOGY ARTIFICIAL-DATA)  (x number)  (y number))(define-sort (ARTIFICIAL-ONTOLOGY ARTIFICIAL-DATA-PROBLEM)  (description ARTIFICIAL-DATA)  (solution ARTIFICIAL-SOLUTION)  )(define-sort (ARTIFICIAL-ONTOLOGY ARTIFICIAL-SOLUTION))

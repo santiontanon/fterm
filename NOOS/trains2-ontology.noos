@@ -1,0 +1,35 @@
+;; 2 - Feb - 2009
+
+(Define-Ontology TRAINS-ONTOLOGY
+  (creator "Santi Ontañón (Georgia Institute of Technology)")
+  (description "Trains ontology"))
+
+(define-sort (TRAINS-ONTOLOGY CAR-SIZE))
+
+(define-sort (TRAINS-ONTOLOGY CAR-SHAPE))
+(define-sort (CAR-SHAPE CAR-OPENSHAPE))
+(define-sort (CAR-SHAPE CAR-CLOSEDSHAPE))
+
+(define-sort (TRAINS-ONTOLOGY LOAD))
+
+(define-sort (TRAINS-ONTOLOGY CAR)
+  (infront ! CAR)
+  (loc ! integer)
+  (nwhl ! integer)
+  (ln ! car-size)
+  (cshape ! car-shape)
+  (npl ! integer)
+  (lcont load)
+)
+
+(define-sort (TRAINS-ONTOLOGY TRAINS-SOLUTION))
+
+(define-sort (TRAINS-ONTOLOGY TRAINS-DESCRIPTION)
+  (ncar ! integer)
+  (cars CAR))
+
+(define-sort (TRAINS-ONTOLOGY TRAINS-PROBLEM)
+  (description ! TRAINS-DESCRIPTION)
+  (solution ! TRAINS-SOLUTION))
+
+

@@ -1,0 +1,349 @@
+;; Nova estructuracio de l'esponja
+;, Febrer 2001
+;; Ontology
+
+
+(Define-Ontology SPONGE-ONTOLOGY
+  (creator "IIIA-CSIC")
+  (description "Demospongiae classification ontology"))
+
+
+(Define-sort (SPONGE-ONTOLOGY NEW-BOOLEAN))
+
+(Define-sort (SPONGE-ONTOLOGY SPONGE)
+  (external-features ! external-features)
+  (ecological-features ! ecological-features)
+  (spiculate-skeleton ! spiculate-skeleton)
+  (fibrous-skeleton ! fibrous-skeleton)
+  (tracts-skeleton ! tracts-skeleton)
+  (anatomy ! ANATOMIC-FEATURES))
+
+
+; -- EXTERNAL FEATURES SORTS: --------------
+
+
+(Define-sort (SPONGE-ONTOLOGY EXTERNAL-FEATURES)
+  (body-size body-size)
+  (consistency consistency)
+  (hand hand)
+  (touch touch)
+  (surface surface)
+  (growing growing)
+  (boring new-boolean)
+  (colour colour)
+  (pigmentation new-boolean)
+  (crible new-boolean)
+  (hollow new-boolean)
+  (brush new-boolean)
+  (briozoa new-boolean)
+  (macro-debris macro-debris)
+  (osc osc)
+  (gemmules new-boolean))
+
+(Define-sort (SPONGE-ONTOLOGY BODY-SIZE))
+
+(Define-sort (SPONGE-ONTOLOGY CONSISTENCY))
+
+(Define-sort (SPONGE-ONTOLOGY HAND))
+
+(Define-sort (SPONGE-ONTOLOGY TOUCH))
+
+(Define-sort (SPONGE-ONTOLOGY SURFACE))
+
+(Define-sort (SPONGE-ONTOLOGY GROWING)
+  (grow growing-kind)
+  (line-form line-form))
+
+(Define-sort (SPONGE-ONTOLOGY GROWING-KIND))
+
+(Define-sort (SPONGE-ONTOLOGY LINE-FORM)
+  (form form)
+  (line line)
+  (peduncle new-boolean))
+
+(Define-sort (SPONGE-ONTOLOGY FORM))
+
+(Define-sort (SPONGE-ONTOLOGY LINE))
+
+(Define-sort (SPONGE-ONTOLOGY COLOUR)
+  (internal colours)
+  (external colours))
+
+(Define-sort (SPONGE-ONTOLOGY COLOURS))
+
+(Define-sort (SPONGE-ONTOLOGY MACRO-DEBRIS))
+
+(Define-sort (SPONGE-ONTOLOGY OSC))
+(Define-sort (osc absent-osc))
+(Define-sort (osc osc-characteristics) 
+  (dot new-boolean)
+  (pach new-boolean)
+  (numosc numosc)
+  (pososc pososc))
+
+(Define-sort (SPONGE-ONTOLOGY NUMOSC))
+
+(Define-sort (SPONGE-ONTOLOGY POSOSC))
+
+; -- ECOLOGICAL FEATURES SORTS: --------------
+
+(Define-sort (SPONGE-ONTOLOGY ECOLOGICAL-FEATURES)
+  (fixation fixation)
+  (habitat habitat)
+  (substrate substrate)
+  (decrease new-boolean)
+  (oxid new-boolean)
+  (location sea)
+  (association association))
+
+(Define-sort (SPONGE-ONTOLOGY FIXATION))
+
+(Define-sort (SPONGE-ONTOLOGY HABITAT))
+
+(Define-sort (SPONGE-ONTOLOGY SUBSTRATE))
+
+(Define-sort (SPONGE-ONTOLOGY SEA))
+
+(Define-sort (SPONGE-ONTOLOGY ASSOCIATION))
+
+; -- SPICULATE SKELETON SORTS: --------------
+
+
+(Define-sort (SPONGE-ONTOLOGY SPICULATE-SKELETON)
+  (chemical chemical)
+  (architecture architecture)
+  (megascleres ! megascleres)
+  (microscleres micros)
+  (sclerospongids ! new-boolean)
+  (hexactinellids hexactinellids)
+  (uniform-length ! new-boolean))
+
+(Define-sort (SPONGE-ONTOLOGY CHEMICAL))
+
+(Define-sort (SPONGE-ONTOLOGY ARCHITECTURE))
+
+(Define-sort (SPONGE-ONTOLOGY MICROS))
+(Define-sort (micros aster))
+
+(Define-sort (aster sterraster)
+  (type form)
+  (deformed ! new-boolean)
+  (sterr-diameter ! number))
+
+(Define-sort (aster oxyaster)
+  (deformation ! new-boolean)
+  (max-diameter ! number)
+  (two-length-categories ! new-boolean))
+
+(Define-sort (micros microrhabd))
+(Define-sort (microrhabd microxea)
+  (max-length number))
+
+(Define-sort (micros chela))
+(Define-sort (chela anisochela))
+(Define-sort (chela isochela)
+  (form isochela-form))
+(Define-sort (SPONGE-ONTOLOGY isochela-form))
+
+(Define-sort (chela isanchora))  
+
+
+(Define-sort (SPONGE-ONTOLOGY HEXACTINELLIDS))
+
+(Define-sort (SPONGE-ONTOLOGY MEGASCLERES)
+  (smooth-form megas-form)
+  (axis axis)
+  (actine actine)
+  (acanthose acanthose)
+  (characteristics characters)
+  (ornamentation ornamentation)
+  (styloids ! new-boolean)
+  (predominant-kind predominancy)
+  (max-length number)
+  (two-or-more-length ! new-boolean))
+
+(Define-sort (SPONGE-ONTOLOGY MEGAS-FORM))
+(Define-sort (megas-form triaena))
+(Define-sort (triaena orthotriaena)
+  (max-diameter number))
+
+(Define-sort (megas-form desma)
+  (description desma-description)
+  (tuberculated ! new-boolean)
+  (zigosis ! new-boolean))
+
+(Define-sort (SPONGE-ONTOLOGY AXIS))
+
+(Define-sort (SPONGE-ONTOLOGY ACTINE))
+
+(Define-sort (SPONGE-ONTOLOGY ACANTHOSE))
+
+(Define-sort (SPONGE-ONTOLOGY CHARACTERS)
+  (shaft shaft)
+  (sinuose-disposition disposition))
+
+(Define-sort (SPONGE-ONTOLOGY SHAFT))
+
+(Define-sort (SPONGE-ONTOLOGY DISPOSITION))
+
+(Define-sort (SPONGE-ONTOLOGY ORNAMENTATION))
+
+(Define-sort (SPONGE-ONTOLOGY PREDOMINANCY))
+
+(Define-sort (SPONGE-ONTOLOGY DESMA-DESCRIPTION))
+
+
+; -- FIBROUS SKELETON SORTS: --------------
+
+
+(Define-sort (SPONGE-ONTOLOGY FIBROUS-SKELETON)
+  (architecture architecture)
+  (arrangement arrangement)
+  (basal-spongin ! new-boolean)
+  (hierarchy hierarchy)
+  (dark-pith ! new-boolean)
+  (pigmentation ! new-boolean)
+  (when-dryed dry)
+  (fasciculated ! new-boolean)
+  (filaments ! new-boolean)
+  (spiculoids ! new-boolean)
+  (choanocyte choanocyte-characteristics)
+  (foreign foreign))
+
+(Define-sort (SPONGE-ONTOLOGY ARRANGEMENT))
+
+(Define-sort (SPONGE-ONTOLOGY HIERARCHY))
+(Define-sort (hierarchy fibrous-hierarchy))
+(Define-sort (fibrous-hierarchy absent-hierarchy))
+(Define-sort (fibrous-hierarchy hierarchy-characteristics)
+  (malla ! new-boolean)
+  (primary-fibre-reduced ! new-boolean)
+  (section section))
+
+(Define-sort (SPONGE-ONTOLOGY FOREIGN))
+(Define-sort (foreign absent-foreign))
+(Define-sort (foreign foreign-characteristics)
+  (kind foreign-kind)
+  (where location-foreign)
+  (cored ! new-boolean))
+
+(Define-sort (SPONGE-ONTOLOGY FOREIGN-KIND))
+
+(Define-sort (SPONGE-ONTOLOGY LOCATION-FOREIGN))
+
+(Define-sort (SPONGE-ONTOLOGY SECTION))
+(Define-sort (section absent-section))
+(Define-sort (section section-characteristics)
+  (by-transparency characteristics)
+  (pith characteristics)
+  (bark characteristics))
+
+(Define-sort (SPONGE-ONTOLOGY CHARACTERISTICS))
+
+(Define-sort (SPONGE-ONTOLOGY DRY)
+  (hollow-cylinder ! new-boolean)
+  (elastic-fibers ! new-boolean))
+
+(Define-sort (SPONGE-ONTOLOGY CHOANOCYTE-CHARACTERISTICS)
+  (form form)
+  (diameter number)
+  (aspect aspect))
+
+(Define-sort (SPONGE-ONTOLOGY ASPECT))
+
+; -- TRACTS SKELETON SORTS: --------------
+
+
+(Define-sort (SPONGE-ONTOLOGY TRACTS-SKELETON)
+  (hierarchy tracts-hierarchy)
+  (reticulation reticulation)
+  (predominancy tracts-predominancy)
+  (distribution distribution))
+
+(Define-sort (hierarchy tracts-hierarchy))
+(Define-sort (tracts-hierarchy no-hierarchy)
+  (tract-number tract-number))
+
+#|
+;; This was the old definition, but didn't match with the deinition in the case base!!
+(Define-sort (tracts-hierarchy hierarchy-tracts)
+  (vertical-tracts tracts-characteristics)
+  (transversal-tracts tracts-characteristics))
+
+|#
+(Define-sort (tracts-hierarchy hierarchy-tracts)
+  (vertical-tracts integer)
+  (transversal-tracts integer))
+
+(Define-sort (SPONGE-ONTOLOGY TRACT-NUMBER))
+
+(Define-sort (SPONGE-ONTOLOGY TRACTS-CHARACTERISTICS)
+  (number number)
+  (kind tract-number))
+
+(Define-sort (SPONGE-ONTOLOGY RETICULATION))
+
+(Define-sort (SPONGE-ONTOLOGY TRACTS-PREDOMINANCY))
+
+(Define-sort (SPONGE-ONTOLOGY DISTRIBUTION))
+
+; -- ANATOMY SORTS: --------------
+
+
+(Define-sort (SPONGE-ONTOLOGY ANATOMIC-FEATURES)
+  (ectosome ectosome)
+  (cortex cortex)  
+  (mesh-side mesh-side)
+  (spicule-location spicule-location)
+  (ornamentation ornamentation))
+
+(Define-sort (SPONGE-ONTOLOGY ECTOSOME))
+(Define-sort (ectosome visible-ectosome)
+  (separable ! new-boolean)
+  (spicules ! new-boolean)
+  (skeleton ectosome-skeleton))
+
+
+(Define-sort (SPONGE-ONTOLOGY ECTOSOME-SKELETON))
+(Define-sort (ectosome-skeleton skeleton-characteristics)
+  (arrangement ectosome-arrangement)
+  (aspect aspect))
+
+(Define-sort (SPONGE-ONTOLOGY ECTOSOME-ARRANGEMENT))
+
+(Define-sort (SPONGE-ONTOLOGY CORTEX))
+(Define-sort (cortex absent-cortex))
+(Define-sort (cortex cortex-characteristics)
+  (cortical-spicules ! new-boolean)
+  (thick number))
+
+(Define-sort (SPONGE-ONTOLOGY MESH-SIDE))
+
+(Define-sort (SPONGE-ONTOLOGY SPICULE-LOCATION)
+  (monactinal location)
+  (diactinal location))
+
+(Define-sort (SPONGE-ONTOLOGY LOCATION))  ;; ULL AQUESTS EL TRADUCTOR LES POSA SENSE EL "IN"
+
+
+;; ---------------------------------- ;;
+;; -- SPONGE PROBLEM: -------------- ;;
+;; ---------------------------------- ;;
+
+(Define-sort (SPONGE-ONTOLOGY SPONGE-PROBLEM)
+  (Description ! sponge)
+  (Solution ! sponge-solution))
+
+(Define-sort (SPONGE-ONTOLOGY SPONGE-SOLUTION)
+  (order ! order)
+  (family ! family)
+  (genus ! genus)
+  (specie ! specie))
+
+(Define-sort (SPONGE-ONTOLOGY ORDER))
+(Define-sort (SPONGE-ONTOLOGY FAMILY))
+(Define-sort (SPONGE-ONTOLOGY GENUS))
+(Define-sort (SPONGE-ONTOLOGY SPECIE))
+
+
+

@@ -1,0 +1,155 @@
+
+
+
+;; FAMILIA 2
+;;                ROBERTO=MARIA                PIERO=FRANCESCA
+;;                       !                          !
+;;            --------------------         -------------------
+;;            !                   !        !                 !
+;;    GINA=EMILIO                 LUCIA=MARCO             ANGELA=TOMASO
+;;                                      !
+;;                              --------------
+;;                              !             !
+;;                            ALFONSO       SOPHIA
+
+
+(define-episode (male :id ROBERTO)
+  (SON Emilio)
+  (DAUGHTER Lucia)
+  (WIFE Maria))
+
+(define-episode (female :id MARIA)
+  (SON Emilio)
+  (DAUGHTER Lucia)
+  (HUSBAND Roberto))
+
+
+(define-episode (male :id PIERO)
+  (SON Marco)
+  (DAUGHTER Angela)
+  (WIFE Francesca))
+
+(define-episode (female :id FRANCESCA)
+  (SON Marco)
+  (DAUGHTER Angela)
+  (HUSBAND Piero))
+
+(define-episode (female :id GINA)
+  (HUSBAND Emilio)
+  (NIECE Sophia)
+  (NEPHEW Alfonso))
+
+(define-episode (male :id EMILIO)
+  (WIFE Gina)
+  (FATHER Roberto)
+  (MOTHER Maria)
+  (SISTER Lucia)
+  (NIECE Sophia)
+  (NEPHEW Alfonso))
+
+(define-episode (female :id LUCIA)
+  (HUSBAND Marco)
+  (FATHER Roberto)
+  (MOTHER Maria)
+  (BROTHER Emilio)
+  (SON Alfonso)
+  (DAUGHTER Sophia))
+
+(define-episode (male :id MARCO)
+  (WIFE Lucia)
+  (FATHER Piero)
+  (MOTHER Francesca)
+  (SISTER Angela)
+  (SON Alfonso)
+  (DAUGHTER Sophia))
+
+(define-episode (female :id ANGELA)
+  (HUSBAND Tomaso)
+  (FATHER Piero)
+  (MOTHER Francesca)
+  (BROTHER Marco)
+  (NIECE Sophia)
+  (NEPHEW Alfonso))
+
+(define-episode (male :id TOMASO)
+  (WIFE Angela)
+  (NIECE Sophia)
+  (NEPHEW Alfonso))
+
+(define-episode (male :id ALFONSO)
+  (FATHER Marco)
+  (MOTHER Lucia)
+  (SISTER Sophia)
+  (GRANDFATHER (define (set) Roberto Piero))
+  (GRANDMOTHER (define (set) Maria Francesca))
+  (UNCLE (define (set) Emilio Tomaso))
+  (AUNT (define (set) Angela Gina)))
+
+(define-episode (female :id SOPHIA)
+  (FATHER Marco)
+  (MOTHER Lucia)
+  (BROTHER Alfonso)
+  (GRANDFATHER (define (set) Roberto Piero))
+  (GRANDMOTHER (define (set) Maria Francesca))
+  (UNCLE (define (set) Emilio Tomaso)) 
+  (AUNT (define (set) Angela Gina)))
+
+
+(define-episode (uncle-problem :id E21)
+  (DESCRIPTION Roberto)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E22)
+  (DESCRIPTION Maria)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E23)
+  (DESCRIPTION Emilio)
+  (SOLUTION is-uncle))
+
+
+(define-episode (uncle-problem :id E24)
+  (DESCRIPTION Lucia)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E25)
+  (DESCRIPTION Marco)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E26)
+  (DESCRIPTION Piero)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E27)
+  (DESCRIPTION Francesca)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E28)
+  (DESCRIPTION Angela)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E29)
+  (DESCRIPTION Tomaso)
+  (SOLUTION is-uncle))
+
+
+(define-episode (uncle-problem :id E210)
+  (DESCRIPTION Alfonso)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E211)
+  (DESCRIPTION Sophia)
+  (SOLUTION is-not-uncle))
+
+
+(define-episode (uncle-problem :id E212)
+  (DESCRIPTION Gina)
+  (SOLUTION is-not-uncle))
