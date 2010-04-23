@@ -1,0 +1,1 @@
+(define-Domain-Model Car-DM  (creator "Santi Ontañón")  (description "Domain model for the Car Data Set")  (uses Car-ontology))(Define (cell :id f))(Define (cell :id l))(Define (cell :id n))(Define (cell :id t))(Define (cell :id b))(Define (cell :id g))(Define (cell :id w))(Define (KR-VS-KP-solution :id won))(Define (KR-VS-KP-solution :id nowin))

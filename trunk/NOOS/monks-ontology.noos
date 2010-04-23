@@ -1,0 +1,21 @@
+;; 22 - Noviembre - 2005
+
+(Define-Ontology MONKS-ONTOLOGY
+  (creator "Santi Onta–—n (IIIA-CSIC)")
+  (description "Monks ontology"))
+
+
+
+(define-sort (MONKS-ONTOLOGY MONKS-DESCRIPTION)
+  (a1 integer)
+  (a2 integer)
+  (a3 integer)
+  (a4 integer)
+  (a5 integer)
+  (a6 integer))
+
+(define-sort (MONKS-ONTOLOGY MONKS-PROBLEM)
+  (description MONKS-DESCRIPTION)
+  (solution integer))
+
+

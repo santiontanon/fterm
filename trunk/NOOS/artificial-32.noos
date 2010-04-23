@@ -1,0 +1,319 @@
+(define-episode (artificial-data :id ad-0)
+  (x 0.419)
+  (y 0.891)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-0)
+  (description ad-0)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-1)
+  (x 0.646)
+  (y 0.744)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-1)
+  (description ad-1)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-2)
+  (x 0.873)
+  (y 0.965)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-2)
+  (description ad-2)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-3)
+  (x 0.935)
+  (y 0.068)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-3)
+  (description ad-3)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-4)
+  (x 0.622)
+  (y 0.704)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-4)
+  (description ad-4)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-5)
+  (x 0.905)
+  (y 0.102)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-5)
+  (description ad-5)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-6)
+  (x 0.315)
+  (y 0.162)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-6)
+  (description ad-6)
+  (solution B)
+)
+
+(define-episode (artificial-data :id ad-7)
+  (x 0.394)
+  (y 0.784)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-7)
+  (description ad-7)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-8)
+  (x 0.453)
+  (y 0.601)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-8)
+  (description ad-8)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-9)
+  (x 0.809)
+  (y 0.311)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-9)
+  (description ad-9)
+  (solution B)
+)
+
+(define-episode (artificial-data :id ad-10)
+  (x 0.061)
+  (y 0.533)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-10)
+  (description ad-10)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-11)
+  (x 0.754)
+  (y 0.514)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-11)
+  (description ad-11)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-12)
+  (x 0.107)
+  (y 0.014)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-12)
+  (description ad-12)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-13)
+  (x 0.274)
+  (y 0.488)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-13)
+  (description ad-13)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-14)
+  (x 0.536)
+  (y 0.015)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-14)
+  (description ad-14)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-15)
+  (x 0.61)
+  (y 0.97)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-15)
+  (description ad-15)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-16)
+  (x 0.973)
+  (y 0.653)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-16)
+  (description ad-16)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-17)
+  (x 0.609)
+  (y 0.611)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-17)
+  (description ad-17)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-18)
+  (x 0.573)
+  (y 0.154)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-18)
+  (description ad-18)
+  (solution B)
+)
+
+(define-episode (artificial-data :id ad-19)
+  (x 0.803)
+  (y 0.083)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-19)
+  (description ad-19)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-20)
+  (x 0.238)
+  (y 0.398)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-20)
+  (description ad-20)
+  (solution B)
+)
+
+(define-episode (artificial-data :id ad-21)
+  (x 0.109)
+  (y 0.47)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-21)
+  (description ad-21)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-22)
+  (x 0.695)
+  (y 0.619)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-22)
+  (description ad-22)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-23)
+  (x 0.739)
+  (y 0.49)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-23)
+  (description ad-23)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-24)
+  (x 0.158)
+  (y 0.954)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-24)
+  (description ad-24)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-25)
+  (x 0.993)
+  (y 0.164)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-25)
+  (description ad-25)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-26)
+  (x 0.11)
+  (y 0.166)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-26)
+  (description ad-26)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-27)
+  (x 0.0)
+  (y 0.356)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-27)
+  (description ad-27)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-28)
+  (x 0.463)
+  (y 0.633)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-28)
+  (description ad-28)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-29)
+  (x 0.648)
+  (y 0.536)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-29)
+  (description ad-29)
+  (solution A)
+)
+
+(define-episode (artificial-data :id ad-30)
+  (x 0.531)
+  (y 0.878)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-30)
+  (description ad-30)
+  (solution C)
+)
+
+(define-episode (artificial-data :id ad-31)
+  (x 0.473)
+  (y 0.275)
+)
+
+(define-episode (artificial-data-problem :id ad-problem-31)
+  (description ad-31)
+  (solution B)
+)

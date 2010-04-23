@@ -1,0 +1,36 @@
+;; 2 - Feb - 2009
+
+(define-Domain-Model TRAINS-DM
+  (creator "Santi Ontañón (Georgia Institute of Technology)")
+  (description "Domain model for the TRAINS identification problem")
+  (uses trains-ontology))
+
+
+; (define-sort (TRAINS-ONTOLOGY CAR-SIZE)
+(define (CAR-SIZE :id long))
+(define (CAR-SIZE :id short))
+
+; (define-sort (CAR-SHAPE CAR-OPENSHAPE)
+(define (CAR-OPENSHAPE :id openrect))
+(define (CAR-OPENSHAPE :id opentrap))
+(define (CAR-OPENSHAPE :id ushaped))
+(define (CAR-OPENSHAPE :id dblopnrect))
+
+; (define-sort (CAR-SHAPE CAR-CLOSEDSHAPE)
+(define (CAR-CLOSEDSHAPE :id hexagon))
+(define (CAR-CLOSEDSHAPE :id ellipse))
+(define (CAR-CLOSEDSHAPE :id closedrect))
+(define (CAR-CLOSEDSHAPE :id jaggedtop))
+(define (CAR-CLOSEDSHAPE :id slopetop))
+(define (CAR-CLOSEDSHAPE :id engine))
+
+; (define-sort (TRAINS-ONTOLOGY LOAD)
+(define (LOAD :id rectanglod))
+(define (LOAD :id trianglod))
+(define (LOAD :id hexagonlod))
+(define (LOAD :id circlelod))
+
+
+; (define-sort (TRAINS-ONTOLOGY TRAINS-SOLUTION))
+(define (TRAINS-SOLUTION :id east))
+(define (TRAINS-SOLUTION :id west))

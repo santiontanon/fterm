@@ -1,0 +1,18 @@
+(Define-Ontology SIMPLE-FAMILY-ONTOLOGY
+  (creator "Santi Onta–—n")
+  (description ""))
+
+(Define-sort (SIMPLE-FAMILY-ONTOLOGY PERSON)
+  (FATHER MALE)
+  (MOTHER FEMALE)
+  (BROTHER MALE)
+  (SISTER FEMALE)
+  (CHILDREN PERSON))
+
+(Define-sort (PERSON MALE)
+  (WIFE FEMALE)
+)
+
+(Define-sort (PERSON FEMALE)
+  (HUSBAND MALE)
+)

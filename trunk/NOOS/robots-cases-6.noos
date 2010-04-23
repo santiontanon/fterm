@@ -1,0 +1,82 @@
+(define-episode (robot-description :id R1)
+  (smiling true)
+  (holding balloon)
+  (has-tie true)
+  (head-shape square)
+  (body-shape square)
+)
+
+(define-episode (robot-problem :id PR1)
+  (description R1)
+  (solution friendly)
+)
+
+
+(define-episode (robot-description :id R2)
+  (smiling true)
+  (holding flag)
+  (has-tie true)
+  (head-shape octagon)
+  (body-shape octagon)
+)
+
+(define-episode (robot-problem :id PR2)
+  (description R2)
+  (solution friendly)
+)
+
+
+(define-episode (robot-description :id R3)
+  (smiling true)
+  (holding sword)
+  (has-tie true)
+  (head-shape round)
+  (body-shape octagon)
+)
+
+(define-episode (robot-problem :id PR3)
+  (description R3)
+  (solution unfriendly)
+)
+
+
+(define-episode (robot-description :id R4)
+  (smiling true)
+  (holding sword)
+  (has-tie false)
+  (head-shape square)
+  (body-shape octagon)
+)
+
+(define-episode (robot-problem :id PR4)
+  (description R4)
+  (solution unfriendly)
+)
+
+
+(define-episode (robot-description :id R5)
+  (smiling false)
+  (holding sword)
+  (has-tie false)
+  (head-shape octagon)
+  (body-shape round)
+)
+
+(define-episode (robot-problem :id PR5)
+  (description R5)
+  (solution unfriendly)
+)
+
+
+(define-episode (robot-description :id R6)
+  (smiling false)
+  (holding flag)
+  (has-tie false)
+  (head-shape round)
+  (body-shape octagon)
+)
+
+(define-episode (robot-problem :id PR6)
+  (description R6)
+  (solution unfriendly)
+)
