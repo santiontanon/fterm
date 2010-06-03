@@ -170,6 +170,8 @@ public class TrainingSetUtils {
     public static final int TOXICOLOGY_DATASET_MMICE = 12;
     public static final int TOXICOLOGY_DATASET_FMICE = 13;
     public static final int KR_VS_KP_DATASET = 14;
+    public static final int FINANCIAL = 15;
+    public static final int FINANCIAL_NO_TRANSACTIONS = 16;
 
     public static TrainingSetProperties loadTrainingSet(int DATASET, Ontology o, FTKBase dm, FTKBase case_base) throws FeatureTermException, IOException
     {
@@ -318,6 +320,34 @@ public class TrainingSetUtils {
 
                 ts.name = "kr-vs-kp";
                 ts.problem_sort = o.getSort("kr-vs-kp-problem");
+                break;
+            case FINANCIAL_NO_TRANSACTIONS:
+                dm.ImportNOOS("NOOS/financial-ontology.noos", o);
+                dm.ImportNOOS("NOOS/financial-dm.noos", o);
+//                case_base.ImportNOOS("NOOS/financial-cases-682-no-transactions.noos", o);
+                case_base.ImportNOOS("NOOS/financial-cases-10-no-transactions.noos", o);
+
+                ts.name = "financial-no-t";
+                ts.problem_sort = o.getSort("loan-problem");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                ts.description_path.features.add(new Symbol("loan"));
+                ts.solution_path.features.add(new Symbol("status"));
+                break;
+            case FINANCIAL:
+                dm.ImportNOOS("NOOS/financial-ontology.noos", o);
+                dm.ImportNOOS("NOOS/financial-dm.noos", o);
+                case_base.ImportNOOS("NOOS/financial-cases-10.noos", o);
+//                case_base.ImportNOOS("NOOS/financial-cases-682.noos", o);
+
+                ts.name = "financial-no-t";
+                ts.problem_sort = o.getSort("loan-problem");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                ts.description_path.features.add(new Symbol("loan"));
+                ts.solution_path.features.add(new Symbol("status"));
                 break;
             default:
                 return null;
