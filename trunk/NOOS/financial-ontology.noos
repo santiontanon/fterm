@@ -1,0 +1,102 @@
+;; 26 - mayo - 2010
+
+(Define-Ontology FINANCIAL-ONTOLOGY
+  (creator "Santiago Onta–—n (IIIA-CSIC)")
+  (description "Ontology for the financial dataset, PKDD 1999 challenge task"))
+
+(define-sort (FINANCIAL-ONTOLOGY LOAN-PROBLEM)
+  (loan ! loan)
+  (status ! loan-status)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY LOAN-STATUS))
+(define-sort (FINANCIAL-ONTOLOGY account-frequency))
+(define-sort (FINANCIAL-ONTOLOGY disposition-type))
+(define-sort (FINANCIAL-ONTOLOGY card-type))
+(define-sort (FINANCIAL-ONTOLOGY bank))
+(define-sort (FINANCIAL-ONTOLOGY k-symbol))
+(define-sort (FINANCIAL-ONTOLOGY gender))
+(define-sort (FINANCIAL-ONTOLOGY transaction-type))
+(define-sort (FINANCIAL-ONTOLOGY transaction-operation))
+
+(define-sort (FINANCIAL-ONTOLOGY LOAN)
+  (account ! account)
+  (date ! date)
+  (amount ! integer)
+  (duration ! integer)
+  (monthly-payments ! float)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY ACCOUNT)
+  (district ! district)
+  (frequency ! account-frequency)
+  (date ! date)
+  (dispositions disposition)
+  (orders order)
+  (transactions transaction)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY DATE)
+  (day ! integer)
+  (month ! integer)
+  (year ! integer)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY district)
+  (A2 ! symbol)
+  (A3 ! symbol)
+  (A4 ! integer)
+  (A5 ! integer)
+  (A6 ! integer)
+  (A7 ! integer)
+  (A8 ! integer)
+  (A9 ! integer)
+  (A10 ! float)
+  (A11 ! float)
+  (A12 ! float)
+  (A13 ! float)
+  (A14 ! integer)
+  (A15 ! integer)
+  (A16 ! integer)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY disposition)
+  (client ! client)
+  (type ! disposition-type)
+  (credit-card ! credit-card)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY credit-card)
+  (type ! card-type)
+  (date ! date)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY order)
+    (bank_to ! bank)
+    (account_to ! integer)
+    (amount ! float)
+    (k-symbol ! k-symbol)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY client)
+  (gender ! gender)
+  (date-of-birth ! date)
+  (district ! district)
+)
+
+(define-sort (FINANCIAL-ONTOLOGY transaction)
+  (date ! date)
+  (type ! transaction-type)
+  (operation ! transaction-operation)
+  (amount ! float)
+  (balance ! float)
+  (ksymbol ! k-symbol)
+  (bank ! bank)
+  (account ! integer)
+)
+
+
+...
+
+
+transaction

@@ -1,0 +1,53 @@
+(define-Domain-Model Financial-DM
+  (creator "Santiago Onta–—n")
+  (description "Domain model for the Financial Data")
+  (uses Financial-ontology))
+
+(define (loan-status :id a))
+(define (loan-status :id b))
+(define (loan-status :id c))
+(define (loan-status :id d))
+
+(define (account-frequency :id poplatek-tydne))
+(define (account-frequency :id poplatek-mesicne))
+(define (account-frequency :id poplatek-po-obratu))
+
+(define (disposition-type :id owner))
+(define (disposition-type :id disponent))
+
+(define (bank :id ef))
+(define (bank :id op))
+(define (bank :id qr))
+(define (bank :id yz))
+(define (bank :id ab))
+(define (bank :id gh))
+(define (bank :id cd))
+(define (bank :id ij))
+(define (bank :id kl))
+(define (bank :id wx))
+(define (bank :id mn))
+(define (bank :id st))
+(define (bank :id uv))
+
+(define (k-symbol :id uver))
+(define (k-symbol :id sipo))
+(define (k-symbol :id pojistne))
+(define (k-symbol :id urok))
+(define (k-symbol :id sluzby))
+
+(define (gender :id female))
+(define (gender :id male))
+
+(define (card-type :id classic))
+(define (card-type :id junior))
+(define (card-type :id gold))
+
+(define (transaction-type :id prijem))
+(define (transaction-type :id vydaj))
+(define (transaction-type :id vyber))
+
+(define (transaction-operation :id vklad))
+(define (transaction-operation :id vyber))
+(define (transaction-operation :id prevod-na-ucet))
+(define (transaction-operation :id prevod-z-uctu))
+(define (transaction-operation :id vyber-kartou))
