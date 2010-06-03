@@ -17,7 +17,7 @@ public class PropertiesDistance extends Distance {
 
     boolean m_fast = false;
     List<FeatureTerm> descriptions = new LinkedList<FeatureTerm>();
-    List<Pair<FeatureTerm, Double>> m_propertyWeight = null;;
+    protected List<Pair<FeatureTerm, Double>> m_propertyWeight = null;;
 
     public PropertiesDistance(Collection<FeatureTerm> objects, FTKBase dm, Ontology o, Path dp, boolean fast) throws FeatureTermException {
         m_fast = fast;
@@ -27,6 +27,7 @@ public class PropertiesDistance extends Distance {
     }
 
     public PropertiesDistance(List<FeatureTerm> objects, FTKBase dm, Ontology o, boolean fast) throws FeatureTermException {
+        m_fast = fast;
         generateAllProperties(objects, dm, o);
     }
 
@@ -104,8 +105,8 @@ public class PropertiesDistance extends Distance {
         double distance = 1.0f - (((double) (shared * 2)) / ((double) (shared * 2 + f1_not_shared + f2_not_shared)));
 //		double distance = 1.0f-(((double)(shared))/((double)(shared+f1_not_shared+f2_not_shared)));
 
-//			System.out.println(distance);
-//			System.out.flush();
+		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
+		System.out.flush();
         return distance;
     }
 }

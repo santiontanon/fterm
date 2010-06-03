@@ -228,7 +228,9 @@ public class Disintegration {
         properties = new LinkedList<FeatureTerm>();
 
         FeatureTerm unnamed = f.clone(dm, o);
-        unnamed.setName(null);
+        for(FeatureTerm f2:FTRefinement.variables(unnamed)) {
+            if (!dm.contains(f2)) f2.setName(null);
+        }
 
         do {
             property_rest = extractPropertyFast(unnamed, dm, o);
@@ -237,7 +239,7 @@ public class Disintegration {
                 properties.add(property_rest.m_a);
                 unnamed = property_rest.m_b;
 
-//				System.out.println("--------------------");
+//				System.out.println("-------------------- " + properties.size());
 //				System.out.println(property_rest.m_a.toStringNOOS(dm));
 //				System.out.println(f.toStringNOOS(dm));
             }
@@ -384,6 +386,7 @@ public class Disintegration {
                             FeatureTerm clone = f.clone(dm, correspondences);
                             ((TermFeatureTerm) correspondences.get(p_f.m_a)).defineFeatureValue(p_f.m_b, node.getSort().createFeatureTerm());
 
+/*
                             if (clone.equivalents(f)) {
                                 System.err.println("ERROR 2!!!");
                                 System.err.println(f.toStringNOOS(dm));
@@ -391,7 +394,7 @@ public class Disintegration {
                                 System.err.println(property.toStringNOOS(dm));
                                 System.exit(1);
                             }
-
+*/
                             return new Pair<FeatureTerm, FeatureTerm>(property, clone);
                         } else {
                             int l = ((SetFeatureTerm) container).getSetValues().size();
