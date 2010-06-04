@@ -20,6 +20,11 @@ public class WeightedPropertiesDistance extends PropertiesDistance {
 			Ontology o, boolean fast) throws FeatureTermException {
 		super(objects, dm, o, fast);
 	}
+
+    public WeightedPropertiesDistance(List<FeatureTerm> objects, FTKBase dm,
+			Ontology o, Path dp, boolean fast) throws FeatureTermException {
+		super(objects, dm, o, dp , fast);
+	}
 	
 	public void computeWeights(List<FeatureTerm> cases,Path sp,Path dp,FTKBase dm) throws FeatureTermException {
 
@@ -41,7 +46,7 @@ public class WeightedPropertiesDistance extends PropertiesDistance {
 //			p_w.m_b = 1-(double)(tmp.m_a);
 			p_w.m_b = (double)(tmp.m_a);
 //			p_w.m_b = Math.pow(p_w.m_b,64);
-//			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
+			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
 		}
 
 		
