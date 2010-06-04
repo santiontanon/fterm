@@ -24,6 +24,7 @@ public class PropertiesDistance extends Distance {
         for (FeatureTerm obj : objects) {
             descriptions.add(obj.readPath(dp));
         }
+        generateAllProperties(descriptions, dm, o);
     }
 
     public PropertiesDistance(List<FeatureTerm> objects, FTKBase dm, Ontology o, boolean fast) throws FeatureTermException {

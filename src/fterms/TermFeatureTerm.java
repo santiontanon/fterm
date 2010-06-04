@@ -53,6 +53,43 @@ public class TermFeatureTerm extends FeatureTerm {
         m_features.put(feature, value);
     } // FeatureTerm::defineFeatureValue
 
+
+    public void addFeatureValue(Symbol feature, FeatureTerm value) {
+        FeatureTerm t = m_features.get(feature);
+
+        if (t==null) {
+            m_features.put(feature, value);
+        } else {
+            if (t instanceof SetFeatureTerm) {
+                ((SetFeatureTerm)t).addSetValue(value);
+            } else {
+                SetFeatureTerm t2 = new SetFeatureTerm();
+                t2.addSetValue(t);
+                t2.addSetValue(value);
+                m_features.put(feature, t2);
+            }
+        }
+    }
+
+    public void addFeatureValueSecure(Symbol feature, FeatureTerm value) {
+        FeatureTerm t = m_features.get(feature);
+
+        if (t==null) {
+            defineFeatureValueSecure(feature,value);
+        } else {
+            if (t instanceof SetFeatureTerm) {
+                ((SetFeatureTerm)t).addSetValue(value);
+            } else {
+                SetFeatureTerm t2 = new SetFeatureTerm();
+                t2.addSetValue(t);
+                t2.addSetValue(value);
+                m_features.put(feature, t2);
+                defineFeatureValueSecure(feature,t2);
+            }
+        }
+    }
+
+
     // checks the SORT to see if the feature exists
     // and if the value has the correct sort
     public boolean defineFeatureValueSecure(Symbol feature, FeatureTerm value) {

@@ -172,6 +172,7 @@ public class TrainingSetUtils {
     public static final int KR_VS_KP_DATASET = 14;
     public static final int FINANCIAL = 15;
     public static final int FINANCIAL_NO_TRANSACTIONS = 16;
+    public static final int MUTAGENESIS = 17;
 
     public static TrainingSetProperties loadTrainingSet(int DATASET, Ontology o, FTKBase dm, FTKBase case_base) throws FeatureTermException, IOException
     {
@@ -348,6 +349,20 @@ public class TrainingSetUtils {
                 ts.solution_path.features.clear();
                 ts.description_path.features.add(new Symbol("loan"));
                 ts.solution_path.features.add(new Symbol("status"));
+                break;
+            case MUTAGENESIS:
+                dm.ImportNOOS("NOOS/mutagenesis-ontology.noos", o);
+                dm.ImportNOOS("NOOS/mutagenesis-dm.noos", o);
+                case_base.ImportNOOS("NOOS/mutagenesis-b4-230-cases.noos", o);
+//                case_base.ImportNOOS("NOOS/mutagenesis-b4-25-cases.noos", o);
+
+                ts.name = "mutagenesis-b4";
+                ts.problem_sort = o.getSort("mutagenesis-problem");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                ts.description_path.features.add(new Symbol("problem"));
+                ts.solution_path.features.add(new Symbol("solution"));
                 break;
             default:
                 return null;
