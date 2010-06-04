@@ -1,0 +1,9 @@
+;; 22 - Noviembre - 2005
+
+(define-Domain-Model MUTAGENESIS-DM
+  (creator "Santiago Onta–—n (IIIA-CSIC)")
+  (description "Domain model for the MUTAGENESIS")
+  (uses mutagenesis-ontology))
+
+(define (mutagenesis-solution :id active))
+(define (mutagenesis-solution :id inactive))
