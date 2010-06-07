@@ -8,16 +8,22 @@ package fterms.learning;
 import fterms.BaseOntology;
 import fterms.FTKBase;
 import fterms.FeatureTerm;
+import fterms.FloatFeatureTerm;
+import fterms.IntegerFeatureTerm;
 import fterms.Ontology;
 import fterms.Path;
 import fterms.Symbol;
 import fterms.exceptions.FeatureTermException;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.Vector;
+import util.Pair;
 import util.Sampler;
 
 /**
@@ -173,6 +179,9 @@ public class TrainingSetUtils {
     public static final int FINANCIAL = 15;
     public static final int FINANCIAL_NO_TRANSACTIONS = 16;
     public static final int MUTAGENESIS = 17;
+    public static final int MUTAGENESIS_EASY = 18;
+    public static final int MUTAGENESIS_DISCRETIZED = 19;
+    public static final int MUTAGENESIS_EASY_DISCRETIZED = 20;
 
     public static TrainingSetProperties loadTrainingSet(int DATASET, Ontology o, FTKBase dm, FTKBase case_base) throws FeatureTermException, IOException
     {
@@ -353,8 +362,8 @@ public class TrainingSetUtils {
             case MUTAGENESIS:
                 dm.ImportNOOS("NOOS/mutagenesis-ontology.noos", o);
                 dm.ImportNOOS("NOOS/mutagenesis-dm.noos", o);
-                case_base.ImportNOOS("NOOS/mutagenesis-b4-230-cases.noos", o);
-//                case_base.ImportNOOS("NOOS/mutagenesis-b4-25-cases.noos", o);
+//                case_base.ImportNOOS("NOOS/mutagenesis-b4-230-cases.noos", o);
+                case_base.ImportNOOS("NOOS/mutagenesis-b4-25-cases.noos", o);
 
                 ts.name = "mutagenesis-b4";
                 ts.problem_sort = o.getSort("mutagenesis-problem");
@@ -364,11 +373,257 @@ public class TrainingSetUtils {
                 ts.description_path.features.add(new Symbol("problem"));
                 ts.solution_path.features.add(new Symbol("solution"));
                 break;
+            case MUTAGENESIS_EASY:
+                dm.ImportNOOS("NOOS/mutagenesis-ontology.noos", o);
+                dm.ImportNOOS("NOOS/mutagenesis-dm.noos", o);
+                case_base.ImportNOOS("NOOS/mutagenesis-b4-188-cases.noos", o);
+
+                ts.name = "mutagenesis-b4";
+                ts.problem_sort = o.getSort("mutagenesis-problem");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                ts.description_path.features.add(new Symbol("problem"));
+                ts.solution_path.features.add(new Symbol("solution"));
+                break;
+            case MUTAGENESIS_DISCRETIZED:
+                dm.ImportNOOS("NOOS/mutagenesis-ontology.noos", o);
+                dm.ImportNOOS("NOOS/mutagenesis-dm.noos", o);
+//                case_base.ImportNOOS("NOOS/mutagenesis-b4-230-cases.noos", o);
+                case_base.ImportNOOS("NOOS/mutagenesis-b4-noH-230-cases.noos", o);
+
+                ts.name = "mutagenesis-b4-discretized";
+                ts.problem_sort = o.getSort("mutagenesis-problem");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                ts.description_path.features.add(new Symbol("problem"));
+                ts.solution_path.features.add(new Symbol("solution"));
+
+                // discretize:
+                {
+                    Set<FeatureTerm> cases=case_base.SearchFT(ts.problem_sort);
+                    Path fp = new Path();
+                    fp.features.add(new Symbol("problem"));
+                    fp.features.add(new Symbol("lumo"));
+                    TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
+
+                    fp.features.clear();
+                    fp.features.add(new Symbol("problem"));
+                    fp.features.add(new Symbol("logp"));
+                    TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
+                }
+
+                break;
+            case MUTAGENESIS_EASY_DISCRETIZED:
+                dm.ImportNOOS("NOOS/mutagenesis-ontology.noos", o);
+                dm.ImportNOOS("NOOS/mutagenesis-dm.noos", o);
+                case_base.ImportNOOS("NOOS/mutagenesis-b4-188-cases.noos", o);
+
+                ts.name = "mutagenesis-b4-discretized";
+                ts.problem_sort = o.getSort("mutagenesis-problem");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                ts.description_path.features.add(new Symbol("problem"));
+                ts.solution_path.features.add(new Symbol("solution"));
+
+                // discretize:
+                {
+                    Set<FeatureTerm> cases=case_base.SearchFT(ts.problem_sort);
+                    Path fp = new Path();
+                    fp.features.add(new Symbol("problem"));
+                    fp.features.add(new Symbol("lumo"));
+                    TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
+
+                    fp.features.clear();
+                    fp.features.add(new Symbol("problem"));
+                    fp.features.add(new Symbol("logp"));
+                    TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
+                }
+
+                break;
             default:
                 return null;
         }
 
         ts.cases.addAll(case_base.SearchFT(ts.problem_sort));
         return ts;
+    }
+
+
+    public static void discretizeFeature(Collection<FeatureTerm> cases, Path featurePath, Path solutionPath, int ncuts) throws FeatureTermException {
+        List<Float> cuts = findDiscretizationIntervals(cases,featurePath,solutionPath,ncuts);
+
+        // change the values by the discretized ones:
+        for(FeatureTerm c:cases) {
+            FeatureTerm v = c.readPath(featurePath);
+            float fv = 0;
+            boolean integer = true;
+            if (v!=null) {
+                if (v instanceof IntegerFeatureTerm) {
+                    fv = ((IntegerFeatureTerm)v).getValue().floatValue();
+                } else {
+                    fv = ((FloatFeatureTerm)v).getValue();
+                    integer = false;
+                }
+
+                int newV = 0;
+                for(Float cut:cuts) {
+                    if (cut<fv) newV++;
+                           else break;
+                }
+                if (integer) {
+                    ((IntegerFeatureTerm)v).setValue(newV);
+                } else {
+                    ((FloatFeatureTerm)v).setValue((float)newV);
+                }
+            } else {
+                System.out.println(c.getName() + " has no value in " + featurePath);
+            }
+        }
+    }
+
+    // this method will split the feature range in 2^uts intervals, and return the cut points:
+    public static List<Float> findDiscretizationIntervals(Collection<FeatureTerm> cases, Path featurePath, Path solutionPath, int cuts) throws FeatureTermException {
+        List<Pair<Float,Integer>> values = new LinkedList<Pair<Float,Integer>>();
+        Vector<FeatureTerm> solutions = new Vector<FeatureTerm>();
+
+        for(FeatureTerm c:cases) {
+            FeatureTerm s = c.readPath(solutionPath);
+            if (!solutions.contains(s)) solutions.add(s);
+        }
+
+        // get all the values:
+        for(FeatureTerm c:cases) {
+            FeatureTerm v = c.readPath(featurePath);
+            FeatureTerm s = c.readPath(solutionPath);
+            Float fv = null;
+
+            if (fv!=null) {
+                if (v instanceof IntegerFeatureTerm) {
+                    fv = (((IntegerFeatureTerm)v).getValue()).floatValue();
+                } else if (v instanceof FloatFeatureTerm) {
+                    fv = ((FloatFeatureTerm)v).getValue();
+                } else {
+                    throw new FeatureTermException("The feature has a non numeric value!");
+                }
+                values.add(new Pair<Float,Integer>(fv,solutions.indexOf(s)));
+            }
+        }
+
+        // sort them:
+        {
+            boolean change = false;
+            int len = values.size();
+            do{
+                change = false;
+                for(int i = 0;i<len-1;i++) {
+                    if (values.get(i).m_a>values.get(i+1).m_a) {
+                        Pair<Float,Integer> tmp = values.get(i);
+                        values.set(i,values.get(i+1));
+                        values.set(i+1, tmp);
+                        change = true;
+                    }
+                }
+            }while(change);
+        }
+
+//        for(Pair<Float,Integer> v:values) {
+//            System.out.println(v.m_b + " - " + v.m_a);
+//        }
+
+        return discretizeFeatureInternal(values,solutions.size(),cuts);
+    }
+
+
+    static List<Float> discretizeFeatureInternal(List<Pair<Float,Integer>> values, int nSolutions, int cuts) {
+        if (cuts==0) {
+            return new LinkedList<Float>();
+        } else {
+            boolean first = true;
+            float bestCut = 0, bestE = 0;
+
+//            System.out.println("discretizing " + values.size() + " values");
+
+            int gDistribution[] = new int[nSolutions];
+            float gE = 0;
+            for(int i = 0 ;i<values.size()-1;i++) {
+                float cut = (values.get(i).m_a + values.get(i+1).m_a)/2;
+
+                int d1[] = new int[nSolutions];
+                int d2[] = new int[nSolutions];
+                int n1 = 0;
+                int n2 = 0;
+
+                for(int j = 0;j<values.size();j++) {
+                    Pair<Float,Integer> v = values.get(j);
+                    if (first) gDistribution[v.m_b]++;
+                    if (v.m_a<cut) {
+                        d1[v.m_b]++;
+                        n1++;
+                    } else {
+                        d2[v.m_b]++;
+                        n2++;
+                    }
+                }
+
+                // compute entropy:
+                if (first) gE = entropy(gDistribution);
+                float e1 = entropy(d1);
+                float e2 = entropy(d2);
+                float e = (e1*n1+e2*n2)/(float)(n1+n2);
+
+                if (first || e<bestE) {
+                    first = false;
+                    bestE = e;
+                    bestCut = cut;
+
+//                    System.out.println("next best: " + cut + " (" + e + ")");
+                }
+            }
+
+            if (bestE<gE) {
+                List<Float> l = new LinkedList<Float>();
+
+                List<Pair<Float,Integer>> vl1 = new LinkedList<Pair<Float,Integer>>();
+                List<Pair<Float,Integer>> vl2 = new LinkedList<Pair<Float,Integer>>();
+
+                for(Pair<Float,Integer> v:values) {
+                    if (v.m_a<bestCut) {
+                        vl1.add(v);
+                    } else {
+                        vl2.add(v);
+                    }
+                }
+
+                l.addAll(discretizeFeatureInternal(vl1,nSolutions,cuts-1));
+                l.add(new Float(bestCut));
+                l.addAll(discretizeFeatureInternal(vl2,nSolutions,cuts-1));
+                return l;
+            } else {
+                return new LinkedList<Float>();
+            }
+        }
+    }
+
+    static float entropy(int hist[]) {
+        int n = hist.length;
+        int t = 0;
+
+        for(int i = 0;i<n;i++) t+=hist[i];
+
+        float h = 0;
+
+//        System.out.print("[ " + hist[0] + "," + hist[1] + "] -> ");
+
+        for(int i = 0;i<n;i++) {
+            if (hist[i]!=0) {
+                float f = (float)hist[i]/(float)(t);
+                h-=Math.log(f)*f;
+            }
+        }
+//        System.out.println("" + h);
+        return h;
     }
 }

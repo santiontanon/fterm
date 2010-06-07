@@ -254,11 +254,11 @@ public class FTRefinement {
 //		System.out.println("[" + refinements.size() + "]");
         refinements.addAll(featureElimination(f, dm, vp));
 //		System.out.println("[" + refinements.size() + "]");
-        refinements.addAll(variableEqualityEliminationAggressive(f, dm, vp));
-//		System.out.println("[" + refinements.size() + "]");
         refinements.addAll(setReduction(f, dm, o));
 //		System.out.println("[" + refinements.size() + "]");
         refinements.addAll(ConstantGeneralization(f, dm));
+//		System.out.println("[" + refinements.size() + "]");
+        refinements.addAll(variableEqualityEliminationAggressive(f, dm, vp));
 //		System.out.println("[" + refinements.size() + "]");
         refinements.addAll(specialGeneralizations(f, dm, o, vp));
 //		System.out.println("[" + refinements.size() + "]");

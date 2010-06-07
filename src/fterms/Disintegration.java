@@ -54,6 +54,8 @@ public class Disintegration {
                 properties.add(property_rest.m_a);
                 unnamed = property_rest.m_b;
 
+                System.out.println(properties.size() + " properties (term now has " + FTRefinement.variables(unnamed).size() + " variables");
+
 //				System.out.println("--------------------");
 //				System.out.println(property_rest.m_a.toStringNOOS(dm));
 //				System.out.println(f.toStringNOOS(dm));
@@ -75,29 +77,22 @@ public class Disintegration {
 
 	if (DEBUG>=1) System.out.println("extractPropertyFormal started...");
         if (DEBUG>=2) {
-//            System.out.println("Original term:");
-//            System.out.println(f.toStringNOOS(dm));
+            System.out.println("Original term:");
+            System.out.println(f.toStringNOOS(dm));
         }
 
         List<FeatureTerm> refinements = FTRefinement.getSomeGeneralizationsAggressive(f, dm, o);
 
         if (refinements.size() > 0) {
             FeatureTerm refinement = refinements.get(0);
-
-            // Obtain the remainder:
-//            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainder(f, refinement, dm, o), refinement);
-            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFast(f, refinement, dm, o), refinement);
+//            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFast(f, refinement, dm, o), refinement);
+            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFastAssumingRefinement(f, refinement, dm, o), refinement);
 
             if (DEBUG>=2) {
                 System.out.println("Property:");
                 System.out.println(tmp.m_a.toStringNOOS(dm));
- //               System.out.println("next term:");
- //               System.out.println(tmp.m_b.toStringNOOS(dm));
             }
             if (DEBUG>=1) System.out.println("extractPropertyFormal finished...");
-
-//            System.exit(1);
-
             return tmp;
         } else {
             if (DEBUG>=1) System.out.println("extractPropertyFormal finished... (null)");
@@ -163,13 +158,13 @@ public class Disintegration {
     
 
     /*
-     * This method computes the remainder also in an exact way, but avoiding any call to unification. It is very fast.
+     * This method computes the remainder also in an exact way, but avoiding any call to unification. It is faster.
      */
     public static FeatureTerm remainderFast(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
         FeatureTerm oldRemainder = null;
         FeatureTerm remainder = f;
 
-        // Of any of these terms are candidate unifications, then the property cannot recover the original term:
+        // If any of these terms are candidate unifications, then the property cannot recover the original term:
         List<FeatureTerm> originalGeneralizations = FTRefinement.getGeneralizationsAggressive(f, dm, o);
 
         do {
@@ -180,7 +175,8 @@ public class Disintegration {
                 System.out.println(remainder.toStringNOOS(dm));
             }
             List<FeatureTerm> refinements = FTRefinement.getGeneralizationsAggressive(remainder, dm, o);
-            if (DEBUG>=3) System.out.println("remainder: " + refinements.size() + " refinements.");
+            // if (DEBUG>=3)
+            System.out.println("remainder: " + refinements.size() + " refinements.");
 
             remainder = null;
             for (FeatureTerm r : refinements) {
@@ -216,6 +212,41 @@ public class Disintegration {
         return oldRemainder;
     }
 
+    // This method assumes that 'refinement' is a direct generlization refinement of 'f', it's even faster:
+    public static FeatureTerm remainderFastAssumingRefinement(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
+        FeatureTerm oldRemainder = null;
+        FeatureTerm remainder = f;
+
+        do {
+            oldRemainder = remainder;
+            if (DEBUG>=3) {
+                System.out.println("remainderFastAssumingRefinement: cycle starts");
+                System.out.println("refinement: ");
+                System.out.println(remainder.toStringNOOS(dm));
+            }
+            List<FeatureTerm> refinements = FTRefinement.getGeneralizationsAggressive(remainder, dm, o);
+            // if (DEBUG>=3)
+//            System.out.println("remainder: " + refinements.size() + " refinements.");
+
+            remainder = null;
+            for (FeatureTerm r : refinements) {
+//                System.out.print(".");
+                if (!r.subsumes(refinement)) {
+                    remainder = r;
+                    break;
+                }
+            }
+        } while (remainder != null);
+
+//		System.out.println("f: ");
+//		System.out.println(f.toStringNOOS(dm));
+//		System.out.println("refinement: ");
+//		System.out.println(refinement.toStringNOOS(dm));
+//		System.out.println("Remainder: ");
+//		System.out.println(oldRemainder.toStringNOOS(dm));
+
+        return oldRemainder;
+    }
 
 
     public static List<FeatureTerm> disintegrateFast(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {

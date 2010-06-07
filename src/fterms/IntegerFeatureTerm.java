@@ -23,7 +23,11 @@ public class IntegerFeatureTerm extends FeatureTerm {
 		return m_value;
 	}
 	
-	public boolean hasValue() {
+	public void setValue(Integer v) {
+		m_value = v;
+	}
+
+    public boolean hasValue() {
 		return m_value!=null;
 	}
 	

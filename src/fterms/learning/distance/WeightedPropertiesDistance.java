@@ -17,12 +17,12 @@ import util.Pair;
 public class WeightedPropertiesDistance extends PropertiesDistance {
 
 	public WeightedPropertiesDistance(List<FeatureTerm> objects, FTKBase dm,
-			Ontology o, boolean fast) throws FeatureTermException {
+			Ontology o, boolean fast) throws Exception {
 		super(objects, dm, o, fast);
 	}
 
     public WeightedPropertiesDistance(List<FeatureTerm> objects, FTKBase dm,
-			Ontology o, Path dp, boolean fast) throws FeatureTermException {
+			Ontology o, Path dp, boolean fast) throws Exception {
 		super(objects, dm, o, dp , fast);
 	}
 	
