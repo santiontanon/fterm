@@ -82,10 +82,15 @@ public class RIBL extends Distance {
 //		System.out.println("Clauses for f2:\n" + f2.toStringNOOS(dm));
 //		for(Clause c:clauses_f2) System.out.println(c);
 
+        System.out.println("RIBL.distance start");
+
         Clause clause_f1 = clauses_f1.get(0);
         Clause clause_f2 = clauses_f2.get(0);
         List<Pair<Integer, List<Clause>>> descriptors_f1 = buildDescriptors(clauses_f1, max_depth);
         List<Pair<Integer, List<Clause>>> descriptors_f2 = buildDescriptors(clauses_f2, max_depth);
+
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f1 = new HashMap<String,List<Pair<Clause,Integer>>>();
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f2 = new HashMap<String,List<Pair<Clause,Integer>>>();
 
 
         if (debug) {
@@ -107,7 +112,7 @@ public class RIBL extends Distance {
             }
         }
 
-        double distance = 1.0 - SimE(clause_f1, clause_f2, descriptors_f1, descriptors_f2, 0);
+        double distance = 1.0 - SimE(clause_f1, clause_f2, descriptors_f1, descriptors_f2, cache_f1, cache_f2, 0);
 
         if (debug) {
             System.out.println("RIBL distance: " + distance);
@@ -117,14 +122,17 @@ public class RIBL extends Distance {
     }
 
     private double SimE(Clause clause_f1, Clause clause_f2,
-        List<Pair<Integer, List<Clause>>> descriptors_f1, List<Pair<Integer, List<Clause>>> descriptors_f2, int depth) {
+        List<Pair<Integer, List<Clause>>> descriptors_f1, List<Pair<Integer, List<Clause>>> descriptors_f2,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f1,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f2,int depth) {
 
         double similarity = 0.0;
 
         for (int i = 0; i < clause_f1.getNumberParameters(); i++) {
             switch (clause_f1.getParameterType(i)) {
                 case Clause.TYPE_ID:
-                    similarity += SimA_ID(clause_f1.getParameterValue(i), clause_f2.getParameterValue(i), descriptors_f1, descriptors_f2, depth);
+                    similarity += SimA_ID(clause_f1.getParameterValue(i), clause_f2.getParameterValue(i), descriptors_f1, descriptors_f2,
+                                          cache_f1,cache_f2,depth);
                     break;
                 case Clause.TYPE_SYMBOL:
                     similarity += SimA_Symbol(clause_f1.getParameterValue(i), clause_f2.getParameterValue(i));
@@ -150,10 +158,14 @@ public class RIBL extends Distance {
     private double SimA_ID(String parameterValue1,
         String parameterValue2,
         List<Pair<Integer, List<Clause>>> descriptors_f1,
-        List<Pair<Integer, List<Clause>>> descriptors_f2, int depth) {
+        List<Pair<Integer, List<Clause>>> descriptors_f2,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f1,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f2,
+        int depth) {
 
-        List<Pair<Clause, Integer>> L_f1 = findClausesOfDepth(parameterValue1, depth, descriptors_f1);
-        List<Pair<Clause, Integer>> L_f2 = findClausesOfDepth(parameterValue2, depth, descriptors_f2);
+        List<Pair<Clause, Integer>> L_f1 = findClausesOfDepth(parameterValue1, depth, descriptors_f1, cache_f1);
+        List<Pair<Clause, Integer>> L_f2 = findClausesOfDepth(parameterValue2, depth, descriptors_f2, cache_f2);
+
         double similarity = 0.0;
         int card = Math.max(L_f1.size(), L_f2.size());
 
@@ -178,7 +190,7 @@ public class RIBL extends Distance {
                         }
                     }
 
-                    double s = SimLS(parameterValue1, parameterValue2, depth, p.m_a.getHead(), p.m_b, L1, L2, descriptors_f1, descriptors_f2);
+                    double s = SimLS(parameterValue1, parameterValue2, depth, p.m_a.getHead(), p.m_b, L1, L2, descriptors_f1, descriptors_f2, cache_f1, cache_f2);
                     similarity += s;
                     break;
                 }
@@ -199,7 +211,9 @@ public class RIBL extends Distance {
     private double SimLS(String A, String B,
         int depth, String P, Integer pos, List<Clause> LA,
         List<Clause> LB,
-        List<Pair<Integer, List<Clause>>> descriptors_f1, List<Pair<Integer, List<Clause>>> descriptors_f2) {
+        List<Pair<Integer, List<Clause>>> descriptors_f1, List<Pair<Integer, List<Clause>>> descriptors_f2,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f1,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f2) {
         double similarity = 0.0;
 
         if (LA.size() < LB.size()) {
@@ -207,7 +221,7 @@ public class RIBL extends Distance {
                 boolean first = true;
                 double max = 0.0;
                 for (Clause Ly : LB) {
-                    double sim = SimL(A, B, depth, P, pos, Lx, Ly, descriptors_f1, descriptors_f2);
+                    double sim = SimL(A, B, depth, P, pos, Lx, Ly, descriptors_f1, descriptors_f2, cache_f1, cache_f2);
                     if (first || sim > max) {
                         first = false;
                         max = sim;
@@ -221,7 +235,7 @@ public class RIBL extends Distance {
                 boolean first = true;
                 double max = 0.0;
                 for (Clause Ly : LA) {
-                    double sim = SimL(A, B, depth, P, pos, Ly, Lx, descriptors_f1, descriptors_f2);
+                    double sim = SimL(A, B, depth, P, pos, Ly, Lx, descriptors_f1, descriptors_f2, cache_f1, cache_f2);
                     if (first || sim > max) {
                         first = false;
                         max = sim;
@@ -241,7 +255,9 @@ public class RIBL extends Distance {
     }
 
     private double SimL(String O1, String O2, int depth, String p, Integer pos,
-        Clause P1, Clause P2, List<Pair<Integer, List<Clause>>> descriptors_f1, List<Pair<Integer, List<Clause>>> descriptors_f2) {
+        Clause P1, Clause P2, List<Pair<Integer, List<Clause>>> descriptors_f1, List<Pair<Integer, List<Clause>>> descriptors_f2,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f1,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f2) {
         double similarity = 0.0;
         int count = 0;
 
@@ -257,7 +273,7 @@ public class RIBL extends Distance {
                 if (depth <= max_depth) {
                     switch (P1.getParameterType(i)) {
                         case Clause.TYPE_ID:
-                            similarity += SimA_ID(Ai, Bi, descriptors_f1, descriptors_f2, depth + 1);
+                            similarity += SimA_ID(Ai, Bi, descriptors_f1, descriptors_f2, cache_f1, cache_f2, depth + 1);
                             break;
                         case Clause.TYPE_SYMBOL:
                             similarity += SimA_Symbol(Ai, Bi);
@@ -290,14 +306,22 @@ public class RIBL extends Distance {
     }
 
     private List<Pair<Clause, Integer>> findClausesOfDepth(String parameterValue1, int depth,
-        List<Pair<Integer, List<Clause>>> clauses_f1) {
+        List<Pair<Integer, List<Clause>>> clauses_f1,
+        HashMap<String,List<Pair<Clause,Integer>>> cache_f1) {
 
-        List<Pair<Clause, Integer>> l = new LinkedList<Pair<Clause, Integer>>();
+        String code = depth + "," + parameterValue1;
+        List<Pair<Clause, Integer>> l = cache_f1.get(code);
+            
+        if (l!=null) return l;
+        
+        l = new LinkedList<Pair<Clause, Integer>>();
+        cache_f1.put(code, l);
 
         for (Pair<Integer, List<Clause>> p : clauses_f1) {
             if (p.m_a == depth) {
                 for (Clause c : p.m_b) {
-                    for (int i = 0; i < c.getNumberParameters(); i++) {
+                    int len = c.getNumberParameters();
+                    for (int i = 0; i < len; i++) {
                         if (c.getParameterType(i) == Clause.TYPE_ID &&
                             c.getParameterValue(i).equals(parameterValue1)) {
                             l.add(new Pair<Clause, Integer>(c, i));
@@ -389,6 +413,8 @@ public class RIBL extends Distance {
             if (newClauses.size() > 0) {
                 descriptors.add(new Pair<Integer, List<Clause>>(i, newClauses));
                 alreadyAdded.addAll(newClauses);
+
+//                System.out.println("At level " + i + " added " + newClauses.size() + " clauses");
             }
         }
 

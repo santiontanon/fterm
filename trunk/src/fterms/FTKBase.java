@@ -130,7 +130,11 @@ public class FTKBase {
 
 		undefined_terms.add(f);
 	} // FTKBase::AddFT  
-	
+
+
+    public List<FeatureTerm> getAllTerms() {
+        return index;
+    }
 	
 	public FeatureTerm SearchUndefinedFT(Symbol name)
 	{

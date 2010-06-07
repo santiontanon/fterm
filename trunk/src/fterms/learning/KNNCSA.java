@@ -33,7 +33,7 @@ public class KNNCSA {
 		
 	}
 
-	public static Prediction predict(FeatureTerm problem,List<FeatureTerm> cases,Path description_path,Path solution_path,Ontology o,FTKBase dm,int K, Distance d) throws FeatureTermException
+	public static Prediction predict(FeatureTerm problem,List<FeatureTerm> cases,Path description_path,Path solution_path,Ontology o,FTKBase dm,int K, Distance d) throws Exception
 	{
 		List<Pair<Pair<FeatureTerm,FeatureTerm>,Double>> solutions_distances = new LinkedList<Pair<Pair<FeatureTerm,FeatureTerm>,Double>>();
 		HashMap<FeatureTerm,List<Double>> K_closest_distances = new HashMap<FeatureTerm,List<Double>>();
@@ -94,7 +94,7 @@ public class KNNCSA {
 	/*
 	 * This method returns different predictions for different values of K at the same time
 	 */
-	public static List<Prediction> multiplePredictions(FeatureTerm problem,List<FeatureTerm> cases,Path description_path,Path solution_path,Ontology o,FTKBase dm,List<Integer> Kl, Distance d) throws FeatureTermException
+	public static List<Prediction> multiplePredictions(FeatureTerm problem,List<FeatureTerm> cases,Path description_path,Path solution_path,Ontology o,FTKBase dm,List<Integer> Kl, Distance d) throws Exception
 	{
 		List<Pair<Pair<FeatureTerm,FeatureTerm>,Double>> solutions_distances = new LinkedList<Pair<Pair<FeatureTerm,FeatureTerm>,Double>>();
 		

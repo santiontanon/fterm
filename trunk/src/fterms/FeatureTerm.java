@@ -306,7 +306,7 @@ public abstract class FeatureTerm {
                             state = 2;
                         } else {
                             FeatureTerm ftc = bindings_b.get(pos);
-                            if (f1 instanceof IntegerFeatureTerm) {
+                            if (f1 instanceof IntegerFeatureTerm && f2 instanceof IntegerFeatureTerm) {
                                 if (ftc instanceof IntegerFeatureTerm &&
                                     ((IntegerFeatureTerm) f2).getValue() != null &&
                                     ((IntegerFeatureTerm) f2).getValue() == ((IntegerFeatureTerm) f1).getValue()) {
