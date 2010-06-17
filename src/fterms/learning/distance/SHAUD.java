@@ -34,7 +34,7 @@ public class SHAUD extends Distance {
 	
 	public SHAUD(List<FeatureTerm> cases) throws FeatureTermException {
 		for(FeatureTerm c:cases) {
-			Set<FeatureTerm> v = FTRefinement.variables(c);
+			List<FeatureTerm> v = FTRefinement.variables(c);
 			
 			for(FeatureTerm ft:v) {
 				if (ft instanceof TermFeatureTerm) {
