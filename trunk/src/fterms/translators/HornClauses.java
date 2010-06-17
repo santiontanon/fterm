@@ -26,7 +26,7 @@ public class HornClauses {
 
     public static List<Clause> toClauses(FeatureTerm f, Ontology o, FTKBase dm, String prefix) throws FeatureTermException {
         List<Clause> clauses = new LinkedList<Clause>();
-        Set<FeatureTerm> vs_tmp = FTRefinement.variables(f);
+        List<FeatureTerm> vs_tmp = FTRefinement.variables(f);
         List<FeatureTerm> vs = new LinkedList<FeatureTerm>();
         int count = 0;
 

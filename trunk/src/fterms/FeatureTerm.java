@@ -708,7 +708,7 @@ public abstract class FeatureTerm {
     }
 
     public boolean consistencyCheck(FTKBase dm) {
-        Set<Pair<FeatureTerm, Path>> nodes = FTRefinement.variablesWithPaths(this, dm);
+        List<Pair<FeatureTerm, Path>> nodes = FTRefinement.variablesWithPaths(this, dm);
 
         for (Pair<FeatureTerm, Path> node : nodes) {
             if (!node.m_a.checkDataType()) {

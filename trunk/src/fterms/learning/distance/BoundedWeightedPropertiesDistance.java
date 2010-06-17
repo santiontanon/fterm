@@ -23,7 +23,7 @@ public class BoundedWeightedPropertiesDistance extends WeightedPropertiesDistanc
     int m_max_properties = 10;
 
 	public BoundedWeightedPropertiesDistance(List<FeatureTerm> objects, FTKBase dm,
-			Ontology o, boolean fast, int max_properties) throws Exception {
+			Ontology o, boolean fast, int max_properties, int max_properties_per_term) throws Exception {
 		super(objects, dm, o, fast);
         m_max_properties = max_properties;
 	}

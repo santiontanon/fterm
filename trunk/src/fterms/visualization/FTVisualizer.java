@@ -220,7 +220,7 @@ public class FTVisualizer extends Display {
         // Create sets:
         {
             int setID = 0;
-            Set<SetFeatureTerm> sets = FTRefinement.sets(f);
+            List<SetFeatureTerm> sets = FTRefinement.sets(f);
             for(SetFeatureTerm set:sets) {
                 AggregateItem aitem = (AggregateItem)at.addItem();
                 aitem.setInt("id", setID++);

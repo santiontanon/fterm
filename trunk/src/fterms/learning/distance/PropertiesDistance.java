@@ -19,6 +19,7 @@ import util.Pair;
 
 public class PropertiesDistance extends Distance {
 
+    static boolean cache = false;
     boolean m_fast = false;
     List<FeatureTerm> descriptions = new LinkedList<FeatureTerm>();
     protected List<Pair<FeatureTerm, Double>> m_propertyWeight = null;;
@@ -58,16 +59,19 @@ public class PropertiesDistance extends Distance {
                     }
                 }
             } while(change);
+            System.out.println("smallest has " + sizes.get(objects.get(0)) + " variables.");
+            System.out.println("largest has " + sizes.get(objects.get(objects.size()-1)) + " variables.");
         }
 
         // Generate all the properties
         for (FeatureTerm object : objects) {
+            long start_time = System.currentTimeMillis();
             System.out.println("processing " + object.getName() + " ("+ count + ")");
 //			System.out.println(object.toStringNOOS(dm));
 
             List<FeatureTerm> properties_tmp = null;
             if (m_fast) {
-                if (object.getName()!=null) {
+                if (object.getName()!=null && cache) {
                     String fname = "disintegration-cache/fast-"+object.getName();
                     File tmp = new File(fname);
                     if (tmp.exists()) {
@@ -90,7 +94,7 @@ public class PropertiesDistance extends Distance {
                     properties_tmp = Disintegration.disintegrateFast(object, dm, o);
                 }
             } else {
-                if (object.getName()!=null) {
+                if (object.getName()!=null && cache) {
                     String fname = "disintegration-cache/formal-"+object.getName();
                     File tmp = new File(fname);
                     if (tmp.exists()) {
@@ -101,6 +105,8 @@ public class PropertiesDistance extends Distance {
                         properties_tmp = new LinkedList<FeatureTerm>();
                         properties_tmp.addAll(tmpBase.getAllTerms());
                     } else {
+                        properties_tmp = new LinkedList<FeatureTerm>();
+/*
                         properties_tmp = Disintegration.disintegrate(object, dm, o);
                         // save properties:
                         FileWriter fw = new FileWriter(tmp);
@@ -108,6 +114,7 @@ public class PropertiesDistance extends Distance {
                             fw.write(prop.toStringNOOS(dm)+"\n");
                         }
                         fw.close();
+ */
                     }
                 } else {
                     properties_tmp = Disintegration.disintegrate(object, dm, o);
@@ -115,6 +122,8 @@ public class PropertiesDistance extends Distance {
             }
 
             System.out.println(properties_tmp.size() + " found, now filtering... (previous total: " + m_propertyWeight.size());
+
+            long disintegration_time = System.currentTimeMillis();
 
             for (FeatureTerm property : properties_tmp) {
                 boolean duplicate = false;
@@ -131,6 +140,9 @@ public class PropertiesDistance extends Distance {
                 }
             }
 
+            long time = System.currentTimeMillis();
+            System.out.println("Disintegration time: " + (disintegration_time-start_time) + " filtering timw: " + (time-disintegration_time));
+
             count++;
         }
 
@@ -139,7 +151,8 @@ public class PropertiesDistance extends Distance {
 //		for(Pair<FeatureTerm,Double> p_w:m_propertyWeight) {
 //			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
 //		}
-        }
+    }
+
 
     public double distance(FeatureTerm f1, FeatureTerm f2, Ontology o, FTKBase dm) throws Exception {
         double shared = 0;
@@ -172,7 +185,7 @@ public class PropertiesDistance extends Distance {
         double distance = 1.0f - (((double) (shared * 2)) / ((double) (shared * 2 + f1_not_shared + f2_not_shared)));
 //		double distance = 1.0f-(((double)(shared))/((double)(shared+f1_not_shared+f2_not_shared)));
 
-//		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
+		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
 		System.out.flush();
         return distance;
     }

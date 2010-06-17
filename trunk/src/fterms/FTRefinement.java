@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import util.Pair;
 import fterms.exceptions.FeatureTermException;
+import java.util.LinkedHashMap;
 
 public class FTRefinement {
 
@@ -21,7 +22,7 @@ public class FTRefinement {
     public static final int ALL_REFINEMENTS = SORT_REFINEMENTS | FEATURE_REFINEMENTS | EQUALITY_REFINEMENTS | SET_REFINEMENTS | CONSTANT_REFINEMENTS | SPECIAL_REFINEMENTS;
 
     public static List<FeatureTerm> getSpecializations(FeatureTerm f, FTKBase dm, int flags) throws FeatureTermException {
-        Set<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if ((flags & SORT_REFINEMENTS) != 0) {
@@ -47,7 +48,7 @@ public class FTRefinement {
     }
 
     public static List<FeatureTerm> getSpecializationsSubsumingAll(FeatureTerm f, FTKBase dm, Ontology o, int flags, List<FeatureTerm> objects) throws FeatureTermException {
-        Set<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if ((flags & SORT_REFINEMENTS) != 0) {
@@ -90,7 +91,7 @@ public class FTRefinement {
     }
 
     public static List<FeatureTerm> getSomeSpecializationSubsumingAll(FeatureTerm f, FTKBase dm, Ontology o, int flags, List<FeatureTerm> objects) throws FeatureTermException {
-        Set<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = null;
         List<FeatureTerm> result = new LinkedList<FeatureTerm>();
 
@@ -145,7 +146,7 @@ public class FTRefinement {
     }
 
     public static List<FeatureTerm> getSpecializationsSubsumingSome(FeatureTerm f, FTKBase dm, Ontology o, int flags, List<FeatureTerm> objects) throws FeatureTermException {
-        Set<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if ((flags & SORT_REFINEMENTS) != 0) {
@@ -203,7 +204,7 @@ public class FTRefinement {
     }
 
     public static List<FeatureTerm> getGeneralizations(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
-        Set<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         refinements.addAll(sortGeneralization(f, dm, o));
@@ -247,7 +248,7 @@ public class FTRefinement {
     }
 
     public static List<FeatureTerm> getGeneralizationsAggressive(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
-        Set<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         refinements.addAll(sortGeneralization(f, dm, o));
@@ -295,7 +296,7 @@ public class FTRefinement {
      * reach it is infinite: there are infinite terms in between (any) and any term with a loop
      */
     public static List<FeatureTerm> getSomeGeneralizations(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
-        Set<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = null;
 
         for (int i = 0; i < 6; i++) {
@@ -331,7 +332,7 @@ public class FTRefinement {
      * This method is like "getSomeGeneralizations", but uses the aggresive version of the removal of variable equalities
      */
     public static List<FeatureTerm> getSomeGeneralizationsAggressive(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
-        Set<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = null;
 
         for (int i = 0; i < 6; i++) {
@@ -362,7 +363,7 @@ public class FTRefinement {
         return new LinkedList<FeatureTerm>();
     }
 
-    private static List<FeatureTerm> ConstantGeneralization(FeatureTerm f, FTKBase dm) throws FeatureTermException {
+    public static List<FeatureTerm> ConstantGeneralization(FeatureTerm f, FTKBase dm) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
@@ -423,7 +424,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    private static List<FeatureTerm> setReduction(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
+    public static List<FeatureTerm> setReduction(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
         HashMap<SetFeatureTerm, Set<Pair<TermFeatureTerm, Symbol>>> sp = setsWithAllParents(f);
         for (SetFeatureTerm S : sp.keySet()) {
@@ -468,7 +469,7 @@ public class FTRefinement {
      * is left empty (just a term of the appropriate sort without any feature). This is useful when trying to generalize a term
      * all the way up to "(any)", since otherwise we can get into an infinite loop.
      */
-    private static List<FeatureTerm> variableEqualityEliminationAggressive(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> variableEqualityEliminationAggressive(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
@@ -554,7 +555,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    private static List<FeatureTerm> variableEqualityElimination(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> variableEqualityElimination(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
@@ -618,7 +619,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    private static List<FeatureTerm> featureElimination(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> featureElimination(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -649,7 +650,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    private static List<FeatureTerm> sortGeneralization(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
+    public static List<FeatureTerm> sortGeneralization(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> vp = variablesWithAllParents(f);
@@ -692,7 +693,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> sortSpecialization(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> sortSpecialization(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -711,7 +712,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> featureIntroduction(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> featureIntroduction(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -732,7 +733,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> featureIntroductionSubsumingAll(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
+    public static List<FeatureTerm> featureIntroductionSubsumingAll(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -775,9 +776,9 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> variableEqualityAddition(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> variableEqualityAddition(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
-        Set<SetFeatureTerm> sets = sets(f);
+        List<SetFeatureTerm> sets = sets(f);
 
         if (vp == null) {
             vp = variablesWithPaths(f, dm);
@@ -814,9 +815,9 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> variableEqualityAdditionSubsumingAll(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
+    public static List<FeatureTerm> variableEqualityAdditionSubsumingAll(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
-        Set<SetFeatureTerm> sets = sets(f);
+        List<SetFeatureTerm> sets = sets(f);
 
         if (vp == null) {
             vp = variablesWithPaths(f, dm);
@@ -868,7 +869,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> setExpansion(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> setExpansion(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -908,7 +909,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> setExpansionSubsumingAll(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
+    public static List<FeatureTerm> setExpansionSubsumingAll(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -979,7 +980,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> substitutionByConstantSubsumingSome(FeatureTerm f, FTKBase dm, Ontology ontology, Set<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
+    public static List<FeatureTerm> substitutionByConstantSubsumingSome(FeatureTerm f, FTKBase dm, Ontology ontology, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -987,7 +988,7 @@ public class FTRefinement {
         }
 
         for (Pair<FeatureTerm, Path> node : vp) {
-            HashSet<FeatureTerm> constants = new HashSet<FeatureTerm>();
+            List<FeatureTerm> constants = new LinkedList<FeatureTerm>();
             for (FeatureTerm o : objects) {
                 FeatureTerm c = o.readPath(node.m_b);
 
@@ -1024,7 +1025,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> substitutionByConstantSubsumingAll(FeatureTerm f, FTKBase dm, Ontology ontology, Set<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
+    public static List<FeatureTerm> substitutionByConstantSubsumingAll(FeatureTerm f, FTKBase dm, Ontology ontology, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -1032,7 +1033,7 @@ public class FTRefinement {
         }
 
         for (Pair<FeatureTerm, Path> node : vp) {
-            HashSet<FeatureTerm> constants = new HashSet<FeatureTerm>();
+            List<FeatureTerm> constants = new LinkedList<FeatureTerm>();
             boolean first = true;
             for (FeatureTerm o : objects) {
                 FeatureTerm c = o.readPath(node.m_b);
@@ -1092,7 +1093,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    private static List<FeatureTerm> specialSpecializations(FeatureTerm f, FTKBase dm, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> specialSpecializations(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -1112,7 +1113,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    private static List<FeatureTerm> specialSpecializationsSubsumingAll(FeatureTerm f, FTKBase dm, Ontology ontology, Set<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
+    public static List<FeatureTerm> specialSpecializationsSubsumingAll(FeatureTerm f, FTKBase dm, Ontology ontology, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
 //		System.out.println("FTRefinement.specialSpecializationsSubsumingAll");
@@ -1140,7 +1141,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    private static List<FeatureTerm> specialSpecializationsSubsumingSome(FeatureTerm f, FTKBase dm, Ontology ontology, Set<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
+    public static List<FeatureTerm> specialSpecializationsSubsumingSome(FeatureTerm f, FTKBase dm, Ontology ontology, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -1166,7 +1167,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    private static List<FeatureTerm> specialGeneralizations(FeatureTerm f, FTKBase dm, Ontology ontology, Set<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> specialGeneralizations(FeatureTerm f, FTKBase dm, Ontology ontology, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         if (vp == null) {
@@ -1186,9 +1187,9 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static Set<FeatureTerm> variables(FeatureTerm ft) {
+    public static List<FeatureTerm> variables(FeatureTerm ft) {
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
-        HashSet<FeatureTerm> variables = new HashSet<FeatureTerm>();
+        List<FeatureTerm> variables = new LinkedList<FeatureTerm>();
         List<FeatureTerm> open_nodes = new LinkedList<FeatureTerm>();
         FeatureTerm node;
 
@@ -1223,9 +1224,9 @@ public class FTRefinement {
         return variables;
     } // variables
 
-    public static Set<Pair<FeatureTerm, Path>> variablesWithPaths(FeatureTerm ft, FTKBase dm) {
+    public static List<Pair<FeatureTerm, Path>> variablesWithPaths(FeatureTerm ft, FTKBase dm) {
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
-        HashSet<Pair<FeatureTerm, Path>> variablesPaths = new HashSet<Pair<FeatureTerm, Path>>();
+        List<Pair<FeatureTerm, Path>> variablesPaths = new LinkedList<Pair<FeatureTerm, Path>>();
         List<Pair<FeatureTerm, Path>> open_nodes = new LinkedList<Pair<FeatureTerm, Path>>();
         Pair<FeatureTerm, Path> node;
 
@@ -1265,7 +1266,7 @@ public class FTRefinement {
 
     public static HashMap<FeatureTerm, AnnotatedPath> variablesWithAnnotatedPaths(FeatureTerm ft) {
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
-        HashMap<FeatureTerm, AnnotatedPath> variablesPaths = new HashMap<FeatureTerm, AnnotatedPath>();
+        HashMap<FeatureTerm, AnnotatedPath> variablesPaths = new LinkedHashMap<FeatureTerm, AnnotatedPath>();
         List<Pair<FeatureTerm, AnnotatedPath>> open_nodes = new LinkedList<Pair<FeatureTerm, AnnotatedPath>>();
         Pair<FeatureTerm, AnnotatedPath> node;
 
@@ -1305,7 +1306,7 @@ public class FTRefinement {
 
 
     public static HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> variablesWithAllParents(FeatureTerm ft) throws FeatureTermException {
-        HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> variablesParents = new HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>>();
+        HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> variablesParents = new LinkedHashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>>();
         List<Pair<FeatureTerm, Pair<TermFeatureTerm, Symbol>>> open_nodes = new LinkedList<Pair<FeatureTerm, Pair<TermFeatureTerm, Symbol>>>();
         Pair<FeatureTerm, Pair<TermFeatureTerm, Symbol>> node;
 
@@ -1384,9 +1385,11 @@ public class FTRefinement {
 
         return variablesParents;
     } // variables with paths
-    public static Set<SetFeatureTerm> sets(FeatureTerm ft) {
+
+
+    public static List<SetFeatureTerm> sets(FeatureTerm ft) {
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
-        HashSet<SetFeatureTerm> sets = new HashSet<SetFeatureTerm>();
+        List<SetFeatureTerm> sets = new LinkedList<SetFeatureTerm>();
         List<FeatureTerm> open_nodes = new LinkedList<FeatureTerm>();
         FeatureTerm node;
 

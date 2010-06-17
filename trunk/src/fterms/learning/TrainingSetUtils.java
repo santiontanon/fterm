@@ -391,6 +391,7 @@ public class TrainingSetUtils {
                 dm.ImportNOOS("NOOS/mutagenesis-dm.noos", o);
 //                case_base.ImportNOOS("NOOS/mutagenesis-b4-230-cases.noos", o);
                 case_base.ImportNOOS("NOOS/mutagenesis-b4-noH-230-cases.noos", o);
+//                case_base.ImportNOOS("NOOS/mutagenesis-b4-noH-25-cases.noos", o);
 
                 ts.name = "mutagenesis-b4-discretized";
                 ts.problem_sort = o.getSort("mutagenesis-problem");

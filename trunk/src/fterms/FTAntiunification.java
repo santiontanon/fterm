@@ -806,7 +806,7 @@ public class FTAntiunification {
 
     static boolean separableFeature(Symbol fname, List<FeatureTerm> objects, FTKBase dm) throws FeatureTermException {
         Sort s;
-        Set<FeatureTerm> l1, l2;
+        List<FeatureTerm> l1, l2;
         FeatureTerm o1, o2;
 
         for (FeatureTerm object : objects) {
