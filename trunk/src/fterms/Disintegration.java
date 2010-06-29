@@ -74,8 +74,10 @@ public class Disintegration {
     // - This method generates a path from f to 'any', and only generates properties for the last 'N' refinements
     // - It is useful when dealing with large terms, since the last 'n' refinements will deal with the smallest terms
     //   and thus will not involve subsumption operations with large terms
-    // - when 'random' = true, the path is selected at random
-    public static List<FeatureTerm> disintegrateFirstN(FeatureTerm f, FTKBase dm, Ontology o,int N,boolean random) throws FeatureTermException {
+    // - when 'method' = 0, the path is selected at random from the term to any (generlization)
+    // - when 'method' = 1, the path is selected as the first path from the term to any (generalization)
+    // - when 'method' = 2, the path is selected as the first path from any to the term (specialization)
+    public static List<FeatureTerm> disintegrateFirstN(FeatureTerm f, FTKBase dm, Ontology o,int N,int method) throws FeatureTermException {
         List<FeatureTerm> properties = null;
         List<FeatureTerm> refinementPath = new LinkedList<FeatureTerm>();
         Random r = new Random();
@@ -86,42 +88,88 @@ public class Disintegration {
 
         properties = new LinkedList<FeatureTerm>();
 
-        FeatureTerm unnamed = f.clone(dm, o);
-        List<FeatureTerm> variables = FTRefinement.variables(unnamed);
-        for(FeatureTerm v:variables) {
-            if (!dm.contains(v)) v.setName(null);
+        FeatureTerm unnamed = null;
+        if (method==0 || method==1) {
+            unnamed = f.clone(dm, o);
+            List<FeatureTerm> variables = FTRefinement.variables(unnamed);
+            for(FeatureTerm v:variables) {
+                if (!dm.contains(v)) v.setName(null);
+            }
+            if (DEBUG>=2) {
+                System.out.println("Unnamed term to disintegrate:");
+                System.out.println(unnamed.toStringNOOS(dm));
+            }
+        } else {
+            unnamed = o.getSort("any").createFeatureTerm();
         }
-        if (DEBUG>=2) {
-            System.out.println("Unnamed term to disintegrate:");
-            System.out.println(unnamed.toStringNOOS(dm));
-        }
-
         // generate the refinement path:
         refinementPath.add(unnamed);
         do{
-            if (random) {
-                List<FeatureTerm> refinements = FTRefinement.getGeneralizationsAggressive(unnamed, dm, o);
-                if (!refinements.isEmpty()) {
-                    unnamed = refinements.get(r.nextInt(refinements.size()));
-                    refinementPath.add(unnamed);
-                } else {
-                    unnamed = null;
+//            System.out.println(refinementPath.size() + "\n" + unnamed.toStringNOOS(dm));
+            switch(method) {
+                // generalization, random
+                case 0:{
+                    List<FeatureTerm> refinements = FTRefinement.getSomeRandomGeneralizationsAggressive(unnamed, dm, o);
+                    if (!refinements.isEmpty()) {
+                        unnamed = refinements.get(r.nextInt(refinements.size()));
+                        refinementPath.add(unnamed);
+                    } else {
+                        unnamed = null;
+                    }
                 }
-            } else {
-                List<FeatureTerm> refinements = FTRefinement.getSomeGeneralizationsAggressive(unnamed, dm, o);
-                if (!refinements.isEmpty()) {
-                    unnamed = refinements.get(0);
-                    refinementPath.add(unnamed);
-                } else {
-                    unnamed = null;
+                break;
+                // generalization, deterministic
+                case 1:{
+                    List<FeatureTerm> refinements = FTRefinement.getSomeGeneralizationsAggressive(unnamed, dm, o);
+                    if (!refinements.isEmpty()) {
+                        unnamed = refinements.get(0);
+                        refinementPath.add(unnamed);
+                    } else {
+                        unnamed = null;
+                    }
                 }
+                break;
+                // specialization, deterministic
+                case 2:{
+                    if (refinementPath.size()>=N) {
+                        unnamed = null;
+                    } else {
+                        List<FeatureTerm> tmp = new LinkedList<FeatureTerm>();
+                        tmp.add(f);
+                        List<FeatureTerm> refinements = FTRefinement.getSomeSpecializationSubsumingAll(unnamed, dm, o, FTRefinement.ALL_REFINEMENTS, tmp);
+                        if (!refinements.isEmpty()) {
+                            unnamed = refinements.get(0);
+                            refinementPath.add(0,unnamed);
+                        } else {
+                            unnamed = null;
+                        }
+                    }
+                }
+                // specialization, random
+                case 3:{
+                    if (refinementPath.size()>N) {
+                        unnamed = null;
+                    } else {
+                        List<FeatureTerm> tmp = new LinkedList<FeatureTerm>();
+                        tmp.add(f);
+                        List<FeatureTerm> refinements = FTRefinement.getSomeSpecializationSubsumingAll(unnamed, dm, o, FTRefinement.ALL_REFINEMENTS, tmp);
+                        if (!refinements.isEmpty()) {
+                            unnamed = refinements.get(r.nextInt(refinements.size()));
+                            refinementPath.add(0,unnamed);
+                        } else {
+                            unnamed = null;
+                        }
+                    }
+                }
+                break;
+
             }
         }while(unnamed!=null);
 
 
         System.out.println("Refinement path is of length: " + refinementPath.size());
         // reduce the path to the desired length:
-        while(refinementPath.size()>N) refinementPath.remove(0);
+        while(refinementPath.size()>(N+1)) refinementPath.remove(0);
 
         // generate the properties:
         for(int i = 0;i<refinementPath.size()-1;i++) {
@@ -129,10 +177,10 @@ public class Disintegration {
             FeatureTerm t2 = refinementPath.get(i+1);
             FeatureTerm property = remainderFastAssumingRefinement(t1, t2, dm, o);
             properties.add(property);
-            if (DEBUG>=2) {
-                System.out.println("Property:");
-                System.out.println(property);
-            }
+//            System.out.println("t1: -----------------------------------");
+//            System.out.println(t1.toStringNOOS(dm));
+//            System.out.println("Property");
+//            System.out.println(property.toStringNOOS(dm));
             if (DEBUG>=1) System.out.println("extractPropertyFormal finished...");
         }
 
@@ -155,7 +203,7 @@ public class Disintegration {
 
         if (refinements.size() > 0) {
             FeatureTerm refinement = refinements.get(0);
-            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFast(f, refinement, dm, o), refinement);
+            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFastAssumingRefinement(f, refinement, dm, o), refinement);
 
             if (DEBUG>=2) {
                 System.out.println("Property:");

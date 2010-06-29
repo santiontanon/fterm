@@ -1,5 +1,6 @@
 package fterms.learning.distance;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,15 +16,21 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import util.Pair;
 
 public class PropertiesDistance extends Distance {
 
-    static boolean cache = false;
+    static boolean s_cache = false;
     boolean m_fast = false;
     List<FeatureTerm> descriptions = new LinkedList<FeatureTerm>();
     protected List<Pair<FeatureTerm, Double>> m_propertyWeight = null;;
+    static HashMap<FeatureTerm,HashSet<FeatureTerm>> property_cache = new HashMap<FeatureTerm,HashSet<FeatureTerm>>();
 
+    
+    public PropertiesDistance() {
+	}
+    
     public PropertiesDistance(Collection<FeatureTerm> objects, FTKBase dm, Ontology o, Path dp, boolean fast) throws Exception {
         m_fast = fast;
         for (FeatureTerm obj : objects) {
@@ -37,93 +44,16 @@ public class PropertiesDistance extends Distance {
         generateAllProperties(objects, dm, o);
     }
 
-    private void generateAllProperties(List<FeatureTerm> objects, FTKBase dm, Ontology o) throws Exception {
+    void generateAllProperties(List<FeatureTerm> objects, FTKBase dm, Ontology o) throws Exception {
         int count = 0;
         m_propertyWeight = new LinkedList<Pair<FeatureTerm, Double>>();
 
-        // sort them from small to big (just for mutagenesis):
-        {
-            HashMap<FeatureTerm,Integer> sizes = new HashMap<FeatureTerm,Integer>();
-            for(FeatureTerm object:objects) {
-                sizes.put(object,FTRefinement.variables(object).size());
-            }
-            boolean change = false;
-            do{
-                change = false;
-                for(int i = 0;i<objects.size()-1;i++) {
-                    if (sizes.get(objects.get(i)) > sizes.get(objects.get(i+1))) {
-                        change = true;
-                        FeatureTerm tmp = objects.get(i);
-                        objects.set(i,objects.get(i+1));
-                        objects.set(i+1,tmp);
-                    }
-                }
-            } while(change);
-            System.out.println("smallest has " + sizes.get(objects.get(0)) + " variables.");
-            System.out.println("largest has " + sizes.get(objects.get(objects.size()-1)) + " variables.");
-        }
-
         // Generate all the properties
         for (FeatureTerm object : objects) {
-            long start_time = System.currentTimeMillis();
+
             System.out.println("processing " + object.getName() + " ("+ count + ")");
-//			System.out.println(object.toStringNOOS(dm));
-
-            List<FeatureTerm> properties_tmp = null;
-            if (m_fast) {
-                if (object.getName()!=null && cache) {
-                    String fname = "disintegration-cache/fast-"+object.getName();
-                    File tmp = new File(fname);
-                    if (tmp.exists()) {
-                        // load properties
-                        FTKBase tmpBase = new FTKBase();
-                        tmpBase.uses(dm);
-                        tmpBase.ImportNOOS(fname, o);
-                        properties_tmp = new LinkedList<FeatureTerm>();
-                        properties_tmp.addAll(tmpBase.getAllTerms());
-                    } else {
-                        properties_tmp = Disintegration.disintegrateFast(object, dm, o);
-                        // save properties:
-                        FileWriter fw = new FileWriter(tmp);
-                        for(FeatureTerm prop:properties_tmp) {
-                            fw.write(prop.toStringNOOS(dm));
-                        }
-                        fw.close();
-                    }
-                } else {
-                    properties_tmp = Disintegration.disintegrateFast(object, dm, o);
-                }
-            } else {
-                if (object.getName()!=null && cache) {
-                    String fname = "disintegration-cache/formal-"+object.getName();
-                    File tmp = new File(fname);
-                    if (tmp.exists()) {
-                        // load properties
-                        FTKBase tmpBase = new FTKBase();
-                        tmpBase.uses(dm);
-                        tmpBase.ImportNOOS(fname, o);
-                        properties_tmp = new LinkedList<FeatureTerm>();
-                        properties_tmp.addAll(tmpBase.getAllTerms());
-                    } else {
-                        properties_tmp = new LinkedList<FeatureTerm>();
-/*
-                        properties_tmp = Disintegration.disintegrate(object, dm, o);
-                        // save properties:
-                        FileWriter fw = new FileWriter(tmp);
-                        for(FeatureTerm prop:properties_tmp) {
-                            fw.write(prop.toStringNOOS(dm)+"\n");
-                        }
-                        fw.close();
- */
-                    }
-                } else {
-                    properties_tmp = Disintegration.disintegrate(object, dm, o);
-                }
-            }
-
-            System.out.println(properties_tmp.size() + " found, now filtering... (previous total: " + m_propertyWeight.size());
-
-            long disintegration_time = System.currentTimeMillis();
+            List<FeatureTerm> properties_tmp = disintegrate(object,dm,o, s_cache);
+            long start_time = System.currentTimeMillis();
 
             for (FeatureTerm property : properties_tmp) {
                 boolean duplicate = false;
@@ -141,9 +71,11 @@ public class PropertiesDistance extends Distance {
             }
 
             long time = System.currentTimeMillis();
-            System.out.println("Disintegration time: " + (disintegration_time-start_time) + " filtering timw: " + (time-disintegration_time));
+            System.out.println("Filtering time: " + (time-start_time));
 
             count++;
+
+//            if (count>=10) break;
         }
 
         // The weights will be all 1 in this distance:
@@ -153,6 +85,61 @@ public class PropertiesDistance extends Distance {
 //		}
     }
 
+    public List<FeatureTerm> disintegrate(FeatureTerm object, FTKBase dm, Ontology o, boolean cache) throws Exception {
+        long start_time = System.currentTimeMillis();
+//			System.out.println(object.toStringNOOS(dm));
+
+        List<FeatureTerm> properties_tmp = null;
+        if (object.getName()!=null && cache) {
+            String fname;
+            if (m_fast) fname = "disintegration-cache/fast-"+object.getName();
+                   else fname = "disintegration-cache/formal-" + object.getName();
+            File tmp = new File(fname);
+            if (tmp.exists()) {
+                // load properties
+                FTKBase tmpBase = new FTKBase();
+                tmpBase.uses(dm);
+                tmpBase.ImportNOOS(fname, o);
+                properties_tmp = new LinkedList<FeatureTerm>();
+                properties_tmp.addAll(tmpBase.getAllTerms());
+            } else {
+//                    properties_tmp = new LinkedList<FeatureTerm>();
+                if (m_fast) properties_tmp = Disintegration.disintegrateFast(object, dm, o);
+                       else properties_tmp = Disintegration.disintegrate(object, dm, o);
+                // save properties:
+                FileWriter fw = new FileWriter(tmp);
+                for(FeatureTerm prop:properties_tmp) {
+                    fw.write(prop.toStringNOOS(dm) + "\n");
+                }
+                fw.close();
+            }
+        } else {
+            if (m_fast) properties_tmp = Disintegration.disintegrateFast(object, dm, o);
+                   else properties_tmp = Disintegration.disintegrate(object, dm, o);
+        }
+
+        System.out.println(properties_tmp.size() + " found, now filtering... (previous total: " + m_propertyWeight.size() + ")");
+
+        long disintegration_time = System.currentTimeMillis();
+        System.out.println("Disintegration time: " + (disintegration_time-start_time));
+        return properties_tmp;
+    }
+
+
+    public HashSet<FeatureTerm> getPropertyCache(FeatureTerm f1) throws FeatureTermException {
+        HashSet<FeatureTerm> cache1 = property_cache.get(f1);
+
+        if (cache1==null) {
+//            System.out.println("getPropertyCache: new property");
+            cache1 = new HashSet<FeatureTerm>();
+            for (Pair<FeatureTerm, Double> p_w : m_propertyWeight)
+                if (p_w.m_a.subsumes(f1))
+                    cache1.add(p_w.m_a);
+            property_cache.put(f1,cache1);
+        }
+
+        return cache1;
+    }
 
     public double distance(FeatureTerm f1, FeatureTerm f2, Ontology o, FTKBase dm) throws Exception {
         double shared = 0;
@@ -163,16 +150,19 @@ public class PropertiesDistance extends Distance {
             generateAllProperties(descriptions, dm, o);
         }
 
+        HashSet<FeatureTerm> cache1 = getPropertyCache(f1);
+        HashSet<FeatureTerm> cache2 = getPropertyCache(f2);
+
         for (Pair<FeatureTerm, Double> p_w : m_propertyWeight) {
             if (p_w.m_b > 0) {
-                if (p_w.m_a.subsumes(f1)) {
-                    if (p_w.m_a.subsumes(f2)) {
+                if (cache1.contains(p_w.m_a)) {
+                    if (cache2.contains(p_w.m_a)) {
                         shared += p_w.m_b;
                     } else {
                         f1_not_shared += p_w.m_b;
                     }
                 } else {
-                    if (p_w.m_a.subsumes(f2)) {
+                    if (cache2.contains(p_w.m_a)) {
                         f2_not_shared += p_w.m_b;
                     } else {
                         // none of them have it!
@@ -185,7 +175,7 @@ public class PropertiesDistance extends Distance {
         double distance = 1.0f - (((double) (shared * 2)) / ((double) (shared * 2 + f1_not_shared + f2_not_shared)));
 //		double distance = 1.0f-(((double)(shared))/((double)(shared+f1_not_shared+f2_not_shared)));
 
-		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
+//		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
 		System.out.flush();
         return distance;
     }
