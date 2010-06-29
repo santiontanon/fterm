@@ -11,12 +11,16 @@ import fterms.Ontology;
 import fterms.Path;
 import fterms.exceptions.FeatureTermException;
 import fterms.learning.InformationMeasurement;
+import java.util.HashSet;
 
 import util.Pair;
 
 public class WeightedPropertiesDistance extends PropertiesDistance {
 
-	public WeightedPropertiesDistance(List<FeatureTerm> objects, FTKBase dm,
+	public WeightedPropertiesDistance() {
+	}
+
+    public WeightedPropertiesDistance(List<FeatureTerm> objects, FTKBase dm,
 			Ontology o, boolean fast) throws Exception {
 		super(objects, dm, o, fast);
 	}
@@ -42,16 +46,33 @@ public class WeightedPropertiesDistance extends PropertiesDistance {
 				
 		for(Pair<FeatureTerm,Double> p_w:m_propertyWeight) {
 //			Pair<Float,Integer> tmp = InformationMeasurement.h_rldm(descriptions,solutions,different_solutions,p_w.m_a);
-			Pair<Float,Integer> tmp = InformationMeasurement.h_information_gain(descriptions,solutions,different_solutions,p_w.m_a);	
 //			p_w.m_b = 1-(double)(tmp.m_a);
-			p_w.m_b = (double)(tmp.m_a);
-//			p_w.m_b = Math.pow(p_w.m_b,64);
-//			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
+
+//            Pair<Float,Integer> tmp = InformationMeasurement.h_information_gain(descriptions,solutions,different_solutions,p_w.m_a);
+//			p_w.m_b = (double)(tmp.m_a);
+
+            // Create the partition induced by the property:
+            {
+                List<FeatureTerm> s1 = new LinkedList<FeatureTerm>();
+                List<FeatureTerm> s2 = new LinkedList<FeatureTerm>();
+
+                for(int i = 0;i<descriptions.size();i++) {
+                    FeatureTerm d = descriptions.get(i);
+                    FeatureTerm s = solutions.get(i);
+
+                    HashSet<FeatureTerm> cache = getPropertyCache(d);
+                    if (cache.contains(p_w.m_a)) {
+                        s1.add(s);
+                    } else {
+                        s2.add(s);
+                    }
+                }
+                Pair<Float,Integer> tmp = InformationMeasurement.h_information_gain(solutions,s1,s2,different_solutions);
+                p_w.m_b = (double)(tmp.m_a);
+//                System.out.println(p_w.m_b + " -> " + p_w.m_a.toStringNOOS(dm));
+            }
 		}
 
 		
-//		for(Pair<FeatureTerm,Double> pw:m_propertyWeight) {
-//			System.out.println(pw.m_b + " -> " + pw.m_a.toStringNOOS(dm));
-//		}
 	}
 }

@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import util.Pair;
 import fterms.exceptions.FeatureTermException;
 import java.util.LinkedHashMap;
+import java.util.Random;
 
 public class FTRefinement {
 
@@ -102,13 +103,13 @@ public class FTRefinement {
             if (i == 1 && (flags & SORT_REFINEMENTS) != 0) {
                 refinements = sortSpecialization(f, dm, vp);
             }
-            if (i == 2 && (flags & FEATURE_REFINEMENTS) != 0) {
+            if (i == 4 && (flags & FEATURE_REFINEMENTS) != 0) {
                 refinements = featureIntroductionSubsumingAll(f, dm, vp, objects);
             }
             if (i == 3 && (flags & SET_REFINEMENTS) != 0) {
                 refinements = setExpansionSubsumingAll(f, dm, vp, objects);
             }
-            if (i == 4 && (flags & CONSTANT_REFINEMENTS) != 0) {
+            if (i == 2 && (flags & CONSTANT_REFINEMENTS) != 0) {
                 refinements = substitutionByConstantSubsumingAll(f, dm, o, vp, objects);
             }
             if (i == 5 && (flags & SPECIAL_REFINEMENTS) != 0) {
@@ -336,24 +337,42 @@ public class FTRefinement {
         List<FeatureTerm> refinements = null;
 
         for (int i = 0; i < 6; i++) {
-            if (i == 0) {
-                refinements = sortGeneralization(f, dm, o);
+            if (i == 0) refinements = sortGeneralization(f, dm, o);
+            if (i == 1) refinements = featureElimination(f, dm, vp);
+            if (i == 2) refinements = setReduction(f, dm, o);
+            if (i == 3) refinements = ConstantGeneralization(f, dm);
+            if (i == 4) refinements = variableEqualityEliminationAggressive(f, dm, vp);
+            if (i == 5) refinements = specialGeneralizations(f, dm, o, vp);
+
+            if (!refinements.isEmpty()) {
+                return refinements;
             }
-            if (i == 1) {
-                refinements = featureElimination(f, dm, vp);
-            }
-            if (i == 2) {
-                refinements = setReduction(f, dm, o);
-            }
-            if (i == 3) {
-                refinements = ConstantGeneralization(f, dm);
-            }
-            if (i == 4) {
-                refinements = variableEqualityEliminationAggressive(f, dm, vp);
-            }
-            if (i == 5) {
-                refinements = specialGeneralizations(f, dm, o, vp);
-            }
+        } // for
+
+        return new LinkedList<FeatureTerm>();
+    }
+
+
+    public static List<FeatureTerm> getSomeRandomGeneralizationsAggressive(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
+        List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
+        List<FeatureTerm> refinements = null;
+        List<Integer> left = new LinkedList<Integer>();
+        left.add(0);
+        left.add(1);
+        left.add(2);
+        left.add(3);
+        left.add(4);
+        left.add(5);
+        Random r = new Random();
+
+        while(!left.isEmpty()) {
+            int i = left.remove(r.nextInt(left.size()));
+            if (i == 0) refinements = sortGeneralization(f, dm, o);
+            if (i == 1) refinements = featureElimination(f, dm, vp);
+            if (i == 2) refinements = setReduction(f, dm, o);
+            if (i == 3) refinements = ConstantGeneralization(f, dm);
+            if (i == 4) refinements = variableEqualityEliminationAggressive(f, dm, vp);
+            if (i == 5) refinements = specialGeneralizations(f, dm, o, vp);
 
             if (!refinements.isEmpty()) {
                 return refinements;
@@ -1035,53 +1054,55 @@ public class FTRefinement {
         for (Pair<FeatureTerm, Path> node : vp) {
             List<FeatureTerm> constants = new LinkedList<FeatureTerm>();
             boolean first = true;
-            for (FeatureTerm o : objects) {
-                FeatureTerm c = o.readPath(node.m_b);
+            if (!node.m_a.isConstant()) {
+                for (FeatureTerm o : objects) {
+                    FeatureTerm c = o.readPath(node.m_b);
 
-                if (first) {
-                    if (c instanceof SetFeatureTerm) {
-                        for (FeatureTerm c2 : ((SetFeatureTerm) c).getSetValues()) {
-                            if ((c2.isConstant() || dm.contains(c2)) && node.m_a.subsumes(c2)) {
-                                constants.add(c2);
-                            }
-                        }
-                    } else {
-                        if ((c.isConstant() || dm.contains(c)) && node.m_a.subsumes(c)) {
-                            constants.add(c);
-                        }
-                    }
-                } else {
-                    if (c instanceof SetFeatureTerm) {
-                        boolean found = false;
-                        List<FeatureTerm> todelete = new LinkedList<FeatureTerm>();
-                        for (FeatureTerm c3 : constants) {
+                    if (first) {
+                        if (c instanceof SetFeatureTerm) {
                             for (FeatureTerm c2 : ((SetFeatureTerm) c).getSetValues()) {
-                                if (c3.equals(c2)) {
-                                    found = true;
-                                    break;
+                                if ((c2.isConstant() || dm.contains(c2)) && node.m_a.subsumes(c2)) {
+                                    constants.add(c2);
                                 }
                             }
-                            if (!found) {
-                                todelete.add(c3);
+                        } else {
+                            if ((c.isConstant() || dm.contains(c)) && node.m_a.subsumes(c)) {
+                                constants.add(c);
                             }
-                        }
-                        while (!todelete.isEmpty()) {
-                            constants.remove(todelete.remove(0));
                         }
                     } else {
-                        List<FeatureTerm> todelete = new LinkedList<FeatureTerm>();
-                        for (FeatureTerm c3 : constants) {
-                            if (c3 != c) {
-                                todelete.add(c3);
+                        if (c instanceof SetFeatureTerm) {
+                            boolean found = false;
+                            List<FeatureTerm> todelete = new LinkedList<FeatureTerm>();
+                            for (FeatureTerm c3 : constants) {
+                                for (FeatureTerm c2 : ((SetFeatureTerm) c).getSetValues()) {
+                                    if (c3.equals(c2)) {
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (!found) {
+                                    todelete.add(c3);
+                                }
+                            }
+                            while (!todelete.isEmpty()) {
+                                constants.remove(todelete.remove(0));
+                            }
+                        } else {
+                            List<FeatureTerm> todelete = new LinkedList<FeatureTerm>();
+                            for (FeatureTerm c3 : constants) {
+                                if (c3 != c) {
+                                    todelete.add(c3);
+                                }
+                            }
+                            while (!todelete.isEmpty()) {
+                                constants.remove(todelete.remove(0));
                             }
                         }
-                        while (!todelete.isEmpty()) {
-                            constants.remove(todelete.remove(0));
-                        }
-                    }
 
-                    if (constants.isEmpty()) {
-                        break;
+                        if (constants.isEmpty()) {
+                            break;
+                        }
                     }
                 }
             }

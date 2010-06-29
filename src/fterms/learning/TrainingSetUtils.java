@@ -182,6 +182,8 @@ public class TrainingSetUtils {
     public static final int MUTAGENESIS_EASY = 18;
     public static final int MUTAGENESIS_DISCRETIZED = 19;
     public static final int MUTAGENESIS_EASY_DISCRETIZED = 20;
+    public static final int MUTAGENESIS_NOL_DISCRETIZED = 21;
+    public static final int MUTAGENESIS_EASY_NOL_DISCRETIZED = 22;
 
     public static TrainingSetProperties loadTrainingSet(int DATASET, Ontology o, FTKBase dm, FTKBase case_base) throws FeatureTermException, IOException
     {
@@ -444,6 +446,60 @@ public class TrainingSetUtils {
                 }
 
                 break;
+            case MUTAGENESIS_EASY_NOL_DISCRETIZED:
+                dm.ImportNOOS("NOOS/mutagenesis-ontology.noos", o);
+                dm.ImportNOOS("NOOS/mutagenesis-dm.noos", o);
+                case_base.ImportNOOS("NOOS/mutagenesis-b4-noH-noL-188-cases.noos", o);
+
+                ts.name = "mutagenesis-b4-nol-discretized";
+                ts.problem_sort = o.getSort("mutagenesis-problem");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                ts.description_path.features.add(new Symbol("problem"));
+                ts.solution_path.features.add(new Symbol("solution"));
+
+                // discretize:
+                {
+                    Set<FeatureTerm> cases=case_base.SearchFT(ts.problem_sort);
+                    Path fp = new Path();
+                    fp.features.add(new Symbol("problem"));
+                    fp.features.add(new Symbol("lumo"));
+                    TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
+
+                    fp.features.clear();
+                    fp.features.add(new Symbol("problem"));
+                    fp.features.add(new Symbol("logp"));
+                    TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
+                }
+                break;
+            case MUTAGENESIS_NOL_DISCRETIZED:
+                dm.ImportNOOS("NOOS/mutagenesis-ontology.noos", o);
+                dm.ImportNOOS("NOOS/mutagenesis-dm.noos", o);
+                case_base.ImportNOOS("NOOS/mutagenesis-b4-noH-noL-230-cases.noos", o);
+
+                ts.name = "mutagenesis-b4-nol-discretized";
+                ts.problem_sort = o.getSort("mutagenesis-problem");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                ts.description_path.features.add(new Symbol("problem"));
+                ts.solution_path.features.add(new Symbol("solution"));
+
+                // discretize:
+                {
+                    Set<FeatureTerm> cases=case_base.SearchFT(ts.problem_sort);
+                    Path fp = new Path();
+                    fp.features.add(new Symbol("problem"));
+                    fp.features.add(new Symbol("lumo"));
+                    TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
+
+                    fp.features.clear();
+                    fp.features.add(new Symbol("problem"));
+                    fp.features.add(new Symbol("logp"));
+                    TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
+                }
+                break;
             default:
                 return null;
         }
@@ -501,7 +557,7 @@ public class TrainingSetUtils {
             FeatureTerm s = c.readPath(solutionPath);
             Float fv = null;
 
-            if (fv!=null) {
+            if (v!=null) {
                 if (v instanceof IntegerFeatureTerm) {
                     fv = (((IntegerFeatureTerm)v).getValue()).floatValue();
                 } else if (v instanceof FloatFeatureTerm) {

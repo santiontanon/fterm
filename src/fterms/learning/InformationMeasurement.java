@@ -85,6 +85,48 @@ public class InformationMeasurement {
 
         return new Pair<Float, Integer>(gain, nb);
     } // h_information_gain
+
+
+    public static Pair<Float, Integer> h_information_gain(List<FeatureTerm> s,
+                                                          List<FeatureTerm> s1,
+                                                          List<FeatureTerm> s2,
+                                                          List<FeatureTerm> solutions) throws FeatureTermException {
+        int nsols = solutions.size();
+        int[] distributiona = new int[nsols];
+        int[] distributionb = new int[nsols];
+        int[] distributionc = new int[nsols];
+        int na, nb, nc;
+        int i;
+        float gain;
+
+//		System.out.println(current_description.toStringNOOS());
+
+        na = s.size();
+        nb = s1.size();
+        nc = s2.size();
+
+        for(FeatureTerm solution:s) distributiona[solutions.indexOf(solution)]++;
+        for(FeatureTerm solution:s1) distributionb[solutions.indexOf(solution)]++;
+        for(FeatureTerm solution:s2) distributionc[solutions.indexOf(solution)]++;
+
+        // Compute information gain:
+        {
+            float e1, e2, e3;
+
+            e1 = entropy(nsols, distributiona);
+            e2 = entropy(nsols, distributionb);
+            e3 = entropy(nsols, distributionc);
+
+//			System.out.println(e1 + " - " + e2 + " - " + e3 + "[" + na + "," + nb + "," + nc + "]");
+
+//			gain=e1-(nb/na)*e2 + (nc/na)*e3);
+            gain = e1 - ((((float) (nb)) / ((float) (na))) * e2 + (((float) (nc)) / ((float) (na))) * e3);
+
+        }
+
+        return new Pair<Float, Integer>(gain, nb);
+    } // h_information_gain
+
     static final double M_LOG2E = Math.log(2.0);
 
     public static float entropyHash(HashMap<FeatureTerm,Integer> distribution) {
