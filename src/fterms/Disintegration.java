@@ -17,7 +17,7 @@ import util.Pair;
  * This class implements the disintegration operation, which breaks a feature term into a set of properties as
  * described in:
  *  - "On Similarity Measures based on a Refinement Lattice" by Santiago Ontanon and Enric Plaza (ICCBR 2009)
- *  - "Similariy over Refinement Graphs" by Santiago Ontanon and Enric Plaza (MAchine Learning Journal, submitted)
+ *  - "Similarity over Refinement Graphs" by Santiago Ontanon and Enric Plaza (Machine Learning Journal, submitted)
  * @author santi
  */
 public class Disintegration {
