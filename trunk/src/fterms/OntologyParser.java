@@ -110,7 +110,8 @@ public abstract class OntologyParser {
 		} 
 		else {
 			if (num[0]==0) {
-				// Create a new term of the appopiate sort and add it to the memory & undefined term list: 
+				// Create a new term of the appopiate sort and add it to the memory & undefined term list:
+                System.err.println("undefined term: " + n);
 				fvalue=new TermFeatureTerm(n,vsort);
 				m.AddUndefinedFT(fvalue);
 			}  // if 

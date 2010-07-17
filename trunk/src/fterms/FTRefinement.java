@@ -653,7 +653,9 @@ public class FTRefinement {
                 for (Symbol fname : TX.getFeatureNames()) {
                     FeatureTerm fvalue = TX.featureValue(fname);
 
-                    if (fvalue.getSort() == X.getSort().featureSort(fname) && fvalue.isLeaf() && !fvalue.isConstant() && !dm.contains(fvalue)) {
+                    if ((fvalue instanceof SetFeatureTerm &&
+                         ((SetFeatureTerm)fvalue).getSetValues().size()==0) ||
+                        (fvalue.getSort() == X.getSort().featureSort(fname) && fvalue.isLeaf() && !fvalue.isConstant() && !dm.contains(fvalue))) {
                         HashMap<FeatureTerm, FeatureTerm> correspondences = new HashMap<FeatureTerm, FeatureTerm>();
                         FeatureTerm clone = f.clone(dm, correspondences);
 
