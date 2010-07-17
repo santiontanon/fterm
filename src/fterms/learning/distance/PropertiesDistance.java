@@ -46,6 +46,8 @@ public class PropertiesDistance extends Distance {
 
     void generateAllProperties(List<FeatureTerm> objects, FTKBase dm, Ontology o) throws Exception {
         int count = 0;
+        Integer max_properties = null;
+        Integer min_properties = null;
         m_propertyWeight = new LinkedList<Pair<FeatureTerm, Double>>();
 
         // Generate all the properties
@@ -54,6 +56,9 @@ public class PropertiesDistance extends Distance {
             System.out.println("processing " + object.getName() + " ("+ count + ")");
             List<FeatureTerm> properties_tmp = disintegrate(object,dm,o, s_cache);
             long start_time = System.currentTimeMillis();
+
+            if (max_properties==null || properties_tmp.size()>max_properties) max_properties = properties_tmp.size();
+            if (min_properties==null || properties_tmp.size()<min_properties) min_properties = properties_tmp.size();
 
             for (FeatureTerm property : properties_tmp) {
                 boolean duplicate = false;
@@ -79,6 +84,7 @@ public class PropertiesDistance extends Distance {
         }
 
         // The weights will be all 1 in this distance:
+        System.out.println("Properties per term: [" + min_properties + " - " + max_properties + "]");
         System.out.println(m_propertyWeight.size() + " properties");
 //		for(Pair<FeatureTerm,Double> p_w:m_propertyWeight) {
 //			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
@@ -225,7 +231,8 @@ public class PropertiesDistance extends Distance {
             }
         }
 
-        double distance = 1.0f - (((double) (shared * 2)) / ((double) (shared * 2 + f1_not_shared + f2_not_shared)));
+        double tmp = ((double) (shared * 2 + f1_not_shared + f2_not_shared));
+        double distance = (tmp>0 ? 1.0f - (((double) (shared * 2)) / tmp):1.0);
 //		double distance = 1.0f-(((double)(shared))/((double)(shared+f1_not_shared+f2_not_shared)));
 
 //		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);

@@ -389,7 +389,7 @@ public class FTKBase {
 								fp.position(pos);
 								FeatureTerm f=NOOSParser.parse(fp,this,o);
 								if (f!=null) {
-//									printf("term added %s\n",(f->getName()!=0 ? f->getName()->get() : "?"));
+//									System.err.println("term added " + (f.getName()!=null ? f.getName().get() : "?"));
 									AddFT(f);
 									state=0;
 								} else {

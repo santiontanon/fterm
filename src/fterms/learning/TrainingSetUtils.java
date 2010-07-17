@@ -170,20 +170,25 @@ public class TrainingSetUtils {
     public static final int TRAINS_DATASET = 6;
     public static final int UNCLE_DATASET = 7;
     public static final int UNCLE_DATASET_SETS = 8;
-    public static final int CARS_DATASET = 9;
-    public static final int TOXICOLOGY_DATASET_MRATS = 10;
-    public static final int TOXICOLOGY_DATASET_FRATS = 11;
-    public static final int TOXICOLOGY_DATASET_MMICE = 12;
-    public static final int TOXICOLOGY_DATASET_FMICE = 13;
-    public static final int KR_VS_KP_DATASET = 14;
-    public static final int FINANCIAL = 15;
-    public static final int FINANCIAL_NO_TRANSACTIONS = 16;
-    public static final int MUTAGENESIS = 17;
-    public static final int MUTAGENESIS_EASY = 18;
-    public static final int MUTAGENESIS_DISCRETIZED = 19;
-    public static final int MUTAGENESIS_EASY_DISCRETIZED = 20;
-    public static final int MUTAGENESIS_NOL_DISCRETIZED = 21;
-    public static final int MUTAGENESIS_EASY_NOL_DISCRETIZED = 22;
+    public static final int UNCLE_DATASET_BOTH = 9;
+    public static final int CARS_DATASET = 10;
+    public static final int TOXICOLOGY_DATASET_MRATS = 11;
+    public static final int TOXICOLOGY_DATASET_FRATS = 12;
+    public static final int TOXICOLOGY_DATASET_MMICE = 13;
+    public static final int TOXICOLOGY_DATASET_FMICE = 14;
+    public static final int TOXICOLOGY_OLD_DATASET_MRATS = 15;
+    public static final int TOXICOLOGY_OLD_DATASET_FRATS = 16;
+    public static final int TOXICOLOGY_OLD_DATASET_MMICE = 17;
+    public static final int TOXICOLOGY_OLD_DATASET_FMICE = 18;
+    public static final int KR_VS_KP_DATASET = 19;
+    public static final int FINANCIAL = 20;
+    public static final int FINANCIAL_NO_TRANSACTIONS = 21;
+    public static final int MUTAGENESIS = 22;
+    public static final int MUTAGENESIS_EASY = 23;
+    public static final int MUTAGENESIS_DISCRETIZED = 24;
+    public static final int MUTAGENESIS_EASY_DISCRETIZED = 25;
+    public static final int MUTAGENESIS_NOL_DISCRETIZED = 26;
+    public static final int MUTAGENESIS_EASY_NOL_DISCRETIZED = 27;
 
     public static TrainingSetProperties loadTrainingSet(int DATASET, Ontology o, FTKBase dm, FTKBase case_base) throws FeatureTermException, IOException
     {
@@ -274,6 +279,15 @@ public class TrainingSetUtils {
                 ts.name = "uncle";
                 ts.problem_sort = o.getSort("uncle-problem");
                 break;
+            case UNCLE_DATASET_BOTH:
+                dm.ImportNOOS("NOOS/family-ontology.noos", o);
+                dm.ImportNOOS("NOOS/family-dm.noos", o);
+                case_base.ImportNOOS("NOOS/family-cases-12.noos",o);
+                case_base.ImportNOOS("NOOS/family-cases-12-sets.noos",o);
+
+                ts.name = "uncle";
+                ts.problem_sort = o.getSort("uncle-problem");
+                break;
             case CARS_DATASET:
                 dm.ImportNOOS("NOOS/car-ontology.noos", o);
                 dm.ImportNOOS("NOOS/car-dm.noos", o);
@@ -282,49 +296,90 @@ public class TrainingSetUtils {
                 ts.name = "cars";
                 ts.problem_sort = o.getSort("car-problem");
                 break;
+
             case TOXICOLOGY_DATASET_MRATS:
-                dm.ImportNOOS("NOOS/toxic-eva-ontology.noos", o);
-                dm.ImportNOOS("NOOS/toxic-eva-dm.noos", o);
-                case_base.ImportNOOS("NOOS/toxic-eva-filtered-cases-276.noos", o);
-
-                ts.solution_path.features.add(new Symbol("m-rats"));
-
-                ts.name = "toxicology";
-                ts.problem_sort = o.getSort("toxic-problem");
-                break;
             case TOXICOLOGY_DATASET_FRATS:
-                dm.ImportNOOS("NOOS/toxic-eva-ontology.noos", o);
-                dm.ImportNOOS("NOOS/toxic-eva-dm.noos", o);
-                case_base.ImportNOOS("NOOS/toxic-eva-filtered-cases-276.noos", o);
-
-                ts.solution_path.features.add(new Symbol("f-rats"));
-                //				sp.features.add(new Symbol("m-mice"));
-                //				sp.features.add(new Symbol("f-mice"));
-
-                ts.name = "toxicology";
-                ts.problem_sort = o.getSort("toxic-problem");
-                break;
             case TOXICOLOGY_DATASET_MMICE:
-                dm.ImportNOOS("NOOS/toxic-eva-ontology.noos", o);
-                dm.ImportNOOS("NOOS/toxic-eva-dm.noos", o);
-                case_base.ImportNOOS("NOOS/toxic-eva-filtered-cases-276.noos", o);
-
-                ts.solution_path.features.add(new Symbol("m-mice"));
-                //				sp.features.add(new Symbol("f-mice"));
-
-                ts.name = "toxicology";
-                ts.problem_sort = o.getSort("toxic-problem");
-                break;
             case TOXICOLOGY_DATASET_FMICE:
                 dm.ImportNOOS("NOOS/toxic-eva-ontology.noos", o);
                 dm.ImportNOOS("NOOS/toxic-eva-dm.noos", o);
-                case_base.ImportNOOS("NOOS/toxic-eva-filtered-cases-276.noos", o);
+//                case_base.ImportNOOS("NOOS/toxic-eva-filtered-cases-276.noos", o);
+//                case_base.ImportNOOS("NOOS/toxic-eva-cases-371.noos", o);
+//                case_base.ImportNOOS("NOOS/toxic-eva-fixed-cases-371.noos", o);
+                case_base.ImportNOOS("NOOS/toxic-santi-cases-353.noos", o);
 
-                ts.solution_path.features.add(new Symbol("f-mice"));
+                switch(DATASET) {
+                case TOXICOLOGY_DATASET_MRATS:
+                    ts.solution_path.features.add(new Symbol("m-rats")); break;
+                case TOXICOLOGY_DATASET_FRATS:
+                    ts.solution_path.features.add(new Symbol("f-rats")); break;
+                case TOXICOLOGY_DATASET_MMICE:
+                    ts.solution_path.features.add(new Symbol("m-mice")); break;
+                case TOXICOLOGY_DATASET_FMICE:
+                    ts.solution_path.features.add(new Symbol("f-mice")); break;
+                }
 
                 ts.name = "toxicology";
                 ts.problem_sort = o.getSort("toxic-problem");
+
+                {
+                    List<FeatureTerm> cs = new LinkedList<FeatureTerm>();
+                    List<FeatureTerm> toDelete = new LinkedList<FeatureTerm>();
+                    cs.addAll(case_base.SearchFT(ts.problem_sort));
+
+                    for(FeatureTerm c:cs) {
+                        FeatureTerm s = c.readPath(ts.solution_path);
+                        String ss = s.toStringNOOS(dm);
+                        if (!ss.equals("positive") && !ss.equals("negative")) {
+                            // remove example, inqdequate!
+                            case_base.DeleteFT(c);
+                        }
+                    }
+
+                }
                 break;
+
+            case TOXICOLOGY_OLD_DATASET_MRATS:
+            case TOXICOLOGY_OLD_DATASET_FRATS:
+            case TOXICOLOGY_OLD_DATASET_MMICE:
+            case TOXICOLOGY_OLD_DATASET_FMICE:
+                dm.ImportNOOS("NOOS/toxic-eva-old-ontology.noos", o);
+                dm.ImportNOOS("NOOS/toxic-eva-old-dm.noos", o);
+                case_base.ImportNOOS("NOOS/toxic-eva-old-cases.noos", o);
+
+                switch(DATASET) {
+                case TOXICOLOGY_OLD_DATASET_MRATS:
+                    ts.solution_path.features.add(new Symbol("m-rats")); break;
+                case TOXICOLOGY_OLD_DATASET_FRATS:
+                    ts.solution_path.features.add(new Symbol("f-rats")); break;
+                case TOXICOLOGY_OLD_DATASET_MMICE:
+                    ts.solution_path.features.add(new Symbol("m-mice")); break;
+                case TOXICOLOGY_OLD_DATASET_FMICE:
+                    ts.solution_path.features.add(new Symbol("f-mice")); break;
+                }
+
+                ts.name = "toxicology-old";
+                ts.problem_sort = o.getSort("toxic-problem");
+
+                {
+                    List<FeatureTerm> cs = new LinkedList<FeatureTerm>();
+                    List<FeatureTerm> toDelete = new LinkedList<FeatureTerm>();
+                    cs.addAll(case_base.SearchFT(ts.problem_sort));
+
+                    for(FeatureTerm c:cs) {
+                        FeatureTerm s = c.readPath(ts.solution_path);
+                        if (s!=null) {
+                            String ss = s.toStringNOOS(dm);
+                            if (!ss.equals("positive") && !ss.equals("negative")) {
+                                // remove example, inqdequate!
+                                case_base.DeleteFT(c);
+                            }
+                        }
+                    }
+
+                }
+                break;
+
             case KR_VS_KP_DATASET:
                 dm.ImportNOOS("NOOS/kr-vs-kp-ontology.noos", o);
                 dm.ImportNOOS("NOOS/kr-vs-kp-dm.noos", o);
