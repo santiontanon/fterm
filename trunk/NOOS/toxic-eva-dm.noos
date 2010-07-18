@@ -1,0 +1,57 @@
+;; 29 - Enero - 2005
+
+(define-Domain-Model FAMILY-DM
+  (creator "Santi Ontañon (IIIA-CSIC)")
+  (description "")
+  (uses FAMILY-oontlogy))
+
+(define (boolean :id yes))
+
+(define (atom-position :id o))
+(define (atom-position :id s))
+(define (atom-position :id n))
+(define (atom-position :id p))
+(define (atom-position :id c))
+
+(define (compound :id n))
+(define (compound :id o))
+(define (compound :id p))
+(define (compound :id s))
+(define (compound :id c))
+
+(define (kind-of-bond :id double))
+
+(define (position :id one))
+(define (position :id two))
+(define (position :id three))
+(define (position :id four))
+(define (position :id five))
+(define (position :id six))
+(define (position :id seven))
+(define (position :id eight))
+(define (position :id nine))
+(define (position :id ten))
+
+(define (position :id eleven))
+(define (position :id twelve))
+(define (position :id thirteen))
+(define (position :id fourteen))
+(define (position :id fifteen))
+(define (position :id sixteen))
+(define (position :id seventeen))
+(define (position :id eighteen))
+(define (position :id nineteen))
+(define (position :id twenty))
+
+(define (evidence :id positive))
+(define (evidence :id negative))
+(define (evidence :id inadequate))
+(define (evidence :id unknown))
+(define (evidence :id equivocal))
+
+
+
+
+
+
+
