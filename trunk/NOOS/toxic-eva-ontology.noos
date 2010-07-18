@@ -1,0 +1,473 @@
+;; Març, 2005: nova representacio
+
+(Define-Ontology TOXICOLOGY-ONTOLOGY
+  (creator "IIIA-CSIC")
+  (description "Toxicology ontology"))
+
+(Define-sort (TOXICOLOGY-ONTOLOGY TOXIC-PROBLEM)
+  (description chemical-compound)
+  (solution solution))
+
+(Define-sort (TOXICOLOGY-ONTOLOGY SOLUTION)
+  (M-rats evidence)
+  (F-rats evidence)
+  (M-mice evidence)
+  (F-mice evidence))
+
+(Define-sort (TOXICOLOGY-ONTOLOGY evidence))
+
+
+;; ======================================================
+;; NOOS SORTS FOR CHEMICAL ONTOLOGY
+;; =====================================================
+
+
+(define-sort (TOXICOLOGY-ONTOLOGY chemical-compound)
+  (molecular-structure compound)
+  (tests test-results))
+
+(define-sort (TOXICOLOGY-ONTOLOGY test-results)
+  (Ames evidence)
+  (TD50 number))
+
+(define-sort (TOXICOLOGY-ONTOLOGY compound))
+
+(define-sort (compound inorganic-compound))
+
+(define-sort (compound organic-compound)
+  (main-group compound)
+  (radicals-object radical-set)
+  (radical-set compound)
+  )
+
+(define-sort (compound position-radical)
+  (radicals compound)
+  (position position)
+  (union union-molecule)) ;; unio entre els radicals d'una mateixa posicio
+
+#|
+(define-sort (organic-compound assembly)
+  (groups organic-compound) ;; son dos anells connectats directament (veure c-30)
+  (connection position))
+|#
+
+(define-sort (TOXICOLOGY-ONTOLOGY position))
+
+(define-sort (position relative-position)
+  (radicals compound)
+  (distance number))
+
+(define-sort (position absolute-position)
+  (position position)
+  (radicals compound))
+
+(define-sort (position atom-position))
+
+
+(define-sort (position numeric-position))
+
+(define-sort (TOXICOLOGY-ONTOLOGY related-positions)
+  (positions position)
+  (edge compound))
+
+(define-sort (TOXICOLOGY-ONTOLOGY p-bonds)
+  (bond kind-of-bond)
+  (position position))
+
+(define-sort (TOXICOLOGY-ONTOLOGY kind-of-bond))
+
+(Define-sort (TOXICOLOGY-ONTOLOGY radical-set)
+  (rad1 compound)
+  (rad2 compound)
+  (rad3 compound)
+  (rad4 compound)
+  (rad5 compound)
+  (rad6 compound)
+  (rad7 compound)
+  (rad8 compound)
+  (rad9 compound)
+  (rad10 compound)
+  (rad11 compound)
+  (rad12 compound)
+  (rad13 compound)
+  (rad14 compound)
+  (rad15 compound))
+  
+
+;; ======================================================
+;; CHEMICAL ONTOLOGY
+;; =====================================================
+
+;; ORGANIC compound
+
+(define-sort (organic-compound simple-compound)
+  (p-radicals position-radical))
+
+(Define-sort (simple-compound hydrocarbon)
+  (cyclic? boolean))
+
+(Define-sort (simple-compound functional-group))
+
+(Define-sort (organic-compound Ring-system)
+  (heterocycle? boolean)
+  (positions position))
+
+
+
+;; HYDROCARBONS
+
+#|
+(Define-sort (hydrocarbon Cyclic-HC)  ;; potser s'haura de canviar el nom (exemples: tr-8, tr-9)
+  (edges related-positions))
+|#
+
+(Define-sort (hydrocarbon HC-saturated))
+
+(Define-sort (hydrocarbon HC-unsaturated)
+  (main-group HC-saturated)
+  (p-bonds p-bonds))
+
+(define-sort (HC-saturated methane))
+(define-sort (HC-saturated ethane))
+(define-sort (HC-saturated propane))
+(define-sort (HC-saturated butane))
+(define-sort (HC-saturated pentane))
+(define-sort (HC-saturated hexane))
+(define-sort (HC-saturated heptane))
+(define-sort (HC-saturated octane))
+(define-sort (HC-saturated nonane))
+(define-sort (HC-saturated decane))
+(define-sort (HC-saturated undecane))
+(define-sort (HC-saturated dodecane))
+(define-sort (HC-saturated tridecane)) ;; cadena de 13
+(define-sort (HC-saturated pentadecane))  ;; cadena de 15
+(define-sort (HC-saturated octadecane))  ;; cadena de 18
+(define-sort (HC-saturated eicosane))  ;; cadena de 20
+(define-sort (HC-saturated tricosane))  ;; cadena de 23 C
+(define-sort (HC-saturated coconut-oil)) ;; es una cadena CH3(CH2)nCH2 = O
+
+
+;; FUNCTIONAL-GROUPS
+;; en tots aquests a l'hora de codificar he de considear que 
+;; porten el C inclos (els que en continguin un)
+
+(Define-sort (functional-group O-compound))
+(Define-sort (functional-group N-compound))
+(Define-sort (functional-group P-compound))
+(Define-sort (functional-group S-compound))
+
+;; O-compound
+
+(Define-sort (O-compound alcohol))  ;; es un OH
+
+(Define-sort (O-compound aldehyde))  ;; es un COH
+
+(define-sort (O-compound ether))  ;; es un O sol
+
+(define-sort (O-compound ester))  ;; C doble amb O i 
+                                         ;; simple amb un altre O
+                                         ;; i de l'O simple surt un radical
+(define-sort (O-compound acid))  ;; es un ester on el radical de l'O
+                                        ;; es un OH (es a dir O = C - OH)
+
+(define-sort (O-compound ketone))  ;;  doble enllaç O 
+
+(define-sort (O-compound acetate)) ;; O = C - O i del C surt
+                                          ;; tambe un CH3
+
+(define-sort (O-compound epoxide))  ;; un O que enllaça dos C consecutius
+
+;; N-compound
+
+(Define-sort (N-compound urea)) ;; NH2 - C - NH2 i del C surt un
+                                 ;; doble enllaç amb un O
+
+(Define-sort (N-compound amine))   ;; ES NH2
+
+(Define-sort (N-compound high-amine))  ;; amina amb un doble enllaç
+
+(Define-sort (N-compound amide))   ;; es un N - C = O
+
+(Define-sort (N-compound imine)) ;; C = NH i del C surten dos
+                                           ;; radicals
+(Define-sort (N-compound imide)) ;; 
+
+(Define-sort (N-compound amonium)) ;; NH3
+                                       
+
+(Define-sort (N-compound nitro-derivate)) ;; es un O - N = O
+(Define-sort (N-compound nitroso-derivate)) ;; es un Rad - N = O
+(Define-sort (N-compound azo-derivate))  ;; enllaç N = N
+(Define-sort (N-compound nitrile))  ;; Rad - C triple amb N
+(Define-sort (N-compound azomethine)) ;; Rad1 - C = N - Rad2 i a
+                                           ;; mes el C te un segon radical
+(Define-sort (N-compound imine)) ;; C = NH i del C surten dos
+                                           ;; radicals
+(Define-sort (N-compound hidrazone))  ;; NH2 - N = C i el C te dos radicals
+(Define-sort (N-compound guanide)) ;; Rad1 - NH - C - NH - Rad2 i del
+                                     ;; C surt un doble enllaç a un NH
+(Define-sort (N-compound biguanide)) ;; dues guanidines enganxades
+(Define-sort (N-compound azine))  ;; Rdad1 Rad2 - C = N - N = C - R R'
+(Define-sort (N-compound azide))  ;; Rad - N = N = NH
+(Define-sort (N-compound hydrazine))  ;; - N - N -
+(Define-sort (N-compound urea)) ;; NH2 - C - NH2 i del C surt un
+                                    ;; doble enllaç amb un O
+(Define-sort (N-compound oxime))  ;; Rad1 - C = N - OH i del C surt
+                                      ;; un altre radical (pot ser un H)
+(Define-sort (N-compound isocyanure)) ;; Rad - N triple amb C
+(Define-sort (N-compound isocyanate))  ;; Rad - N = C = O
+
+
+;; P-compound
+
+(define-sort (p-compound phosphate))  ;; es un P  amb 4 Os si no te
+                                      ;; radicals son tot enllaços dobles
+(define-sort (p-compound phosphite))  ;; P amb tres enllaços dobles a O
+                                        ;; i un radical ???????
+(define-sort (p-compound phosphorothioate)) ;; S = P i P enllaç amb tres O
+(define-sort (p-compound phosphorodithioate))  ;; S = P - S i el P enllaçat amb
+                                                ;; dos O
+(define-sort (p-compound phosphamide))  ;; Rad - N - P = O i del P surt un
+                                          ;; altre enllaç doble amb O i un altre radical
+(define-sort (p-compound phosphine))  ;; P = S i del P surten tres radicals
+
+;; S-compound
+
+(Define-sort (s-compound thiol))  ;; una S i un radical
+(Define-sort (s-compound thione))  ;; es un grup C = S 
+(Define-sort (s-compound thiourea)) ;; NH2 - C - NH2 i de la C surt
+                                     ;; un doble enllaç amb un S
+(Define-sort (s-compound sulphure)) ;; es un S amb dos radicals
+(Define-sort (s-compound sulphate))  ;; un S amb un doble enllaç amb O
+                                      ;; un altre doble enllaç amb O
+                                      ;; un enllaç simple amb un O
+(Define-sort (s-compound sulphone))  ;; es un S amb dos enllaços dobles
+                                      ;; cadascun amb un O i pengen dos
+                                      ;; radicals mes del S
+(Define-sort (s-compound thioester))  ;; S = C - S - R' i del C surt
+                                        ;; un altre radical
+(Define-sort (s-compound sulfonamide)) ;; O = S = O i del S surten tambe
+                                         ;; un NH2 i un radical
+(Define-sort (s-compound sulfoxide))  ;; S = O i del S surten dos Radicals
+(define-sort (s-compound sulfonic))  ;; S amb dues cetones i un OH o un O amb un radical
+
+
+
+;; RING-SYSTEMS
+
+(Define-sort (ring-system monocycle))
+(define-sort (ring-system polycycle))
+
+
+;; monocycles
+
+(define-sort (monocycle benzene))
+
+
+(define-sort (monocycle furane)) ;; son 4 C i un O. Es un penta ciclic amb
+                                ;; dos enllaços dobles
+(define-sort (monocycle pyrano)) ;; benze amb un O
+(define-sort (monocycle pyridine))  ;; un benze amb un N i tres dobles enllaços
+(define-sort (monocycle pyrazine))  ;; un benze amb dos N i tres dobles enllaços
+(define-sort (monocycle piperidine)) ;; un benze amb un N i cap enllaç doble
+(define-sort (monocycle dihydropyridine))  ;; un benze amb un NH
+(define-sort (monocycle pyrimidine))  ;; un benze amb dos N separats per 1
+(define-sort (monocycle triazine))  ;; un benze amb tres N separats per 1
+(define-sort (monocycle thiadiazine))  ;; un benze amb dos N 
+                                                         ;; i un S
+(define-sort (monocycle diazepin)) ;; un hepta amb dos N
+(define-sort (monocycle imidazole))  ;; un penta amb un NH i un N
+(define-sort (monocycle pirrol))
+(define-sort (monocycle thiazole)) ;; un penta amb un S i un N i dos 
+                                                    ;; enllaços dobles
+
+(define-sort (monocycle thiazolidine)) ;; un penta amb un S i un N i  
+                                                    ;; no enllaços dobles
+(define-sort (monocycle thiophene)) ;; penta amb un S i dos enllaços doble
+(define-sort (monocycle isoxazole)) ;;  penta amb un
+                                                      ;; N i un O seguits
+(define-sort (monocycle pyrazole)) ;; penta amb dos N seguits i un enllaç doble
+
+(define-sort (monocycle tetrahydrofurane))  ;; penta amb un O sense enllaços dobles
+(define-sort (monocycle oxethane)) ;; quadrat amb un O
+(define-sort (monocycle azetidine))  ;; quadrat amb NH
+(define-sort (monocycle thiadiazine)) ;; es un hexa amb dos N i un S
+
+;; polycycles
+
+(define-sort (polycycle chromene))  ;; dos benzens, un amb un O
+(define-sort (polycycle fluorene)) ;; dos benzens i al mig un penta
+(define-sort (polycycle carbazole))  ;; es com el fluore pero el penta
+                                     ;; porta un NH en el vertex lliure
+(define-sort (polycycle dioxane))  ;; hexa amb dos O
+(define-sort (polycycle benzopirrol)) ;; un benze i un penta. El penta te un N
+(define-sort (polycycle benzofurane)) ;; un benze i un fura
+(define-sort (polycycle benzotriazole)) ;; un benze i un penta amb tres N
+(define-sort (polycycle benzopyrano))  ;; un benze i un pira
+(define-sort (polycycle benzotriazine))  ;; un benze i una triazina
+(define-sort (polycycle benzoimidazole)) ;; un penta amb dos N (imidazole) i un benze
+(define-sort (polycycle purine)) ;; un hexa amb dos N alternats i un
+                                 ;; penta amb dos N alternats
+(define-sort (polycycle acrydine)) ;; tres benzens junts pero el del mig
+                                    ;; te un N
+(define-sort (polycycle xantene))  ;; tres benzens i el del mig te un O
+(define-sort (polycycle pentalene))  ;; dos pentans
+(define-sort (polycycle phenantrene)) ;; tres benzens, dos de costat i un a sota
+(define-sort (polycycle isoquinoline)) ;; dos benzens un amb un N. No esta
+                                        ;; seguit a l'enllaç dels dos benzens 
+                                        ;; (veure llibre pag 175)
+(define-sort (polycycle quinoline)) ;; benze + pyridine
+                                     ;; la N esta seguit a l'enllaç
+
+(define-sort (polycycle quinazoline)) ;; benze + hexa amb dos N
+                                                      ;; alternats
+(define-sort (polycycle naphthyridine)) ;; dos bezens amb un N cadascun
+(define-sort (polycycle indene)) ;; es un benze i un penta
+(define-sort (polycycle esteroide)) ;; es TR-175 sense radicals
+(define-sort (polycycle phenothiazine)) ;; tres benzens pero el del mig te un N
+                                          ;; i un S
+(define-sort (polycycle anthracene))  ;; 3 benzens lineals
+(define-sort (polycycle naphthalene)) ;; 2 benzens
+(define-sort (polycycle phenalen))  ;; 3 benzens en triangle
+(define-sort (polycycle Acephenantrilene))  ;; son tres benzens i un penta
+                                               ;; veure pag 65 perque no es exactament igual
+(define-sort (polycycle naphthacene)) ;; quatre benzens
+(define-sort (polycycle Acenaphthylene))
+(define-sort (polycycle benzodiazepine)) ;; veure molec 443
+
+;; INORGANIC COMPOUNDS
+
+(define-sort (Inorganic-compound HYDROGEN))
+(define-sort (Inorganic-compound METAL))
+(define-sort (Inorganic-compound ZINC-GROUP))
+(define-sort (Inorganic-compound BORON-GROUP))
+(define-sort (Inorganic-compound CARBON-GROUP))
+(define-sort (Inorganic-compound NITROGEN-GROUP))
+(define-sort (Inorganic-compound OXYGEN-GROUP))
+(define-sort (Inorganic-compound HALOGEN))
+(define-sort (Inorganic-compound NOBLE-GAS))
+(define-sort (Inorganic-compound TRANSITION))
+(define-sort (Inorganic-compound RARE-EARTH))
+
+
+
+;; METALS 
+
+(define-sort (metal alkaline-metal))
+(define-sort (metal alkaline-earth-metal))
+
+;; alkaline metals 
+
+(define-sort (alkaline-metal lithium))
+(define-sort (alkaline-metal sodium))
+(define-sort (alkaline-metal potassium))
+(define-sort (alkaline-metal rubidium))
+(define-sort (alkaline-metal cesium))
+
+
+;; alkaline earth metals
+
+(define-sort (alkaline-earth-metal beryllium))
+(define-sort (alkaline-earth-metal magnesium))
+(define-sort (alkaline-earth-metal calcium))
+(define-sort (alkaline-earth-metal strontium))
+(define-sort (alkaline-earth-metal barium))
+(define-sort (alkaline-earth-metal radium))
+
+;; zinc-group 
+
+(define-sort (zinc-group zinc))
+(define-sort (zinc-group cadmium))
+(define-sort (zinc-group mercury))
+
+;; boron-group 
+
+(define-sort (boron-group boron))
+(define-sort (boron-group aluminum))
+(define-sort (boron-group gallium))
+(define-sort (boron-group indium))
+(define-sort (boron-group thallium))
+
+;; carbon-group
+
+(define-sort (carbon-group carbon))
+(define-sort (carbon-group silicon))
+(define-sort (carbon-group germanium))
+(define-sort (carbon-group tin))
+(define-sort (carbon-group lead))
+
+
+;; nitrogen-group
+
+(define-sort (nitrogen-group nitrogen))
+(define-sort (nitrogen-group phosphorus))
+(define-sort (nitrogen-group arsenic))
+(define-sort (nitrogen-group antimony))
+(define-sort (nitrogen-group bismuth))
+
+
+;; oxygen-group
+
+(define-sort (oxygen-group oxygen))
+(define-sort (oxygen-group sulfur))
+(define-sort (oxygen-group selenium))
+(define-sort (oxygen-group tellurium))
+(define-sort (oxygen-group polonium))
+
+
+;; halogen elements
+
+(define-sort (halogen fluorine))
+(define-sort (halogen chlorine))
+(define-sort (halogen bromine))
+(define-sort (halogen iodine))
+(define-sort (halogen astatine))
+
+
+;; noble gases
+
+(define-sort (noble-gas hellium))
+(define-sort (noble-gas neon))
+(define-sort (noble-gas argon))
+(define-sort (noble-gas krypton))
+(define-sort (noble-gas xenon))
+(define-sort (noble-gas radon))
+
+
+;; transition elements
+
+(define-sort (transition first-transition))
+(define-sort (transition second-transition))
+(define-sort (transition third-transition))
+
+
+;; first transition elements
+
+(define-sort (first-transition chromium))
+(define-sort (first-transition manganese))
+(define-sort (first-transition iron))
+(define-sort (first-transition cobalt))
+(define-sort (first-transition nickel))
+(define-sort (first-transition copper))
+
+;; second transition elements
+
+(define-sort (second-transition silver))       
+
+
+;; third transition elements
+
+(define-sort (third-transition iridium))
+(define-sort (third-transition platinum))
+(define-sort (third-transition gold))   
+
+
+;; Rare earth elements
+
+(define-sort (rare-earth thorium))
+(define-sort (rare-earth uranium))
+
+
+;; altres
+
+(define-sort (compound stannane))
