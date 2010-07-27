@@ -6,6 +6,7 @@
 package fterms.visualization;
 
 import fterms.BaseOntology;
+import fterms.Disintegration;
 import fterms.FTKBase;
 import fterms.FeatureTerm;
 import fterms.Ontology;
@@ -25,7 +26,7 @@ import javax.swing.JFrame;
  * @author santi
  */
 public class Main {
-    static int DATA_SET = 0;	/* 0: sponge, 1: toxic, 2: soybean, 3: zoology, 4: trains, 5: family, 6: cars, 7: chess, 8: melanoma */
+    static int DATA_SET = 4;	/* 0: sponge, 1: toxic, 2: soybean, 3: zoology, 4: trains, 5: family, 6: cars, 7: chess, 8: melanoma */
     public static int mode = 0; // 0: complete case base, 1: single case
 
     public static void main(String[] argv) throws FeatureTermException, IOException {
@@ -129,7 +130,11 @@ public class Main {
         }
 
         if (mode==0) {
-            new ScrollableFrame("test", 800,600, new FeatureTermTreePanel(cases.iterator().next(), dm));
+//            new ScrollableFrame("test", 800,600, new FeatureTermTreePanel(cases.iterator().next(), dm));
+            List<FeatureTerm> l = Disintegration.disintegrate(cases.iterator().next(), dm, o);
+            JFrame frame = PropertiesVisualizer.newWindow("Properties Visualizer demo",640,480,l,dm,sp,dp,true);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(true);
         } else {
             List<FeatureTerm> l = new LinkedList<FeatureTerm>();
             l.addAll(cases);

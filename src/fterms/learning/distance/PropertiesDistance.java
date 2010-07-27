@@ -25,10 +25,11 @@ public class PropertiesDistance extends Distance {
     boolean m_fast = false;
     List<FeatureTerm> descriptions = new LinkedList<FeatureTerm>();
     protected List<Pair<FeatureTerm, Double>> m_propertyWeight = null;;
-    static HashMap<FeatureTerm,HashSet<FeatureTerm>> property_cache = new HashMap<FeatureTerm,HashSet<FeatureTerm>>();
+    HashMap<FeatureTerm,HashSet<FeatureTerm>> property_cache = new HashMap<FeatureTerm,HashSet<FeatureTerm>>();
 
     
     public PropertiesDistance() {
+        m_propertyWeight = new LinkedList<Pair<FeatureTerm, Double>>();
 	}
     
     public PropertiesDistance(Collection<FeatureTerm> objects, FTKBase dm, Ontology o, Path dp, boolean fast) throws Exception {
@@ -142,7 +143,12 @@ public class PropertiesDistance extends Distance {
 
             while(current_state!=null) {
                 // extract a property:
-                Pair<FeatureTerm, FeatureTerm> property_rest = Disintegration.extractProperty(current_state, dm, o);
+                Pair<FeatureTerm, FeatureTerm> property_rest;
+                if (m_fast) {
+                    property_rest = Disintegration.extractPropertyFast(current_state, dm, o);
+                } else {
+                    property_rest = Disintegration.extractProperty(current_state, dm, o);
+                }
                 if (property_rest!=null) {
                     current_state = property_rest.m_b;
                     properties_tmp.add(property_rest.m_a);
@@ -189,7 +195,7 @@ public class PropertiesDistance extends Distance {
         HashSet<FeatureTerm> cache1 = property_cache.get(f1);
 
         if (cache1==null) {
-//            System.out.println("getPropertyCache: new property");
+            System.out.println("getPropertyCache: new case, testinc against " + m_propertyWeight.size() + " properties.");
             cache1 = new HashSet<FeatureTerm>();
             for (Pair<FeatureTerm, Double> p_w : m_propertyWeight)
                 if (p_w.m_a.subsumes(f1))
@@ -205,7 +211,7 @@ public class PropertiesDistance extends Distance {
         double f1_not_shared = 0;
         double f2_not_shared = 0;
 
-        if (m_propertyWeight==null) {
+        if (m_propertyWeight==null || m_propertyWeight.size()==0) {
             generateAllProperties(descriptions, dm, o);
         }
 
@@ -235,7 +241,7 @@ public class PropertiesDistance extends Distance {
         double distance = (tmp>0 ? 1.0f - (((double) (shared * 2)) / tmp):1.0);
 //		double distance = 1.0f-(((double)(shared))/((double)(shared+f1_not_shared+f2_not_shared)));
 
-//		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
+		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
 		System.out.flush();
         return distance;
     }

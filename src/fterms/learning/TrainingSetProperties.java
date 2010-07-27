@@ -29,6 +29,17 @@ public class TrainingSetProperties {
     public String name = null;
     public List<FeatureTerm> cases = null;
 
+
+    public List<FeatureTerm> differentSolutions() throws FeatureTermException {
+        List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+        for(FeatureTerm c:cases) {
+            FeatureTerm s = c.readPath(solution_path);
+            if (!l.contains(s)) l.add(s);
+        }
+
+        return l;
+    }
+
     public void printStatistics(FTKBase dm) {
         System.out.println("Data set name: " + name);
         System.out.println(cases.size() + " cases");

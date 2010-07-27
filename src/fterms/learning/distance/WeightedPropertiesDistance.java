@@ -45,32 +45,25 @@ public class WeightedPropertiesDistance extends PropertiesDistance {
 		}
 				
 		for(Pair<FeatureTerm,Double> p_w:m_propertyWeight) {
-//			Pair<Float,Integer> tmp = InformationMeasurement.h_rldm(descriptions,solutions,different_solutions,p_w.m_a);
-//			p_w.m_b = 1-(double)(tmp.m_a);
-
-//            Pair<Float,Integer> tmp = InformationMeasurement.h_information_gain(descriptions,solutions,different_solutions,p_w.m_a);
-//			p_w.m_b = (double)(tmp.m_a);
-
             // Create the partition induced by the property:
-            {
-                List<FeatureTerm> s1 = new LinkedList<FeatureTerm>();
-                List<FeatureTerm> s2 = new LinkedList<FeatureTerm>();
+            List<FeatureTerm> s1 = new LinkedList<FeatureTerm>();
+            List<FeatureTerm> s2 = new LinkedList<FeatureTerm>();
 
-                for(int i = 0;i<descriptions.size();i++) {
-                    FeatureTerm d = descriptions.get(i);
-                    FeatureTerm s = solutions.get(i);
+            for(int i = 0;i<descriptions.size();i++) {
+                FeatureTerm d = descriptions.get(i);
+                FeatureTerm s = solutions.get(i);
 
-                    HashSet<FeatureTerm> cache = getPropertyCache(d);
-                    if (cache.contains(p_w.m_a)) {
-                        s1.add(s);
-                    } else {
-                        s2.add(s);
-                    }
+                HashSet<FeatureTerm> cache = getPropertyCache(d);
+//                System.out.println("Cache has " + cache.size() + " properties.");
+                if (cache.contains(p_w.m_a)) {
+                    s1.add(s);
+                } else {
+                    s2.add(s);
                 }
-                Pair<Float,Integer> tmp = InformationMeasurement.h_information_gain(solutions,s1,s2,different_solutions);
-                p_w.m_b = (double)(tmp.m_a);
-//                System.out.println(p_w.m_b + " -> " + p_w.m_a.toStringNOOS(dm));
             }
+            Pair<Float,Integer> tmp = InformationMeasurement.h_information_gain(solutions,s1,s2,different_solutions);
+            p_w.m_b = (double)(tmp.m_a);
+            System.out.println(p_w.m_b + "[" + s1.size() + "," + s2.size() + "]" + " -> " + p_w.m_a.toStringNOOS(dm));
 		}
 
 		
