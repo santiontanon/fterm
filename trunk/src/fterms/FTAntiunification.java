@@ -228,11 +228,11 @@ public class FTAntiunification {
             {
                 current = generalizations_to_process.remove(0);
 
-                if (version == VERSION_FAST) {
-                    tmp = FTRefinement.getSomeSpecializationSubsumingAll(current, dm, o, language, objects);
-                } else {
+//                if (version == VERSION_FAST) {
+//                    tmp = FTRefinement.getSomeSpecializationSubsumingAll(current, dm, o, language, objects);
+//                } else {
                     tmp = FTRefinement.getSpecializationsSubsumingAll(current, dm, o, language, objects);
-                }
+//                }
 
 //				System.out.println("AU: " + tmp.size() + " refinements...");
 
@@ -365,7 +365,7 @@ public class FTAntiunification {
                 } // if
             } // while
 
-            // In the FAST mode, only one possible antiunification is likely to be found, but no search is required:
+            // In the FAST mode, only one possible antiunification is to be found, but no search is required:
             if (version == VERSION_FAST) {
                 if (generalizations.size() > 0) {
                     node = generalizations.remove(0);
@@ -609,11 +609,11 @@ public class FTAntiunification {
 
             {
                 current = generalizations_to_process.remove(0);
-                if (version == VERSION_FAST) {
-                    tmp = FTRefinement.getSomeSpecializationSubsumingAll(current.m_a, dm, o, language, objects);
-                } else {
+//                if (version == VERSION_FAST) {
+//                    tmp = FTRefinement.getSomeSpecializationSubsumingAll(current.m_a, dm, o, language, objects);
+//                } else {
                     tmp = FTRefinement.getSpecializationsSubsumingAll(current.m_a, dm, o, language, objects);
-                }
+//                }
 
 //				System.out.println("AU: " + tmp.size() + " refinements...");
 

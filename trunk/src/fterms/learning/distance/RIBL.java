@@ -82,7 +82,7 @@ public class RIBL extends Distance {
 //		System.out.println("Clauses for f2:\n" + f2.toStringNOOS(dm));
 //		for(Clause c:clauses_f2) System.out.println(c);
 
-        System.out.println("RIBL.distance start");
+//        System.out.println("RIBL.distance start");
 
         Clause clause_f1 = clauses_f1.get(0);
         Clause clause_f2 = clauses_f2.get(0);
@@ -93,7 +93,8 @@ public class RIBL extends Distance {
         HashMap<String,List<Pair<Clause,Integer>>> cache_f2 = new HashMap<String,List<Pair<Clause,Integer>>>();
 
 
-        if (debug) {
+        if (debug)
+        {
             System.out.println("Descriptor of f1:");
             for (Pair<Integer, List<Clause>> d : descriptors_f1) {
                 System.out.print("Depth " + d.m_a + " < ");

@@ -385,7 +385,6 @@ public class NOOSParser extends OntologyParser {
 //					printf("Added a variable reference to \"%s\" (to a SET)\n",token);
 		} else if (t.type==NOOSToken.TOKEN_SYMBOL) {
 			
-			errorMessage="NOOS Importer: Error 6";
 			fvalue = setupSymbol(vsort, m);
 
 		} else if (t.type==NOOSToken.TOKEN_INTEGER) {
@@ -409,7 +408,7 @@ public class NOOSParser extends OntologyParser {
 	}
 	protected FeatureTerm setupSymbol(Sort vsort, FTKBase m) throws FeatureTermException {
 		FeatureTerm fvalue=null;
-		if(sort!=null)
+		if(vsort!=null)
 		{
 			fvalue = super.setupSymbol(vsort, m,t.token,errorMessage);
 			if(num[0]!=0&&num[0]!=1)

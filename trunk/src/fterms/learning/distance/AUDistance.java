@@ -9,11 +9,12 @@ import fterms.FTRefinement;
 import fterms.FeatureTerm;
 import fterms.Ontology;
 import fterms.exceptions.FeatureTermException;
+import util.Pair;
 
 
 public class AUDistance extends Distance {
 	
-	static final boolean DEBUG = false; 
+	static final boolean DEBUG = true;
 
 	public double distance(FeatureTerm f1, FeatureTerm f2,Ontology o,FTKBase dm) throws FeatureTermException {
 		FeatureTerm au;
@@ -24,7 +25,7 @@ public class AUDistance extends Distance {
 		
 		List<FeatureTerm> objects = new LinkedList<FeatureTerm>();
 
-		if (DEBUG) {
+        if (DEBUG) {
 			System.out.print(f1.getName() + " - " + f2.getName()+ " [");
 			System.out.flush();
 		}
@@ -50,7 +51,7 @@ public class AUDistance extends Distance {
 		}
 
 		// Count additional f1 steps:		
-/*
+
 		{
 			List<Pair<FeatureTerm,Integer>> results;
 			List<Pair<FeatureTerm,Integer>> startl = new LinkedList<Pair<FeatureTerm,Integer>>();
@@ -61,8 +62,8 @@ public class AUDistance extends Distance {
 			startl.clear();
 			additional_steps_f1=results.get(0).m_b;
 		}
-*/
-		additional_steps_f1 = Math.max(termSize(f1,dm,o) - steps_au,0);
+
+//		additional_steps_f1 = Math.max(termSize(f1,dm,o) - steps_au,0);
 
 		if (DEBUG) {
 			System.out.print("b = " + additional_steps_f1 + " ");
@@ -70,7 +71,6 @@ public class AUDistance extends Distance {
 		}
 
 		// Count additional f2 steps:
-/*
 		{
 			List<Pair<FeatureTerm,Integer>> results;
 			List<Pair<FeatureTerm,Integer>> startl = new LinkedList<Pair<FeatureTerm,Integer>>();
@@ -81,8 +81,7 @@ public class AUDistance extends Distance {
 			startl.clear();
 			additional_steps_f2=results.get(0).m_b;
 		}
-*/
-		additional_steps_f2 = Math.max(termSize(f2,dm,o) - steps_au,0);
+//		additional_steps_f2 = Math.max(termSize(f2,dm,o) - steps_au,0);
 
 		if (DEBUG) {
 			System.out.print("c = " + additional_steps_f2 + "] -> ");
