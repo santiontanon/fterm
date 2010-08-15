@@ -846,10 +846,10 @@ public class FTRefinement {
 
         for (Pair<FeatureTerm, Path> p : vp) {
             FeatureTerm X = p.m_a;
-            if (!dm.contains(X)) {
+            if (!X.isConstant() && !dm.contains(X)) {
                 for (Pair<FeatureTerm, Path> p2 : vp) {
                     FeatureTerm Y = p2.m_a;
-                    if (Y != X && X.subsumes(Y) && !dm.contains(Y)) {
+                    if (Y != X && !Y.isConstant() && X.subsumes(Y) && !dm.contains(Y)) {
                         boolean appear_together = false;
                         boolean appear_in_all_objects = true;
 
@@ -877,6 +877,10 @@ public class FTRefinement {
                                 FeatureTerm clone = f.clone(dm, correspondences);
                                 clone.substitute(correspondences.get(X), correspondences.get(Y));
                                 refinements.add(clone);
+
+//                                System.out.println("Adding variable equality refinement making these two values equal:");
+//                                System.out.println(X.toStringNOOS(dm));
+//                                System.out.println(Y.toStringNOOS(dm));
                             }
                         }
 
@@ -1056,7 +1060,7 @@ public class FTRefinement {
         for (Pair<FeatureTerm, Path> node : vp) {
             List<FeatureTerm> constants = new LinkedList<FeatureTerm>();
             boolean first = true;
-            if (!node.m_a.isConstant()) {
+            if (!node.m_a.isConstant() && !dm.contains(node.m_a)) {
                 for (FeatureTerm o : objects) {
                     FeatureTerm c = o.readPath(node.m_b);
 

@@ -228,11 +228,11 @@ public class FTAntiunification {
             {
                 current = generalizations_to_process.remove(0);
 
-//                if (version == VERSION_FAST) {
-//                    tmp = FTRefinement.getSomeSpecializationSubsumingAll(current, dm, o, language, objects);
-//                } else {
+                if (version == VERSION_FAST) {
+                    tmp = FTRefinement.getSomeSpecializationSubsumingAll(current, dm, o, language, objects);
+                } else {
                     tmp = FTRefinement.getSpecializationsSubsumingAll(current, dm, o, language, objects);
-//                }
+                }
 
 //				System.out.println("AU: " + tmp.size() + " refinements...");
 
@@ -609,11 +609,11 @@ public class FTAntiunification {
 
             {
                 current = generalizations_to_process.remove(0);
-//                if (version == VERSION_FAST) {
-//                    tmp = FTRefinement.getSomeSpecializationSubsumingAll(current.m_a, dm, o, language, objects);
-//                } else {
+                if (version == VERSION_FAST) {
+                    tmp = FTRefinement.getSomeSpecializationSubsumingAll(current.m_a, dm, o, language, objects);
+                } else {
                     tmp = FTRefinement.getSpecializationsSubsumingAll(current.m_a, dm, o, language, objects);
-//                }
+                }
 
 //				System.out.println("AU: " + tmp.size() + " refinements...");
 
@@ -743,6 +743,11 @@ public class FTAntiunification {
                         } // if
 
                         generalizations_to_process.add(0, new Pair<FeatureTerm, Integer>(node, current.m_b + 1));
+
+                    } else {
+                        System.err.println("Generalization is not more specific!!");
+                        System.err.println(current.m_a.toStringNOOS(dm));
+                        System.err.println(node.toStringNOOS(dm));
                     } // if
 
                 } else {

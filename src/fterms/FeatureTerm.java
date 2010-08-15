@@ -315,7 +315,17 @@ public abstract class FeatureTerm {
                                     state = 1;
                                 } // if
                             } else {
-                                state = 1;
+                                if (f1 instanceof FloatFeatureTerm && f2 instanceof FloatFeatureTerm) {
+                                    if (ftc instanceof FloatFeatureTerm &&
+                                        ((FloatFeatureTerm) f2).getValue() != null &&
+                                        ((FloatFeatureTerm) f2).getValue() == ((FloatFeatureTerm) f1).getValue()) {
+                                        state = 2;
+                                    } else {
+                                        state = 1;
+                                    } // if
+                                } else {
+                                    state = 1;
+                                }
                             }
                         } // if
                     } // if
