@@ -809,7 +809,7 @@ public class FTAntiunification {
     } /* antiunification */
 
 
-    static boolean separableFeature(Symbol fname, List<FeatureTerm> objects, FTKBase dm) throws FeatureTermException {
+    public static boolean separableFeature(Symbol fname, List<FeatureTerm> objects, FTKBase dm) throws FeatureTermException {
         Sort s;
         List<FeatureTerm> l1, l2;
         FeatureTerm o1, o2;

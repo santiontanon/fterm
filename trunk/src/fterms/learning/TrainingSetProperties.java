@@ -39,6 +39,15 @@ public class TrainingSetProperties {
 
         return l;
     }
+    
+
+    public FeatureTerm getCaseByName(String name) {
+        for(FeatureTerm c:cases) {
+            if (c.getName().equals(name)) return c;
+        }
+        return null;
+    }
+    
 
     public void printStatistics(FTKBase dm) {
         System.out.println("Data set name: " + name);

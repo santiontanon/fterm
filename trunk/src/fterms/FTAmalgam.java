@@ -51,12 +51,12 @@ public class FTAmalgam {
 
         // Find all the properties which unify without problems:
         for(FeatureTerm p:propertiesF1) {
-            if (FTUnification.simpleUnification(p,f2,ontology,domain_model)!=null) {
+            if (FTUnification.simpleUnification(p,f2,domain_model)!=null) {
                 toAdd.add(p);
             }
         }
         for(FeatureTerm p:propertiesF2) {
-            if (FTUnification.simpleUnification(p,f1,ontology,domain_model)!=null) {
+            if (FTUnification.simpleUnification(p,f1,domain_model)!=null) {
                 toAdd.add(p);
             }
         }
@@ -73,7 +73,7 @@ public class FTAmalgam {
             if (result==null) {
                 result = p;
             } else {
-                FeatureTerm tmp = FTUnification.simpleUnification(result, p, ontology, domain_model);
+                FeatureTerm tmp = FTUnification.simpleUnification(result, p, domain_model);
                 if (tmp==null) {
                     System.err.println("amalgamProperties, Inconsistency!!!");
                     System.err.println("could not unify result:");
@@ -113,7 +113,7 @@ public class FTAmalgam {
                 }
                 left.remove(next);
 
-                FeatureTerm tmp = FTUnification.simpleUnification(result, next, ontology, domain_model);
+                FeatureTerm tmp = FTUnification.simpleUnification(result, next, domain_model);
                 if (tmp!=null) {
                     result = tmp;
                     common.add(next);

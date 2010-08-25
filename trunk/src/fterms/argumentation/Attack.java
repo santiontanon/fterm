@@ -32,7 +32,7 @@ public class Attack {
                     if (DEBUG>=1) System.out.println("attacksAcceptedP: true (attacker subsumes by attackee)");
                 return true;
             }
-            FeatureTerm u = FTUnification.simpleUnification(attacker.m_rule.pattern, attackee.m_rule.pattern, o, dm);
+            FeatureTerm u = FTUnification.simpleUnification(attacker.m_rule.pattern, attackee.m_rule.pattern, dm);
             Argument a = new Argument(new Rule(u,attacker.m_rule.solution,0.0f,0));
             if (u!=null) {
                 if (aa.accepted(a)) {
@@ -59,7 +59,7 @@ public class Attack {
 
     public static boolean attacksP(Argument attacker, Argument attackee, ArgumentAcceptability aa, Ontology o, FTKBase dm) throws FeatureTermException {
         if (!attacker.m_rule.solution.equivalents(attackee.m_rule.solution)) {
-            FeatureTerm u = FTUnification.simpleUnification(attacker.m_rule.pattern, attackee.m_rule.pattern, o, dm);
+            FeatureTerm u = FTUnification.simpleUnification(attacker.m_rule.pattern, attackee.m_rule.pattern, dm);
             Argument a = new Argument(new Rule(u,attacker.m_rule.solution,0.0f,0));
             if (u!=null) {
                 if (aa.accepted(a)) {

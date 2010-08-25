@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fterms.exceptions.FeatureTermException;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
@@ -69,6 +71,136 @@ public class Disintegration {
         propertiesFormalTable.put(f,properties);
         return properties;
     }
+
+
+        public static List<Pair<FeatureTerm,FeatureTerm>> disintegrateWithTrace(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
+        List<Pair<FeatureTerm,FeatureTerm>> trace = null;
+        Pair<FeatureTerm, FeatureTerm> property_rest;
+
+        trace = new LinkedList<Pair<FeatureTerm,FeatureTerm>>();
+
+        FeatureTerm unnamed = f.clone(dm, o);
+        List<FeatureTerm> variables = FTRefinement.variables(unnamed);
+        for(FeatureTerm v:variables) {
+            if (!dm.contains(v)) v.setName(null);
+        }
+
+        if (DEBUG>=2) {
+            System.out.println("Unnamed term to disintegrate:");
+            System.out.println(unnamed.toStringNOOS(dm));
+        }
+
+        do {
+            property_rest = extractProperty(unnamed, dm, o);
+
+            if (property_rest != null) {
+                if (property_rest.m_a!=null) trace.add(property_rest);
+                unnamed = property_rest.m_b;
+
+                System.out.println(trace.size() + " properties (term now has " + FTRefinement.variables(unnamed).size() + " variables");
+            }
+        } while (property_rest != null);
+
+        return trace;
+    }
+
+
+    public static List<FeatureTerm> disintegrate(FeatureTerm object, FTKBase dm, Ontology o, boolean cache, boolean fast) throws Exception {
+        long start_time = System.currentTimeMillis();
+        List<FeatureTerm> properties_tmp = null;
+        if (object.getName()!=null && cache) {
+            String fname;
+            String fname_state;
+            FeatureTerm current_state = null;
+            if (fast) fname = "disintegration-cache/fast-"+object.getName();
+                 else fname = "disintegration-cache/formal-" + object.getName();
+            if (fast) fname_state = "disintegration-cache/fast-"+object.getName()+"-state";
+                 else fname_state = "disintegration-cache/formal-" + object.getName()+"-state";
+            File tmp_state = new File(fname_state);
+            File tmp = new File(fname);
+            // set up the current state:
+            if (tmp_state.exists() && tmp.exists()) {
+                // disintegration was abandoned in the middle
+                // load properties
+                FTKBase tmpBase = new FTKBase();
+                tmpBase.uses(dm);
+                tmpBase.ImportNOOS(fname, o);
+                properties_tmp = new LinkedList<FeatureTerm>();
+                properties_tmp.addAll(tmpBase.getAllTerms());
+                // load the last state:
+                FTKBase tmpBase_state = new FTKBase();
+                tmpBase_state.uses(dm);
+                tmpBase_state.ImportNOOS(fname_state, o);
+                current_state = tmpBase_state.getAllTerms().get(0);
+                System.out.println(properties_tmp.size() + " properties were already extracted. Continuing...");
+            } else {
+                // disintegration didn't start or it's complete:
+                if (tmp.exists()) {
+                    // load properties
+                    FTKBase tmpBase = new FTKBase();
+                    tmpBase.uses(dm);
+                    tmpBase.ImportNOOS(fname, o);
+                    properties_tmp = new LinkedList<FeatureTerm>();
+                    properties_tmp.addAll(tmpBase.getAllTerms());
+                    System.out.println(properties_tmp.size() + " properties were already extracted. Complete.");
+                } else {
+                    properties_tmp = new LinkedList<FeatureTerm>();
+                    current_state = object.clone(dm, o);
+                    List<FeatureTerm> variables = FTRefinement.variables(current_state);
+                    for(FeatureTerm v:variables) {
+                        if (!dm.contains(v)) v.setName(null);
+                    }
+                    System.out.println("Disintegrating from scratch...");
+                }
+            }
+
+            while(current_state!=null) {
+                // extract a property:
+                Pair<FeatureTerm, FeatureTerm> property_rest;
+                if (fast) {
+                    property_rest = Disintegration.extractPropertyFast(current_state, dm, o);
+                } else {
+                    property_rest = Disintegration.extractProperty(current_state, dm, o);
+                }
+                if (property_rest!=null) {
+                    current_state = property_rest.m_b;
+                    properties_tmp.add(property_rest.m_a);
+
+                    System.out.println(properties_tmp.size() + " properties (term now has " + FTRefinement.variables(current_state).size() + " variables)");
+
+                    // save the property
+                    {
+                        FileWriter fw = new FileWriter(fname,true);
+                        fw.write(property_rest.m_a.toStringNOOS(dm)+"\n");
+                        fw.flush();
+                        fw.close();
+                    }
+                    // save the state
+                    if (current_state!=null) {
+                        FileWriter fw = new FileWriter(fname_state);
+                        fw.write(current_state.toStringNOOS(dm)+"\n");
+                        fw.flush();
+                        fw.close();
+                    } else {
+                        tmp_state.delete();
+                    }
+                } else {
+                    current_state = null;
+                    tmp_state.delete();
+                }
+
+
+            }
+        } else {
+            if (fast) properties_tmp = Disintegration.disintegrateFast(object, dm, o);
+                 else properties_tmp = Disintegration.disintegrate(object, dm, o);
+        }
+
+        long disintegration_time = System.currentTimeMillis();
+        System.out.println("Disintegration time: " + (disintegration_time-start_time));
+        return properties_tmp;
+    }
+
 
 
     // - This method generates a path from f to 'any', and only generates properties for the last 'N' refinements
@@ -175,7 +307,7 @@ public class Disintegration {
         for(int i = 0;i<refinementPath.size()-1;i++) {
             FeatureTerm t1 = refinementPath.get(i);
             FeatureTerm t2 = refinementPath.get(i+1);
-            FeatureTerm property = remainderFastAssumingRefinement(t1, t2, dm, o);
+            FeatureTerm property = remainderFaster(t1, t2, dm, o);
             properties.add(property);
 //            System.out.println("t1: -----------------------------------");
 //            System.out.println(t1.toStringNOOS(dm));
@@ -203,7 +335,7 @@ public class Disintegration {
 
         if (refinements.size() > 0) {
             FeatureTerm refinement = refinements.get(0);
-            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFastAssumingRefinement(f, refinement, dm, o), refinement);
+            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFaster(f, refinement, dm, o), refinement);
 
             if (DEBUG>=2) {
                 System.out.println("Property:");
@@ -222,7 +354,7 @@ public class Disintegration {
      * It's here just because it's implemented in the exact way in which the operation is defined in our submissino to the Machine Learning
      * Journal.
      */
-    public static FeatureTerm remainder(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
+    public static FeatureTerm remainderUnification(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
         FeatureTerm oldRemainder = null;
         FeatureTerm remainder = f;
         do {
@@ -239,7 +371,7 @@ public class Disintegration {
 
             remainder = null;
             for (FeatureTerm r : refinements) {
-                List<FeatureTerm> unifications = FTUnification.unification(refinement, r, o, dm, true);
+                List<FeatureTerm> unifications = FTUnification.unification(refinement, r, dm);
                 if (unifications==null) {
                     if (DEBUG>=3) System.out.println("remainder: 0 unifications");
                     continue;
@@ -324,26 +456,50 @@ public class Disintegration {
         return oldRemainder;
     }
 
-    // This method assumes that 'refinement' is a direct generlization refinement of 'f', it's even faster:
-    public static FeatureTerm remainderFastAssumingRefinement(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
+
+    // 'refinement' is a generlization of 'f':
+    public static FeatureTerm remainderFaster(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
         FeatureTerm oldRemainder = null;
         FeatureTerm remainder = f;
+
+        // If any of these terms are candidate unifications, then the property cannot recover the original term:
+        List<FeatureTerm> originalGeneralizations = FTRefinement.getGeneralizationsAggressive(f, dm, o);
+
+        // Only those generalizations of 'f', which are subsumed by 'refinement'
+        List<FeatureTerm> originalGeneralizationsFiltered = new LinkedList<FeatureTerm>();
+        for(FeatureTerm g:originalGeneralizations) {
+            if (refinement.subsumes(g)) originalGeneralizationsFiltered.add(g);
+        }
 
         do {
             oldRemainder = remainder;
             if (DEBUG>=3) {
-                System.out.println("remainderFastAssumingRefinement: cycle starts");
+                System.out.println("remainder: cycle starts");
                 System.out.println("refinement: ");
                 System.out.println(remainder.toStringNOOS(dm));
             }
             List<FeatureTerm> refinements = FTRefinement.getGeneralizationsAggressive(remainder, dm, o);
-            // if (DEBUG>=3)
-//            System.out.println("remainder: " + refinements.size() + " refinements.");
+            if (DEBUG>=3)
+                System.out.println("remainder: " + refinements.size() + " refinements.");
 
             remainder = null;
             for (FeatureTerm r : refinements) {
-//                System.out.print(".");
-                if (!r.subsumes(refinement)) {
+                boolean canRecover = true;
+
+                // Sanity test:
+/*                if (!(refinement.subsumes(f) && r.subsumes(f))) {
+                    System.err.println("remainderFast: sanity check failed!");
+                    System.exit(1);
+                }
+*/
+                canRecover = true;
+                for(FeatureTerm candidate:originalGeneralizationsFiltered) {
+                    if (refinement.subsumes(candidate) && r.subsumes(candidate)) {
+                        canRecover = false;
+                    }
+                }
+
+                if (canRecover) {
                     remainder = r;
                     break;
                 }

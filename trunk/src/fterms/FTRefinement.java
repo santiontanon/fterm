@@ -260,7 +260,7 @@ public class FTRefinement {
 //		System.out.println("[" + refinements.size() + "]");
         refinements.addAll(ConstantGeneralization(f, dm));
 //		System.out.println("[" + refinements.size() + "]");
-        refinements.addAll(variableEqualityEliminationAggressive(f, dm, vp));
+        refinements.addAll(variableEqualityEliminationAggressive(f, dm));
 //		System.out.println("[" + refinements.size() + "]");
         refinements.addAll(specialGeneralizations(f, dm, o, vp));
 //		System.out.println("[" + refinements.size() + "]");
@@ -341,7 +341,7 @@ public class FTRefinement {
             if (i == 1) refinements = featureElimination(f, dm, vp);
             if (i == 2) refinements = setReduction(f, dm, o);
             if (i == 3) refinements = ConstantGeneralization(f, dm);
-            if (i == 4) refinements = variableEqualityEliminationAggressive(f, dm, vp);
+            if (i == 4) refinements = variableEqualityEliminationAggressive(f, dm);
             if (i == 5) refinements = specialGeneralizations(f, dm, o, vp);
 
             if (!refinements.isEmpty()) {
@@ -371,7 +371,7 @@ public class FTRefinement {
             if (i == 1) refinements = featureElimination(f, dm, vp);
             if (i == 2) refinements = setReduction(f, dm, o);
             if (i == 3) refinements = ConstantGeneralization(f, dm);
-            if (i == 4) refinements = variableEqualityEliminationAggressive(f, dm, vp);
+            if (i == 4) refinements = variableEqualityEliminationAggressive(f, dm);
             if (i == 5) refinements = specialGeneralizations(f, dm, o, vp);
 
             if (!refinements.isEmpty()) {
@@ -488,10 +488,11 @@ public class FTRefinement {
      * is left empty (just a term of the appropriate sort without any feature). This is useful when trying to generalize a term
      * all the way up to "(any)", since otherwise we can get into an infinite loop.
      */
-    public static List<FeatureTerm> variableEqualityEliminationAggressive(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
+    public static List<FeatureTerm> variableEqualityEliminationAggressive(FeatureTerm f, FTKBase dm) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
+        HashMap<FeatureTerm,Pair<FeatureTerm,Symbol>> firstOccurrence = new HashMap<FeatureTerm,Pair<FeatureTerm,Symbol>>();
         List<FeatureTerm> open_nodes = new LinkedList<FeatureTerm>();
         FeatureTerm node;
 
@@ -506,6 +507,7 @@ public class FTRefinement {
                     if (!visited.contains(ft2)) {
                         visited.add(ft2);
                         open_nodes.add(ft2);
+                        firstOccurrence.put(ft2, new Pair<FeatureTerm,Symbol>(node,feature.getKey()));
                     } else {
                         if (!dm.contains(ft2) && !ft2.isConstant() && !(ft2 instanceof SetFeatureTerm)) {
                             // Variable equality:
@@ -523,13 +525,28 @@ public class FTRefinement {
                                     System.err.println("from the feature '" + feature.getKey().get() + "' in the term:" + node.toStringNOOS(dm));
                                     System.err.flush();
                                 }
-//								correspondences.remove(ft2);
-//								FeatureTerm ft2Clone = ft2.clone(correspondences);
                                 FeatureTerm ft2Clone = ft2.getSort().createFeatureTerm();
                                 ((TermFeatureTerm) (correspondences.get(node))).defineFeatureValue(feature.getKey(), ft2Clone);
                             }
 
                             refinements.add(clone);
+
+                            if (firstOccurrence.get(ft2)!=null) {
+                                HashMap<FeatureTerm, FeatureTerm> correspondences2 = new HashMap<FeatureTerm, FeatureTerm>();
+                                Pair<FeatureTerm,Symbol> tmp = firstOccurrence.get(ft2);
+                                FeatureTerm clone2 = f.clone(dm, correspondences2);
+                                FeatureTerm ft2Clone = ft2.getSort().createFeatureTerm();
+                                if (tmp.m_b==null) {
+                                    ((SetFeatureTerm) (correspondences2.get(tmp.m_a))).addSetValue(ft2Clone);
+                                } else {
+                                    ((TermFeatureTerm) (correspondences2.get(tmp.m_a))).defineFeatureValue(tmp.m_b, ft2Clone);
+                                }
+                                // prevent the case where replacing the value cuts the access to the other instances of the variable:
+                                if (variables(clone2).contains(correspondences2.get(ft2))) {
+                                    refinements.add(clone2);
+                                }
+                                firstOccurrence.remove(ft2);
+                            }
                         }
                     }
                 }
@@ -540,6 +557,7 @@ public class FTRefinement {
                     if (!visited.contains(ft2)) {
                         visited.add(ft2);
                         open_nodes.add(ft2);
+                        firstOccurrence.put(ft2, new Pair<FeatureTerm,Symbol>(node,null));
                     } else {
                         if (!dm.contains(ft2) && !ft2.isConstant() && !(ft2 instanceof SetFeatureTerm)) {
                             // Variable equality:
@@ -565,6 +583,23 @@ public class FTRefinement {
                             }
 
                             refinements.add(clone);
+
+                            if (firstOccurrence.get(ft2)!=null) {
+                                Pair<FeatureTerm,Symbol> tmp = firstOccurrence.get(ft2);
+                                HashMap<FeatureTerm, FeatureTerm> correspondences2 = new HashMap<FeatureTerm, FeatureTerm>();
+                                FeatureTerm clone2 = f.clone(dm, correspondences2);
+                                FeatureTerm ft2Clone = ft2.getSort().createFeatureTerm();
+                                if (tmp.m_b==null) {
+                                    ((SetFeatureTerm) (correspondences2.get(tmp.m_a))).addSetValue(ft2Clone);
+                                } else {
+                                    ((TermFeatureTerm) (correspondences2.get(tmp.m_a))).defineFeatureValue(tmp.m_b, ft2Clone);
+                                }
+                                // prevent the case where replacing the value cuts the access to the other instances of the variable:
+                                if (variables(clone2).contains(correspondences2.get(ft2))) {
+                                    refinements.add(clone2);
+                                }
+                                firstOccurrence.remove(ft2);
+                            }
                         }
                     }
                 } // for
