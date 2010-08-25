@@ -19,6 +19,7 @@ import java.util.Set;
 import util.RewindableInputStream;
 
 import fterms.BaseOntology;
+import fterms.Disintegration;
 import fterms.FTKBase;
 import fterms.FTRefinement;
 import fterms.FTUnification;
@@ -33,9 +34,12 @@ import fterms.Symbol;
 import fterms.SymbolFeatureTerm;
 import fterms.TermFeatureTerm;
 import fterms.exceptions.FeatureTermException;
+import fterms.learning.TrainingSetProperties;
+import fterms.learning.TrainingSetUtils;
 
 
 public class FTermTests {
+    private static FTKBase case_base;
 	public static void main(String args[]) {
 		long t_start,t_end;
 		int errors = 0;
@@ -125,7 +129,7 @@ public class FTermTests {
 			errors++;
 		}
 		domain_model_toxicology.ImportNOOS("NOOS/toxic-eva-ontology.noos",o);
-		if (o.getNSorts()!=230) {
+		if (o.getNSorts()!=229) {
 			int n = o.getNSorts();
 			System.out.println("Ontology Test 2 failed: N sorts in o is " + n);
 			System.out.println(o.getDescription());
@@ -406,8 +410,106 @@ public class FTermTests {
 
 		errors += unificationTests(o,domain_model_families);
 
+        errors += disintegrationTests();
+
 		return errors;
 	}
+
+    static int disintegrationTests() throws FeatureTermException, IOException
+	{
+        int datasets[]= {TrainingSetUtils.ZOOLOGY_DATASET,TrainingSetUtils.UNCLE_DATASET,TrainingSetUtils.TRAINS_DATASET};
+        String message[]={"Language L0, zoology","Language Lc, uncle, no sets","Language L, trains"};
+        String examples[]={"zp-1680","e1","tr1"};
+		int errors = 0;
+		System.out.println("Disintegration tests...");
+
+//        for(int i = 0;i<datasets.length;i++) {
+        for(int i = 0;i<2;i++) {
+            Ontology base_ontology = new BaseOntology();
+            Ontology o=new Ontology();
+            FTKBase dm=new FTKBase();
+            FTKBase cb=new FTKBase();
+            o.uses(base_ontology);
+            cb.uses(dm);
+
+            System.out.println(message[i]);
+            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(datasets[i], o, dm, cb);
+
+            FeatureTerm c = ts.getCaseByName(examples[i]);
+            FeatureTerm description = c.readPath(ts.description_path);
+            System.out.println("Disintegrating " + c.getName().get());
+            List<Pair<FeatureTerm,FeatureTerm>> disintegrationTrace = Disintegration.disintegrateWithTrace(description, dm, o);
+
+            FeatureTerm last = description.clone(dm, o);
+            {
+                List<FeatureTerm> variables = FTRefinement.variables(last);
+                for(FeatureTerm v:variables) {
+                    if (!dm.contains(v)) v.setName(null);
+                }
+            }
+
+            for(Pair<FeatureTerm,FeatureTerm> property_term:disintegrationTrace) {
+                // 1st, test whether the remainder is correct:
+                if (FTUnification.isUnification(last,property_term.m_a,property_term.m_b,dm,o)) {
+                    System.out.println("remainder is correct!");
+                } else {
+                    System.err.println("remainder is incorrect!!!!!");
+                    errors++;
+                }
+
+                // 2nd, test whether unification works:
+
+                List<FeatureTerm> unifications = FTUnification.unification(property_term.m_a, property_term.m_b, dm);
+                boolean found = false;
+                if (unifications!=null && unifications.size()>0) {
+                    System.out.println("Unification yields " + unifications.size() + " results.");
+                    for(FeatureTerm u:unifications) {
+                        if (last.equivalents(u)) {
+                            found = true;
+                            System.out.println("ok!");
+                            break;
+                        }
+                    }
+                } else {
+                    boolean fine = true;
+                    System.err.println("Property and rest do not unify!!!");
+                    if (!property_term.m_a.subsumes(last)) {
+                        System.err.println("The property does not subsume the original term!!!!!");
+                        fine = false;
+                    }
+                    if (!property_term.m_b.subsumes(last)) {
+                        System.err.println("The rest does not subsume the original term!!!!!");
+                        fine = false;
+                    }
+                    if (fine) {
+                        System.err.println("There is an error in the unification method...");
+                    }
+                }
+                if (!found) {
+                    errors++;
+                    System.out.println("Disintegration error, unifying property with rest does not recover original term!!!!");
+                    System.out.println("Property is:");
+                    System.out.println(property_term.m_a.toStringNOOS(dm));
+                    System.out.println("Rest is:");
+                    System.out.println(property_term.m_b.toStringNOOS(dm));
+                    System.out.println("original is:");
+                    System.out.println(last.toStringNOOS(dm));
+
+                    List<FeatureTerm> gs = FTRefinement.variableEqualityEliminationAggressive(last, dm);
+                    System.out.println("Generalizations of original:");
+                    for(FeatureTerm g:gs) {
+                        System.out.println(g.toStringNOOS(dm));
+                    }
+                }
+                last = property_term.m_b;
+            }
+        }
+
+
+
+        return errors;
+    }
+
 
     static int antiunificationTests(Ontology o,FTKBase dm) throws FeatureTermException, IOException
 	{
@@ -526,19 +628,7 @@ public class FTermTests {
 									   ") ")),case_base,o);
 				expected_result = 2;
 				break;
-			case 8:
-				f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
-						"(define (person) " +
-											       "  (son (define (male))) " +
-												   ") ")),case_base,o);
-				f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
-						"(define (male) " +
-												   "  (son (define (set))) " +
-												   "  (father (define (set))) " +
-												   ") ")),case_base,o);
-				expected_result = 1;
-				break;
-            case 9:
+            case 8:
                 f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
                         "(define (sponge-problem) " +
                         " (description (define (sponge) " +
@@ -553,6 +643,66 @@ public class FTermTests {
                         " (smooth-form oxea))))))))")),case_base,o);
 				expected_result = 1;
                 break;
+            case 9:
+                f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define (female) " +
+                        "                     (brother (define (male) " +
+                        "                                (father (define (male))))))")),case_base,o);
+                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define ?X3 (female) " +
+                        "                     (brother (define ?X4 (male) " +
+                        "                                (sister !X3))) " +
+                        "                     (father (define (male) " +
+                        "                               (son !X4) " +
+                        "                               (daughter !X3))))")),case_base,o);
+                 
+                expected_result = 1;
+                break;
+            case 10:
+                f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define (female) " +
+                        "                 (mother (define (female) " +
+                        "                           (husband (define ?X5 (male))))) " +
+                        "                 (brother (define (male) " +
+                        "                            (father !X5))))")),case_base,o);
+                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define ?X3 (female) " +
+                        "                 (father (define ?X4 (male) " +
+                        "                           (daughter !X3) " +
+                        "                           (son (define ?X5 (male) " +
+                        "                                  (sister !X3) " +
+                        "                                  (father !X4) " +
+                        "                                  (mother (define ?X7 (female) " +
+                        "                                            (husband (define (male))))))) " +
+                        "                           (wife !X7))) " +
+                        "                 (mother !X7) " +
+                        "                 (brother !X5))")),case_base,o);
+ /*               f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define (person) " +
+                        "  (son (define (male) " +
+                        "         (wife (define (female) " +
+                        "                 (mother (define (female) " +
+                        "                           (husband (define ?X5 (male))))) " +
+                        "                 (brother (define (male) " +
+                        "                            (father !X5))))))))")),case_base,o);
+                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define (person) " +
+                        "  (son (define (male) " +
+                        "         (wife (define ?X3 (female) " +
+                        "                 (father (define ?X4 (male) " +
+                        "                           (daughter !X3) " +
+                        "                           (son (define ?X5 (male) " +
+                        "                                  (sister !X3) " +
+                        "                                  (wife (define (female) " +
+                        "                                          (husband !X5))) " +
+                        "                                  (father !X4) " +
+                        "                                  (mother (define ?X7 (female) " +
+                        "                                            (husband (define (male))))))) " +
+                        "                           (wife !X7))) " +
+                        "                 (mother !X7) " +
+                        "                 (brother !X5))))))")),case_base,o);*/
+                expected_result = 1;
+                break;
 			default:
 				f1 = null;
                 f2 = null;
@@ -563,7 +713,8 @@ public class FTermTests {
 				System.out.println("F1:\n" + f1.toStringNOOS(dm));
 				System.out.println("F2:\n" + f2.toStringNOOS(dm));
 
-				unifications=FTUnification.unification(f1,f2,o,dm, true);
+//				unifications=FTUnification.unification(f1,f2,o,dm, true);
+				unifications=FTUnification.unification(f1,f2,dm);
 				if (unifications!=null && !unifications.isEmpty()) {
 					System.out.println("Unification successful!");
 					System.out.println(unifications.size() + " unifications");

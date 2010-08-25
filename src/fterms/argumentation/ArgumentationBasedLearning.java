@@ -7,7 +7,6 @@ package fterms.argumentation;
 import fterms.FTAntiunification;
 import fterms.FTKBase;
 import fterms.FTRefinement;
-import fterms.FTUnification;
 import fterms.FeatureTerm;
 import fterms.Ontology;
 import fterms.Path;

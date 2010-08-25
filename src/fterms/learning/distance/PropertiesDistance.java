@@ -55,7 +55,7 @@ public class PropertiesDistance extends Distance {
         for (FeatureTerm object : objects) {
 
             System.out.println("processing " + object.getName() + " ("+ count + ")");
-            List<FeatureTerm> properties_tmp = disintegrate(object,dm,o, s_cache);
+            List<FeatureTerm> properties_tmp = Disintegration.disintegrate(object,dm,o, s_cache, m_fast);
             long start_time = System.currentTimeMillis();
 
             if (max_properties==null || properties_tmp.size()>max_properties) max_properties = properties_tmp.size();
@@ -90,104 +90,6 @@ public class PropertiesDistance extends Distance {
 //		for(Pair<FeatureTerm,Double> p_w:m_propertyWeight) {
 //			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
 //		}
-    }
-
-    public List<FeatureTerm> disintegrate(FeatureTerm object, FTKBase dm, Ontology o, boolean cache) throws Exception {
-        long start_time = System.currentTimeMillis();
-        List<FeatureTerm> properties_tmp = null;
-        if (object.getName()!=null && cache) {
-            String fname;
-            String fname_state;
-            FeatureTerm current_state = null;
-            if (m_fast) fname = "disintegration-cache/fast-"+object.getName();
-                   else fname = "disintegration-cache/formal-" + object.getName();
-            if (m_fast) fname_state = "disintegration-cache/fast-"+object.getName()+"-state";
-                   else fname_state = "disintegration-cache/formal-" + object.getName()+"-state";
-            File tmp_state = new File(fname_state);
-            File tmp = new File(fname);
-            // set up the current state:
-            if (tmp_state.exists() && tmp.exists()) {
-                // disintegration was abandoned in the middle
-                // load properties
-                FTKBase tmpBase = new FTKBase();
-                tmpBase.uses(dm);
-                tmpBase.ImportNOOS(fname, o);
-                properties_tmp = new LinkedList<FeatureTerm>();
-                properties_tmp.addAll(tmpBase.getAllTerms());
-                // load the last state:
-                FTKBase tmpBase_state = new FTKBase();
-                tmpBase_state.uses(dm);
-                tmpBase_state.ImportNOOS(fname_state, o);
-                current_state = tmpBase_state.getAllTerms().get(0);
-                System.out.println(properties_tmp.size() + " properties were already extracted. Continuing...");
-            } else {
-                // disintegration didn't start or it's complete:
-                if (tmp.exists()) {
-                    // load properties
-                    FTKBase tmpBase = new FTKBase();
-                    tmpBase.uses(dm);
-                    tmpBase.ImportNOOS(fname, o);
-                    properties_tmp = new LinkedList<FeatureTerm>();
-                    properties_tmp.addAll(tmpBase.getAllTerms());
-                    System.out.println(properties_tmp.size() + " properties were already extracted. Complete.");
-                } else {
-                    properties_tmp = new LinkedList<FeatureTerm>();
-                    current_state = object.clone(dm, o);
-                    List<FeatureTerm> variables = FTRefinement.variables(current_state);
-                    for(FeatureTerm v:variables) {
-                        if (!dm.contains(v)) v.setName(null);
-                    }
-                    System.out.println("Disintegrating from scratch...");
-                }
-            }
-
-            while(current_state!=null) {
-                // extract a property:
-                Pair<FeatureTerm, FeatureTerm> property_rest;
-                if (m_fast) {
-                    property_rest = Disintegration.extractPropertyFast(current_state, dm, o);
-                } else {
-                    property_rest = Disintegration.extractProperty(current_state, dm, o);
-                }
-                if (property_rest!=null) {
-                    current_state = property_rest.m_b;
-                    properties_tmp.add(property_rest.m_a);
-
-                    System.out.println(properties_tmp.size() + " properties (term now has " + FTRefinement.variables(current_state).size() + " variables)");
-
-                    // save the property
-                    {
-                        FileWriter fw = new FileWriter(fname,true);
-                        fw.write(property_rest.m_a.toStringNOOS(dm)+"\n");
-                        fw.flush();
-                        fw.close();
-                    }
-                    // save the state
-                    if (current_state!=null) {
-                        FileWriter fw = new FileWriter(fname_state);
-                        fw.write(current_state.toStringNOOS(dm)+"\n");
-                        fw.flush();
-                        fw.close();
-                    } else {
-                        tmp_state.delete();
-                    }
-                } else {
-                    current_state = null;
-                    tmp_state.delete();
-                }
-
-                
-            }
-        } else {
-            if (m_fast) properties_tmp = Disintegration.disintegrateFast(object, dm, o);
-                   else properties_tmp = Disintegration.disintegrate(object, dm, o);
-        }
-
-        System.out.println(properties_tmp.size() + " found, now filtering... (previous total: " + m_propertyWeight.size() + ")");
-
-        long disintegration_time = System.currentTimeMillis();
-        System.out.println("Disintegration time: " + (disintegration_time-start_time));
-        return properties_tmp;
     }
 
 

@@ -421,7 +421,8 @@ public class Sort {
 		} else {
 			List<Symbol> l=new LinkedList<Symbol>();
 			l.addAll(m_super.getFeatures());
-			l.addAll(m_feature_names);
+            for(Symbol f:m_feature_names)
+                if (!l.contains(f)) l.add(f);
 			return l;
 		} // if 
 	} // Sort::getFeatures  

@@ -337,7 +337,7 @@ public class PropertiesCN2 extends InductiveLearner {
         }
 
         public Rule(Rule r, Selector s, List<FeatureTerm> differentSolutions, Ontology o, FTKBase dm) throws FeatureTermException {
-            pattern = FTUnification.simpleUnification(r.pattern, s.pattern, o, dm);
+            pattern = FTUnification.simpleUnification(r.pattern, s.pattern, dm);
             if (pattern == null) return;
             selectors.addAll(r.selectors);
             selectors.add(s);
