@@ -47,6 +47,7 @@ public class FTUnification {
         List<FeatureTerm> variables = new LinkedList<FeatureTerm>();
         List<Feature> features = new LinkedList<Feature>();
         List<Restriction> restrictions = new LinkedList<Restriction>(); // yet to be applied
+        List<Restriction> differentRestrictions = null;    // variables which cannot be equal (due to our subsumption restriction on sets)
 
         public UnificationNode(UnificationNode n) {
             root = n.root;
@@ -56,6 +57,10 @@ public class FTUnification {
             }
             for(Restriction r:n.restrictions) {
                 restrictions.add(new Restriction(r.f1,r.f2,r.soft));
+            }
+            differentRestrictions = new LinkedList<Restriction>();
+            for(Restriction r:n.differentRestrictions) {
+                differentRestrictions.add(new Restriction(r.f1,r.f2,r.soft));
             }
         }
 
@@ -89,6 +94,23 @@ public class FTUnification {
                     }
                 }
             }
+            differentRestrictions = new LinkedList<Restriction>();
+            for(SetFeatureTerm s1:FTRefinement.sets(f1)) {
+                for(int i = 0;i<s1.getSetValues().size();i++) {
+                    for(int j = i+1;j<s1.getSetValues().size();j++) {
+                        differentRestrictions.add(new Restriction(s1.getSetValues().get(i),
+                                                                  s1.getSetValues().get(j),false));
+                    }
+                }
+            }
+            for(SetFeatureTerm s2:FTRefinement.sets(f2)) {
+                for(int i = 0;i<s2.getSetValues().size();i++) {
+                    for(int j = i+1;j<s2.getSetValues().size();j++) {
+                        differentRestrictions.add(new Restriction(s2.getSetValues().get(i),
+                                                                  s2.getSetValues().get(j),false));
+                    }
+                }
+            }
             root = f1;
             restrictions.add(new Restriction(f1, f2, false));    // the first restriction cannot be broken
         }
@@ -107,44 +129,57 @@ public class FTUnification {
             System.out.print("R:[ ");
             for(Restriction r:restrictions) {
                 if (r.soft) System.out.print("{");
-                System.out.print("X" + variables.indexOf(r.f1) + " = X" + variables.indexOf(r.f2));
+                System.out.print("X" + variables.indexOf(r.f1) + "=X" + variables.indexOf(r.f2));
                 if (r.soft) System.out.print("} ");
                 else System.out.print(" ");
             }
             System.out.println("]");
+            System.out.print("R:[ ");
+            for(Restriction r:differentRestrictions) {
+                System.out.print("X" + variables.indexOf(r.f1) + "!=X" + variables.indexOf(r.f2) + " ");
+            }
+            System.out.println("]");
         }
 
-        // applies the first restriction:
+        // applies the first hard restriction, if no hard restricitons, then applies the first soft
         public List<UnificationNode> applyRestriction(FTKBase dm) throws FeatureTermException {
-            Restriction r = restrictions.get(0);
+            int rnum = 0;
+
+            for(Restriction r:restrictions) {
+                if (!r.soft) {
+                    rnum = restrictions.indexOf(r);
+                    break;
+                }
+            }
+
+            Restriction r = restrictions.get(rnum);
             List<UnificationNode> results = new LinkedList<UnificationNode>();
 
             if (variables.contains(r.f1) && variables.contains(r.f2)) {
                 if (r.soft) {
                     // clone the node:
                     UnificationNode n = new UnificationNode(this);
-                    n.restrictions.remove(0);
+                    n.restrictions.remove(rnum);
                     results.add(n);
                 }
 
                 // clone the node:
                 UnificationNode n = new UnificationNode(this);
-                n.restrictions.remove(0);
+                n.restrictions.remove(rnum);
                 
                 // figure out the new restrictions
                 for(Feature f:n.features) {
                     if (f.f1==r.f1) {
                         for(Feature f2:n.features) {
                             if (f2.f1==r.f2 && f2.f.equals(f.f) && f.f2!=f2.f2) {
-                                n.restrictions.add(new Restriction(f.f2,f2.f2,!f.f1.getSort().featureSingleton(f.f) ||
-                                                                              !f2.f1.getSort().featureSingleton(f.f)));
+                                Restriction nr = new Restriction(f.f2,f2.f2,!f.f1.getSort().featureSingleton(f.f) ||
+                                                                              !f2.f1.getSort().featureSingleton(f.f));
+                                n.restrictions.add(nr);
                             }
                         }
                     }
                 }
 
-
-                // compute the merged variable (unify sort and constants):
                 FeatureTerm u = variableUnification(r.f1,r.f2,dm);
 
                 if (u!=null) {
@@ -164,6 +199,12 @@ public class FTUnification {
                         if (f.f2==r.f2) f.f2=u;
                     }
                     for(Restriction r2:n.restrictions) {
+                        if (r2.f1==r.f1) r2.f1=u;
+                        if (r2.f2==r.f1) r2.f2=u;
+                        if (r2.f1==r.f2) r2.f1=u;
+                        if (r2.f2==r.f2) r2.f2=u;
+                    }
+                    for(Restriction r2:n.differentRestrictions) {
                         if (r2.f1==r.f1) r2.f1=u;
                         if (r2.f2==r.f1) r2.f2=u;
                         if (r2.f1==r.f2) r2.f1=u;
@@ -199,7 +240,7 @@ public class FTUnification {
                         }
                         if (num2<num1) {
                             // restrictions violated!!!
-                            if (DEBUG>=1) {
+                            if (DEBUG>=2) {
                                 System.out.println("Number restriction violated for X" + n.variables.indexOf(f1.f1) + "." + f1.f.get());
                                 System.out.println("It should ne at least " + num1 + " and it's " + num2);
                             }
@@ -207,6 +248,31 @@ public class FTUnification {
                             break;
                         }
                         if (!consistent) break;
+                    }
+                    if (consistent) {
+                        for(Restriction r2:n.differentRestrictions) {
+                            if (r2.f1==r2.f2) {
+                                consistent = false;
+                                break;
+                            }
+                        }
+                        if (consistent) {
+                            List<Restriction> toDeleteR = new LinkedList<Restriction>();
+                            for(Restriction r1:n.restrictions) {
+                                for(Restriction r2:n.differentRestrictions) {
+                                    // make sure restriction does not collide with 'differentRestrictions':
+                                    if ((r1.f1==r2.f1 && r1.f2==r2.f2) ||
+                                        (r1.f2==r2.f1 && r1.f1==r2.f2)) {
+                                        // impossible restriction:
+                                        if (r1.soft) toDeleteR.add(r1);
+                                                else consistent = false;
+                                        break;
+                                    }
+                                }
+                                if (!consistent) break;
+                            }
+                           n.restrictions.removeAll(toDeleteR);
+                        }
                     }
 
                     if (consistent) results.add(n);
@@ -281,18 +347,39 @@ public class FTUnification {
     }
 
 
-    public static List<FeatureTerm> unificationRemovingDuplicates(FeatureTerm f1,FeatureTerm f2,FTKBase dm) throws FeatureTermException {
-        List<FeatureTerm> unifications = unification(f1,f2,dm);
+    public static List<FeatureTerm> unification(FeatureTerm f1,FeatureTerm f2,FTKBase dm) throws FeatureTermException {
+
+        if (DEBUG>=1) System.out.println("UnificationDuplicates started...");
+
+        List<FeatureTerm> unifications = unificationDuplicates(f1,f2,dm);
+
+        if (DEBUG>=1) System.out.println("UnificationDuplicates returned " + unifications.size() + " results, now filtering...");
+
         List<FeatureTerm> unificationsFiltered = new LinkedList<FeatureTerm>();
+        List<FeatureTerm> toDelete = new LinkedList<FeatureTerm>();
 
         for(FeatureTerm u:unifications) {
             boolean found = false;
+            toDelete.clear();
             for(FeatureTerm u2:unificationsFiltered) {
-                if (u.equivalents(u2)) {
-                    found = true;
-                    break;
+                if (u2.subsumes(u)) {
+                    // the one in the filtered list is more general or equal
+                    if (u.subsumes(u2)) {
+                        // they are equal, just don't add
+                        found = true;
+                    } else {
+                        // the one in the filtered list is more general, remove it and add the new one
+                        found = true;
+                    }
+                } else {
+                    // the one in the filtered list is more specific, or different
+                    if (u.subsumes(u2)) {
+                        // the one in the filtered list is more specific:
+                        toDelete.add(u2);
+                    }
                 }
             }
+            unificationsFiltered.removeAll(toDelete);
             if (!found) unificationsFiltered.add(u);
         }
 
@@ -306,7 +393,7 @@ public class FTUnification {
 
         while(!stack.isEmpty()) {
             UnificationNode n = stack.remove(0);
-            if (DEBUG>=1) {
+            if (DEBUG>=2) {
                 System.out.println("Current:");
                 n.print(dm);
             }
@@ -321,7 +408,7 @@ public class FTUnification {
                     FeatureTerm res = n2.generateResult(dm);
                     toDelete.add(n2);
 
-                    if (DEBUG>=1) {
+                    if (DEBUG>=2) {
                         System.out.println("We've got a result:");
                         n2.print(dm);
                         System.out.println(res.toStringNOOS(dm));
@@ -333,7 +420,7 @@ public class FTUnification {
             r.removeAll(toDelete);
 
             if (r!=null) {
-                stack.addAll(r);
+                stack.addAll(0,r);
             }
         }
         
@@ -341,7 +428,7 @@ public class FTUnification {
     }
 
 
-    public static List<FeatureTerm> unification(FeatureTerm f1,FeatureTerm f2,FTKBase dm) throws FeatureTermException {
+    public static List<FeatureTerm> unificationDuplicates(FeatureTerm f1,FeatureTerm f2,FTKBase dm) throws FeatureTermException {
         List<FeatureTerm> results = new LinkedList<FeatureTerm>();
         UnificationNode start = new UnificationNode(f1, f2, dm);
         List<UnificationNode> stack = new LinkedList<UnificationNode>();
@@ -349,7 +436,7 @@ public class FTUnification {
 
         while(!stack.isEmpty()) {
             UnificationNode n = stack.remove(0);
-            if (DEBUG>=1) {
+            if (DEBUG>=2) {
                 System.out.println("Current:");
                 n.print(dm);
             }
@@ -365,7 +452,7 @@ public class FTUnification {
                     results.add(res);
                     toDelete.add(n2);
 
-                    if (DEBUG>=1) {
+                    if (DEBUG>=2) {
                         System.out.println("We've got a result:");
                         n2.print(dm);
                         System.out.println(res.toStringNOOS(dm));
@@ -375,7 +462,7 @@ public class FTUnification {
             r.removeAll(toDelete);
 
             if (r!=null) {
-                stack.addAll(r);
+                stack.addAll(0,r);
             }
         }
 

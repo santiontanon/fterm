@@ -120,7 +120,7 @@ public class FTermTests {
 
 		System.out.println("Ontology Load tests...");
 		domain_model_trains.ImportNOOS("NOOS/trains-ontology.noos",o);
-		if (o.getNSorts()!=10) {
+		if (o.getNSorts()!=14) {
 			int n = o.getNSorts();
 			System.out.println("Ontology Test 1 failed: N sorts in o is " + n);
 			for(Sort s:o.getSorts()) {
@@ -129,7 +129,7 @@ public class FTermTests {
 			errors++;
 		}
 		domain_model_toxicology.ImportNOOS("NOOS/toxic-eva-ontology.noos",o);
-		if (o.getNSorts()!=229) {
+		if (o.getNSorts()!=233) {
 			int n = o.getNSorts();
 			System.out.println("Ontology Test 2 failed: N sorts in o is " + n);
 			System.out.println(o.getDescription());
@@ -404,9 +404,7 @@ public class FTermTests {
 		 * ---------------------------------------------------------------------------------
 		 */
 
-		System.out.println("Generalization tests...");
-		// ...
-
+		errors += generalizationTests();
 
 		errors += unificationTests(o,domain_model_families);
 
@@ -415,16 +413,60 @@ public class FTermTests {
 		return errors;
 	}
 
+    static int generalizationTests() throws IOException,FeatureTermException {
+        int errors = 0;
+        System.out.println("Generalization tests...");
+        FeatureTerm f = null;
+        Ontology base_ontology = new BaseOntology();
+        Ontology o=new Ontology();
+        FTKBase dm=new FTKBase();
+        FTKBase cb=new FTKBase();
+        o.uses(base_ontology);
+        cb.uses(dm);
+
+        TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TRAINS_DATASET, o, dm, cb);
+
+        f = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+            "(define (trains-description) " +
+            "  (cars (define (set) " +
+            "          (define (car) " +
+            "           (infront (define ?X4 (car)))) " +
+            "          !X4)))")),case_base,o);
+
+        List<FeatureTerm> l = FTRefinement.getGeneralizationsAggressive(f, dm, o);
+        for(FeatureTerm r:l) {
+            boolean investigate = false;
+            if (!r.subsumes(f)) {
+                errors++;
+                System.out.println("Generalization does not subsume original!!!");
+                System.out.println("Original:");
+                System.out.println(f.toStringNOOS(dm));
+                System.out.println("Generalization:");
+                System.out.println(r.toStringNOOS(dm));
+            } else {
+                if (f.subsumes(r)) {
+                    errors++;
+                    System.out.println("Original, more general than generalization!!!");
+                    System.out.println("Original:");
+                    System.out.println(f.toStringNOOS(dm));
+                    System.out.println("Generalization:");
+                    System.out.println(r.toStringNOOS(dm));
+                }
+            }
+        }
+
+        return errors;
+    }
+
     static int disintegrationTests() throws FeatureTermException, IOException
 	{
         int datasets[]= {TrainingSetUtils.ZOOLOGY_DATASET,TrainingSetUtils.UNCLE_DATASET,TrainingSetUtils.TRAINS_DATASET};
         String message[]={"Language L0, zoology","Language Lc, uncle, no sets","Language L, trains"};
-        String examples[]={"zp-1680","e1","tr1"};
+        String examples[]={"zp-1680","e1","tr6"};
 		int errors = 0;
 		System.out.println("Disintegration tests...");
 
-//        for(int i = 0;i<datasets.length;i++) {
-        for(int i = 0;i<2;i++) {
+        for(int i = 0;i<datasets.length;i++) {
             Ontology base_ontology = new BaseOntology();
             Ontology o=new Ontology();
             FTKBase dm=new FTKBase();
@@ -449,18 +491,21 @@ public class FTermTests {
             }
 
             for(Pair<FeatureTerm,FeatureTerm> property_term:disintegrationTrace) {
+                boolean anyproblem = false;
                 // 1st, test whether the remainder is correct:
                 if (FTUnification.isUnification(last,property_term.m_a,property_term.m_b,dm,o)) {
                     System.out.println("remainder is correct!");
                 } else {
-                    System.err.println("remainder is incorrect!!!!!");
+                    System.out.println("remainder is incorrect!!!!!");
                     errors++;
+                    anyproblem = true;
                 }
 
-                // 2nd, test whether unification works:
 
+                // 2nd, test whether unification works:
                 List<FeatureTerm> unifications = FTUnification.unification(property_term.m_a, property_term.m_b, dm);
                 boolean found = false;
+                boolean fine = true;
                 if (unifications!=null && unifications.size()>0) {
                     System.out.println("Unification yields " + unifications.size() + " results.");
                     for(FeatureTerm u:unifications) {
@@ -471,21 +516,22 @@ public class FTermTests {
                         }
                     }
                 } else {
-                    boolean fine = true;
-                    System.err.println("Property and rest do not unify!!!");
+                    System.out.println("Property and rest do not unify!!!");
                     if (!property_term.m_a.subsumes(last)) {
-                        System.err.println("The property does not subsume the original term!!!!!");
+                        System.out.println("The property does not subsume the original term!!!!!");
                         fine = false;
                     }
                     if (!property_term.m_b.subsumes(last)) {
-                        System.err.println("The rest does not subsume the original term!!!!!");
+                        System.out.println("The rest does not subsume the original term!!!!!");
                         fine = false;
                     }
                     if (fine) {
-                        System.err.println("There is an error in the unification method...");
+                        System.out.println("There is an error in the unification method...");
                     }
                 }
-                if (!found) {
+                if (!found || !fine) anyproblem = true;
+ 
+                if (anyproblem) {
                     errors++;
                     System.out.println("Disintegration error, unifying property with rest does not recover original term!!!!");
                     System.out.println("Property is:");
@@ -495,6 +541,12 @@ public class FTermTests {
                     System.out.println("original is:");
                     System.out.println(last.toStringNOOS(dm));
 
+                    System.out.println("Unifications are:");
+                    if (unifications!=null) {
+                        for(FeatureTerm g:unifications) {
+                            System.out.println(g.toStringNOOS(dm));
+                        }
+                    }
                     List<FeatureTerm> gs = FTRefinement.variableEqualityEliminationAggressive(last, dm);
                     System.out.println("Generalizations of original:");
                     for(FeatureTerm g:gs) {
@@ -534,6 +586,8 @@ public class FTermTests {
         dm.ImportNOOS("NOOS/zoology-dm.noos",o);
         dm.ImportNOOS("NOOS/sponge-ontology.noos",o);
         dm.ImportNOOS("NOOS/sponge-dm.noos",o);
+        dm.ImportNOOS("NOOS/trains-ontology.noos",o);
+        dm.ImportNOOS("NOOS/trains-dm.noos",o);
 
         System.out.println("Unification tests...");
 
@@ -677,33 +731,111 @@ public class FTermTests {
                         "                           (wife !X7))) " +
                         "                 (mother !X7) " +
                         "                 (brother !X5))")),case_base,o);
- /*               f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
-                        "(define (person) " +
-                        "  (son (define (male) " +
-                        "         (wife (define (female) " +
-                        "                 (mother (define (female) " +
-                        "                           (husband (define ?X5 (male))))) " +
-                        "                 (brother (define (male) " +
-                        "                            (father !X5))))))))")),case_base,o);
-                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
-                        "(define (person) " +
-                        "  (son (define (male) " +
-                        "         (wife (define ?X3 (female) " +
-                        "                 (father (define ?X4 (male) " +
-                        "                           (daughter !X3) " +
-                        "                           (son (define ?X5 (male) " +
-                        "                                  (sister !X3) " +
-                        "                                  (wife (define (female) " +
-                        "                                          (husband !X5))) " +
-                        "                                  (father !X4) " +
-                        "                                  (mother (define ?X7 (female) " +
-                        "                                            (husband (define (male))))))) " +
-                        "                           (wife !X7))) " +
-                        "                 (mother !X7) " +
-                        "                 (brother !X5))))))")),case_base,o);*/
                 expected_result = 1;
                 break;
-			default:
+            case 11:
+                f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    " (define (trains-description)" +
+                    "   (cars (define (car)" +
+                    "          (nwhl 2))))")),case_base,o);
+                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    " (define (trains-description) " +
+                    "  (cars (define (set) " +
+                    "          (define (car) " +
+                    "           (infront (define ?X4 (car) " +
+                    "                      (nwhl (define (integer))) " +
+                    "                      (loc 2) " +
+                    "                      (npl 3) " +
+                    "                      (cshape closedrect) " +
+                    "                      (infront (define ?X8 (car) " +
+                    "                                 (lcont (define (trianglod))) " +
+                    "                                 (nwhl 2) " +
+                    "                                 (ln short) " +
+                    "                                 (loc 3) " +
+                    "                                 (npl 1) " +
+                    "                                 (cshape openrect)))))) " +
+                    "          !X4 " +
+                    "          !X8)))")),case_base,o);
+                expected_result = 1;
+                break;
+            case 12:
+                f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    "(define (trains-description) " +
+                    "  (ncar 3) " +
+                    "  (cars (define (set) " +
+                    "          (define (car) " +
+                    "           (infront (define ?X5 (car) " +
+                    "                      (lcont (define (set) " +
+                    "                               (define (circlelod)) " +
+                    "                               (define (circlelod)) " +
+                    "                               )) " +
+                    "                      (infront (define ?X7 (car) " +
+                    "                                 (lcont (define (trianglod))) " +
+                    "                                 (npl 1) " +
+                    "                                 (nwhl 2) " +
+                    "                                 (loc 3) " +
+                    "                                 (cshape openrect) " +
+                    "                                 (ln short))) " +
+                    "                      (npl 3) " +
+                    "                      (nwhl 2) " +
+                    "                      (loc 2) " +
+                    "                      (cshape closedrect) " +
+                    "                      (ln long))) " +
+                    "           (npl 0) " +
+                    "           (nwhl 2) " +
+                    "           (loc 1) " +
+                    "           (cshape engine) " +
+                    "           (ln long)) " +
+                    "          !X5 " +
+                    "          !X7)))")),case_base,o);
+                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    "(define (trains-description) " +
+                    "  (ncar 3) " +
+                    "  (cars (define (set) " +
+                    "          (define (car) " +
+                    "           (infront (define ?X5 (car) " +
+                    "                      (lcont (define (circlelod))) " +
+                    "                      (infront (define ?X6 (car) " +
+                    "                                 (lcont (define (trianglod))) " +
+                    "                                 (npl 1) " +
+                    "                                 (loc 3) " +
+                    "                                 (nwhl 2) " +
+                    "                                 (cshape openrect) " +
+                    "                                 (ln short))) " +
+                    "                      (npl 3) " +
+                    "                      (loc 2) " +
+                    "                      (nwhl 2) " +
+                    "                      (cshape closedrect) " +
+                    "                      (ln long))) " +
+                    "           (npl 0) " +
+                    "           (loc 1) " +
+                    "           (nwhl 2) " +
+                    "           (cshape engine) " +
+                    "           (ln long)) " +
+                    "          !X5 " +
+                    "          !X6)))")),case_base,o);
+                expected_result = 1;
+                break;
+
+            case 13:
+                f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    "(define (car)" +
+                    "  (lcont (define (set)" +
+                    "    (define (load))" +
+                    "    (define (load))" +
+                    "    (define (circlelod))))" +
+                    ")")),case_base,o);
+                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    "(define (car)" +
+                    "  (lcont (define (set)" +
+                    "    (define (load))" +
+                    "    (define (circlelod))" +
+                    "    (define (circlelod))))" +
+                    ")")),case_base,o);
+                expected_result = 1;
+                break;
+ 
+            default:
 				f1 = null;
                 f2 = null;
 			break;

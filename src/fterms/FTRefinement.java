@@ -537,6 +537,7 @@ public class FTRefinement {
                                 FeatureTerm clone2 = f.clone(dm, correspondences2);
                                 FeatureTerm ft2Clone = ft2.getSort().createFeatureTerm();
                                 if (tmp.m_b==null) {
+                                    ((SetFeatureTerm) (correspondences2.get(tmp.m_a))).removeSetValue(correspondences2.get(ft2));
                                     ((SetFeatureTerm) (correspondences2.get(tmp.m_a))).addSetValue(ft2Clone);
                                 } else {
                                     ((TermFeatureTerm) (correspondences2.get(tmp.m_a))).defineFeatureValue(tmp.m_b, ft2Clone);
@@ -579,6 +580,7 @@ public class FTRefinement {
                                     System.err.flush();
                                 }
                                 FeatureTerm ft2Clone = ft2.getSort().createFeatureTerm();
+                                ((SetFeatureTerm) (correspondences.get(node))).removeSetValue(correspondences.get(ft2));
                                 ((SetFeatureTerm) (correspondences.get(node))).addSetValue(ft2Clone);
                             }
 
@@ -590,6 +592,7 @@ public class FTRefinement {
                                 FeatureTerm clone2 = f.clone(dm, correspondences2);
                                 FeatureTerm ft2Clone = ft2.getSort().createFeatureTerm();
                                 if (tmp.m_b==null) {
+                                    ((SetFeatureTerm) (correspondences2.get(tmp.m_a))).removeSetValue(correspondences2.get(ft2));
                                     ((SetFeatureTerm) (correspondences2.get(tmp.m_a))).addSetValue(ft2Clone);
                                 } else {
                                     ((TermFeatureTerm) (correspondences2.get(tmp.m_a))).defineFeatureValue(tmp.m_b, ft2Clone);

@@ -25,6 +25,9 @@ import util.Pair;
 public class Disintegration {
 
     public static int DEBUG = 0;
+    public static int s_reminderType = 1; // 0: unification-based (always works, but slow)
+                                          // 1: smart (uses fast, checks for correctness, and in case of failure, uses unification-based)
+                                          // 2: fast (fast, but might not work when breaking variable equalities)
 
     public static HashMap<FeatureTerm,List<FeatureTerm>> propertiesFormalTable = new HashMap<FeatureTerm,List<FeatureTerm>>();
     public static HashMap<FeatureTerm,List<FeatureTerm>> propertiesFastTable = new HashMap<FeatureTerm,List<FeatureTerm>>();
@@ -51,7 +54,7 @@ public class Disintegration {
         }
 
         do {
-            property_rest = extractProperty(unnamed, dm, o);
+            property_rest = extractProperty(unnamed, dm, o, s_reminderType);
 
             if (property_rest != null) {
                 if (property_rest.m_a!=null) properties.add(property_rest.m_a);
@@ -91,7 +94,7 @@ public class Disintegration {
         }
 
         do {
-            property_rest = extractProperty(unnamed, dm, o);
+            property_rest = extractProperty(unnamed, dm, o, s_reminderType);
 
             if (property_rest != null) {
                 if (property_rest.m_a!=null) trace.add(property_rest);
@@ -160,7 +163,7 @@ public class Disintegration {
                 if (fast) {
                     property_rest = Disintegration.extractPropertyFast(current_state, dm, o);
                 } else {
-                    property_rest = Disintegration.extractProperty(current_state, dm, o);
+                    property_rest = Disintegration.extractProperty(current_state, dm, o, s_reminderType);
                 }
                 if (property_rest!=null) {
                     current_state = property_rest.m_b;
@@ -307,7 +310,15 @@ public class Disintegration {
         for(int i = 0;i<refinementPath.size()-1;i++) {
             FeatureTerm t1 = refinementPath.get(i);
             FeatureTerm t2 = refinementPath.get(i+1);
-            FeatureTerm property = remainderFaster(t1, t2, dm, o);
+            FeatureTerm property = null;
+            switch(s_reminderType) {
+            case 0:property = remainderUnification(t1, t2, dm, o);
+                break;
+            case 1:property = remainderSmart(t1, t2, dm, o);
+                break;
+            default:property = remainderFaster(t1, t2, dm, o);
+                break;
+            }
             properties.add(property);
 //            System.out.println("t1: -----------------------------------");
 //            System.out.println(t1.toStringNOOS(dm));
@@ -323,7 +334,7 @@ public class Disintegration {
     /*
      * This method is like the one below, but follows the exat formulation used in out journal paper
      */
-    public static Pair<FeatureTerm, FeatureTerm> extractProperty(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
+    public static Pair<FeatureTerm, FeatureTerm> extractProperty(FeatureTerm f, FTKBase dm, Ontology o, int reminderType) throws FeatureTermException {
 
 	if (DEBUG>=1) System.out.println("extractPropertyFormal started...");
         if (DEBUG>=2) {
@@ -335,7 +346,18 @@ public class Disintegration {
 
         if (refinements.size() > 0) {
             FeatureTerm refinement = refinements.get(0);
-            Pair<FeatureTerm, FeatureTerm> tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFaster(f, refinement, dm, o), refinement);
+            Pair<FeatureTerm, FeatureTerm> tmp = null;
+            switch(reminderType) {
+            case 0:
+                tmp = new Pair<FeatureTerm, FeatureTerm>(remainderUnification(f, refinement, dm, o), refinement);
+                break;
+            case 1:
+                tmp = new Pair<FeatureTerm, FeatureTerm>(remainderSmart(f, refinement, dm, o), refinement);
+                break;
+            default:
+                tmp = new Pair<FeatureTerm, FeatureTerm>(remainderFaster(f, refinement, dm, o), refinement);
+                break;
+            }
 
             if (DEBUG>=2) {
                 System.out.println("Property:");
@@ -359,9 +381,7 @@ public class Disintegration {
         FeatureTerm remainder = f;
         do {
             oldRemainder = remainder;
-            if (DEBUG>=2) {
-                System.out.println("remainder: cycle starts");
-            }
+            if (DEBUG>=2) System.out.println("remainder: cycle starts");
             if (DEBUG>=3) {
                 System.out.println("refinement: ");
                 System.out.println(remainder.toStringNOOS(dm));
@@ -371,6 +391,20 @@ public class Disintegration {
 
             remainder = null;
             for (FeatureTerm r : refinements) {
+                if (DEBUG>=1) {
+                    if (oldRemainder.subsumes(r)) {
+                        System.err.println("A generalization refinement is more specific than the orignal term!!!!!");
+                        System.err.println("Original:");
+                        System.err.println(oldRemainder.toStringNOOS(dm));
+                        System.err.println("Generalization:");
+                        System.err.println(r.toStringNOOS(dm));
+                    }
+                }
+
+                // If the refinement subsumes 'refinement', then their unification will never be 'f':
+                if (r.subsumes(refinement)) continue;
+
+                if (DEBUG>=3) System.out.println("remainder: starting unification...");
                 List<FeatureTerm> unifications = FTUnification.unification(refinement, r, dm);
                 if (unifications==null) {
                     if (DEBUG>=3) System.out.println("remainder: 0 unifications");
@@ -386,63 +420,6 @@ public class Disintegration {
                 }
 
                 if (remainder != null) break;
-            }
-        } while (remainder != null);
-
-//		System.out.println("f: ");
-//		System.out.println(f.toStringNOOS(dm));
-//		System.out.println("refinement: ");
-//		System.out.println(refinement.toStringNOOS(dm));
-//		System.out.println("Remainder: ");
-//		System.out.println(oldRemainder.toStringNOOS(dm));
-
-        return oldRemainder;
-    }
-
-    
-
-    /*
-     * This method computes the remainder also in an exact way, but avoiding any call to unification. It is faster.
-     */
-    public static FeatureTerm remainderFast(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
-        FeatureTerm oldRemainder = null;
-        FeatureTerm remainder = f;
-
-        // If any of these terms are candidate unifications, then the property cannot recover the original term:
-        List<FeatureTerm> originalGeneralizations = FTRefinement.getGeneralizationsAggressive(f, dm, o);
-
-        do {
-            oldRemainder = remainder;
-            if (DEBUG>=3) {
-                System.out.println("remainder: cycle starts");
-                System.out.println("refinement: ");
-                System.out.println(remainder.toStringNOOS(dm));
-            }
-            List<FeatureTerm> refinements = FTRefinement.getGeneralizationsAggressive(remainder, dm, o);
-            // if (DEBUG>=3)
-            System.out.println("remainder: " + refinements.size() + " refinements.");
-
-            remainder = null;
-            for (FeatureTerm r : refinements) {
-                boolean canRecover = true;
-
-                // Sanity test:
-/*                if (!(refinement.subsumes(f) && r.subsumes(f))) {
-                    System.err.println("remainderFast: sanity check failed!");
-                    System.exit(1);
-                }
-*/
-                canRecover = true;
-                for(FeatureTerm candidate:originalGeneralizations) {
-                    if (refinement.subsumes(candidate) && r.subsumes(candidate)) {
-                        canRecover = false;
-                    }
-                }
-
-                if (canRecover) {
-                    remainder = r;
-                    break;
-                }
             }
         } while (remainder != null);
 
@@ -516,6 +493,22 @@ public class Disintegration {
         return oldRemainder;
     }
 
+
+    public static FeatureTerm remainderSmart(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
+        if (DEBUG>=2) System.out.println("ReminderSmart started...");
+        FeatureTerm result = remainderFaster(f,refinement,dm,o);
+        List<FeatureTerm> l = FTUnification.unification(result, refinement, dm);
+        boolean found = false;
+        for(FeatureTerm tmp:l) {
+            if (f.equivalents(tmp)) {
+                if (DEBUG>=2) System.out.println("ReminderSmart, fast succeeded!");
+                return result;
+            }
+        }
+        if (DEBUG>=2) System.out.println("ReminderSmart, fast failed, starting slow remainder...");
+        return remainderUnification(f, refinement, dm, o);
+    }
+    
 
     public static List<FeatureTerm> disintegrateFast(FeatureTerm f, FTKBase dm, Ontology o) throws FeatureTermException {
         List<FeatureTerm> properties = null;
