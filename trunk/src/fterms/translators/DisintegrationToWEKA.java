@@ -38,8 +38,9 @@ public class DisintegrationToWEKA {
 			t_start=System.currentTimeMillis();
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.ZOOLOGY_DATASET, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.SOYBEAN_DATASET, o, dm, case_base);
-            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TRAINS_DATASET, o, dm, case_base);
+//            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TRAINS_DATASET, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.UNCLE_DATASET_BOTH, o, dm, case_base);
+            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.UNCLE_DATASET_SETS, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.DEMOSPONGIAE_503_DATASET, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.FINANCIAL_NO_TRANSACTIONS, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.FINANCIAL, o, dm, case_base);
@@ -72,7 +73,9 @@ public class DisintegrationToWEKA {
 
             for(FeatureTerm c:cases) {
                 FeatureTerm description = c.readPath(ts.description_path);
-                List<FeatureTerm> properties = Disintegration.disintegrate(description, dm, o, true, false);
+                System.out.println("Disintegrating " + c.getName());
+//                List<FeatureTerm> properties = Disintegration.disintegrate(description, dm, o, true, false);  // using the cache
+                List<FeatureTerm> properties = Disintegration.disintegrate(description, dm, o, false, false);  // not using cache
 
                 // add them without replication to the dictionary:
                 for(FeatureTerm property:properties) {
