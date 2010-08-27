@@ -155,7 +155,7 @@ public class FTUnification {
             Restriction r = restrictions.get(rnum);
             List<UnificationNode> results = new LinkedList<UnificationNode>();
 
-            if (variables.contains(r.f1) && variables.contains(r.f2)) {
+            if (variables.contains(r.f1) && variables.contains(r.f2) && r.f1!=r.f2) {
                 if (r.soft) {
                     // clone the node:
                     UnificationNode n = new UnificationNode(this);
@@ -279,7 +279,10 @@ public class FTUnification {
                 }
 
             } else {
-                results.add(this);
+                // clone the node:
+                UnificationNode n = new UnificationNode(this);
+                n.restrictions.remove(rnum);
+                results.add(n);
             }
             return results;
         }
@@ -435,6 +438,9 @@ public class FTUnification {
         stack.add(start);
 
         while(!stack.isEmpty()) {
+            if (DEBUG>=1) {
+                System.out.println("stack: " + stack.size() + ", results: " + results.size());
+            }
             UnificationNode n = stack.remove(0);
             if (DEBUG>=2) {
                 System.out.println("Current:");
