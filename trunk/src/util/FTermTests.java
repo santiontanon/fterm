@@ -269,6 +269,27 @@ public class FTermTests {
 		 * ---------------------------------------------------------------------------------
 		 */
 
+        errors += refinementTests(o,base_domain_model,domain_model_trains,domain_model_families, cb_trains);
+
+		errors += antiunificationTests(o,domain_model_families);
+
+		/*
+		 * ---------------------------------------------------------------------------------
+		 */
+
+		errors += generalizationTests();
+
+		errors += unificationTests(o,domain_model_families);
+
+        errors += disintegrationTests();
+
+		return errors;
+	}
+
+
+    static int refinementTests(Ontology o,FTKBase base_domain_model, FTKBase domain_model_families,
+                                          FTKBase domain_model_trains, FTKBase cb_trains) throws IOException, FeatureTermException {
+        int errors = 0;
 		System.out.println("Specialization Refinements tests...");
 		{
 			base_domain_model.ImportNOOS("NOOS/simple-family-ontology.noos",o);
@@ -397,21 +418,8 @@ public class FTermTests {
 
 
 		}
-
-		errors += antiunificationTests(o,domain_model_families);
-
-		/*
-		 * ---------------------------------------------------------------------------------
-		 */
-
-		errors += generalizationTests();
-
-		errors += unificationTests(o,domain_model_families);
-
-        errors += disintegrationTests();
-
-		return errors;
-	}
+        return errors;
+    }
 
     static int generalizationTests() throws IOException,FeatureTermException {
         int errors = 0;

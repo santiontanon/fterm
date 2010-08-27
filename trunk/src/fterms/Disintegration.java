@@ -506,7 +506,8 @@ public class Disintegration {
             }
         }
         if (DEBUG>=2) System.out.println("ReminderSmart, fast failed, starting slow remainder...");
-        return remainderUnification(f, refinement, dm, o);
+        result =  remainderUnification(f, refinement, dm, o);
+        return result;
     }
     
 

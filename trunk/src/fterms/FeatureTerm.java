@@ -241,6 +241,9 @@ public abstract class FeatureTerm {
     abstract FeatureTerm cloneInternal2(HashMap<FeatureTerm, FeatureTerm> correspondences, FTKBase dm, Ontology o) throws FeatureTermException;
 
     public boolean subsumes(FeatureTerm f) throws FeatureTermException {
+
+//        if (true) return FTSubsumption.subsumes(this,f);
+
         List<FeatureTerm> bindings_a = new ArrayList<FeatureTerm>();
         List<FeatureTerm> bindings_b = new ArrayList<FeatureTerm>();
         List<SubsumptionStackNode> stack = new LinkedList<SubsumptionStackNode>();

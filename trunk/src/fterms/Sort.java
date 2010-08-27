@@ -94,7 +94,14 @@ public class Sort {
 
 		m_data_type=-1;
 		if (m_super!=null) m_data_type=m_super.m_data_type;
-	} // Sort::Sort  
+	}
+
+
+    public String toString() {
+        return m_name.get();
+    }
+
+
 	public boolean inSort(int i)
 	{
 		if (m_data_type==-1) return true;
