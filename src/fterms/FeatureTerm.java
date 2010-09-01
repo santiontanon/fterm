@@ -242,6 +242,7 @@ public abstract class FeatureTerm {
 
     public boolean subsumes(FeatureTerm f) throws FeatureTermException {
 
+//        boolean FTsubsumptionReturn = FTSubsumption.subsumes(this,f);
 //        if (true) return FTSubsumption.subsumes(this,f);
 
         List<FeatureTerm> bindings_a = new ArrayList<FeatureTerm>();
@@ -646,6 +647,9 @@ public abstract class FeatureTerm {
         }
          */
 
+//        if (res!=FTsubsumptionReturn) {
+//            System.err.println("subsumption different!!!!!!!!!!!!!!!!!!");
+//        }
         return res;
     } // FeatureTerm::subsumes
 

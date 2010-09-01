@@ -39,13 +39,13 @@ public class DisintegrationToWEKA {
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.ZOOLOGY_DATASET, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.SOYBEAN_DATASET, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TRAINS_DATASET, o, dm, case_base);
-            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.UNCLE_DATASET_BOTH, o, dm, case_base);
+//            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.UNCLE_DATASET_BOTH, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.UNCLE_DATASET_SETS, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.DEMOSPONGIAE_503_DATASET, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.FINANCIAL_NO_TRANSACTIONS, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.FINANCIAL, o, dm, case_base);
 
-//            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TOXICOLOGY_DATASET_MRATS, o, dm, case_base);
+            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TOXICOLOGY_DATASET_MRATS, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TOXICOLOGY_DATASET_FRATS, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TOXICOLOGY_DATASET_MMICE, o, dm, case_base);
 //            TrainingSetProperties ts = TrainingSetUtils.loadTrainingSet(TrainingSetUtils.TOXICOLOGY_DATASET_FMICE, o, dm, case_base);

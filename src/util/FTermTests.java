@@ -842,7 +842,50 @@ public class FTermTests {
                     ")")),case_base,o);
                 expected_result = 1;
                 break;
- 
+
+            case 14:
+                f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    "(define (trains-description) " +
+                    "  (cars (define (set) " +
+                    "          (define (car) " +
+                    "           (infront (define ?X4 (car) " +
+                    "                      (infront (define ?X5 (car)))))) " +
+                    "          !X4 " +
+                    "          !X5 " +
+                    "          (define (car)))))")),case_base,o);
+                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    "(define (trains-description) " +
+                    "  (cars (define (set) " +
+                    "          (define (car) " +
+                    "           (infront (define ?X8 (car)))) " +
+                    "          !X8)))")),case_base,o);
+                expected_result = 1;
+                break;
+            case 15:
+                f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    "(define (trains-description) " +
+                    "  (cars (define (set) " +
+                    "          (define (car) " +
+                    "           (infront (define ?X4 (car) " +
+                    "                      (infront (define ?X5 (car) " +
+                    "                                 (infront (define ?X6 (car)))))))) " +
+                    "          !X4 " +
+                    "          !X5 " +
+                    "          !X6 " +
+                    "          (define (car)))))")),case_base,o);
+                f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                    "(define (trains-description) " +
+                    "  (cars (define (set) " +
+                    "          (define (car) " +
+                    "           (infront (define ?X4 (car)))) " +
+                    "          !X4 " +
+                    "          (define (car) " +
+                    "           (infront (define (car)))) " +
+                    "          (define (car) " +
+                    "           (infront (define ?X8 (car)))) " +
+                    "          !X8)))")),case_base,o);
+                expected_result = 1;
+                break;
             default:
 				f1 = null;
                 f2 = null;
