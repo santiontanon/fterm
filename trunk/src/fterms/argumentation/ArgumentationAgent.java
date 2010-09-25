@@ -12,6 +12,7 @@ import fterms.Path;
 import fterms.learning.Rule;
 import fterms.learning.RuleHypothesis;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ import java.util.List;
 public class ArgumentationAgent {
     public String m_name;
     public List<FeatureTerm> m_examples;
+    public HashMap<String,List<FeatureTerm>> m_alreadySentExamples;
     public ArgumentAcceptability m_aa;
     public RuleHypothesis m_hypothesis;
     public ArgumentationBasedLearning m_learning;
@@ -30,9 +32,28 @@ public class ArgumentationAgent {
         m_name = name;
         m_examples = new LinkedList<FeatureTerm>();
         m_examples.addAll(examples);
+        m_alreadySentExamples = new HashMap<String,List<FeatureTerm>>();
         m_aa = aa;
         m_hypothesis = h;
         m_learning = l;
+    }
+
+
+    public void sendExample(ArgumentationAgent other,FeatureTerm example, ArgumentationState state) {
+        other.m_examples.add(example);
+        other.m_aa.updateExamples(other.m_examples);
+
+        List<FeatureTerm> l = m_alreadySentExamples.get(other);
+        if (l==null) {
+            l = new LinkedList<FeatureTerm>();
+            m_alreadySentExamples.put(other.m_name,l);
+        } else {
+            if (l.contains(example)) {
+                System.err.println("ArgumentationAgent.sendExample: example had already been sent to this agent!!!!");
+            }
+        }
+        l.add(example);
+        state.unSettle(other.m_name);
     }
 
     
