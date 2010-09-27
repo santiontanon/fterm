@@ -57,7 +57,7 @@ public class ArgumentationAgent {
     }
 
     
-    public void beliefRevision(ArgumentationState state, FeatureTerm solution, Path dp, Path sp, Ontology o, FTKBase dm,boolean recover) throws Exception {
+    public void beliefRevision(ArgumentationState state, FeatureTerm solution, Path dp, Path sp, Ontology o, FTKBase dm,boolean recover, List<ArgumentationAgent> agents) throws Exception {
         System.out.println("beliefRevision: " + m_name);
         List<Rule> toDelete = new LinkedList<Rule>();
         boolean anyNewExample = false;
@@ -80,11 +80,28 @@ public class ArgumentationAgent {
         }
         System.out.println("Removed " + toDelete.size() + " rules due to not meeting acceptance criterion.");
 
+        for(Rule r:toDelete) {
+            m_hypothesis.removeRule(r);
+
+            // remove them from the state:
+            for(Argument a:state.getRoots(m_name)) {
+                if (a.m_rule == r) {
+                    state.retractRoot(a);
+                }
+            }
+        }
+        toDelete.clear();
+
         // Remove all rules that have been defeated:
         {
-            for(ArgumentationTree at:state.getTrees(m_name)) {
-                if (at.settledP(at.getRoot()) && at.defeatedP()) {
-                    toDelete.add(at.getRoot().m_rule);
+            List<ArgumentationTree> toDefend = state.getDefeated(m_name);
+            for (ArgumentationTree at : toDefend) {
+                List<Argument> challengers = at.getChallengers();
+                for(Argument challenger:challengers) {
+                    if (at.settledP(challenger, m_name)) {
+                        toDelete.add(at.getRoot().m_rule);
+                        break;
+                    }
                 }
             }
         }
@@ -100,11 +117,12 @@ public class ArgumentationAgent {
                 }
             }
         }
-        state.retractUnacceptable(m_name, m_aa);
+        int removedRoots = state.retractUnacceptable(m_name, m_aa);
+        System.out.println("Removed " + removedRoots + " additional roots from the state due propagation of rules not meeting acceptance criterion.");
 
         // Recover uncovered examples:
         if (recover) {
-            m_hypothesis = m_learning.coverUncoveredExamples(m_examples, solution, m_hypothesis, state.getSettled(), m_aa, dp, sp, o, dm);
+            m_hypothesis = m_learning.coverUncoveredExamples(m_examples, solution, m_hypothesis, state.getSettled(agents), m_aa, dp, sp, o, dm);
 
             for(Rule r:m_hypothesis.getRules()) {
                 boolean found = false;
