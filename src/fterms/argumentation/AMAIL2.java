@@ -32,6 +32,7 @@ public class AMAIL2 {
     public int last_rules_sent = 0;
     public boolean VISUALIZE_EVALUATION_AFTER_REVISION = false;
 
+    public List<ArgumentationAgent> a_l = new LinkedList<ArgumentationAgent>();
     public ArgumentationAgent a1 = null;
     public ArgumentationAgent a2 = null;
     ArgumentationAgent token = null, other = null;
@@ -52,6 +53,9 @@ public class AMAIL2 {
         a2 = new ArgumentationAgent("Agent 2", examples2, aa2, new RuleHypothesis(h2), l2);
         token = a1;
         other = a2;
+
+        a_l.add(a1);
+        a_l.add(a2);
 
         // Initial state of argumentation:
         state = new ArgumentationState();
@@ -94,7 +98,7 @@ public class AMAIL2 {
         }
 
         // Try to defend all of the self arguments which are currently defeated:
-        List<ArgumentationTree> toDefend = state.getDefeatedUnsettled(token.m_name);
+        List<ArgumentationTree> toDefend = state.getDefeated(token.m_name);
         System.out.println("AMAIL: agent " + token.m_name + " has to defend " + toDefend.size() + " roots");
         for (ArgumentationTree at : toDefend) {
             // Defend argument:
@@ -103,16 +107,15 @@ public class AMAIL2 {
             List<Pair<Argument,Argument>> attacks = new LinkedList<Pair<Argument,Argument>>();
             System.out.println("AMAIL: agent " + token.m_name + " has to attack " + challengers.size() + " arguments to defend it's root");
             for (Argument a : challengers) {
-                Argument b = findSingleCounterArgument(a, token, other, state, at, dp, sp, o, dm);
+                Argument b = findSingleCounterArgument(a, token, other, state, at, dp, sp, o, dm, a_l);
                 if (b == null) {
-                    at.settle(a);
+                    at.settle(a,token.m_name);
                     attacks.clear();
                     break;
                 } else {
                     attacks.add(new Pair<Argument,Argument>(a,b));
                 }
             }
-            if (attacks.size()==0) at.settle(at.getRoot());
 
             System.out.println("AMAIL: agent " + token.m_name + " cand send " + attacks.size() + " attacks for this root!");
 
@@ -127,20 +130,20 @@ public class AMAIL2 {
         }
 
         // Settle all the arguments of the other agent which are acceptable:
-        List<Pair<Argument, ArgumentationTree>> acceptable = state.getAcceptable(token.m_name, token.m_aa);
+        List<Pair<Argument, ArgumentationTree>> acceptable = state.getAcceptable(token.m_name, token.m_aa, a_l);
         for (Pair<Argument, ArgumentationTree> a : acceptable) {
-            a.m_b.settle(a.m_a);
+            a.m_b.settle(a.m_a, token.m_name);
         }
 
         // Find unacceptable arguments "I", and attack one:
         if (!singleMessage || !anyAttack) {
-            List<Pair<Argument, ArgumentationTree>> unacceptable = state.getUnacceptable(token.m_name, token.m_aa);
+            List<Pair<Argument, ArgumentationTree>> unacceptable = state.getUnacceptable(token.m_name, token.m_aa, a_l);
             System.out.println("AMAIL: agent " + token.m_name + " finds " + unacceptable.size() + " arguments of the other agent unacceptable");
             for (Pair<Argument, ArgumentationTree> a : unacceptable) {
                 // Attack argument:
-                Argument b = findSingleCounterArgument(a.m_a, token, other, state, a.m_b, dp, sp, o, dm);
+                Argument b = findSingleCounterArgument(a.m_a, token, other, state, a.m_b, dp, sp, o, dm, a_l);
                 if (b == null) {
-                    a.m_b.settle(a.m_a);
+                    a.m_b.settle(a.m_a, token.m_name);
                     System.out.println("AMAIL: agent " + token.m_name + " settling for an opponent root!");
                 } else {
                     System.out.println("AMAIL: agent " + token.m_name + " sending an attack!");
@@ -172,8 +175,8 @@ public class AMAIL2 {
         }
 
         // Belief Revision:
-        token.beliefRevision(state, solution, dp, sp, o, dm, true);
-        other.beliefRevision(state, solution, dp, sp, o, dm, false);
+        token.beliefRevision(state, solution, dp, sp, o, dm, true, a_l);
+        other.beliefRevision(state, solution, dp, sp, o, dm, false, a_l);
 
         if (anyAttack) {
             anotherRound = 2;
@@ -214,8 +217,9 @@ public class AMAIL2 {
     }
 
     public static Argument findSingleCounterArgument(Argument argumentToAttack, ArgumentationAgent attacker, ArgumentationAgent defendant,
-        ArgumentationState state, ArgumentationTree context, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
-        List<Argument> settled = state.getSettled();
+        ArgumentationState state, ArgumentationTree context, Path dp, Path sp, Ontology o, FTKBase dm,
+        List<ArgumentationAgent> agents) throws Exception {
+        List<Argument> settled = state.getSettled(agents);
 
 //        System.out.println("findSingleCounterArgument: attacking argument " + argumentToAttack.toStringNOOS(dm));
 //        System.out.println("findSingleCounterArgument: " + settled.size() + " settled arguments.");
