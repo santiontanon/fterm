@@ -284,6 +284,7 @@ public class ArgumentationTree {
         for(Argument a:toDelete) {
             if (a==m_root) {
                 retractedRoot = true;
+                retractArgument(a);
             } else {
                 retractArgument(a);
             }

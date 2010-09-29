@@ -78,7 +78,7 @@ public class ArgumentationAgent {
         for(Rule r:m_hypothesis.getRules()) {
             if (!m_aa.accepted(new Argument(r))) toDelete.add(r);
         }
-        System.out.println("Removed " + toDelete.size() + " rules due to not meeting acceptance criterion.");
+        if (toDelete.size()>0) System.out.println("Removed " + toDelete.size() + " rules due to not meeting acceptance criterion.");
 
         for(Rule r:toDelete) {
             m_hypothesis.removeRule(r);
@@ -105,7 +105,7 @@ public class ArgumentationAgent {
                 }
             }
         }
-        System.out.println("Removed " + toDelete.size() + " rules due to being defeated.");
+        if (toDelete.size()>0) System.out.println("Removed " + toDelete.size() + " rules due to being defeated.");
 
         for(Rule r:toDelete) {
             m_hypothesis.removeRule(r);
@@ -118,11 +118,13 @@ public class ArgumentationAgent {
             }
         }
         int removedRoots = state.retractUnacceptable(m_name, m_aa);
-        System.out.println("Removed " + removedRoots + " additional roots from the state due propagation of rules not meeting acceptance criterion.");
+        if (removedRoots>0) System.out.println("Removed " + removedRoots + " additional roots from the state due propagation of rules not meeting acceptance criterion.");
 
         // Recover uncovered examples:
         if (recover) {
-            m_hypothesis = m_learning.coverUncoveredExamples(m_examples, solution, m_hypothesis, state.getSettled(agents), m_aa, dp, sp, o, dm);
+//            List<Argument> acceptedArguments = state.getSettled(agents);
+            List<Argument> acceptedArguments = state.getUndefeatedArguments();
+            m_hypothesis = m_learning.coverUncoveredExamples(m_examples, solution, m_hypothesis, acceptedArguments, m_aa, dp, sp, o, dm);
 
             for(Rule r:m_hypothesis.getRules()) {
                 boolean found = false;
