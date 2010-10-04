@@ -153,6 +153,19 @@ public class ArgumentationTree {
         return examples;
     }
 
+    public List<FeatureTerm> getExamplesSentToAgent(String name) {
+        List<FeatureTerm> examples = new LinkedList<FeatureTerm>();
+
+        for(Argument a:m_arguments) {
+            if (a.m_type == Argument.ARGUMENT_EXAMPLE) {
+                Argument p = m_parent.get(a);
+                if (p!=null && p.m_agent.equals(name)) examples.add(a.m_example);
+            }
+        }
+
+        return examples;
+    }
+
     public List<Argument> getRuleArguments() {
         List<Argument> args = new LinkedList<Argument>();
 

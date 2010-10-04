@@ -62,7 +62,7 @@ public class ArgumentationAgent {
         List<Rule> toDelete = new LinkedList<Rule>();
         boolean anyNewExample = false;
 
-        for(FeatureTerm e:state.getExamples()) {
+        for(FeatureTerm e:state.getExamplesSentToAgent(m_name)) {
             if (!m_examples.contains(e)) {
                 m_examples.add(e);
                 anyNewExample = true;
