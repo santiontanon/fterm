@@ -45,6 +45,14 @@ public class ArgumentationState {
         return examples;
     }
 
+    public List<FeatureTerm> getExamplesSentToAgent(String name) {
+        List<FeatureTerm> examples = new LinkedList<FeatureTerm>();
+        for(Pair<String,ArgumentationTree> aNode:m_baseArguments) {
+            examples.addAll(aNode.m_b.getExamplesSentToAgent(name));
+        }
+        return examples;
+    }
+
     public List<Argument> getRoots(String agent) {
         List<Argument> roots = new LinkedList<Argument>();
         for(Pair<String,ArgumentationTree> aNode:m_baseArguments) {

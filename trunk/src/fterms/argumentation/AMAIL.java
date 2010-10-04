@@ -108,6 +108,12 @@ public class AMAIL {
         return a_l.get(pos).m_name;
     }
 
+    public String getPreviousAgent() {
+        int pos = a_l.indexOf(token);
+        pos--;
+        if (pos<0) pos=a_l.size()-1;
+        return a_l.get(pos).m_name;
+    }
 
     public boolean moreRoundsP() {
         return anotherRound>0;
