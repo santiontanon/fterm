@@ -11,6 +11,10 @@
 (define-sort (CAR-SHAPE CAR-CLOSEDSHAPE))
 
 (define-sort (TRAINS-ONTOLOGY LOAD))
+(define-sort (LOAD rectanglod))
+(define-sort (LOAD trianglod))
+(define-sort (LOAD hexagonlod))
+(define-sort (LOAD circlelod))
 
 (define-sort (TRAINS-ONTOLOGY CAR)
   (infront ! CAR)

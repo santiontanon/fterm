@@ -68,7 +68,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 800))))))
 ; (freeze SPONGE-0)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-0)
+(define-episode (sponge-PROBLEM :ID sp-0)
         (DESCRIPTION SPONGE-0)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -76,7 +76,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS CAMINUS)
                  (SPECIE VULCANI))))
-; (freeze SPONGE-PROBLEM-0)
+; (freeze sp-0)
 (define-episode (sponge :ID SPONGE-1)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -114,7 +114,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-1)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-1)
+(define-episode (sponge-PROBLEM :ID sp-1)
         (DESCRIPTION SPONGE-1)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -122,7 +122,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS CAMINUS)
                  (SPECIE VULCANI))))
-; (freeze SPONGE-PROBLEM-1)
+; (freeze sp-1)
 (define-episode (sponge :ID SPONGE-2)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -181,7 +181,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-2)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-2)
+(define-episode (sponge-PROBLEM :ID sp-2)
         (DESCRIPTION SPONGE-2)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -189,7 +189,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS CAMINUS)
                  (SPECIE VULCANI))))
-; (freeze SPONGE-PROBLEM-2)
+; (freeze sp-2)
 (define-episode (sponge :ID SPONGE-3)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -260,7 +260,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-3)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-3)
+(define-episode (sponge-PROBLEM :ID sp-3)
         (DESCRIPTION SPONGE-3)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -268,7 +268,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-3)
+; (freeze sp-3)
 (define-episode (sponge :ID SPONGE-4)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -336,7 +336,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-4)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-4)
+(define-episode (sponge-PROBLEM :ID sp-4)
         (DESCRIPTION SPONGE-4)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -344,7 +344,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-4)
+; (freeze sp-4)
 (define-episode (sponge :ID SPONGE-5)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -411,7 +411,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-5)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-5)
+(define-episode (sponge-PROBLEM :ID sp-5)
         (DESCRIPTION SPONGE-5)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -419,7 +419,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-5)
+; (freeze sp-5)
 (define-episode (sponge :ID SPONGE-6)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -491,7 +491,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-6)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-6)
+(define-episode (sponge-PROBLEM :ID sp-6)
         (DESCRIPTION SPONGE-6)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -499,7 +499,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-6)
+; (freeze sp-6)
 (define-episode (sponge :ID SPONGE-7)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -571,7 +571,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-7)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-7)
+(define-episode (sponge-PROBLEM :ID sp-7)
         (DESCRIPTION SPONGE-7)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -579,7 +579,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-7)
+; (freeze sp-7)
 (define-episode (sponge :ID SPONGE-8)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -650,7 +650,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-8)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-8)
+(define-episode (sponge-PROBLEM :ID sp-8)
         (DESCRIPTION SPONGE-8)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -658,7 +658,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-8)
+; (freeze sp-8)
 (define-episode (sponge :ID SPONGE-9)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -729,7 +729,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-9)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-9)
+(define-episode (sponge-PROBLEM :ID sp-9)
         (DESCRIPTION SPONGE-9)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -737,7 +737,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-9)
+; (freeze sp-9)
 (define-episode (sponge :ID SPONGE-10)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -808,7 +808,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-10)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-10)
+(define-episode (sponge-PROBLEM :ID sp-10)
         (DESCRIPTION SPONGE-10)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -816,7 +816,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-10)
+; (freeze sp-10)
 (define-episode (sponge :ID SPONGE-11)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -882,7 +882,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-11)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-11)
+(define-episode (sponge-PROBLEM :ID sp-11)
         (DESCRIPTION SPONGE-11)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -890,7 +890,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-11)
+; (freeze sp-11)
 (define-episode (sponge :ID SPONGE-12)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -961,7 +961,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-12)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-12)
+(define-episode (sponge-PROBLEM :ID sp-12)
         (DESCRIPTION SPONGE-12)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -969,7 +969,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-12)
+; (freeze sp-12)
 (define-episode (sponge :ID SPONGE-13)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1041,7 +1041,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-13)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-13)
+(define-episode (sponge-PROBLEM :ID sp-13)
         (DESCRIPTION SPONGE-13)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1049,7 +1049,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-13)
+; (freeze sp-13)
 (define-episode (sponge :ID SPONGE-14)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1117,7 +1117,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-14)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-14)
+(define-episode (sponge-PROBLEM :ID sp-14)
         (DESCRIPTION SPONGE-14)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1125,7 +1125,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-14)
+; (freeze sp-14)
 (define-episode (sponge :ID SPONGE-15)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1189,7 +1189,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 1500))))))
 ; (freeze SPONGE-15)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-15)
+(define-episode (sponge-PROBLEM :ID sp-15)
         (DESCRIPTION SPONGE-15)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1197,7 +1197,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-15)
+; (freeze sp-15)
 (define-episode (sponge :ID SPONGE-16)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1250,7 +1250,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-16)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-16)
+(define-episode (sponge-PROBLEM :ID sp-16)
         (DESCRIPTION SPONGE-16)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1258,7 +1258,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-16)
+; (freeze sp-16)
 (define-episode (sponge :ID SPONGE-17)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1297,7 +1297,7 @@
                  (SCLEROSPONGIDS NO)
                  (UNIFORM-LENGTH NO))))
 ; (freeze SPONGE-17)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-17)
+(define-episode (sponge-PROBLEM :ID sp-17)
         (DESCRIPTION SPONGE-17)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1305,7 +1305,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CYDONIUM))))
-; (freeze SPONGE-PROBLEM-17)
+; (freeze sp-17)
 (define-episode (sponge :ID SPONGE-18)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1358,7 +1358,7 @@
                  (CORTEX
                   (DEFINE (CORTEX-CHARACTERISTICS) (CORTICAL-SPICULES YES))))))
 ; (freeze SPONGE-18)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-18)
+(define-episode (sponge-PROBLEM :ID sp-18)
         (DESCRIPTION SPONGE-18)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1366,7 +1366,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CORTICOSTYLIFERA))))
-; (freeze SPONGE-PROBLEM-18)
+; (freeze sp-18)
 (define-episode (sponge :ID SPONGE-19)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1411,7 +1411,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-19)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-19)
+(define-episode (sponge-PROBLEM :ID sp-19)
         (DESCRIPTION SPONGE-19)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1419,7 +1419,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE BARRETTI))))
-; (freeze SPONGE-PROBLEM-19)
+; (freeze sp-19)
 (define-episode (sponge :ID SPONGE-20)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1481,7 +1481,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 2000))))))
 ; (freeze SPONGE-20)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-20)
+(define-episode (sponge-PROBLEM :ID sp-20)
         (DESCRIPTION SPONGE-20)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1489,7 +1489,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS GEODIA)
                  (SPECIE CONCHILEGA))))
-; (freeze SPONGE-PROBLEM-20)
+; (freeze sp-20)
 (define-episode (sponge :ID SPONGE-21)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1525,7 +1525,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-21)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-21)
+(define-episode (sponge-PROBLEM :ID sp-21)
         (DESCRIPTION SPONGE-21)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1533,7 +1533,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ERYLUS)
                  (SPECIE EUASTRUM))))
-; (freeze SPONGE-PROBLEM-21)
+; (freeze sp-21)
 (define-episode (sponge :ID SPONGE-22)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1599,7 +1599,7 @@
                  (CORTEX
                   (DEFINE (CORTEX-CHARACTERISTICS) (CORTICAL-SPICULES YES))))))
 ; (freeze SPONGE-22)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-22)
+(define-episode (sponge-PROBLEM :ID sp-22)
         (DESCRIPTION SPONGE-22)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1607,7 +1607,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ERYLUS)
                  (SPECIE EUASTRUM))))
-; (freeze SPONGE-PROBLEM-22)
+; (freeze sp-22)
 (define-episode (sponge :ID SPONGE-23)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1641,7 +1641,7 @@
                  (UNIFORM-LENGTH NO)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-23)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-23)
+(define-episode (sponge-PROBLEM :ID sp-23)
         (DESCRIPTION SPONGE-23)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1649,7 +1649,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ERYLUS)
                  (SPECIE DISCOPHORUS))))
-; (freeze SPONGE-PROBLEM-23)
+; (freeze sp-23)
 (define-episode (sponge :ID SPONGE-24)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1711,7 +1711,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-24)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-24)
+(define-episode (sponge-PROBLEM :ID sp-24)
         (DESCRIPTION SPONGE-24)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1719,7 +1719,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ERYLUS)
                  (SPECIE DISCOPHORUS))))
-; (freeze SPONGE-PROBLEM-24)
+; (freeze sp-24)
 (define-episode (sponge :ID SPONGE-25)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1767,7 +1767,7 @@
                  (UNIFORM-LENGTH NO)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION spines))))
 ; (freeze SPONGE-25)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-25)
+(define-episode (sponge-PROBLEM :ID sp-25)
         (DESCRIPTION SPONGE-25)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1775,7 +1775,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ERYLUS)
                  (SPECIE DISCOPHORUS))))
-; (freeze SPONGE-PROBLEM-25)
+; (freeze sp-25)
 (define-episode (sponge :ID SPONGE-26)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1834,7 +1834,7 @@
                  (CORTEX
                   (DEFINE (CORTEX-CHARACTERISTICS) (CORTICAL-SPICULES YES))))))
 ; (freeze SPONGE-26)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-26)
+(define-episode (sponge-PROBLEM :ID sp-26)
         (DESCRIPTION SPONGE-26)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1842,7 +1842,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ERYLUS)
                  (SPECIE PAPULIFER))))
-; (freeze SPONGE-PROBLEM-26)
+; (freeze sp-26)
 (define-episode (sponge :ID SPONGE-27)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1899,7 +1899,7 @@
                  (CORTEX
                   (DEFINE (CORTEX-CHARACTERISTICS) (CORTICAL-SPICULES YES))))))
 ; (freeze SPONGE-27)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-27)
+(define-episode (sponge-PROBLEM :ID sp-27)
         (DESCRIPTION SPONGE-27)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1907,7 +1907,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ERYLUS)
                  (SPECIE PAPULIFER))))
-; (freeze SPONGE-PROBLEM-27)
+; (freeze sp-27)
 (define-episode (sponge :ID SPONGE-28)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -1972,7 +1972,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 700))))))
 ; (freeze SPONGE-28)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-28)
+(define-episode (sponge-PROBLEM :ID sp-28)
         (DESCRIPTION SPONGE-28)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -1980,7 +1980,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ISOPS)
                  (SPECIE ANCEPS))))
-; (freeze SPONGE-PROBLEM-28)
+; (freeze sp-28)
 (define-episode (sponge :ID SPONGE-29)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2034,7 +2034,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 500))))))
 ; (freeze SPONGE-29)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-29)
+(define-episode (sponge-PROBLEM :ID sp-29)
         (DESCRIPTION SPONGE-29)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2042,7 +2042,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS ISOPS)
                  (SPECIE INTUTA))))
-; (freeze SPONGE-PROBLEM-29)
+; (freeze sp-29)
 (define-episode (sponge :ID SPONGE-30)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2099,7 +2099,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-30)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-30)
+(define-episode (sponge-PROBLEM :ID sp-30)
         (DESCRIPTION SPONGE-30)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2107,7 +2107,7 @@
                  (FAMILY GEODIIDAE)
                  (GENUS PACHYMATISMA)
                  (SPECIE JOHNSTONIA))))
-; (freeze SPONGE-PROBLEM-30)
+; (freeze sp-30)
 (define-episode (sponge :ID SPONGE-31)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2143,7 +2143,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-31)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-31)
+(define-episode (sponge-PROBLEM :ID sp-31)
         (DESCRIPTION SPONGE-31)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2151,7 +2151,7 @@
                  (FAMILY CALTHROPELLIDAE)
                  (GENUS CALTHROPELLA)
                  (SPECIE STELLIGERA))))
-; (freeze SPONGE-PROBLEM-31)
+; (freeze sp-31)
 (define-episode (sponge :ID SPONGE-32)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2195,7 +2195,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-32)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-32)
+(define-episode (sponge-PROBLEM :ID sp-32)
         (DESCRIPTION SPONGE-32)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2203,7 +2203,7 @@
                  (FAMILY CALTHROPELLIDAE)
                  (GENUS CALTHROPELLA)
                  (SPECIE PATHOLOGICA))))
-; (freeze SPONGE-PROBLEM-32)
+; (freeze sp-32)
 (define-episode (sponge :ID SPONGE-33)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2250,7 +2250,7 @@
                  (CORTEX
                   (DEFINE (CORTEX-CHARACTERISTICS) (CORTICAL-SPICULES YES))))))
 ; (freeze SPONGE-33)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-33)
+(define-episode (sponge-PROBLEM :ID sp-33)
         (DESCRIPTION SPONGE-33)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2258,7 +2258,7 @@
                  (FAMILY CALTHROPELLIDAE)
                  (GENUS PACHASTRISSA)
                  (SPECIE PATHOLOGICA))))
-; (freeze SPONGE-PROBLEM-33)
+; (freeze sp-33)
 (define-episode (sponge :ID SPONGE-34)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2325,7 +2325,7 @@
                  (SPICULE-LOCATION
                   (DEFINE (SPICULE-LOCATION) (MONACTINAL IN-ECTOSOME))))))
 ; (freeze SPONGE-34)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-34)
+(define-episode (sponge-PROBLEM :ID sp-34)
         (DESCRIPTION SPONGE-34)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2333,7 +2333,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS POECILLASTRA)
                  (SPECIE COMPRESSA))))
-; (freeze SPONGE-PROBLEM-34)
+; (freeze sp-34)
 (define-episode (sponge :ID SPONGE-35)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2400,7 +2400,7 @@
                  (SPICULE-LOCATION
                   (DEFINE (SPICULE-LOCATION) (MONACTINAL IN-ECTOSOME))))))
 ; (freeze SPONGE-35)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-35)
+(define-episode (sponge-PROBLEM :ID sp-35)
         (DESCRIPTION SPONGE-35)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2408,7 +2408,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS POECILLASTRA)
                  (SPECIE COMPRESSA))))
-; (freeze SPONGE-PROBLEM-35)
+; (freeze sp-35)
 (define-episode (sponge :ID SPONGE-36)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2475,7 +2475,7 @@
                  (SPICULE-LOCATION
                   (DEFINE (SPICULE-LOCATION) (MONACTINAL IN-ECTOSOME))))))
 ; (freeze SPONGE-36)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-36)
+(define-episode (sponge-PROBLEM :ID sp-36)
         (DESCRIPTION SPONGE-36)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2483,7 +2483,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS POECILLASTRA)
                  (SPECIE COMPRESSA))))
-; (freeze SPONGE-PROBLEM-36)
+; (freeze sp-36)
 (define-episode (sponge :ID SPONGE-37)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2550,7 +2550,7 @@
                  (SPICULE-LOCATION
                   (DEFINE (SPICULE-LOCATION) (MONACTINAL IN-ECTOSOME))))))
 ; (freeze SPONGE-37)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-37)
+(define-episode (sponge-PROBLEM :ID sp-37)
         (DESCRIPTION SPONGE-37)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2558,7 +2558,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS POECILLASTRA)
                  (SPECIE COMPRESSA))))
-; (freeze SPONGE-PROBLEM-37)
+; (freeze sp-37)
 (define-episode (sponge :ID SPONGE-38)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2606,7 +2606,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-38)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-38)
+(define-episode (sponge-PROBLEM :ID sp-38)
         (DESCRIPTION SPONGE-38)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2614,7 +2614,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS POECILLASTRA)
                  (SPECIE COMPRESSA))))
-; (freeze SPONGE-PROBLEM-38)
+; (freeze sp-38)
 (define-episode (sponge :ID SPONGE-39)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2668,7 +2668,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-39)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-39)
+(define-episode (sponge-PROBLEM :ID sp-39)
         (DESCRIPTION SPONGE-39)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2676,7 +2676,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS POECILLASTRA)
                  (SPECIE COMPRESSA))))
-; (freeze SPONGE-PROBLEM-39)
+; (freeze sp-39)
 (define-episode (sponge :ID SPONGE-40)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2729,7 +2729,7 @@
                           (SKELETON absent-skeleton)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-40)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-40)
+(define-episode (sponge-PROBLEM :ID sp-40)
         (DESCRIPTION SPONGE-40)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2737,7 +2737,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS POECILLASTRA)
                  (SPECIE COMPRESSA))))
-; (freeze SPONGE-PROBLEM-40)
+; (freeze sp-40)
 (define-episode (sponge :ID SPONGE-41)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2781,7 +2781,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-41)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-41)
+(define-episode (sponge-PROBLEM :ID sp-41)
         (DESCRIPTION SPONGE-41)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2789,7 +2789,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS PACHASTRELLA)
                  (SPECIE MONILIFERA))))
-; (freeze SPONGE-PROBLEM-41)
+; (freeze sp-41)
 (define-episode (sponge :ID SPONGE-42)
   (EXTERNAL-FEATURES
    (DEFINE (EXTERNAL-FEATURES)
@@ -2833,7 +2833,7 @@
       (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
      (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-42)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-42)
+(define-episode (sponge-PROBLEM :ID sp-42)
         (DESCRIPTION SPONGE-42)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2841,7 +2841,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS PACHASTRELLA)
                  (SPECIE MONILIFERA))))
-; (freeze SPONGE-PROBLEM-42)
+; (freeze sp-42)
 (define-episode (sponge :ID SPONGE-43)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2884,7 +2884,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-43)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-43)
+(define-episode (sponge-PROBLEM :ID sp-43)
         (DESCRIPTION SPONGE-43)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2892,7 +2892,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS PACHASTRELLA)
                  (SPECIE MONILIFERA))))
-; (freeze SPONGE-PROBLEM-43)
+; (freeze sp-43)
 (define-episode (sponge :ID SPONGE-44)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2944,7 +2944,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-44)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-44)
+(define-episode (sponge-PROBLEM :ID sp-44)
         (DESCRIPTION SPONGE-44)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -2952,7 +2952,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS DERCITUS)
                  (SPECIE PLICATUS))))
-; (freeze SPONGE-PROBLEM-44)
+; (freeze sp-44)
 (define-episode (sponge :ID SPONGE-45)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -2999,7 +2999,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SPINES))))
 ; (freeze SPONGE-45)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-45)
+(define-episode (sponge-PROBLEM :ID sp-45)
         (DESCRIPTION SPONGE-45)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3007,7 +3007,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS DERCITUS)
                  (SPECIE BUCKLANDI))))
-; (freeze SPONGE-PROBLEM-45)
+; (freeze sp-45)
 (define-episode (sponge :ID SPONGE-46)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3042,7 +3042,7 @@
                  (SCLEROSPONGIDS NO)
                  (UNIFORM-LENGTH NO))))
 ; (freeze SPONGE-46)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-46)
+(define-episode (sponge-PROBLEM :ID sp-46)
         (DESCRIPTION SPONGE-46)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3050,7 +3050,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS DERCITUS)
                  (SPECIE BUCKLANDI))))
-; (freeze SPONGE-PROBLEM-46)
+; (freeze sp-46)
 (define-episode (sponge :ID SPONGE-47)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3098,7 +3098,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-47)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-47)
+(define-episode (sponge-PROBLEM :ID sp-47)
         (DESCRIPTION SPONGE-47)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3106,7 +3106,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS CHARACELLA)
                  (SPECIE TRIPODARIA))))
-; (freeze SPONGE-PROBLEM-47)
+; (freeze sp-47)
 (define-episode (sponge :ID SPONGE-48)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3150,7 +3150,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION spines))))
 ; (freeze SPONGE-48)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-48)
+(define-episode (sponge-PROBLEM :ID sp-48)
         (DESCRIPTION SPONGE-48)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3158,7 +3158,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS SPHINCTRELLA)
                  (SPECIE ABERRANS))))
-; (freeze SPONGE-PROBLEM-48)
+; (freeze sp-48)
 (define-episode (sponge :ID SPONGE-49)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3198,7 +3198,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-49)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-49)
+(define-episode (sponge-PROBLEM :ID sp-49)
         (DESCRIPTION SPONGE-49)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3206,7 +3206,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS SPHINCTRELLA)
                  (SPECIE GRACILIS))))
-; (freeze SPONGE-PROBLEM-49)
+; (freeze sp-49)
 (define-episode (sponge :ID SPONGE-50)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3258,7 +3258,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-50)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-50)
+(define-episode (sponge-PROBLEM :ID sp-50)
         (DESCRIPTION SPONGE-50)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3266,7 +3266,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS SPHINCTRELLA)
                  (SPECIE GRACILIS))))
-; (freeze SPONGE-PROBLEM-50)
+; (freeze sp-50)
 (define-episode (sponge :ID SPONGE-51)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3305,7 +3305,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION spines))))
 ; (freeze SPONGE-51)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-51)
+(define-episode (sponge-PROBLEM :ID sp-51)
         (DESCRIPTION SPONGE-51)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3313,7 +3313,7 @@
                  (FAMILY PACHASTRELLIDAE)
                  (GENUS STOEBA)
                  (SPECIE PLICATUS))))
-; (freeze SPONGE-PROBLEM-51)
+; (freeze sp-51)
 (define-episode (sponge :ID SPONGE-52)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3357,7 +3357,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-52)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-52)
+(define-episode (sponge-PROBLEM :ID sp-52)
         (DESCRIPTION SPONGE-52)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3365,7 +3365,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS PENARES)
                  (SPECIE HELLERI))))
-; (freeze SPONGE-PROBLEM-52)
+; (freeze sp-52)
 (define-episode (sponge :ID SPONGE-53)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3419,7 +3419,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-53)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-53)
+(define-episode (sponge-PROBLEM :ID sp-53)
         (DESCRIPTION SPONGE-53)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3427,7 +3427,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS PENARES)
                  (SPECIE HELLERI))))
-; (freeze SPONGE-PROBLEM-53)
+; (freeze sp-53)
 (define-episode (sponge :ID SPONGE-54)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3464,7 +3464,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-54)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-54)
+(define-episode (sponge-PROBLEM :ID sp-54)
         (DESCRIPTION SPONGE-54)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3472,7 +3472,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS PENARES)
                  (SPECIE SPHAERA))))
-; (freeze SPONGE-PROBLEM-54)
+; (freeze sp-54)
 (define-episode (sponge :ID SPONGE-55)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3509,7 +3509,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-55)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-55)
+(define-episode (sponge-PROBLEM :ID sp-55)
         (DESCRIPTION SPONGE-55)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3517,7 +3517,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS PENARES)
                  (SPECIE SPHAERA))))
-; (freeze SPONGE-PROBLEM-55)
+; (freeze sp-55)
 (define-episode (sponge :ID SPONGE-56)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3556,7 +3556,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-56)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-56)
+(define-episode (sponge-PROBLEM :ID sp-56)
         (DESCRIPTION SPONGE-56)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3564,7 +3564,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE MUCRONATUS))))
-; (freeze SPONGE-PROBLEM-56)
+; (freeze sp-56)
 (define-episode (sponge :ID SPONGE-57)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3626,7 +3626,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-57)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-57)
+(define-episode (sponge-PROBLEM :ID sp-57)
         (DESCRIPTION SPONGE-57)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3634,7 +3634,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-57)
+; (freeze sp-57)
 (define-episode (sponge :ID SPONGE-58)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3690,7 +3690,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-58)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-58)
+(define-episode (sponge-PROBLEM :ID sp-58)
         (DESCRIPTION SPONGE-58)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3698,7 +3698,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-58)
+; (freeze sp-58)
 (define-episode (sponge :ID SPONGE-59)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3754,7 +3754,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-59)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-59)
+(define-episode (sponge-PROBLEM :ID sp-59)
         (DESCRIPTION SPONGE-59)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3762,7 +3762,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-59)
+; (freeze sp-59)
 (define-episode (sponge :ID SPONGE-60)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3818,7 +3818,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-60)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-60)
+(define-episode (sponge-PROBLEM :ID sp-60)
         (DESCRIPTION SPONGE-60)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3826,7 +3826,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-60)
+; (freeze sp-60)
 (define-episode (sponge :ID SPONGE-61)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3882,7 +3882,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-61)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-61)
+(define-episode (sponge-PROBLEM :ID sp-61)
         (DESCRIPTION SPONGE-61)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3890,7 +3890,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-61)
+; (freeze sp-61)
 (define-episode (sponge :ID SPONGE-62)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -3946,7 +3946,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-62)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-62)
+(define-episode (sponge-PROBLEM :ID sp-62)
         (DESCRIPTION SPONGE-62)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -3954,7 +3954,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-62)
+; (freeze sp-62)
 (define-episode (sponge :ID SPONGE-63)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4010,7 +4010,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-63)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-63)
+(define-episode (sponge-PROBLEM :ID sp-63)
         (DESCRIPTION SPONGE-63)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4018,7 +4018,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-63)
+; (freeze sp-63)
 (define-episode (sponge :ID SPONGE-64)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4074,7 +4074,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-64)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-64)
+(define-episode (sponge-PROBLEM :ID sp-64)
         (DESCRIPTION SPONGE-64)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4082,7 +4082,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-64)
+; (freeze sp-64)
 (define-episode (sponge :ID SPONGE-65)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4138,7 +4138,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-65)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-65)
+(define-episode (sponge-PROBLEM :ID sp-65)
         (DESCRIPTION SPONGE-65)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4146,7 +4146,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-65)
+; (freeze sp-65)
 (define-episode (sponge :ID SPONGE-66)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4202,7 +4202,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-66)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-66)
+(define-episode (sponge-PROBLEM :ID sp-66)
         (DESCRIPTION SPONGE-66)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4210,7 +4210,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-66)
+; (freeze sp-66)
 (define-episode (sponge :ID SPONGE-67)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4252,7 +4252,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-67)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-67)
+(define-episode (sponge-PROBLEM :ID sp-67)
         (DESCRIPTION SPONGE-67)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4260,7 +4260,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STRYPHNUS)
                  (SPECIE PONDEROSUS))))
-; (freeze SPONGE-PROBLEM-67)
+; (freeze sp-67)
 (define-episode (sponge :ID SPONGE-68)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4328,7 +4328,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-68)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-68)
+(define-episode (sponge-PROBLEM :ID sp-68)
         (DESCRIPTION SPONGE-68)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4336,7 +4336,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-68)
+; (freeze sp-68)
 (define-episode (sponge :ID SPONGE-69)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4404,7 +4404,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-69)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-69)
+(define-episode (sponge-PROBLEM :ID sp-69)
         (DESCRIPTION SPONGE-69)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4412,7 +4412,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-69)
+; (freeze sp-69)
 (define-episode (sponge :ID SPONGE-70)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4480,7 +4480,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-70)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-70)
+(define-episode (sponge-PROBLEM :ID sp-70)
         (DESCRIPTION SPONGE-70)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4488,7 +4488,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-70)
+; (freeze sp-70)
 (define-episode (sponge :ID SPONGE-71)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4556,7 +4556,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-71)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-71)
+(define-episode (sponge-PROBLEM :ID sp-71)
         (DESCRIPTION SPONGE-71)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4564,7 +4564,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-71)
+; (freeze sp-71)
 (define-episode (sponge :ID SPONGE-72)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4632,7 +4632,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-72)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-72)
+(define-episode (sponge-PROBLEM :ID sp-72)
         (DESCRIPTION SPONGE-72)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4640,7 +4640,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-72)
+; (freeze sp-72)
 (define-episode (sponge :ID SPONGE-73)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4708,7 +4708,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-73)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-73)
+(define-episode (sponge-PROBLEM :ID sp-73)
         (DESCRIPTION SPONGE-73)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4716,7 +4716,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-73)
+; (freeze sp-73)
 (define-episode (sponge :ID SPONGE-74)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4784,7 +4784,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-74)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-74)
+(define-episode (sponge-PROBLEM :ID sp-74)
         (DESCRIPTION SPONGE-74)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4792,7 +4792,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-74)
+; (freeze sp-74)
 (define-episode (sponge :ID SPONGE-75)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4860,7 +4860,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-75)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-75)
+(define-episode (sponge-PROBLEM :ID sp-75)
         (DESCRIPTION SPONGE-75)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4868,7 +4868,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-75)
+; (freeze sp-75)
 (define-episode (sponge :ID SPONGE-76)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4936,7 +4936,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-76)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-76)
+(define-episode (sponge-PROBLEM :ID sp-76)
         (DESCRIPTION SPONGE-76)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -4944,7 +4944,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBII))))
-; (freeze SPONGE-PROBLEM-76)
+; (freeze sp-76)
 (define-episode (sponge :ID SPONGE-77)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -4998,7 +4998,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-77)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-77)
+(define-episode (sponge-PROBLEM :ID sp-77)
         (DESCRIPTION SPONGE-77)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5006,7 +5006,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBEI))))
-; (freeze SPONGE-PROBLEM-77)
+; (freeze sp-77)
 (define-episode (sponge :ID SPONGE-78)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5043,7 +5043,7 @@
                  (SCLEROSPONGIDS NO)
                  (UNIFORM-LENGTH NO))))
 ; (freeze SPONGE-78)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-78)
+(define-episode (sponge-PROBLEM :ID sp-78)
         (DESCRIPTION SPONGE-78)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5051,7 +5051,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE GRUBEI))))
-; (freeze SPONGE-PROBLEM-78)
+; (freeze sp-78)
 (define-episode (sponge :ID SPONGE-79)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5115,7 +5115,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-79)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-79)
+(define-episode (sponge-PROBLEM :ID sp-79)
         (DESCRIPTION SPONGE-79)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5123,7 +5123,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-79)
+; (freeze sp-79)
 (define-episode (sponge :ID SPONGE-80)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5187,7 +5187,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-80)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-80)
+(define-episode (sponge-PROBLEM :ID sp-80)
         (DESCRIPTION SPONGE-80)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5195,7 +5195,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-80)
+; (freeze sp-80)
 (define-episode (sponge :ID SPONGE-81)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5259,7 +5259,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-81)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-81)
+(define-episode (sponge-PROBLEM :ID sp-81)
         (DESCRIPTION SPONGE-81)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5267,7 +5267,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-81)
+; (freeze sp-81)
 (define-episode (sponge :ID SPONGE-82)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5331,7 +5331,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-82)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-82)
+(define-episode (sponge-PROBLEM :ID sp-82)
         (DESCRIPTION SPONGE-82)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5339,7 +5339,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-82)
+; (freeze sp-82)
 (define-episode (sponge :ID SPONGE-83)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5403,7 +5403,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-83)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-83)
+(define-episode (sponge-PROBLEM :ID sp-83)
         (DESCRIPTION SPONGE-83)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5411,7 +5411,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-83)
+; (freeze sp-83)
 (define-episode (sponge :ID SPONGE-84)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5475,7 +5475,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-84)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-84)
+(define-episode (sponge-PROBLEM :ID sp-84)
         (DESCRIPTION SPONGE-84)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5483,7 +5483,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-84)
+; (freeze sp-84)
 (define-episode (sponge :ID SPONGE-85)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5547,7 +5547,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-85)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-85)
+(define-episode (sponge-PROBLEM :ID sp-85)
         (DESCRIPTION SPONGE-85)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5555,7 +5555,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-85)
+; (freeze sp-85)
 (define-episode (sponge :ID SPONGE-86)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5619,7 +5619,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-86)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-86)
+(define-episode (sponge-PROBLEM :ID sp-86)
         (DESCRIPTION SPONGE-86)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5627,7 +5627,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-86)
+; (freeze sp-86)
 (define-episode (sponge :ID SPONGE-87)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5691,7 +5691,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 6000))))))
 ; (freeze SPONGE-87)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-87)
+(define-episode (sponge-PROBLEM :ID sp-87)
         (DESCRIPTION SPONGE-87)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5699,7 +5699,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-87)
+; (freeze sp-87)
 (define-episode (sponge :ID SPONGE-88)
   (EXTERNAL-FEATURES
    (DEFINE (EXTERNAL-FEATURES)
@@ -5745,7 +5745,7 @@
   ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
   )
 ; (freeze SPONGE-88)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-88)
+(define-episode (sponge-PROBLEM :ID sp-88)
         (DESCRIPTION SPONGE-88)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5753,7 +5753,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE DORSIGERA))))
-; (freeze SPONGE-PROBLEM-88)
+; (freeze sp-88)
 (define-episode (sponge :ID SPONGE-89)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5812,7 +5812,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 10000))))))
 ; (freeze SPONGE-89)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-89)
+(define-episode (sponge-PROBLEM :ID sp-89)
         (DESCRIPTION SPONGE-89)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5820,7 +5820,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE HISPIDA))))
-; (freeze SPONGE-PROBLEM-89)
+; (freeze sp-89)
 (define-episode (sponge :ID SPONGE-90)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5864,7 +5864,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-90)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-90)
+(define-episode (sponge-PROBLEM :ID sp-90)
         (DESCRIPTION SPONGE-90)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5872,7 +5872,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE HISPIDA))))
-; (freeze SPONGE-PROBLEM-90)
+; (freeze sp-90)
 (define-episode (sponge :ID SPONGE-91)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5918,7 +5918,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-91)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-91)
+(define-episode (sponge-PROBLEM :ID sp-91)
         (DESCRIPTION SPONGE-91)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5926,7 +5926,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS STELLETTA)
                  (SPECIE SIMPLICISSIMA))))
-; (freeze SPONGE-PROBLEM-91)
+; (freeze sp-91)
 (define-episode (sponge :ID SPONGE-92)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -5981,7 +5981,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-92)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-92)
+(define-episode (sponge-PROBLEM :ID sp-92)
         (DESCRIPTION SPONGE-92)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -5989,7 +5989,7 @@
                  (FAMILY STELLETTIIDAE)
                  (GENUS MYRIASTRA)
                  (SPECIE LACTEA))))
-; (freeze SPONGE-PROBLEM-92)
+; (freeze sp-92)
 (define-episode (sponge :ID SPONGE-93)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6053,7 +6053,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-93)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-93)
+(define-episode (sponge-PROBLEM :ID sp-93)
         (DESCRIPTION SPONGE-93)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6061,7 +6061,7 @@
                  (FAMILY THENEIDAE)
                  (GENUS THENEA)
                  (SPECIE MURICATA))))
-; (freeze SPONGE-PROBLEM-93)
+; (freeze sp-93)
 (define-episode (sponge :ID SPONGE-94)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6101,7 +6101,7 @@
                  (SCLEROSPONGIDS NO)
                  (UNIFORM-LENGTH NO))))
 ; (freeze SPONGE-94)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-94)
+(define-episode (sponge-PROBLEM :ID sp-94)
         (DESCRIPTION SPONGE-94)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6109,7 +6109,7 @@
                  (FAMILY THENEIDAE)
                  (GENUS THENEA)
                  (SPECIE SCHMIDTII))))
-; (freeze SPONGE-PROBLEM-94)
+; (freeze sp-94)
 
 
 
@@ -6183,7 +6183,7 @@
                  (CORTEX (DEFINE (ABSENT-CORTEX)))
                  (MESH-SIDE VARIABLE))))
 ; (freeze SPONGE-95)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-95)
+(define-episode (sponge-PROBLEM :ID sp-95)
         (DESCRIPTION SPONGE-95)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6191,7 +6191,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE MAMMILLARIS))))
-; (freeze SPONGE-PROBLEM-95)
+; (freeze sp-95)
 (define-episode (sponge :ID SPONGE-96)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6257,7 +6257,7 @@
                  (CORTEX (DEFINE (ABSENT-CORTEX)))
                  (MESH-SIDE VARIABLE))))
 ; (freeze SPONGE-96)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-96)
+(define-episode (sponge-PROBLEM :ID sp-96)
         (DESCRIPTION SPONGE-96)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6265,7 +6265,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE MAMMILLARIS))))
-; (freeze SPONGE-PROBLEM-96)
+; (freeze sp-96)
 (define-episode (sponge :ID SPONGE-97)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6332,7 +6332,7 @@
                  (CORTEX (DEFINE (ABSENT-CORTEX)))
                  (MESH-SIDE VARIABLE))))
 ; (freeze SPONGE-97)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-97)
+(define-episode (sponge-PROBLEM :ID sp-97)
         (DESCRIPTION SPONGE-97)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6340,7 +6340,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE MAMMILLARIS))))
-; (freeze SPONGE-PROBLEM-97)
+; (freeze sp-97)
 (define-episode (sponge :ID SPONGE-98)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6408,7 +6408,7 @@
                  (CORTEX (DEFINE (ABSENT-CORTEX)))
                  (MESH-SIDE VARIABLE))))
 ; (freeze SPONGE-98)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-98)
+(define-episode (sponge-PROBLEM :ID sp-98)
         (DESCRIPTION SPONGE-98)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6416,7 +6416,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE MAMMILLARIS))))
-; (freeze SPONGE-PROBLEM-98)
+; (freeze sp-98)
 (define-episode (sponge :ID SPONGE-99)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6482,7 +6482,7 @@
                  (CORTEX (DEFINE (ABSENT-CORTEX)))
                  (MESH-SIDE VARIABLE))))
 ; (freeze SPONGE-99)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-99)
+(define-episode (sponge-PROBLEM :ID sp-99)
         (DESCRIPTION SPONGE-99)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6490,7 +6490,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE MAMMILLARIS))))
-; (freeze SPONGE-PROBLEM-99)
+; (freeze sp-99)
 (define-episode (sponge :ID SPONGE-100)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6529,7 +6529,7 @@
                  (CORTEX
                   (DEFINE (CORTEX-CHARACTERISTICS) (CORTICAL-SPICULES YES))))))
 ; (freeze SPONGE-100)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-100)
+(define-episode (sponge-PROBLEM :ID sp-100)
         (DESCRIPTION SPONGE-100)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6537,7 +6537,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE POLYTYLOTA))))
-; (freeze SPONGE-PROBLEM-100)
+; (freeze sp-100)
 (define-episode (sponge :ID SPONGE-101)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6577,7 +6577,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-101)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-101)
+(define-episode (sponge-PROBLEM :ID sp-101)
         (DESCRIPTION SPONGE-101)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6585,7 +6585,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE ISIDIS))))
-; (freeze SPONGE-PROBLEM-101)
+; (freeze sp-101)
 (define-episode (sponge :ID SPONGE-102)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6624,7 +6624,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-102)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-102)
+(define-episode (sponge-PROBLEM :ID sp-102)
         (DESCRIPTION SPONGE-102)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6632,7 +6632,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE INFRAPILOSA))))
-; (freeze SPONGE-PROBLEM-102)
+; (freeze sp-102)
 (define-episode (sponge :ID SPONGE-103)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6673,7 +6673,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-103)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-103)
+(define-episode (sponge-PROBLEM :ID sp-103)
         (DESCRIPTION SPONGE-103)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6681,7 +6681,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE ROBUSTA))))
-; (freeze SPONGE-PROBLEM-103)
+; (freeze sp-103)
 (define-episode (sponge :ID SPONGE-104)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6717,7 +6717,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-104)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-104)
+(define-episode (sponge-PROBLEM :ID sp-104)
         (DESCRIPTION SPONGE-104)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6725,7 +6725,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS POLYMASTIA)
                  (SPECIE TISSIERI))))
-; (freeze SPONGE-PROBLEM-104)
+; (freeze sp-104)
 (define-episode (sponge :ID SPONGE-105)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6791,7 +6791,7 @@
                  (CORTEX (DEFINE (ABSENT-CORTEX)))
                  (MESH-SIDE VARIABLE))))
 ; (freeze SPONGE-105)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-105)
+(define-episode (sponge-PROBLEM :ID sp-105)
         (DESCRIPTION SPONGE-105)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6799,7 +6799,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS WEBERELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-105)
+; (freeze sp-105)
 (define-episode (sponge :ID SPONGE-106)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6852,7 +6852,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 500))))))
 ; (freeze SPONGE-106)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-106)
+(define-episode (sponge-PROBLEM :ID sp-106)
         (DESCRIPTION SPONGE-106)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6860,7 +6860,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS WEBERELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-106)
+; (freeze sp-106)
 (define-episode (sponge :ID SPONGE-107)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6916,7 +6916,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 500))))))
 ; (freeze SPONGE-107)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-107)
+(define-episode (sponge-PROBLEM :ID sp-107)
         (DESCRIPTION SPONGE-107)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6924,7 +6924,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS PSEUDOTRACHYA)
                  (SPECIE HYSTRIX))))
-; (freeze SPONGE-PROBLEM-107)
+; (freeze sp-107)
 (define-episode (sponge :ID SPONGE-108)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -6983,7 +6983,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 1500))))))
 ; (freeze SPONGE-108)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-108)
+(define-episode (sponge-PROBLEM :ID sp-108)
         (DESCRIPTION SPONGE-108)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -6991,7 +6991,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS SPHAEROSTYLUS)
                  (SPECIE CAPITATUS))))
-; (freeze SPONGE-PROBLEM-108)
+; (freeze sp-108)
 (define-episode (sponge :ID SPONGE-109)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7027,7 +7027,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-109)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-109)
+(define-episode (sponge-PROBLEM :ID sp-109)
         (DESCRIPTION SPONGE-109)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7035,7 +7035,7 @@
                  (FAMILY POLYMASTIIDAE)
                  (GENUS TRICHOSTEMMA)
                  (SPECIE SARSI))))
-; (freeze SPONGE-PROBLEM-109)
+; (freeze sp-109)
 (define-episode (sponge :ID SPONGE-110)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7097,7 +7097,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-110)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-110)
+(define-episode (sponge-PROBLEM :ID sp-110)
         (DESCRIPTION SPONGE-110)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7105,7 +7105,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS RHIZAXINELLA)
                  (SPECIE PYRIFERA))))
-; (freeze SPONGE-PROBLEM-110)
+; (freeze sp-110)
 (define-episode (sponge :ID SPONGE-111)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7167,7 +7167,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-111)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-111)
+(define-episode (sponge-PROBLEM :ID sp-111)
         (DESCRIPTION SPONGE-111)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7175,7 +7175,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS RHIZAXINELLA)
                  (SPECIE PYRIFERA))))
-; (freeze SPONGE-PROBLEM-111)
+; (freeze sp-111)
 (define-episode (sponge :ID SPONGE-112)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7237,7 +7237,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-112)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-112)
+(define-episode (sponge-PROBLEM :ID sp-112)
         (DESCRIPTION SPONGE-112)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7245,7 +7245,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS RHIZAXINELLA)
                  (SPECIE PYRIFERA))))
-; (freeze SPONGE-PROBLEM-112)
+; (freeze sp-112)
 (define-episode (sponge :ID SPONGE-113)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7307,7 +7307,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-113)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-113)
+(define-episode (sponge-PROBLEM :ID sp-113)
         (DESCRIPTION SPONGE-113)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7315,7 +7315,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS RHIZAXINELLA)
                  (SPECIE PYRIFERA))))
-; (freeze SPONGE-PROBLEM-113)
+; (freeze sp-113)
 (define-episode (sponge :ID SPONGE-114)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7377,7 +7377,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-114)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-114)
+(define-episode (sponge-PROBLEM :ID sp-114)
         (DESCRIPTION SPONGE-114)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7385,7 +7385,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS RHIZAXINELLA)
                  (SPECIE PYRIFERA))))
-; (freeze SPONGE-PROBLEM-114)
+; (freeze sp-114)
 (define-episode (sponge :ID SPONGE-115)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7425,7 +7425,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-115)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-115)
+(define-episode (sponge-PROBLEM :ID sp-115)
         (DESCRIPTION SPONGE-115)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7433,7 +7433,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS RHIZAXINELLA)
                  (SPECIE PYRIFERA))))
-; (freeze SPONGE-PROBLEM-115)
+; (freeze sp-115)
 (define-episode (sponge :ID SPONGE-116)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7476,7 +7476,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-116)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-116)
+(define-episode (sponge-PROBLEM :ID sp-116)
         (DESCRIPTION SPONGE-116)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7484,7 +7484,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PROSUBERITES)
                  (SPECIE LONGISPINA))))
-; (freeze SPONGE-PROBLEM-116)
+; (freeze sp-116)
 (define-episode (sponge :ID SPONGE-117)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7509,7 +7509,7 @@
                  (SCLEROSPONGIDS NO)
                  (UNIFORM-LENGTH NO))))
 ; (freeze SPONGE-117)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-117)
+(define-episode (sponge-PROBLEM :ID sp-117)
         (DESCRIPTION SPONGE-117)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7517,7 +7517,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PROSUBERITES)
                  (SPECIE LONGISPINA))))
-; (freeze SPONGE-PROBLEM-117)
+; (freeze sp-117)
 (define-episode (sponge :ID SPONGE-118)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7561,7 +7561,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-118)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-118)
+(define-episode (sponge-PROBLEM :ID sp-118)
         (DESCRIPTION SPONGE-118)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7569,7 +7569,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PROSUBERITES)
                  (SPECIE EPIPHYTUM))))
-; (freeze SPONGE-PROBLEM-118)
+; (freeze sp-118)
 (define-episode (sponge :ID SPONGE-119)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7602,7 +7602,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-119)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-119)
+(define-episode (sponge-PROBLEM :ID sp-119)
         (DESCRIPTION SPONGE-119)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7610,7 +7610,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PROSUBERITES)
                  (SPECIE EPIPHYTUM))))
-; (freeze SPONGE-PROBLEM-119)
+; (freeze sp-119)
 (define-episode (sponge :ID SPONGE-120)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7655,7 +7655,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-120)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-120)
+(define-episode (sponge-PROBLEM :ID sp-120)
         (DESCRIPTION SPONGE-120)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7663,7 +7663,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PROSUBERITES)
                  (SPECIE RUGOSUS))))
-; (freeze SPONGE-PROBLEM-120)
+; (freeze sp-120)
 (define-episode (sponge :ID SPONGE-121)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7721,7 +7721,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-121)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-121)
+(define-episode (sponge-PROBLEM :ID sp-121)
         (DESCRIPTION SPONGE-121)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7729,7 +7729,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE CARNOSUS))))
-; (freeze SPONGE-PROBLEM-121)
+; (freeze sp-121)
 (define-episode (sponge :ID SPONGE-122)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7776,7 +7776,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-122)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-122)
+(define-episode (sponge-PROBLEM :ID sp-122)
         (DESCRIPTION SPONGE-122)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7784,7 +7784,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE CARNOSUS))))
-; (freeze SPONGE-PROBLEM-122)
+; (freeze sp-122)
 (define-episode (sponge :ID SPONGE-123)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7828,7 +7828,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-123)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-123)
+(define-episode (sponge-PROBLEM :ID sp-123)
         (DESCRIPTION SPONGE-123)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7836,7 +7836,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE CARNOSUS))))
-; (freeze SPONGE-PROBLEM-123)
+; (freeze sp-123)
 (define-episode (sponge :ID SPONGE-124)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7887,7 +7887,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-124)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-124)
+(define-episode (sponge-PROBLEM :ID sp-124)
         (DESCRIPTION SPONGE-124)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7895,7 +7895,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE CARNOSUS))))
-; (freeze SPONGE-PROBLEM-124)
+; (freeze sp-124)
 (define-episode (sponge :ID SPONGE-125)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7931,7 +7931,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-125)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-125)
+(define-episode (sponge-PROBLEM :ID sp-125)
         (DESCRIPTION SPONGE-125)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -7939,7 +7939,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE CARNOSUS))))
-; (freeze SPONGE-PROBLEM-125)
+; (freeze sp-125)
 (define-episode (sponge :ID SPONGE-126)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -7999,7 +7999,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-126)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-126)
+(define-episode (sponge-PROBLEM :ID sp-126)
         (DESCRIPTION SPONGE-126)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8007,7 +8007,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE FICUS))))
-; (freeze SPONGE-PROBLEM-126)
+; (freeze sp-126)
 (define-episode (sponge :ID SPONGE-127)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8069,7 +8069,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-127)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-127)
+(define-episode (sponge-PROBLEM :ID sp-127)
         (DESCRIPTION SPONGE-127)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8077,7 +8077,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE FICUS))))
-; (freeze SPONGE-PROBLEM-127)
+; (freeze sp-127)
 (define-episode (sponge :ID SPONGE-128)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8138,7 +8138,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-128)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-128)
+(define-episode (sponge-PROBLEM :ID sp-128)
         (DESCRIPTION SPONGE-128)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8146,7 +8146,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE FICUS))))
-; (freeze SPONGE-PROBLEM-128)
+; (freeze sp-128)
 (define-episode (sponge :ID SPONGE-129)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8208,7 +8208,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-129)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-129)
+(define-episode (sponge-PROBLEM :ID sp-129)
         (DESCRIPTION SPONGE-129)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8216,7 +8216,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE FICUS))))
-; (freeze SPONGE-PROBLEM-129)
+; (freeze sp-129)
 (define-episode (sponge :ID SPONGE-130)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8267,7 +8267,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-130)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-130)
+(define-episode (sponge-PROBLEM :ID sp-130)
         (DESCRIPTION SPONGE-130)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8275,7 +8275,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE DOMUNCULA))))
-; (freeze SPONGE-PROBLEM-130)
+; (freeze sp-130)
 (define-episode (sponge :ID SPONGE-131)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8316,7 +8316,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-131)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-131)
+(define-episode (sponge-PROBLEM :ID sp-131)
         (DESCRIPTION SPONGE-131)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8324,7 +8324,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE DOMUNCULA))))
-; (freeze SPONGE-PROBLEM-131)
+; (freeze sp-131)
 (define-episode (sponge :ID SPONGE-132)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8369,7 +8369,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-132)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-132)
+(define-episode (sponge-PROBLEM :ID sp-132)
         (DESCRIPTION SPONGE-132)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8377,7 +8377,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE DOMUNCULA))))
-; (freeze SPONGE-PROBLEM-132)
+; (freeze sp-132)
 (define-episode (sponge :ID SPONGE-133)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8415,7 +8415,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-133)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-133)
+(define-episode (sponge-PROBLEM :ID sp-133)
         (DESCRIPTION SPONGE-133)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8423,7 +8423,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE AXIATUS))))
-; (freeze SPONGE-PROBLEM-133)
+; (freeze sp-133)
 (define-episode (sponge :ID SPONGE-134)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8465,7 +8465,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-134)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-134)
+(define-episode (sponge-PROBLEM :ID sp-134)
         (DESCRIPTION SPONGE-134)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8473,7 +8473,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS SUBERITES)
                  (SPECIE TYLOBTUSA))))
-; (freeze SPONGE-PROBLEM-134)
+; (freeze sp-134)
 (define-episode (sponge :ID SPONGE-135)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8541,7 +8541,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-135)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-135)
+(define-episode (sponge-PROBLEM :ID sp-135)
         (DESCRIPTION SPONGE-135)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8549,7 +8549,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PSEUDOSUBERITES)
                  (SPECIE HYALINUS))))
-; (freeze SPONGE-PROBLEM-135)
+; (freeze sp-135)
 (define-episode (sponge :ID SPONGE-136)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8598,7 +8598,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-136)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-136)
+(define-episode (sponge-PROBLEM :ID sp-136)
         (DESCRIPTION SPONGE-136)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8606,7 +8606,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PSEUDOSUBERITES)
                  (SPECIE HYALINUS))))
-; (freeze SPONGE-PROBLEM-136)
+; (freeze sp-136)
 (define-episode (sponge :ID SPONGE-137)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8658,7 +8658,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-137)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-137)
+(define-episode (sponge-PROBLEM :ID sp-137)
         (DESCRIPTION SPONGE-137)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8666,7 +8666,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PSEUDOSUBERITES)
                  (SPECIE HYALINUS))))
-; (freeze SPONGE-PROBLEM-137)
+; (freeze sp-137)
 (define-episode (sponge :ID SPONGE-138)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8716,7 +8716,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-138)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-138)
+(define-episode (sponge-PROBLEM :ID sp-138)
         (DESCRIPTION SPONGE-138)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8724,7 +8724,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PSEUDOSUBERITES)
                  (SPECIE HYALINUS))))
-; (freeze SPONGE-PROBLEM-138)
+; (freeze sp-138)
 (define-episode (sponge :ID SPONGE-139)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8761,7 +8761,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-139)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-139)
+(define-episode (sponge-PROBLEM :ID sp-139)
         (DESCRIPTION SPONGE-139)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8769,7 +8769,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PSEUDOSUBERITES)
                  (SPECIE SULPHUREUS))))
-; (freeze SPONGE-PROBLEM-139)
+; (freeze sp-139)
 (define-episode (sponge :ID SPONGE-140)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8823,7 +8823,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-140)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-140)
+(define-episode (sponge-PROBLEM :ID sp-140)
         (DESCRIPTION SPONGE-140)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8831,7 +8831,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PSEUDOSUBERITES)
                  (SPECIE SULPHUREUS))))
-; (freeze SPONGE-PROBLEM-140)
+; (freeze sp-140)
 (define-episode (sponge :ID SPONGE-141)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8878,7 +8878,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-141)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-141)
+(define-episode (sponge-PROBLEM :ID sp-141)
         (DESCRIPTION SPONGE-141)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8886,7 +8886,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS PSEUDOSUBERITES)
                  (SPECIE ANTARTICUS))))
-; (freeze SPONGE-PROBLEM-141)
+; (freeze sp-141)
 (define-episode (sponge :ID SPONGE-142)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8917,7 +8917,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-142)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-142)
+(define-episode (sponge-PROBLEM :ID sp-142)
         (DESCRIPTION SPONGE-142)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8925,7 +8925,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS LAXOSUBERITES)
                  (SPECIE RUGOSUS))))
-; (freeze SPONGE-PROBLEM-142)
+; (freeze sp-142)
 (define-episode (sponge :ID SPONGE-143)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -8965,7 +8965,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-143)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-143)
+(define-episode (sponge-PROBLEM :ID sp-143)
         (DESCRIPTION SPONGE-143)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -8973,7 +8973,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS LAXOSUBERITES)
                  (SPECIE ECTYONINUS))))
-; (freeze SPONGE-PROBLEM-143)
+; (freeze sp-143)
 (define-episode (sponge :ID SPONGE-144)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9004,7 +9004,7 @@
                  (SCLEROSPONGIDS NO)
                  (UNIFORM-LENGTH YES))))
 ; (freeze SPONGE-144)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-144)
+(define-episode (sponge-PROBLEM :ID sp-144)
         (DESCRIPTION SPONGE-144)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9012,7 +9012,7 @@
                  (FAMILY SUBERITIDAE)
                  (GENUS TERPIOS)
                  (SPECIE FUGAX))))
-; (freeze SPONGE-PROBLEM-144)
+; (freeze sp-144)
 (define-episode (sponge :ID SPONGE-145)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9076,7 +9076,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-145)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-145)
+(define-episode (sponge-PROBLEM :ID sp-145)
         (DESCRIPTION SPONGE-145)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9084,7 +9084,7 @@
                  (FAMILY TETHYIDAE)
                  (GENUS AAPTOS)
                  (SPECIE AAPTOS))))
-; (freeze SPONGE-PROBLEM-145)
+; (freeze sp-145)
 (define-episode (sponge :ID SPONGE-146)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9134,7 +9134,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-146)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-146)
+(define-episode (sponge-PROBLEM :ID sp-146)
         (DESCRIPTION SPONGE-146)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9142,7 +9142,7 @@
                  (FAMILY TETHYIDAE)
                  (GENUS AAPTOS)
                  (SPECIE AAPTOS))))
-; (freeze SPONGE-PROBLEM-146)
+; (freeze sp-146)
 (define-episode (sponge :ID SPONGE-147)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9196,7 +9196,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-147)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-147)
+(define-episode (sponge-PROBLEM :ID sp-147)
         (DESCRIPTION SPONGE-147)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9204,7 +9204,7 @@
                  (FAMILY TETHYIDAE)
                  (GENUS AAPTOS)
                  (SPECIE AAPTOS))))
-; (freeze SPONGE-PROBLEM-147)
+; (freeze sp-147)
 (define-episode (sponge :ID SPONGE-148)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9263,7 +9263,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 3000))))))
 ; (freeze SPONGE-148)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-148)
+(define-episode (sponge-PROBLEM :ID sp-148)
         (DESCRIPTION SPONGE-148)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9271,7 +9271,7 @@
                  (FAMILY TETHYIDAE)
                  (GENUS TETHYA)
                  (SPECIE AURANTIUM))))
-; (freeze SPONGE-PROBLEM-148)
+; (freeze sp-148)
 (define-episode (sponge :ID SPONGE-149)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9322,7 +9322,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 1500))))))
 ; (freeze SPONGE-149)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-149)
+(define-episode (sponge-PROBLEM :ID sp-149)
         (DESCRIPTION SPONGE-149)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9330,7 +9330,7 @@
                  (FAMILY TETHYIDAE)
                  (GENUS TETHYA)
                  (SPECIE AURANTIUM))))
-; (freeze SPONGE-PROBLEM-149)
+; (freeze sp-149)
 (define-episode (sponge :ID SPONGE-150)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9376,7 +9376,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         )
 ; (freeze SPONGE-150)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-150)
+(define-episode (sponge-PROBLEM :ID sp-150)
         (DESCRIPTION SPONGE-150)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9384,7 +9384,7 @@
                  (FAMILY TETHYIDAE)
                  (GENUS TETHYA)
                  (SPECIE AURANTIUM))))
-; (freeze SPONGE-PROBLEM-150)
+; (freeze sp-150)
 (define-episode (sponge :ID SPONGE-151)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9413,7 +9413,7 @@
                          (UNIFORM-LENGTH YES)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-151)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-151)
+(define-episode (sponge-PROBLEM :ID sp-151)
         (DESCRIPTION SPONGE-151)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9421,7 +9421,7 @@
                  (FAMILY TETHYIDAE)
                  (GENUS TETHYA)
                  (SPECIE AURANTIUM))))
-; (freeze SPONGE-PROBLEM-151)
+; (freeze sp-151)
 (define-episode (sponge :ID SPONGE-152)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9476,7 +9476,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-152)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-152)
+(define-episode (sponge-PROBLEM :ID sp-152)
         (DESCRIPTION SPONGE-152)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9484,7 +9484,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-152)
+; (freeze sp-152)
 (define-episode (sponge :ID SPONGE-153)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9534,7 +9534,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-153)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-153)
+(define-episode (sponge-PROBLEM :ID sp-153)
         (DESCRIPTION SPONGE-153)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9542,7 +9542,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-153)
+; (freeze sp-153)
 (define-episode (sponge :ID SPONGE-154)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9602,7 +9602,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-154)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-154)
+(define-episode (sponge-PROBLEM :ID sp-154)
         (DESCRIPTION SPONGE-154)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9610,7 +9610,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-154)
+; (freeze sp-154)
 (define-episode (sponge :ID SPONGE-155)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9656,7 +9656,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-155)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-155)
+(define-episode (sponge-PROBLEM :ID sp-155)
         (DESCRIPTION SPONGE-155)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9664,7 +9664,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-155)
+; (freeze sp-155)
 (define-episode (sponge :ID SPONGE-156)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9710,7 +9710,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-156)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-156)
+(define-episode (sponge-PROBLEM :ID sp-156)
         (DESCRIPTION SPONGE-156)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9718,7 +9718,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-156)
+; (freeze sp-156)
 (define-episode (sponge :ID SPONGE-157)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9764,7 +9764,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-157)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-157)
+(define-episode (sponge-PROBLEM :ID sp-157)
         (DESCRIPTION SPONGE-157)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9772,7 +9772,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-157)
+; (freeze sp-157)
 (define-episode (sponge :ID SPONGE-158)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9818,7 +9818,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-158)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-158)
+(define-episode (sponge-PROBLEM :ID sp-158)
         (DESCRIPTION SPONGE-158)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9826,7 +9826,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-158)
+; (freeze sp-158)
 (define-episode (sponge :ID SPONGE-159)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9872,7 +9872,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-159)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-159)
+(define-episode (sponge-PROBLEM :ID sp-159)
         (DESCRIPTION SPONGE-159)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9880,7 +9880,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-159)
+; (freeze sp-159)
 (define-episode (sponge :ID SPONGE-160)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9926,7 +9926,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-160)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-160)
+(define-episode (sponge-PROBLEM :ID sp-160)
         (DESCRIPTION SPONGE-160)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9934,7 +9934,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-160)
+; (freeze sp-160)
 (define-episode (sponge :ID SPONGE-161)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -9980,7 +9980,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-161)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-161)
+(define-episode (sponge-PROBLEM :ID sp-161)
         (DESCRIPTION SPONGE-161)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -9988,7 +9988,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VIRIDIS))))
-; (freeze SPONGE-PROBLEM-161)
+; (freeze sp-161)
 (define-episode (sponge :ID SPONGE-162)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10035,7 +10035,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-162)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-162)
+(define-episode (sponge-PROBLEM :ID sp-162)
         (DESCRIPTION SPONGE-162)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10043,7 +10043,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE CELATA))))
-; (freeze SPONGE-PROBLEM-162)
+; (freeze sp-162)
 (define-episode (sponge :ID SPONGE-163)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10092,7 +10092,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-163)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-163)
+(define-episode (sponge-PROBLEM :ID sp-163)
         (DESCRIPTION SPONGE-163)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10100,7 +10100,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE CELATA))))
-; (freeze SPONGE-PROBLEM-163)
+; (freeze sp-163)
 (define-episode (sponge :ID SPONGE-164)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10148,7 +10148,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-164)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-164)
+(define-episode (sponge-PROBLEM :ID sp-164)
         (DESCRIPTION SPONGE-164)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10156,7 +10156,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE CELATA))))
-; (freeze SPONGE-PROBLEM-164)
+; (freeze sp-164)
 (define-episode (sponge :ID SPONGE-165)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10187,7 +10187,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-165)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-165)
+(define-episode (sponge-PROBLEM :ID sp-165)
         (DESCRIPTION SPONGE-165)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10195,7 +10195,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE CELATA))))
-; (freeze SPONGE-PROBLEM-165)
+; (freeze sp-165)
 (define-episode (sponge :ID SPONGE-166)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10226,7 +10226,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-166)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-166)
+(define-episode (sponge-PROBLEM :ID sp-166)
         (DESCRIPTION SPONGE-166)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10234,7 +10234,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE CELATA))))
-; (freeze SPONGE-PROBLEM-166)
+; (freeze sp-166)
 (define-episode (sponge :ID SPONGE-167)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10265,7 +10265,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-167)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-167)
+(define-episode (sponge-PROBLEM :ID sp-167)
         (DESCRIPTION SPONGE-167)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10273,7 +10273,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE CELATA))))
-; (freeze SPONGE-PROBLEM-167)
+; (freeze sp-167)
 (define-episode (sponge :ID SPONGE-168)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10304,7 +10304,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-168)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-168)
+(define-episode (sponge-PROBLEM :ID sp-168)
         (DESCRIPTION SPONGE-168)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10312,7 +10312,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE CELATA))))
-; (freeze SPONGE-PROBLEM-168)
+; (freeze sp-168)
 (define-episode (sponge :ID SPONGE-169)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10349,7 +10349,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-169)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-169)
+(define-episode (sponge-PROBLEM :ID sp-169)
         (DESCRIPTION SPONGE-169)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10357,7 +10357,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-169)
+; (freeze sp-169)
 (define-episode (sponge :ID SPONGE-170)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10392,7 +10392,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-170)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-170)
+(define-episode (sponge-PROBLEM :ID sp-170)
         (DESCRIPTION SPONGE-170)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10400,7 +10400,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE SCHMIDTI))))
-; (freeze SPONGE-PROBLEM-170)
+; (freeze sp-170)
 (define-episode (sponge :ID SPONGE-171)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10434,7 +10434,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-171)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-171)
+(define-episode (sponge-PROBLEM :ID sp-171)
         (DESCRIPTION SPONGE-171)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10442,7 +10442,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE SCHMIDTI))))
-; (freeze SPONGE-PROBLEM-171)
+; (freeze sp-171)
 (define-episode (sponge :ID SPONGE-172)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10476,7 +10476,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-172)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-172)
+(define-episode (sponge-PROBLEM :ID sp-172)
         (DESCRIPTION SPONGE-172)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10484,7 +10484,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE SCHMIDTI))))
-; (freeze SPONGE-PROBLEM-172)
+; (freeze sp-172)
 (define-episode (sponge :ID SPONGE-173)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10518,7 +10518,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-173)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-173)
+(define-episode (sponge-PROBLEM :ID sp-173)
         (DESCRIPTION SPONGE-173)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10526,7 +10526,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE SCHMIDTI))))
-; (freeze SPONGE-PROBLEM-173)
+; (freeze sp-173)
 (define-episode (sponge :ID SPONGE-174)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10560,7 +10560,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-174)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-174)
+(define-episode (sponge-PROBLEM :ID sp-174)
         (DESCRIPTION SPONGE-174)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10568,7 +10568,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE SCHMIDTI))))
-; (freeze SPONGE-PROBLEM-174)
+; (freeze sp-174)
 (define-episode (sponge :ID SPONGE-175)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10607,7 +10607,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-175)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-175)
+(define-episode (sponge-PROBLEM :ID sp-175)
         (DESCRIPTION SPONGE-175)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10615,7 +10615,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE LEVISPIRA))))
-; (freeze SPONGE-PROBLEM-175)
+; (freeze sp-175)
 (define-episode (sponge :ID SPONGE-176)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10655,7 +10655,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-176)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-176)
+(define-episode (sponge-PROBLEM :ID sp-176)
         (DESCRIPTION SPONGE-176)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10663,7 +10663,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE AMPLICAVATA))))
-; (freeze SPONGE-PROBLEM-176)
+; (freeze sp-176)
 (define-episode (sponge :ID SPONGE-177)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10694,7 +10694,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-177)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-177)
+(define-episode (sponge-PROBLEM :ID sp-177)
         (DESCRIPTION SPONGE-177)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10702,7 +10702,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE JANITRIX))))
-; (freeze SPONGE-PROBLEM-177)
+; (freeze sp-177)
 (define-episode (sponge :ID SPONGE-178)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10737,7 +10737,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-178)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-178)
+(define-episode (sponge-PROBLEM :ID sp-178)
         (DESCRIPTION SPONGE-178)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10745,7 +10745,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE LOBATA))))
-; (freeze SPONGE-PROBLEM-178)
+; (freeze sp-178)
 (define-episode (sponge :ID SPONGE-179)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10780,7 +10780,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-179)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-179)
+(define-episode (sponge-PROBLEM :ID sp-179)
         (DESCRIPTION SPONGE-179)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10788,7 +10788,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE RHODENSIS))))
-; (freeze SPONGE-PROBLEM-179)
+; (freeze sp-179)
 (define-episode (sponge :ID SPONGE-180)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10823,7 +10823,7 @@
         ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-180)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-180)
+(define-episode (sponge-PROBLEM :ID sp-180)
         (DESCRIPTION SPONGE-180)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10831,7 +10831,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE RHODENSIS))))
-; (freeze SPONGE-PROBLEM-180)
+; (freeze sp-180)
 (define-episode (sponge :ID SPONGE-181)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10866,7 +10866,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-181)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-181)
+(define-episode (sponge-PROBLEM :ID sp-181)
         (DESCRIPTION SPONGE-181)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10874,7 +10874,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE RHODENSIS))))
-; (freeze SPONGE-PROBLEM-181)
+; (freeze sp-181)
 (define-episode (sponge :ID SPONGE-182)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10909,7 +10909,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-182)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-182)
+(define-episode (sponge-PROBLEM :ID sp-182)
         (DESCRIPTION SPONGE-182)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10917,7 +10917,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE RHODENSIS))))
-; (freeze SPONGE-PROBLEM-182)
+; (freeze sp-182)
 (define-episode (sponge :ID SPONGE-183)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -10952,7 +10952,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-183)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-183)
+(define-episode (sponge-PROBLEM :ID sp-183)
         (DESCRIPTION SPONGE-183)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -10960,7 +10960,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS CLIONA)
                  (SPECIE RHODENSIS))))
-; (freeze SPONGE-PROBLEM-183)
+; (freeze sp-183)
 (define-episode (sponge :ID SPONGE-184)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11002,7 +11002,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON) (PREDOMINANCY OXEAS))))
 ; (freeze SPONGE-184)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-184)
+(define-episode (sponge-PROBLEM :ID sp-184)
         (DESCRIPTION SPONGE-184)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11010,7 +11010,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS SCANTILLETTA)
                  (SPECIE LEVISPIRA))))
-; (freeze SPONGE-PROBLEM-184)
+; (freeze sp-184)
 (define-episode (sponge :ID SPONGE-185)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11051,7 +11051,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-185)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-185)
+(define-episode (sponge-PROBLEM :ID sp-185)
         (DESCRIPTION SPONGE-185)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11059,7 +11059,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS PIONE)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-185)
+; (freeze sp-185)
 (define-episode (sponge :ID SPONGE-186)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11100,7 +11100,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-186)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-186)
+(define-episode (sponge-PROBLEM :ID sp-186)
         (DESCRIPTION SPONGE-186)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11108,7 +11108,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS PIONE)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-186)
+; (freeze sp-186)
 (define-episode (sponge :ID SPONGE-187)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11149,7 +11149,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-187)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-187)
+(define-episode (sponge-PROBLEM :ID sp-187)
         (DESCRIPTION SPONGE-187)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11157,7 +11157,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS PIONE)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-187)
+; (freeze sp-187)
 (define-episode (sponge :ID SPONGE-188)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11197,7 +11197,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-188)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-188)
+(define-episode (sponge-PROBLEM :ID sp-188)
         (DESCRIPTION SPONGE-188)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11205,7 +11205,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS PIONE)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-188)
+; (freeze sp-188)
 (define-episode (sponge :ID SPONGE-189)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11245,7 +11245,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-189)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-189)
+(define-episode (sponge-PROBLEM :ID sp-189)
         (DESCRIPTION SPONGE-189)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11253,7 +11253,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS PIONE)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-189)
+; (freeze sp-189)
 (define-episode (sponge :ID SPONGE-190)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11292,7 +11292,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-190)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-190)
+(define-episode (sponge-PROBLEM :ID sp-190)
         (DESCRIPTION SPONGE-190)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11300,7 +11300,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS PIONE)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-190)
+; (freeze sp-190)
 (define-episode (sponge :ID SPONGE-191)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11339,7 +11339,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-191)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-191)
+(define-episode (sponge-PROBLEM :ID sp-191)
         (DESCRIPTION SPONGE-191)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11347,7 +11347,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS PIONE)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-191)
+; (freeze sp-191)
 (define-episode (sponge :ID SPONGE-192)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11387,7 +11387,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-192)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-192)
+(define-episode (sponge-PROBLEM :ID sp-192)
         (DESCRIPTION SPONGE-192)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11395,7 +11395,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS PIONE)
                  (SPECIE VASTIFICA))))
-; (freeze SPONGE-PROBLEM-192)
+; (freeze sp-192)
 (define-episode (sponge :ID SPONGE-193)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11434,7 +11434,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-193)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-193)
+(define-episode (sponge-PROBLEM :ID sp-193)
         (DESCRIPTION SPONGE-193)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11442,7 +11442,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS DOTONA)
                  (SPECIE PULCHELLA))))
-; (freeze SPONGE-PROBLEM-193)
+; (freeze sp-193)
 (define-episode (sponge :ID SPONGE-194)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11479,7 +11479,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-194)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-194)
+(define-episode (sponge-PROBLEM :ID sp-194)
         (DESCRIPTION SPONGE-194)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11487,7 +11487,7 @@
                  (FAMILY CLIONIDAE)
                  (GENUS ALECTONA)
                  (SPECIE MILLARI))))
-; (freeze SPONGE-PROBLEM-194)
+; (freeze sp-194)
 (define-episode (sponge :ID SPONGE-195)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11537,7 +11537,7 @@
                                    (ARRANGEMENT TANGENTIAL)))))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-195)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-195)
+(define-episode (sponge-PROBLEM :ID sp-195)
         (DESCRIPTION SPONGE-195)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11545,7 +11545,7 @@
                  (FAMILY SPIRASTRELLIDAE)
                  (GENUS SPIRASTRELLA)
                  (SPECIE CUNCTATRIX))))
-; (freeze SPONGE-PROBLEM-195)
+; (freeze sp-195)
 (define-episode (sponge :ID SPONGE-196)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11588,7 +11588,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-196)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-196)
+(define-episode (sponge-PROBLEM :ID sp-196)
         (DESCRIPTION SPONGE-196)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11596,7 +11596,7 @@
                  (FAMILY SPIRASTRELLIDAE)
                  (GENUS SPIRASTRELLA)
                  (SPECIE CUNCTATRIX))))
-; (freeze SPONGE-PROBLEM-196)
+; (freeze sp-196)
 (define-episode (sponge :ID SPONGE-197)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11646,7 +11646,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-197)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-197)
+(define-episode (sponge-PROBLEM :ID sp-197)
         (DESCRIPTION SPONGE-197)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11654,7 +11654,7 @@
                  (FAMILY SPIRASTRELLIDAE)
                  (GENUS SPIRASTRELLA)
                  (SPECIE CUNCTATRIX))))
-; (freeze SPONGE-PROBLEM-197)
+; (freeze sp-197)
 (define-episode (sponge :ID SPONGE-198)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11692,7 +11692,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-198)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-198)
+(define-episode (sponge-PROBLEM :ID sp-198)
         (DESCRIPTION SPONGE-198)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11700,7 +11700,7 @@
                  (FAMILY SPIRASTRELLIDAE)
                  (GENUS SPIRASTRELLA)
                  (SPECIE SPINISPIRULIFERA))))
-; (freeze SPONGE-PROBLEM-198)
+; (freeze sp-198)
 (define-episode (sponge :ID SPONGE-199)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11740,7 +11740,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-199)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-199)
+(define-episode (sponge-PROBLEM :ID sp-199)
         (DESCRIPTION SPONGE-199)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11748,7 +11748,7 @@
                  (FAMILY TIMEIDAE)
                  (GENUS DIPLASTRELLA)
                  (SPECIE BISTELLATA))))
-; (freeze SPONGE-PROBLEM-199)
+; (freeze sp-199)
 
 (define-episode (sponge :ID SPONGE-201)
         (EXTERNAL-FEATURES
@@ -11793,7 +11793,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-201)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-201)
+(define-episode (sponge-PROBLEM :ID sp-201)
         (DESCRIPTION SPONGE-201)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11801,7 +11801,7 @@
                  (FAMILY TIMEIDAE)
                  (GENUS DIPLASTRELLA)
                  (SPECIE BISTELLATA))))
-; (freeze SPONGE-PROBLEM-201)
+; (freeze sp-201)
 (define-episode (sponge :ID SPONGE-202)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11837,7 +11837,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO) (SPICULES YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-202)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-202)
+(define-episode (sponge-PROBLEM :ID sp-202)
         (DESCRIPTION SPONGE-202)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11845,7 +11845,7 @@
                  (FAMILY TIMEIDAE)
                  (GENUS TIMEA)
                  (SPECIE HALLEZI))))
-; (freeze SPONGE-PROBLEM-202)
+; (freeze sp-202)
 (define-episode (sponge :ID SPONGE-203)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11881,7 +11881,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-203)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-203)
+(define-episode (sponge-PROBLEM :ID sp-203)
         (DESCRIPTION SPONGE-203)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11889,7 +11889,7 @@
                  (FAMILY TIMEIDAE)
                  (GENUS TIMEA)
                  (SPECIE HALLEZI))))
-; (freeze SPONGE-PROBLEM-203)
+; (freeze sp-203)
 (define-episode (sponge :ID SPONGE-204)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11930,7 +11930,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-204)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-204)
+(define-episode (sponge-PROBLEM :ID sp-204)
         (DESCRIPTION SPONGE-204)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11938,7 +11938,7 @@
                  (FAMILY TIMEIDAE)
                  (GENUS TIMEA)
                  (SPECIE UNISTELLATA))))
-; (freeze SPONGE-PROBLEM-204)
+; (freeze sp-204)
 (define-episode (sponge :ID SPONGE-205)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -11983,7 +11983,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-205)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-205)
+(define-episode (sponge-PROBLEM :ID sp-205)
         (DESCRIPTION SPONGE-205)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -11991,7 +11991,7 @@
                  (FAMILY TIMEIDAE)
                  (GENUS TIMEA)
                  (SPECIE UNISTELLATA))))
-; (freeze SPONGE-PROBLEM-205)
+; (freeze sp-205)
 (define-episode (sponge :ID SPONGE-206)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12035,7 +12035,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-206)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-206)
+(define-episode (sponge-PROBLEM :ID sp-206)
         (DESCRIPTION SPONGE-206)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12043,7 +12043,7 @@
                  (FAMILY TIMEIDAE)
                  (GENUS TIMEA)
                  (SPECIE MIXTA))))
-; (freeze SPONGE-PROBLEM-206)
+; (freeze sp-206)
 (define-episode (sponge :ID SPONGE-207)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12094,7 +12094,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-207)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-207)
+(define-episode (sponge-PROBLEM :ID sp-207)
         (DESCRIPTION SPONGE-207)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12102,7 +12102,7 @@
                  (FAMILY TIMEIDAE)
                  (GENUS TIMEA)
                  (SPECIE CUMANA))))
-; (freeze SPONGE-PROBLEM-207)
+; (freeze sp-207)
 (define-episode (sponge :ID SPONGE-208)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12157,7 +12157,7 @@
                           (CORTICAL-SPICULES YES)
                           (THICK 700))))))
 ; (freeze SPONGE-208)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-208)
+(define-episode (sponge-PROBLEM :ID sp-208)
         (DESCRIPTION SPONGE-208)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12165,7 +12165,7 @@
                  (FAMILY LATRUNCULIIDAE)
                  (GENUS LATRUNCULIA)
                  (SPECIE CITHARISTAE))))
-; (freeze SPONGE-PROBLEM-208)
+; (freeze sp-208)
 (define-episode (sponge :ID SPONGE-209)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12204,7 +12204,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON) (PREDOMINANCY STYLE))))
 ; (freeze SPONGE-209)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-209)
+(define-episode (sponge-PROBLEM :ID sp-209)
         (DESCRIPTION SPONGE-209)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12212,7 +12212,7 @@
                  (FAMILY LATRUNCULIIDAE)
                  (GENUS LATRUNCULIA)
                  (SPECIE INSIGNIS))))
-; (freeze SPONGE-PROBLEM-209)
+; (freeze sp-209)
 (define-episode (sponge :ID SPONGE-210)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12248,7 +12248,7 @@
                  (CORTEX
                   (DEFINE (CORTEX-CHARACTERISTICS) (CORTICAL-SPICULES YES))))))
 ; (freeze SPONGE-210)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-210)
+(define-episode (sponge-PROBLEM :ID sp-210)
         (DESCRIPTION SPONGE-210)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12256,7 +12256,7 @@
                  (FAMILY LATRUNCULIIDAE)
                  (GENUS LATRUNCULIA)
                  (SPECIE INSIGNIS))))
-; (freeze SPONGE-PROBLEM-210)
+; (freeze sp-210)
 (define-episode (sponge :ID SPONGE-211)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12310,7 +12310,7 @@
                  (CORTEX
                   (DEFINE (CORTEX-CHARACTERISTICS) (CORTICAL-SPICULES YES))))))
 ; (freeze SPONGE-211)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-211)
+(define-episode (sponge-PROBLEM :ID sp-211)
         (DESCRIPTION SPONGE-211)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12318,7 +12318,7 @@
                  (FAMILY LATRUNCULIIDAE)
                  (GENUS LATRUNCULIA)
                  (SPECIE BREVIS))))
-; (freeze SPONGE-PROBLEM-211)
+; (freeze sp-211)
 (define-episode (sponge :ID SPONGE-212)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12370,7 +12370,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-212)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-212)
+(define-episode (sponge-PROBLEM :ID sp-212)
         (DESCRIPTION SPONGE-212)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12378,7 +12378,7 @@
                  (FAMILY LATRUNCULIIDAE)
                  (GENUS PODOSPONGIA)
                  (SPECIE LOVENII))))
-; (freeze SPONGE-PROBLEM-212)
+; (freeze sp-212)
 
 
 
@@ -12438,7 +12438,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-213)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-213)
+(define-episode (sponge-PROBLEM :ID sp-213)
         (DESCRIPTION SPONGE-213)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12446,7 +12446,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-213)
+; (freeze sp-213)
 (define-episode (sponge :ID SPONGE-214)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12500,7 +12500,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-214)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-214)
+(define-episode (sponge-PROBLEM :ID sp-214)
         (DESCRIPTION SPONGE-214)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12508,7 +12508,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-214)
+; (freeze sp-214)
 (define-episode (sponge :ID SPONGE-215)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12562,7 +12562,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-215)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-215)
+(define-episode (sponge-PROBLEM :ID sp-215)
         (DESCRIPTION SPONGE-215)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12570,7 +12570,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-215)
+; (freeze sp-215)
 (define-episode (sponge :ID SPONGE-216)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12624,7 +12624,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-216)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-216)
+(define-episode (sponge-PROBLEM :ID sp-216)
         (DESCRIPTION SPONGE-216)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12632,7 +12632,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-216)
+; (freeze sp-216)
 (define-episode (sponge :ID SPONGE-217)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12686,7 +12686,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-217)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-217)
+(define-episode (sponge-PROBLEM :ID sp-217)
         (DESCRIPTION SPONGE-217)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12694,7 +12694,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-217)
+; (freeze sp-217)
 (define-episode (sponge :ID SPONGE-218)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12750,7 +12750,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-218)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-218)
+(define-episode (sponge-PROBLEM :ID sp-218)
         (DESCRIPTION SPONGE-218)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12758,7 +12758,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-218)
+; (freeze sp-218)
 (define-episode (sponge :ID SPONGE-219)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12812,7 +12812,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-219)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-219)
+(define-episode (sponge-PROBLEM :ID sp-219)
         (DESCRIPTION SPONGE-219)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12820,7 +12820,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-219)
+; (freeze sp-219)
 (define-episode (sponge :ID SPONGE-220)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12874,7 +12874,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-220)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-220)
+(define-episode (sponge-PROBLEM :ID sp-220)
         (DESCRIPTION SPONGE-220)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12882,7 +12882,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-220)
+; (freeze sp-220)
 (define-episode (sponge :ID SPONGE-221)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12936,7 +12936,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-221)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-221)
+(define-episode (sponge-PROBLEM :ID sp-221)
         (DESCRIPTION SPONGE-221)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12944,7 +12944,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-221)
+; (freeze sp-221)
 (define-episode (sponge :ID SPONGE-222)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -12987,7 +12987,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-222)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-222)
+(define-episode (sponge-PROBLEM :ID sp-222)
         (DESCRIPTION SPONGE-222)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -12995,7 +12995,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-222)
+; (freeze sp-222)
 (define-episode (sponge :ID SPONGE-223)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13036,7 +13036,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-223)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-223)
+(define-episode (sponge-PROBLEM :ID sp-223)
         (DESCRIPTION SPONGE-223)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13044,7 +13044,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VERRUCOSA))))
-; (freeze SPONGE-PROBLEM-223)
+; (freeze sp-223)
 (define-episode (sponge :ID SPONGE-224)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13092,7 +13092,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-224)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-224)
+(define-episode (sponge-PROBLEM :ID sp-224)
         (DESCRIPTION SPONGE-224)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13100,7 +13100,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE DAMICORNIS))))
-; (freeze SPONGE-PROBLEM-224)
+; (freeze sp-224)
 (define-episode (sponge :ID SPONGE-225)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13142,7 +13142,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON) (PREDOMINANCY STYLE))))
 ; (freeze SPONGE-225)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-225)
+(define-episode (sponge-PROBLEM :ID sp-225)
         (DESCRIPTION SPONGE-225)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13150,7 +13150,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE DAMICORNIS))))
-; (freeze SPONGE-PROBLEM-225)
+; (freeze sp-225)
 (define-episode (sponge :ID SPONGE-226)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13187,7 +13187,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-226)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-226)
+(define-episode (sponge-PROBLEM :ID sp-226)
         (DESCRIPTION SPONGE-226)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13195,7 +13195,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE DAMICORNIS))))
-; (freeze SPONGE-PROBLEM-226)
+; (freeze sp-226)
 (define-episode (sponge :ID SPONGE-227)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13234,7 +13234,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-227)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-227)
+(define-episode (sponge-PROBLEM :ID sp-227)
         (DESCRIPTION SPONGE-227)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13242,7 +13242,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE CENTROTYLOTA))))
-; (freeze SPONGE-PROBLEM-227)
+; (freeze sp-227)
 (define-episode (sponge :ID SPONGE-228)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13284,7 +13284,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-228)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-228)
+(define-episode (sponge-PROBLEM :ID sp-228)
         (DESCRIPTION SPONGE-228)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13292,7 +13292,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE POLYPOIDES))))
-; (freeze SPONGE-PROBLEM-228)
+; (freeze sp-228)
 (define-episode (sponge :ID SPONGE-229)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13334,7 +13334,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-229)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-229)
+(define-episode (sponge-PROBLEM :ID sp-229)
         (DESCRIPTION SPONGE-229)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13342,7 +13342,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE POLYPOIDES))))
-; (freeze SPONGE-PROBLEM-229)
+; (freeze sp-229)
 (define-episode (sponge :ID SPONGE-230)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13382,7 +13382,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)
                          (DISTRIBUTION (DEFINE (SET) TRACT NODE)))))
 ; (freeze SPONGE-230)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-230)
+(define-episode (sponge-PROBLEM :ID sp-230)
         (DESCRIPTION SPONGE-230)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13390,7 +13390,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE SALICINA))))
-; (freeze SPONGE-PROBLEM-230)
+; (freeze sp-230)
 (define-episode (sponge :ID SPONGE-231)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13432,7 +13432,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-231)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-231)
+(define-episode (sponge-PROBLEM :ID sp-231)
         (DESCRIPTION SPONGE-231)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13440,7 +13440,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE VACELETI))))
-; (freeze SPONGE-PROBLEM-231)
+; (freeze sp-231)
 (define-episode (sponge :ID SPONGE-232)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13478,7 +13478,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-232)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-232)
+(define-episode (sponge-PROBLEM :ID sp-232)
         (DESCRIPTION SPONGE-232)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13486,7 +13486,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS AXINELLA)
                  (SPECIE PUMILA))))
-; (freeze SPONGE-PROBLEM-232)
+; (freeze sp-232)
 (define-episode (sponge :ID SPONGE-233)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13532,7 +13532,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO) (SPICULES NO)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-233)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-233)
+(define-episode (sponge-PROBLEM :ID sp-233)
         (DESCRIPTION SPONGE-233)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13540,7 +13540,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS ACANTHELLA)
                  (SPECIE ACUTA))))
-; (freeze SPONGE-PROBLEM-233)
+; (freeze sp-233)
 (define-episode (sponge :ID SPONGE-234)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13591,7 +13591,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO) (SPICULES NO)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-234)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-234)
+(define-episode (sponge-PROBLEM :ID sp-234)
         (DESCRIPTION SPONGE-234)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13599,7 +13599,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS ACANTHELLA)
                  (SPECIE ACUTA))))
-; (freeze SPONGE-PROBLEM-234)
+; (freeze sp-234)
 (define-episode (sponge :ID SPONGE-235)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13651,7 +13651,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO) (SPICULES NO)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-235)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-235)
+(define-episode (sponge-PROBLEM :ID sp-235)
         (DESCRIPTION SPONGE-235)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13659,7 +13659,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS ACANTHELLA)
                  (SPECIE ACUTA))))
-; (freeze SPONGE-PROBLEM-235)
+; (freeze sp-235)
 (define-episode (sponge :ID SPONGE-236)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13710,7 +13710,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO) (SPICULES NO)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-236)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-236)
+(define-episode (sponge-PROBLEM :ID sp-236)
         (DESCRIPTION SPONGE-236)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13718,7 +13718,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS ACANTHELLA)
                  (SPECIE ACUTA))))
-; (freeze SPONGE-PROBLEM-236)
+; (freeze sp-236)
 (define-episode (sponge :ID SPONGE-237)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13769,7 +13769,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO) (SPICULES NO)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-237)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-237)
+(define-episode (sponge-PROBLEM :ID sp-237)
         (DESCRIPTION SPONGE-237)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13777,7 +13777,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS ACANTHELLA)
                  (SPECIE ACUTA))))
-; (freeze SPONGE-PROBLEM-237)
+; (freeze sp-237)
 (define-episode (sponge :ID SPONGE-238)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13829,7 +13829,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO) (SPICULES NO)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-238)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-238)
+(define-episode (sponge-PROBLEM :ID sp-238)
         (DESCRIPTION SPONGE-238)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13837,7 +13837,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS ACANTHELLA)
                  (SPECIE ACUTA))))
-; (freeze SPONGE-PROBLEM-238)
+; (freeze sp-238)
 (define-episode (sponge :ID SPONGE-239)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13887,7 +13887,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES NO)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-239)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-239)
+(define-episode (sponge-PROBLEM :ID sp-239)
         (DESCRIPTION SPONGE-239)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13895,7 +13895,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS ACANTHELLA)
                  (SPECIE ACUTA))))
-; (freeze SPONGE-PROBLEM-239)
+; (freeze sp-239)
 (define-episode (sponge :ID SPONGE-240)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13938,7 +13938,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-240)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-240)
+(define-episode (sponge-PROBLEM :ID sp-240)
         (DESCRIPTION SPONGE-240)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -13946,7 +13946,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS ACANTHELLA)
                  (SPECIE ACUTA))))
-; (freeze SPONGE-PROBLEM-240)
+; (freeze sp-240)
 (define-episode (sponge :ID SPONGE-241)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -13995,7 +13995,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-241)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-241)
+(define-episode (sponge-PROBLEM :ID sp-241)
         (DESCRIPTION SPONGE-241)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14003,7 +14003,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS PHAKELLIA)
                  (SPECIE ROBUSTA))))
-; (freeze SPONGE-PROBLEM-241)
+; (freeze sp-241)
 (define-episode (sponge :ID SPONGE-242)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14058,7 +14058,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-242)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-242)
+(define-episode (sponge-PROBLEM :ID sp-242)
         (DESCRIPTION SPONGE-242)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14066,7 +14066,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS PHAKELLIA)
                  (SPECIE VENTILABRUM))))
-; (freeze SPONGE-PROBLEM-242)
+; (freeze sp-242)
 (define-episode (sponge :ID SPONGE-243)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14117,7 +14117,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-243)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-243)
+(define-episode (sponge-PROBLEM :ID sp-243)
         (DESCRIPTION SPONGE-243)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14125,7 +14125,7 @@
                  (FAMILY AXINELLIDAE)
                  (GENUS PHAKELLIA)
                  (SPECIE RUGOSA))))
-; (freeze SPONGE-PROBLEM-243)
+; (freeze sp-243)
 (define-episode (sponge :ID SPONGE-244)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14173,7 +14173,7 @@
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON)))
         (ANATOMY (DEFINE (ANATOMIC-FEATURES) (ORNAMENTATION SMOOTH-ORNAMENTATION))))
 ; (freeze SPONGE-244)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-244)
+(define-episode (sponge-PROBLEM :ID sp-244)
         (DESCRIPTION SPONGE-244)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14181,7 +14181,7 @@
                  (FAMILY HEMIASTERELLIDAE)
                  (GENUS STELLIGERA)
                  (SPECIE RIGIDA))))
-; (freeze SPONGE-PROBLEM-244)
+; (freeze sp-244)
 (define-episode (sponge :ID SPONGE-245)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14226,7 +14226,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-245)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-245)
+(define-episode (sponge-PROBLEM :ID sp-245)
         (DESCRIPTION SPONGE-245)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14234,7 +14234,7 @@
                  (FAMILY HEMIASTERELLIDAE)
                  (GENUS ADREUS)
                  (SPECIE FASCICULARIS))))
-; (freeze SPONGE-PROBLEM-245)
+; (freeze sp-245)
 (define-episode (sponge :ID SPONGE-246)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14278,7 +14278,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-246)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-246)
+(define-episode (sponge-PROBLEM :ID sp-246)
         (DESCRIPTION SPONGE-246)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14286,7 +14286,7 @@
                  (FAMILY HEMIASTERELLIDAE)
                  (GENUS PARATIMEA)
                  (SPECIE CONSTELLATA))))
-; (freeze SPONGE-PROBLEM-246)
+; (freeze sp-246)
 (define-episode (sponge :ID SPONGE-247)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14333,7 +14333,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-247)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-247)
+(define-episode (sponge-PROBLEM :ID sp-247)
         (DESCRIPTION SPONGE-247)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14341,7 +14341,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPAILIA)
                  (SPECIE VIMINALIS))))
-; (freeze SPONGE-PROBLEM-247)
+; (freeze sp-247)
 (define-episode (sponge :ID SPONGE-248)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14395,7 +14395,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-248)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-248)
+(define-episode (sponge-PROBLEM :ID sp-248)
         (DESCRIPTION SPONGE-248)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14403,7 +14403,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPAILIA)
                  (SPECIE VIMINALIS))))
-; (freeze SPONGE-PROBLEM-248)
+; (freeze sp-248)
 (define-episode (sponge :ID SPONGE-249)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14450,7 +14450,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-249)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-249)
+(define-episode (sponge-PROBLEM :ID sp-249)
         (DESCRIPTION SPONGE-249)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14458,7 +14458,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPAILIA)
                  (SPECIE VIMINALIS))))
-; (freeze SPONGE-PROBLEM-249)
+; (freeze sp-249)
 (define-episode (sponge :ID SPONGE-250)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14510,7 +14510,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-250)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-250)
+(define-episode (sponge-PROBLEM :ID sp-250)
         (DESCRIPTION SPONGE-250)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14518,7 +14518,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-250)
+; (freeze sp-250)
 (define-episode (sponge :ID SPONGE-251)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14570,7 +14570,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-251)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-251)
+(define-episode (sponge-PROBLEM :ID sp-251)
         (DESCRIPTION SPONGE-251)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14578,7 +14578,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-251)
+; (freeze sp-251)
 (define-episode (sponge :ID SPONGE-252)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14630,7 +14630,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-252)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-252)
+(define-episode (sponge-PROBLEM :ID sp-252)
         (DESCRIPTION SPONGE-252)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14638,7 +14638,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-252)
+; (freeze sp-252)
 (define-episode (sponge :ID SPONGE-253)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14690,7 +14690,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-253)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-253)
+(define-episode (sponge-PROBLEM :ID sp-253)
         (DESCRIPTION SPONGE-253)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14698,7 +14698,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-253)
+; (freeze sp-253)
 (define-episode (sponge :ID SPONGE-254)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14750,7 +14750,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-254)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-254)
+(define-episode (sponge-PROBLEM :ID sp-254)
         (DESCRIPTION SPONGE-254)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14758,7 +14758,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-254)
+; (freeze sp-254)
 (define-episode (sponge :ID SPONGE-255)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14810,7 +14810,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-255)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-255)
+(define-episode (sponge-PROBLEM :ID sp-255)
         (DESCRIPTION SPONGE-255)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14818,7 +14818,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-255)
+; (freeze sp-255)
 (define-episode (sponge :ID SPONGE-256)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14870,7 +14870,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-256)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-256)
+(define-episode (sponge-PROBLEM :ID sp-256)
         (DESCRIPTION SPONGE-256)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14878,7 +14878,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-256)
+; (freeze sp-256)
 (define-episode (sponge :ID SPONGE-257)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14930,7 +14930,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-257)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-257)
+(define-episode (sponge-PROBLEM :ID sp-257)
         (DESCRIPTION SPONGE-257)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14938,7 +14938,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-257)
+; (freeze sp-257)
 (define-episode (sponge :ID SPONGE-258)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -14990,7 +14990,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-258)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-258)
+(define-episode (sponge-PROBLEM :ID sp-258)
         (DESCRIPTION SPONGE-258)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -14998,7 +14998,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-258)
+; (freeze sp-258)
 (define-episode (sponge :ID SPONGE-259)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15050,7 +15050,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-259)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-259)
+(define-episode (sponge-PROBLEM :ID sp-259)
         (DESCRIPTION SPONGE-259)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15058,7 +15058,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-259)
+; (freeze sp-259)
 (define-episode (sponge :ID SPONGE-260)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15102,7 +15102,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-260)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-260)
+(define-episode (sponge-PROBLEM :ID sp-260)
         (DESCRIPTION SPONGE-260)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15110,7 +15110,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RASPACIONA)
                  (SPECIE ACULEATA))))
-; (freeze SPONGE-PROBLEM-260)
+; (freeze sp-260)
 (define-episode (sponge :ID SPONGE-261)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15153,7 +15153,7 @@
                           (SKELETON ABSENT-SKELETON)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-261)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-261)
+(define-episode (sponge-PROBLEM :ID sp-261)
         (DESCRIPTION SPONGE-261)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15161,7 +15161,7 @@
                  (FAMILY RASPAILIIDAE)
                  (GENUS RHAPHIDECTYON)
                  (SPECIE SPINOSUM))))
-; (freeze SPONGE-PROBLEM-261)
+; (freeze sp-261)
 (define-episode (sponge :ID SPONGE-262)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15213,7 +15213,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-262)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-262)
+(define-episode (sponge-PROBLEM :ID sp-262)
         (DESCRIPTION SPONGE-262)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15221,7 +15221,7 @@
                  (FAMILY AGELASIDAE)
                  (GENUS AGELAS)
                  (SPECIE OROIDES))))
-; (freeze SPONGE-PROBLEM-262)
+; (freeze sp-262)
 (define-episode (sponge :ID SPONGE-263)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15271,7 +15271,7 @@
                  (ECTOSOME (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE NO)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-263)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-263)
+(define-episode (sponge-PROBLEM :ID sp-263)
         (DESCRIPTION SPONGE-263)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15279,7 +15279,7 @@
                  (FAMILY AGELASIDAE)
                  (GENUS AGELAS)
                  (SPECIE OROIDES))))
-; (freeze SPONGE-PROBLEM-263)
+; (freeze sp-263)
 (define-episode (sponge :ID SPONGE-264)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15333,7 +15333,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (ABSENT-CORTEX))))))
 ; (freeze SPONGE-264)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-264)
+(define-episode (sponge-PROBLEM :ID sp-264)
         (DESCRIPTION SPONGE-264)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15341,7 +15341,7 @@
                  (FAMILY EURYPONIDAE)
                  (GENUS EURYPON)
                  (SPECIE CINTUM))))
-; (freeze SPONGE-PROBLEM-264)
+; (freeze sp-264)
 (define-episode (sponge :ID SPONGE-265)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15389,7 +15389,7 @@
                                    (ASPECT ORDERED)))))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-265)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-265)
+(define-episode (sponge-PROBLEM :ID sp-265)
         (DESCRIPTION SPONGE-265)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15397,7 +15397,7 @@
                  (FAMILY EURYPONIDAE)
                  (GENUS EURYPON)
                  (SPECIE CORONULA))))
-; (freeze SPONGE-PROBLEM-265)
+; (freeze sp-265)
 (define-episode (sponge :ID SPONGE-266)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15427,7 +15427,7 @@
                  (SCLEROSPONGIDS NO)
                  (UNIFORM-LENGTH YES))))
 ; (freeze SPONGE-266)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-266)
+(define-episode (sponge-PROBLEM :ID sp-266)
         (DESCRIPTION SPONGE-266)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15435,7 +15435,7 @@
                  (FAMILY EURYPONIDAE)
                  (GENUS EURYPON)
                  (SPECIE TOPSENTI))))
-; (freeze SPONGE-PROBLEM-266)
+; (freeze sp-266)
 (define-episode (sponge :ID SPONGE-267)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15470,7 +15470,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-267)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-267)
+(define-episode (sponge-PROBLEM :ID sp-267)
         (DESCRIPTION SPONGE-267)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15478,7 +15478,7 @@
                  (FAMILY EURYPONIDAE)
                  (GENUS EURYPON)
                  (SPECIE LACAZEI))))
-; (freeze SPONGE-PROBLEM-267)
+; (freeze sp-267)
 (define-episode (sponge :ID SPONGE-268)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15509,7 +15509,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-268)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-268)
+(define-episode (sponge-PROBLEM :ID sp-268)
         (DESCRIPTION SPONGE-268)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15517,7 +15517,7 @@
                  (FAMILY EURYPONIDAE)
                  (GENUS EURYPON)
                  (SPECIE CLAVATUM))))
-; (freeze SPONGE-PROBLEM-268)
+; (freeze sp-268)
 (define-episode (sponge :ID SPONGE-269)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15542,7 +15542,7 @@
                  (SCLEROSPONGIDS NO)
                  (UNIFORM-LENGTH NO))))
 ; (freeze SPONGE-269)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-269)
+(define-episode (sponge-PROBLEM :ID sp-269)
         (DESCRIPTION SPONGE-269)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15550,7 +15550,7 @@
                  (FAMILY EURYPONIDAE)
                  (GENUS EURYPON)
                  (SPECIE MAJOR))))
-; (freeze SPONGE-PROBLEM-269)
+; (freeze sp-269)
 (define-episode (sponge :ID SPONGE-270)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15583,7 +15583,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         )
 ; (freeze SPONGE-270)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-270)
+(define-episode (sponge-PROBLEM :ID sp-270)
         (DESCRIPTION SPONGE-270)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15591,7 +15591,7 @@
                  (FAMILY EURYPONIDAE)
                  (GENUS TRYCHEURYPON)
                  (SPECIE VIRIDE))))
-; (freeze SPONGE-PROBLEM-270)
+; (freeze sp-270)
 (define-episode (sponge :ID SPONGE-271)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15631,7 +15631,7 @@
                  ; (TRACTS-SKELETON (DEFINE (NO-TRACTS-SKELETON)))
         )
 ; (freeze SPONGE-271)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-271)
+(define-episode (sponge-PROBLEM :ID sp-271)
         (DESCRIPTION SPONGE-271)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15639,7 +15639,7 @@
                  (FAMILY EURYPONIDAE)
                  (GENUS rhacheurypon)  ;; era RHABDEURYPON
                  (SPECIE SPINOSUM))))
-; (freeze SPONGE-PROBLEM-271)
+; (freeze sp-271)
 (define-episode (sponge :ID SPONGE-272)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15674,7 +15674,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         (TRACTS-SKELETON (DEFINE (TRACTS-SKELETON))))
 ; (freeze SPONGE-272)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-272)
+(define-episode (sponge-PROBLEM :ID sp-272)
         (DESCRIPTION SPONGE-272)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15682,7 +15682,7 @@
                  (FAMILY BUBARIDAE)
                  (GENUS BUBARIS)
                  (SPECIE CARCISIS))))
-; (freeze SPONGE-PROBLEM-272)
+; (freeze sp-272)
 (define-episode (sponge :ID SPONGE-273)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15709,7 +15709,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         )
 ; (freeze SPONGE-273)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-273)
+(define-episode (sponge-PROBLEM :ID sp-273)
         (DESCRIPTION SPONGE-273)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15717,7 +15717,7 @@
                  (FAMILY BUBARIDAE)
                  (GENUS BUBARIS)
                  (SPECIE SUBTYLA))))
-; (freeze SPONGE-PROBLEM-273)
+; (freeze sp-273)
 (define-episode (sponge :ID SPONGE-274)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15747,7 +15747,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-274)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-274)
+(define-episode (sponge-PROBLEM :ID sp-274)
         (DESCRIPTION SPONGE-274)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15755,7 +15755,7 @@
                  (FAMILY BUBARIDAE)
                  (GENUS MONOCREPIDIUM)
                  (SPECIE VERMICULATUM))))
-; (freeze SPONGE-PROBLEM-274)
+; (freeze sp-274)
 (define-episode (sponge :ID SPONGE-275)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15783,7 +15783,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         )
 ; (freeze SPONGE-275)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-275)
+(define-episode (sponge-PROBLEM :ID sp-275)
         (DESCRIPTION SPONGE-275)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15791,7 +15791,7 @@
                  (FAMILY BUBARIDAE)
                  (GENUS RHABDOPLOCA)
                  (SPECIE CURVISPICULIFERA))))
-; (freeze SPONGE-PROBLEM-275)
+; (freeze sp-275)
 (define-episode (sponge :ID SPONGE-276)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15823,7 +15823,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-276)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-276)
+(define-episode (sponge-PROBLEM :ID sp-276)
         (DESCRIPTION SPONGE-276)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15831,7 +15831,7 @@
                  (FAMILY BUBARIDAE)
                  (GENUS HYMERHABDIA)
                  (SPECIE OXYTRUNCA))))
-; (freeze SPONGE-PROBLEM-276)
+; (freeze sp-276)
 (define-episode (sponge :ID SPONGE-277)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15870,7 +15870,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-277)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-277)
+(define-episode (sponge-PROBLEM :ID sp-277)
         (DESCRIPTION SPONGE-277)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15878,7 +15878,7 @@
                  (FAMILY DESMOXYDAE)
                  (GENUS HALICNEMIA)
                  (SPECIE PATERA))))
-; (freeze SPONGE-PROBLEM-277)
+; (freeze sp-277)
 (define-episode (sponge :ID SPONGE-278)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15919,7 +15919,7 @@
                  (ECTOSOME NO-VISIBLE)
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-278)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-278)
+(define-episode (sponge-PROBLEM :ID sp-278)
         (DESCRIPTION SPONGE-278)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15927,7 +15927,7 @@
                  (FAMILY DESMOXYDAE)
                  (GENUS HALICNEMIA)
                  (SPECIE PATERA))))
-; (freeze SPONGE-PROBLEM-278)
+; (freeze sp-278)
 (define-episode (sponge :ID SPONGE-279)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -15967,7 +15967,7 @@
                   (DEFINE (VISIBLE-ECTOSOME) (SEPARABLE YES) (SPICULES YES)))
                  (CORTEX (DEFINE (CORTEX-CHARACTERISTICS))))))
 ; (freeze SPONGE-279)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-279)
+(define-episode (sponge-PROBLEM :ID sp-279)
         (DESCRIPTION SPONGE-279)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -15975,7 +15975,7 @@
                  (FAMILY RHABDEREMIIDAE)
                  (GENUS RHABDEREMIA)
                  (SPECIE MINUTULA))))
-; (freeze SPONGE-PROBLEM-279)
+; (freeze sp-279)
 (define-episode (sponge :ID SPONGE-280)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
@@ -16005,7 +16005,7 @@
         ; (FIBROUS-SKELETON (DEFINE (NO-FIBROUS-SKELETON)))
         )
 ; (freeze SPONGE-280)
-(define-episode (sponge-PROBLEM :ID SPONGE-PROBLEM-280)
+(define-episode (sponge-PROBLEM :ID sp-280)
         (DESCRIPTION SPONGE-280)
         (SOLUTION
          (DEFINE (sponge-solution)
@@ -16013,4 +16013,4 @@
                  (FAMILY RHABDEREMIIDAE)
                  (GENUS RHABDEREMIA)
                  (SPECIE LIPORHABDA))))
-; (freeze SPONGE-PROBLEM-280)
+; (freeze sp-280)
