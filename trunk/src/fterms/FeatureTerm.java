@@ -52,6 +52,35 @@ public abstract class FeatureTerm {
         return false;
     }
 
+    public List<FeatureTerm> featureValues(String feature) throws FeatureTermException {
+        FeatureTerm v = featureValue(feature);
+        if (v==null) return new LinkedList<FeatureTerm>();
+        if (v instanceof SetFeatureTerm) {
+            List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+            l.addAll(((SetFeatureTerm)v).getSetValues());
+            return l;
+        } else {
+            List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+            l.add(v);
+            return l;
+        }
+    }
+
+    public List<FeatureTerm> featureValues(Symbol feature) throws FeatureTermException {
+        FeatureTerm v = featureValue(feature);
+        if (v==null) return new LinkedList<FeatureTerm>();
+        if (v instanceof SetFeatureTerm) {
+            List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+            l.addAll(((SetFeatureTerm)v).getSetValues());
+            return l;
+        } else {
+            List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+            l.add(v);
+            return l;
+        }
+    }
+
+
     public FeatureTerm featureValue(String feature) throws FeatureTermException {
         throw new FeatureTermException("FeatureValue of non-term: " + this.getClass().getName() + " -> " + feature);
     }
