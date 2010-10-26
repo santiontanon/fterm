@@ -64,15 +64,15 @@ public class PropertiesVisualizer extends Display {
     public static final String EDGES = "graph.edges";
 
 
-    public static JFrame newWindow(String name,int dx,int dy,List<FeatureTerm> terms,FTKBase dm, Path sp, Path dp,boolean separateConstants) {
-        PropertiesVisualizer ad = new PropertiesVisualizer(dx,dy,terms,dm, sp, dp,separateConstants);
+    public static JFrame newWindow(String name,int dx,int dy,List<FeatureTerm> terms,FTKBase dm,boolean separateConstants) {
+        PropertiesVisualizer ad = new PropertiesVisualizer(dx,dy,terms,dm,separateConstants);
         JFrame frame = new JFrame(name);
         frame.getContentPane().add(ad);
         frame.pack();
         return frame;
     }
 
-    public PropertiesVisualizer(int dx,int dy,List<FeatureTerm> terms,FTKBase dm, Path sp, Path dp, boolean separateConstants) {
+    public PropertiesVisualizer(int dx,int dy,List<FeatureTerm> terms,FTKBase dm, boolean separateConstants) {
         // initialize display and data
         super(new Visualization());
         try {
@@ -149,7 +149,7 @@ public class PropertiesVisualizer extends Display {
         addControlListener(new AggregateDragControl());
         addControlListener(new ZoomControl());
         addControlListener(new PanControl());
-        addControlListener(new PropertiesSelectControl(terms,dm,sp,dp));
+        addControlListener(new PropertiesSelectControl(terms,dm));
 
 //      ActionList draw = new ActionList();
 //	draw.add(new GraphDistanceFilter(GRAPH, 50));
@@ -260,7 +260,6 @@ class PropertiesSelectControl extends ControlAdapter {
     public VisualItem menuItem = null;
     public List<FeatureTerm> terms = null;
     public FTKBase dm = null;
-    public Path sp = null, dp = null;
 
     protected VisualItem activeItem;
     protected Point2D down = new Point2D.Double();
@@ -268,11 +267,9 @@ class PropertiesSelectControl extends ControlAdapter {
     protected boolean dragged;
     final JPopupMenu menu = new JPopupMenu();
 
-    public PropertiesSelectControl(List<FeatureTerm> t, FTKBase a_dm, Path a_sp, Path a_dp) {
+    public PropertiesSelectControl(List<FeatureTerm> t, FTKBase a_dm) {
         terms = t;
         dm = a_dm;
-        sp = a_sp;
-        dp = a_dp;
     }
 
     public void itemEntered(VisualItem item, MouseEvent e) {
