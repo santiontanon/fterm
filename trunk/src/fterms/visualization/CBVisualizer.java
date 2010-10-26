@@ -315,7 +315,7 @@ class PropertiesFormalVisualizerActionListener implements ActionListener {
         FeatureTerm t = control.terms.get(index);
         try {
             List<FeatureTerm> properties = Disintegration.disintegrate(t.readPath(control.dp), control.dm, t.getSort().getOntology());
-            JFrame frame = PropertiesVisualizer.newWindow("Properties",640,480,properties,control.dm,control.sp,control.dp,true);
+            JFrame frame = PropertiesVisualizer.newWindow("Properties",640,480,properties,control.dm,true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setVisible(true);
 
@@ -338,7 +338,7 @@ class PropertiesFastVisualizerActionListener implements ActionListener {
         FeatureTerm t = control.terms.get(index);
         try {
             List<FeatureTerm> properties = Disintegration.disintegrateFast(t.readPath(control.dp), control.dm, t.getSort().getOntology());
-            JFrame frame = PropertiesVisualizer.newWindow("Properties",640,480,properties,control.dm,control.sp,control.dp,true);
+            JFrame frame = PropertiesVisualizer.newWindow("Properties",640,480,properties,control.dm,true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setVisible(true);
 
