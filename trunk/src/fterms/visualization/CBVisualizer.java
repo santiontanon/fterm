@@ -252,7 +252,7 @@ class TermSelectControl extends ControlAdapter {
                     int index = (Integer)item.get("id");
                     FeatureTerm t = terms.get(index);
                     JFrame frame;
-                    frame = FTVisualizer.newWindow("FTVisualizer demo", 640, 480, t, dm, true);
+                    frame = FTVisualizer.newWindow("FTVisualizer demo", 640, 480, t, dm, true, true);
                     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     frame.setVisible(true);
                 } catch (FeatureTermException ex) {
@@ -294,7 +294,7 @@ class TermVisualizerActionListener implements ActionListener {
             // Display the pop up!!!
             int index = (Integer) control.menuItem.get("id");
             FeatureTerm t = control.terms.get(index);
-            JFrame frame = FTVisualizer.newWindow("Term Visualizer", 640, 480, t, control.dm, true);
+            JFrame frame = FTVisualizer.newWindow("Term Visualizer", 640, 480, t, control.dm, true, true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setVisible(true);
         } catch (FeatureTermException ex) {

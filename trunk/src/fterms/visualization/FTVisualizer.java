@@ -66,8 +66,8 @@ public class FTVisualizer extends Display {
     public static final String AGGR = "aggregates";
 
     
-    public static JFrame newWindow(String name,int dx,int dy,FeatureTerm f,FTKBase dm, boolean separateConstants) throws FeatureTermException {
-        FTVisualizer ad = new FTVisualizer(dx,dy,f,dm, separateConstants);
+    public static JFrame newWindow(String name,int dx,int dy,FeatureTerm f,FTKBase dm, boolean separateConstants, boolean groupSets) throws FeatureTermException {
+        FTVisualizer ad = new FTVisualizer(dx,dy,f,dm, separateConstants, groupSets);
         JFrame frame = new JFrame(name);
         frame.getContentPane().add(ad);
         frame.pack();
@@ -75,10 +75,10 @@ public class FTVisualizer extends Display {
     }
 
 
-    public FTVisualizer(int dx,int dy,FeatureTerm f,FTKBase dm, boolean separateConstants) throws FeatureTermException {
+    public FTVisualizer(int dx,int dy,FeatureTerm f,FTKBase dm, boolean separateConstants, boolean groupSets) throws FeatureTermException {
         // initialize display and data
         super(new Visualization());
-        initDataGroups(f,dm,separateConstants);
+        initDataGroups(f,dm,separateConstants, groupSets);
 
         // set up the renderers
         // draw the nodes as basic shapes
@@ -158,7 +158,7 @@ public class FTVisualizer extends Display {
         m_vis.run("layout");
     }
 
-    private void initDataGroups(FeatureTerm f,FTKBase dm, boolean separateConstants) throws FeatureTermException {
+    private void initDataGroups(FeatureTerm f,FTKBase dm, boolean separateConstants, boolean groupSets) throws FeatureTermException {
         Graph g = new Graph(true);
         
         g.addColumn("name", String.class);
@@ -218,7 +218,7 @@ public class FTVisualizer extends Display {
         at.addColumn("id", int.class);
 
         // Create sets:
-        {
+        if (groupSets) {
             int setID = 0;
             List<SetFeatureTerm> sets = FTRefinement.sets(f);
             for(SetFeatureTerm set:sets) {
