@@ -43,6 +43,19 @@ public class FTAntiunification {
         return null;
     } // simple_antiunification
 
+    public static FeatureTerm simpleAntiunification(List<FeatureTerm> objects, FeatureTerm startingPoint, Ontology ontology, FTKBase domain_model) throws FeatureTermException {
+        List<FeatureTerm> results;
+        List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+        l.add(startingPoint);
+
+        results = antiunification(objects, 0, l, ontology, domain_model, true, VERSION_FAST);
+
+        if (results != null && results.size() > 0) {
+            return results.remove(0);
+        }
+        return null;
+    } // simple_antiunification
+
     public static List<FeatureTerm> antiunification(List<FeatureTerm> objects, int language, List<FeatureTerm> initial_terms, Ontology o, FTKBase dm, boolean separation_test, int version) throws FeatureTermException {
         List<FeatureTerm> todelete_g = new LinkedList<FeatureTerm>(), todelete_gtp = new LinkedList<FeatureTerm>(), generalizations_to_process = new LinkedList<FeatureTerm>();
         List<FeatureTerm> next_nodes = new LinkedList<FeatureTerm>(), tmp = null;

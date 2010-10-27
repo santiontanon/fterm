@@ -158,10 +158,10 @@ public abstract class Hypothesis {
                         //						System.out.println(d.toStringNOOS(domain_model));
                         break;
                     } else {
-                        //						System.out.println("ok");
+                        // System.out.println("ok");
                     }
                 }
-                //				System.out.println(c1);
+//                System.out.println("C1: " + c1);
 
                 if (c1) {
                     for (FeatureTerm d : negative) {
@@ -172,8 +172,8 @@ public abstract class Hypothesis {
                             //							System.out.println("ok");
                         }
                     }
+//                    System.out.println("C2: " + c2);
                 }
-                //				System.out.println(c2);
 
                 if (c1 && c2) {
                     pattern = f2;
@@ -199,8 +199,7 @@ public abstract class Hypothesis {
             //			System.out.flush();
         } while (!end);
 
-//		System.out.println("done...");
-//		System.out.flush();
+//	System.out.println("Generalization: done... (" + positive.size() + "," + negative.size() + ")");
 
         return pattern;
     }
