@@ -116,7 +116,7 @@ public class FTRefinement {
                 refinements = specialSpecializationsSubsumingAll(f, dm, o, vp, objects);
             }
 
-//			System.out.println("getSomeSpecializationSubsumingAll: " + i + " -> " + refinements.size());
+// 			System.out.println("getSomeSpecializationSubsumingAll: " + i + " -> " + refinements.size());
 
             {
                 for (FeatureTerm r : refinements) {
@@ -893,7 +893,7 @@ public class FTRefinement {
 
                         for (FeatureTerm object : objects) {
                             FeatureTerm X2 = object.readPath(p.m_b);
-                            FeatureTerm Y2 = object.readPath(p.m_b);
+                            FeatureTerm Y2 = object.readPath(p2.m_b);
 
                             if (!intersect(X2, Y2)) {
                                 appear_in_all_objects = false;
@@ -1114,6 +1114,7 @@ public class FTRefinement {
                                 constants.add(c);
                             }
                         }
+                        first = false;
                     } else {
                         if (c instanceof SetFeatureTerm) {
                             boolean found = false;
