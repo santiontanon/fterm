@@ -303,7 +303,7 @@ class PropertiesSelectControl extends ControlAdapter {
                 FeatureTerm t = terms.get(index);
                 JFrame frame = null;
                 try {
-                    frame = FTVisualizer.newWindow("FTVisualizer: " + (String) item.get("name"), 640, 480, t, dm, true);
+                    frame = FTVisualizer.newWindow("FTVisualizer: " + (String) item.get("name"), 640, 480, t, dm, true, true);
                 } catch (FeatureTermException ex) {
                     Logger.getLogger(PropertiesSelectControl.class.getName()).log(Level.SEVERE, null, ex);
                 }
