@@ -75,12 +75,24 @@ public class RefinementCN2 extends InductiveLearner {
                 remainingExamples.add(new CN2Example(e, dp, sp));
             }
             CN2Rule rule = null;
+            FeatureTerm startingTerm = o.getSort("any").createFeatureTerm();
+
+            /*
+            {
+                List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+                List<FeatureTerm> l2 = new LinkedList<FeatureTerm>();
+                for(CN2Example e:remainingExamples) l.add(e.description);
+                l2.add(startingTerm);
+                List<FeatureTerm> aul = FTAntiunification.antiunification(l, FTRefinement.ALL_REFINEMENTS, l2, o, dm, true, FTAntiunification.VERSION_FAST);
+                startingTerm = aul.get(0);
+            }
+            */
+
             do {
                 if (DEBUG >= 1) {
                     System.out.println("RefinementCN2: " + remainingExamples.size() + " remaining examples...");
                 }
-
-                rule = findBestRule(remainingExamples, o, dm, descriptionSort, differentSolutions);
+                rule = findBestRule(remainingExamples, startingTerm, o, dm, descriptionSort, differentSolutions);
                 if (rule != null) {
                     {
                         List<CN2Example> covered = new LinkedList<CN2Example>();
@@ -154,10 +166,10 @@ public class RefinementCN2 extends InductiveLearner {
     }
 
 
-    private CN2Rule findBestRule(List<CN2Example> remainingExamples, Ontology o, FTKBase dm, Sort descriptionSort, List<FeatureTerm> differentSolutions) throws FeatureTermException {
+    private CN2Rule findBestRule(List<CN2Example> remainingExamples, FeatureTerm au,Ontology o, FTKBase dm, Sort descriptionSort, List<FeatureTerm> differentSolutions) throws FeatureTermException {
 
         List<CN2Rule> star = new LinkedList<CN2Rule>();
-        CN2Rule initial = new CN2Rule(o.getSort("any").createFeatureTerm(), null, remainingExamples, null, differentSolutions, o, dm);
+        CN2Rule initial = new CN2Rule(au, null, remainingExamples, null, differentSolutions, o, dm);
         star.add(initial);
         CN2Rule bestRule = initial;
 
@@ -297,7 +309,11 @@ public class RefinementCN2 extends InductiveLearner {
         float heuristic;
 
         public CN2Rule(FeatureTerm p, FeatureTerm s, Collection<CN2Example> examples1, Collection<CN2Example> examples2, List<FeatureTerm> differentSolutions, Ontology o, FTKBase dm) throws FeatureTermException {
-            pattern = p;
+            if (p!=null) {
+                pattern = p;
+            } else {
+                pattern = o.getSort("any").createFeatureTerm();
+            }
             examplesCovered = new HashSet<CN2Example>();
             for (CN2Example example : examples1) {
                 if (examples2 == null || examples2.contains(example)) {
@@ -319,7 +335,11 @@ public class RefinementCN2 extends InductiveLearner {
         }
 
         public CN2Rule(CN2Rule r, FeatureTerm p, List<FeatureTerm> differentSolutions, Ontology o, FTKBase dm) throws FeatureTermException {
-            pattern = p;
+            if (p!=null) {
+                pattern = p;
+            } else {
+                pattern = o.getSort("any").createFeatureTerm();
+            }
             examplesCovered = new HashSet<CN2Example>();
             for (CN2Example example : r.examplesCovered) {
                 if (p.subsumes(example.description)) {
