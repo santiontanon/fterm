@@ -301,6 +301,7 @@ public abstract class FeatureTerm {
         //		System.out.println("*---- Begin Subsumption ----*");
         //		System.out.println("Pattern: " + toStringNOOS());
         //		System.out.println("Object: " + f.toStringNOOS());
+//        long start = System.currentTimeMillis();
 
 
         stack.add(0, new SubsumptionStackNode(this, f, 0, null, null, 0, null, 0, -1));
@@ -679,6 +680,15 @@ public abstract class FeatureTerm {
 //        if (res!=FTsubsumptionReturn) {
 //            System.err.println("subsumption different!!!!!!!!!!!!!!!!!!");
 //        }
+
+//        long end = System.currentTimeMillis();
+
+//        if ((end-start)>10000) {
+//            System.out.println("!!! -> " + res + " in (" + (end-start) + ")");
+//            System.out.println(this.toStringNOOS());
+//            System.out.println(f.toStringNOOS());
+//        }
+
         return res;
     } // FeatureTerm::subsumes
 
