@@ -13,8 +13,10 @@
 (define-sort (TRAINS-ONTOLOGY LOAD))
 (define-sort (LOAD rectanglod))
 (define-sort (LOAD trianglod))
+(define-sort (trianglod utrianglod))
 (define-sort (LOAD hexagonlod))
 (define-sort (LOAD circlelod))
+(define-sort (LOAD diamondlod))
 
 (define-sort (TRAINS-ONTOLOGY CAR)
   (infront ! CAR)
