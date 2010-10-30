@@ -391,7 +391,7 @@
 		(define ?X3 (car)
 			(infront !X4)
 			(loc 3)
-			(nwhl 2)
+			(nwhl 3)
 			(ln long)
 			(cshape jaggedtop)
 			(npl 1)
