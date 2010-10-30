@@ -137,7 +137,7 @@ public class PropertiesCN2 extends InductiveLearner {
         }
     }
 
-    private List<Selector> computeAllSelectors(List<Example> examples, Sort descriptionSort, FTKBase dm) throws FeatureTermException {
+    private List<Selector> computeAllSelectors(List<Example> examples, Sort descriptionSort, FTKBase dm) throws FeatureTermException, Exception {
         List<Selector> selectors = new LinkedList<Selector>();
         List<FeatureTerm> properties = new LinkedList<FeatureTerm>();
 
@@ -146,11 +146,7 @@ public class PropertiesCN2 extends InductiveLearner {
         for (Example e : examples) {
             List<FeatureTerm> properties_tmp;
             if (DEBUG>=1) System.out.println("PropertiexCN2: computing selectors... " + examples.indexOf(e) + "/" + examples.size());
-            if (fast) {
-                properties_tmp = Disintegration.disintegrateFast(e.description, dm, e.description.getSort().getOntology());
-            } else {
-                properties_tmp = Disintegration.disintegrate(e.description, dm, e.description.getSort().getOntology());
-            }
+            properties_tmp = Disintegration.disintegrate(e.description, dm, e.description.getSort().getOntology(), true, fast);
 
             for (FeatureTerm property : properties_tmp) {
                 boolean duplicate = false;
@@ -216,11 +212,6 @@ public class PropertiesCN2 extends InductiveLearner {
 
             if (bestRule.coversSingleClass()) return bestRule;
 
-            if (DEBUG >= 1) {
-                System.out.println("Best rule heuristic: " + bestRule.heuristic);
-                System.out.println("Distribution: " + bestRule.distributionToString());
-                System.out.println("Best rule: " + bestRule.pattern.toStringNOOS(dm));
-            }
             
             // Keep only the best rules:
             {
@@ -233,7 +224,8 @@ public class PropertiesCN2 extends InductiveLearner {
                         Rule r1 = newStar.get(i);
                         Rule r2 = newStar.get(i + 1);
 
-                        if (r1.heuristic > r2.heuristic) {
+                        if (r1.heuristic < r2.heuristic ||
+                            (r1.heuristic == r2.heuristic && r1.examplesCovered.size()>r2.examplesCovered.size())) {
                             keepSorting = true;
                             newStar.set(i, r2);
                             newStar.set(i + 1, r1);
@@ -243,6 +235,17 @@ public class PropertiesCN2 extends InductiveLearner {
                 while (newStar.size() > BEAM_WIDTH) {
                     newStar.remove(0);
                 }
+
+                if (DEBUG >= 1) {
+                    int i = 1;
+                    for(Rule r:newStar) {
+                        System.out.println("Best rule " + i + " heuristic: " + r.heuristic);
+                        System.out.println("Distribution " + i + ": " + r.distributionToString());
+                        System.out.println("Best rule " + i + ": " + r.pattern.toStringNOOS(dm));
+                        i++;
+                    }
+                }
+
             }
 
             star = newStar;
