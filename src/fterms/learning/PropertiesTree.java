@@ -53,6 +53,7 @@ public class PropertiesTree extends InductiveLearner {
         if (distribution.size()>1) {
             for(FeatureTerm p:properties) {
                 float heuristic = evaluateProperty(p,examples,dp,sp);
+                
                 if (best_property==null || heuristic>=best_heuristic) {
                     if (heuristic==best_heuristic) {
                         // Resolve ties by generality (biased towards using general patterns):
@@ -62,10 +63,17 @@ public class PropertiesTree extends InductiveLearner {
                         if (s2<s1) {
                             best_property = p;
                             best_heuristic = heuristic;
+
+//                            System.out.println(heuristic + " : ");
+//                            System.out.println(p.toStringNOOS(dm));
+
                         }
                     } else {
                         best_property = p;
                         best_heuristic = heuristic;
+
+//                        System.out.println(heuristic + " : ");
+//                        System.out.println(p.toStringNOOS(dm));
                     }
                 }
             }

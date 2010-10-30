@@ -236,7 +236,8 @@ public class RefinementCN2 extends InductiveLearner {
                         CN2Rule r1 = newStar.get(i);
                         CN2Rule r2 = newStar.get(i + 1);
 
-                        if (r1.heuristic > r2.heuristic) {
+                        if (r1.heuristic < r2.heuristic ||
+                            (r1.heuristic == r2.heuristic && r1.examplesCovered.size()>r2.examplesCovered.size())) {
                             keepSorting = true;
                             newStar.set(i, r2);
                             newStar.set(i + 1, r1);

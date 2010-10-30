@@ -168,6 +168,8 @@ public class TrainingSetUtils {
     public static final int DEMOSPONGIAE_280_DATASET = 4;
     public static final int DEMOSPONGIAE_120_DATASET = 5;
     public static final int TRAINS_DATASET = 6;
+    public static final int TRAINS_82_DATASET = 61;
+    public static final int TRAINS_900_DATASET = 62;
     public static final int UNCLE_DATASET = 7;
     public static final int UNCLE_DATASET_SETS = 8;
     public static final int UNCLE_DATASET_BOTH = 9;
@@ -259,6 +261,22 @@ public class TrainingSetUtils {
                 dm.ImportNOOS("NOOS/trains-ontology.noos", o);
                 dm.ImportNOOS("NOOS/trains-dm.noos", o);
                 case_base.ImportNOOS("NOOS/trains-cases-10.noos", o);
+
+                ts.name = "trains";
+                ts.problem_sort = o.getSort("trains-problem");
+                break;
+            case TRAINS_82_DATASET:
+                dm.ImportNOOS("NOOS/trains-ontology.noos", o);
+                dm.ImportNOOS("NOOS/trains-dm.noos", o);
+                case_base.ImportNOOS("NOOS/trains-cases-82.noos", o);
+
+                ts.name = "trains";
+                ts.problem_sort = o.getSort("trains-problem");
+                break;
+            case TRAINS_900_DATASET:
+                dm.ImportNOOS("NOOS/trains-ontology.noos", o);
+                dm.ImportNOOS("NOOS/trains-dm.noos", o);
+                case_base.ImportNOOS("NOOS/trains-cases-900.noos", o);
 
                 ts.name = "trains";
                 ts.problem_sort = o.getSort("trains-problem");

@@ -175,7 +175,19 @@ public class FTKBase {
 	} // FTKBase::DeleteFT  
 
 
-	public Set<FeatureTerm> SearchFT(Symbol name)
+    public FeatureTerm getByName(String name) throws FeatureTermException {
+        Set<FeatureTerm> s = SearchFT(new Symbol(name));
+        if (s.size()<1) return null;
+        return s.iterator().next();
+    }
+
+    public FeatureTerm getByName(Symbol name) {
+        Set<FeatureTerm> s = SearchFT(name);
+        if (s.size()<1) return null;
+        return s.iterator().next();
+    }
+
+    public Set<FeatureTerm> SearchFT(Symbol name)
 	{
 		HashSet<FeatureTerm> l;
 		HashSet<FeatureTerm> ni;
