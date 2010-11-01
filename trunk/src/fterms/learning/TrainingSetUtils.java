@@ -191,6 +191,7 @@ public class TrainingSetUtils {
     public static final int MUTAGENESIS_EASY_DISCRETIZED = 25;
     public static final int MUTAGENESIS_NOL_DISCRETIZED = 26;
     public static final int MUTAGENESIS_EASY_NOL_DISCRETIZED = 27;
+    public static final int RIU_STORIES = 28;
 
     public static TrainingSetProperties loadTrainingSet(int DATASET, Ontology o, FTKBase dm, FTKBase case_base) throws FeatureTermException, IOException
     {
@@ -572,6 +573,16 @@ public class TrainingSetUtils {
                     fp.features.add(new Symbol("logp"));
                     TrainingSetUtils.discretizeFeature(cases, fp, ts.solution_path, 2);
                 }
+                break;
+            case RIU_STORIES:
+                dm.ImportNOOS("NOOS/story-ontology.noos", o);
+                case_base.ImportNOOS("NOOS/story-cases-2.noos", o);
+
+                ts.name = "riu-stories";
+                ts.problem_sort = o.getSort("scene");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
                 break;
             default:
                 return null;
