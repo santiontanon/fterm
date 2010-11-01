@@ -1,0 +1,68 @@
+;; Ontology for store representation in Riu
+;, November 2010
+;; Santiago Ontañón
+;; IIIA-CSIC
+
+
+(Define-Ontology STORY-ONTOLOGY
+  (creator "IIIA-CSIC")
+  (description "Ontology for Riu story representation"))
+
+
+(Define-sort (STORY-ONTOLOGY SCENE)
+  (phases PHASE))
+
+(Define-sort (STORY-ONTOLOGY PHASE)
+  (entities ENTITY)
+  (expressions EXPRESSION)
+  (force-dynamics ! FORCE-DYNAMICS)
+  (next PHASE)
+  (previous PHASE)
+)
+
+(Define-sort (STORY-ONTOLOGY FORCE-DYNAMICS)
+  (agonist ! CLAUSE)
+  (antagonist ! CLAUSE)
+  (stronger ! CLAUSE)
+  (move-tendency ! CLAUSE)
+  (action ! CLAUSE)
+)
+
+(Define-sort (STORY-ONTOLOGY CLAUSE))
+
+
+;; Entities
+
+(Define-sort (CLAUSE ENTITY))
+(Define-sort (ENTITY ANIMATE))
+(Define-sort (ANIMATE ANIMAL))
+(Define-sort (ANIMATE ROBOT))
+(Define-sort (ENTITY INANIMATE))
+(Define-sort (INANIMATE LOCATION))
+
+
+;; Expressions
+
+(Define-sort (CLAUSE EXPRESSION))
+
+(Define-sort (EXPRESSION ATTRIBUTE)
+	(entity ! ENTITY)
+)
+
+(Define-sort (ATTRIBUTE CUTE))
+(Define-sort (ATTRIBUTE YOUNG))
+(Define-sort (ATTRIBUTE DEAD))
+(Define-sort (ATTRIBUTE HAPPY))
+(Define-sort (ATTRIBUTE SAD))
+
+(Define-sort (EXPRESSION RELATION)
+	(entity1 ! ENTITY)
+	(entity2 ! ENTITY)
+)
+
+(Define-sort (RELATION IN))
+(Define-sort (RELATION HAVE))
+(Define-sort (RELATION ACTION))
+(Define-sort (ACTION WALK))
+(Define-sort (ACTION SEE))
+(Define-sort (ACTION PLAY))

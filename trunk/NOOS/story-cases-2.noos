@@ -1,0 +1,107 @@
+(define (scene :id story-0-cat)
+	;; "One day, Ales was walking in the street"
+	;; "when he saw a cat in front of him."
+	;; "Ales hesitated for a second about what to do with the cat."
+	;; "He might be late for work if he lost too much time with the cat..."
+	(phases
+		(define ?PHASE1 (phase)
+			(entities
+				(define ?ALES (robot))
+				(define ?CAT (animal))
+				(define ?STREET (location))
+				(define ?WORK (inanimate))
+			)
+			(expressions
+				(define ?E1 (walk)
+					(entity1 !ALES)
+					(entity2 !STREET))
+				(define ?E2 (in)
+					(entity1 !CAT)
+					(entity2 !STREET))
+				(define ?E3 (see)
+					(entity1 !ALES)
+					(entity2 !CAT))
+				(define ?E4 (cute)
+					(entity !CAT))
+				(define ?E5 (play)
+					(entity1 !ALES)
+					(entity2 !CAT)
+				)
+			)
+			(force-dynamics
+				(define (force-dynamics)
+					(agonist !ALES)
+					(antagonist !WORK)
+					(action !E5)
+					(stronger !ALES)
+				)
+			)
+		)
+	)
+)
+
+
+
+(define (scene :id memory-1-bird-death)
+	;; "Ales used to have a bird when he was young."
+	;; "Ales played a lot with the bird and was very happy."
+	;; "Ales was very fond of it."
+	;; "But the bird died, leaving him really sad."
+	(phases
+		(define ?PHASE1 (phase)
+			(entities
+				(define ?ALES (robot))
+				(define ?BIRD (animal))
+			)
+			(expressions
+				(define ?E1 (young)
+					(entity !ALES))
+				(define ?E2 (cute)
+					(entity !BIRD))
+				(define ?E3 (have)
+					(entity1 !ALES)
+					(entity2 !BIRD))
+				(define ?E4 (play)
+					(entity1 !ALES)
+					(entity2 !BIRD))
+				(define ?E5 (happy)
+					(entity !ALES))
+			)
+			(force-dynamics
+				(define (force-dynamics)
+					(agonist !ALES)
+					(move-tendency !ALES)
+					(action !E4)
+					(stronger !ALES)
+				)
+			)
+			(next !PHASE2)
+		)
+		(define ?PHASE2 (phase)
+			(previous !PHASE1)
+			(entities
+				!ALES
+				!BIRD
+			)
+			(expressions
+				!E1
+				!E2
+				!E3
+				!E4
+				(define ?E6 (dead)
+					(entity !BIRD))
+				(define ?E7 (sad)
+					(entity !ALES))
+			)
+			(force-dynamics
+				(define (force-dynamics)
+					(agonist !ALES)
+					(antagonist !E6)
+					(move-tendency !ALES)
+					(action !E4)
+					(stronger !E6)
+				)
+			)
+		)
+	)
+)
