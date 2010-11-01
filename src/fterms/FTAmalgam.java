@@ -19,12 +19,15 @@ public class FTAmalgam {
 
     public static final int DEBUG = 0;
 
-    public static Pair<FeatureTerm,Integer> amalgamProperties(FeatureTerm f1, FeatureTerm f2, Ontology ontology, FTKBase domain_model) throws FeatureTermException {
+    public static Pair<FeatureTerm,Integer> amalgamProperties(FeatureTerm f1, FeatureTerm f2, Ontology ontology, FTKBase domain_model) throws FeatureTermException, Exception {
 
-        List<FeatureTerm> propertiesF1 = Disintegration.disintegrate(f1, domain_model, ontology);
-        List<FeatureTerm> propertiesF2 = Disintegration.disintegrate(f2, domain_model, ontology);
+//            public static List<FeatureTerm> disintegrate(FeatureTerm object, FTKBase dm, Ontology o, boolean cache, boolean fast) throws Exception {
+
+        List<FeatureTerm> propertiesF1 = Disintegration.disintegrate(f1, domain_model, ontology, true, true);
+        List<FeatureTerm> propertiesF2 = Disintegration.disintegrate(f2, domain_model, ontology, true, true);
         List<FeatureTerm> common = new LinkedList<FeatureTerm>();
         List<FeatureTerm> toAdd = new LinkedList<FeatureTerm>();
+        List<FeatureTerm> left = new LinkedList<FeatureTerm>();
         FeatureTerm result = null;
 
         if (DEBUG>=1) System.out.println("amalgamProperties, start with " + propertiesF1.size() + ", " + propertiesF2.size() + " porperties.");
@@ -73,15 +76,28 @@ public class FTAmalgam {
             if (result==null) {
                 result = p;
             } else {
-                FeatureTerm tmp = FTUnification.simpleUnification(result, p, domain_model);
-                if (tmp==null) {
+                FeatureTerm tmp_result = null;
+                List<FeatureTerm> tmpl = FTUnification.unification(result, p, domain_model);
+                if (tmpl==null) {
                     System.err.println("amalgamProperties, Inconsistency!!!");
                     System.err.println("could not unify result:");
                     System.err.println(result.toStringNOOS(domain_model));
                     System.err.println("with property:");
                     System.err.println(p.toStringNOOS(domain_model));
+                } else {
+                    for(FeatureTerm tmp:tmpl) {
+                        if (tmp.subsumes(f1) && tmp.subsumes(f2)) {
+                            tmp_result = tmp;
+                            break;
+                        }
+                    }
+                    if (tmp_result==null) {
+                        System.err.println("Amalgam: cannot add a property without nonsubsumming the terms...");
+                        left.add(p);
+                    } else {
+                        result = tmp_result;
+                    }
                 }
-                result = tmp;
             }
         }
         common.addAll(toAdd);
@@ -92,7 +108,6 @@ public class FTAmalgam {
         // Heuristic: potential number of new refinements that can be added if this one is (i.e. number of refinements left subsumed)
         {
             HashMap<FeatureTerm,Integer> heuristic = new HashMap<FeatureTerm,Integer>();
-            List<FeatureTerm> left = new LinkedList<FeatureTerm>();
             left.addAll(propertiesF1);
             left.addAll(propertiesF2);
             for(FeatureTerm p:left) {
@@ -103,6 +118,8 @@ public class FTAmalgam {
                 heuristic.put(p, count);
             }
             while(!left.isEmpty()) {
+                System.out.println("Amalgam: " + left.size() + " properties left");
+
                 FeatureTerm next = null;
                 int h = 0;
                 for(FeatureTerm p:left) {
@@ -118,6 +135,10 @@ public class FTAmalgam {
                     result = tmp;
                     common.add(next);
                 }
+
+                System.out.println("Amalgam:");
+                System.out.println(result.toStringNOOS(domain_model));;
+
             }
         }
         propertiesF1.removeAll(common);
