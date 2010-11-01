@@ -663,19 +663,18 @@ public abstract class FeatureTerm {
         } // while
         //		System.out.println("*---- End Subsumption: " + (res ? "true":"false") + " ----*\n");
 
-        /*
+       /*
         if (res == true) {
-        System.out.println("- subsumption = true -------------");
-        System.out.println(this.toStringNOOS());
-        System.out.println(f.toStringNOOS());
-        System.out.println("- bindings -------------");
-        for(i=0;i<bindings_a.size();i++) {
-        System.out.println("--------------");
-        System.out.println(bindings_a.get(i).toStringNOOS());
-        System.out.println(bindings_b.get(i).toStringNOOS());
+            System.out.println("- subsumption = true -------------");
+            System.out.println("- bindings -------------");
+            List<FeatureTerm> variables1 = FTRefinement.variables(this);
+            List<FeatureTerm> variables2 = FTRefinement.variables(f);
+            for(i=0;i<bindings_a.size();i++) {
+                System.out.println((variables1.indexOf(bindings_a.get(i))+1) + " -> " +
+                                   (variables2.indexOf(bindings_b.get(i))+1));
+            }
         }
-        }
-         */
+        */
 
 //        if (res!=FTsubsumptionReturn) {
 //            System.err.println("subsumption different!!!!!!!!!!!!!!!!!!");
