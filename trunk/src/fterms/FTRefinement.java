@@ -978,7 +978,7 @@ public class FTRefinement {
         if (vp == null) {
             vp = variablesWithPaths(f, dm);
         }
-
+        
         for (Pair<FeatureTerm, Path> p : vp) {
             FeatureTerm X = p.m_a;
             if (X.getDataType() == Sort.DATATYPE_FEATURETERM) {
@@ -997,17 +997,26 @@ public class FTRefinement {
 
                         for (FeatureTerm object : objects) {
                             FeatureTerm X2 = object.readPath(p.m_b);
-                            FeatureTerm v2 = (X2.getDataType() == Sort.DATATYPE_FEATURETERM ? X2.featureValue(feature) : null);
-
-                            if (v2 != null) {
-                                if (v2 instanceof SetFeatureTerm) {
-                                    maximum_size = Math.min(((SetFeatureTerm) v2).getSetValues().size(), maximum_size);
-                                } else {
-                                    maximum_size = Math.min(1, maximum_size);
+                            List<FeatureTerm> lv2 = new LinkedList<FeatureTerm>();
+                            int local_max_size = 0;
+                            if (X2 instanceof TermFeatureTerm) {
+                                lv2.add(X2.featureValue(feature));
+                            } else if (X2 instanceof SetFeatureTerm) {
+                                for(FeatureTerm X2v:((SetFeatureTerm)X2).getSetValues()) {
+                                    if (X2v instanceof TermFeatureTerm)
+                                        lv2.add(X2v.featureValue(feature));
                                 }
-                            } else {
-                                maximum_size = 0;
                             }
+
+                            for(FeatureTerm v2:lv2) {
+                                if (v2 instanceof SetFeatureTerm) {
+                                    local_max_size = Math.max(((SetFeatureTerm) v2).getSetValues().size(), local_max_size);
+                                } else {
+                                    local_max_size = Math.max(1, local_max_size);
+                                }                                
+                            }
+
+                            maximum_size = Math.min(maximum_size,local_max_size);
 
                             if (maximum_size <= current_size) {
                                 break;
@@ -1645,5 +1654,28 @@ public class FTRefinement {
             depth++;
         };
         return depth;
+    }
+
+
+    // this method assumes that f1 subsumes f2
+    public static List<FeatureTerm> refinementPath(FeatureTerm f1,FeatureTerm f2, Ontology o, FTKBase dm) throws FeatureTermException {
+        List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+
+        l.add(f2);
+        
+        FeatureTerm next = f2;
+        do{
+            List<FeatureTerm> refinements = FTRefinement.getGeneralizationsAggressive(next, dm,o);
+            next = null;
+            for(FeatureTerm r:refinements) {
+                if (f1.subsumes(r)) {
+                    next = r;
+                    l.add(0,next);
+                    break;
+                }
+            }
+        }while(next!=null);
+        
+        return l;
     }
 }

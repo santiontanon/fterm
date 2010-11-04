@@ -149,4 +149,69 @@ public class FTAmalgam {
         return new Pair<FeatureTerm,Integer>(result,propertiesF1.size()+propertiesF2.size());
     }
 
+    
+    public static List<Pair<FeatureTerm,Integer>> simpleAmalgamRefinements(FeatureTerm f1, FeatureTerm f2, Ontology o, FTKBase dm) throws FeatureTermException, Exception {
+        FeatureTerm au = FTAntiunification.simpleAntiunification(f1, f2, o, dm);
+
+        // Compute the refinement path from "au" to "f1":
+        List<FeatureTerm> rpath1 = FTRefinement.refinementPath(au,f1,o,dm);
+        List<FeatureTerm> rpath2 = FTRefinement.refinementPath(au,f2,o,dm);
+
+        int L1 = rpath1.size(), L2 = rpath2.size();
+        System.out.println("au -> f1: " + L1);
+        System.out.println("au -> f2: " + L2);
+
+        // compute the LUGs:
+        int LUG1N = 0, LUG2N = 0;
+        FeatureTerm LUG1 = null;
+        FeatureTerm LUG2 = null;
+        {
+            int min = 0,max = rpath1.size()-1;
+
+            while(min!=max) {
+                int mid = (min+max)/2;
+                if (mid==min) mid++;
+                FeatureTerm midTerm = rpath1.get(mid);
+                FeatureTerm u = FTUnification.simpleUnification(midTerm, f2, dm);
+                if (u!=null) {
+                    min = mid;
+                } else {
+                    if (max!=mid) max = mid;
+                             else max = min;
+                }
+            }
+            LUG1N = min;
+            LUG1 = rpath1.get(min);
+            System.out.println("LUG1 is in position: " + min);
+//            System.out.println(LUG1.toStringNOOS(dm));
+
+            min = 0;
+            max = rpath2.size()-1;
+            while(min!=max) {
+                int mid = (min+max)/2;
+                if (mid==min) mid++;
+                FeatureTerm midTerm = rpath2.get(mid);
+                FeatureTerm u = FTUnification.simpleUnification(midTerm, f1, dm);
+                if (u!=null) {
+                    min = mid;
+                } else {
+                    if (max!=mid) max = mid;
+                             else max = min;
+                }
+            }
+            LUG2N = min;
+            LUG2 = rpath2.get(min);
+            System.out.println("LUG2 is in position: " + min);
+//            System.out.println(LUG2.toStringNOOS(dm));
+        }
+
+        // compute the amalgam:
+        List<FeatureTerm> amalgams = FTUnification.unification(LUG1, LUG2, dm);
+        List<Pair<FeatureTerm,Integer>> results = new LinkedList<Pair<FeatureTerm,Integer>>();
+        for(FeatureTerm amalgam:amalgams) {
+            results.add(new Pair<FeatureTerm,Integer>(amalgam,(L1+L2-2)-(LUG1N+LUG2N)));
+        }
+
+        return results;
+    }
 }
