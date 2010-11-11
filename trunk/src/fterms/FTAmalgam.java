@@ -150,7 +150,7 @@ public class FTAmalgam {
     }
 
     
-    public static List<Pair<FeatureTerm,Integer>> simpleAmalgamRefinements(FeatureTerm f1, FeatureTerm f2, Ontology o, FTKBase dm) throws FeatureTermException, Exception {
+    public static List<Pair<FeatureTerm,Integer>> fastAmalgamRefinements(FeatureTerm f1, FeatureTerm f2, Ontology o, FTKBase dm) throws FeatureTermException, Exception {
         FeatureTerm au = FTAntiunification.simpleAntiunification(f1, f2, o, dm);
 
         // Compute the refinement path from "au" to "f1":
@@ -176,6 +176,9 @@ public class FTAmalgam {
                 if (u!=null) {
                     min = mid;
                 } else {
+//                    System.out.println("Term does not unify:" + mid);
+//                    System.out.println(midTerm.toStringNOOS(dm));
+
                     if (max!=mid) max = mid;
                              else max = min;
                 }
@@ -183,7 +186,7 @@ public class FTAmalgam {
             LUG1N = min;
             LUG1 = rpath1.get(min);
             System.out.println("LUG1 is in position: " + min);
-//            System.out.println(LUG1.toStringNOOS(dm));
+            System.out.println(LUG1.toStringNOOS(dm));
 
             min = 0;
             max = rpath2.size()-1;
@@ -202,7 +205,7 @@ public class FTAmalgam {
             LUG2N = min;
             LUG2 = rpath2.get(min);
             System.out.println("LUG2 is in position: " + min);
-//            System.out.println(LUG2.toStringNOOS(dm));
+            System.out.println(LUG2.toStringNOOS(dm));
         }
 
         // compute the amalgam:
@@ -214,4 +217,80 @@ public class FTAmalgam {
 
         return results;
     }
+
+
+    public static List<Pair<FeatureTerm,Integer>> amalgamRefinements(FeatureTerm f1, FeatureTerm f2, Ontology o, FTKBase dm) throws FeatureTermException, Exception {
+        FeatureTerm au = FTAntiunification.simpleAntiunification(f1, f2, o, dm);
+
+        // compute the LUGs:
+        int LUG1N = 0, LUG2N = 0;
+        FeatureTerm LUG1 = null;
+        FeatureTerm LUG2 = null;
+
+        FeatureTerm next = null;
+        List<FeatureTerm> objects = new LinkedList<FeatureTerm>();
+        objects.add(f1);
+        next = au;
+        do {
+            LUG1 = next;
+            List<FeatureTerm> l = FTRefinement.getSpecializationsSubsumingAll(next, dm, o, FTRefinement.ALL_REFINEMENTS, objects);
+            System.out.println(l.size());
+            next = null;
+            for(FeatureTerm t:l) {
+                if (t.subsumes(f1)) {
+                    FeatureTerm u = FTUnification.simpleUnification(t, f2, dm);
+                    if (u!=null) {
+                        next = t;
+                        LUG1N++;
+                        continue;
+                    }
+                } else {
+                    System.out.println("!!!");
+                }
+            }
+        }while(next!=null);
+        System.out.println("LUG1 is in position: " + LUG1N);
+        System.out.println(LUG1.toStringNOOS(dm));
+
+        objects.clear();
+        objects.add(f2);
+        next = au;
+        do {
+            LUG2 = next;
+            List<FeatureTerm> l = FTRefinement.getSpecializationsSubsumingAll(next, dm, o, FTRefinement.ALL_REFINEMENTS, objects);
+            System.out.println(l.size());
+            next = null;
+            for(FeatureTerm t:l) {
+                if (t.subsumes(f2)) {
+                    FeatureTerm u = FTUnification.simpleUnification(t, f1, dm);
+                    if (u!=null) {
+                        next = t;
+                        LUG2N++;
+                        continue;
+                    }
+                } else {
+                    System.out.println("!!!");
+                }
+            }
+        }while(next!=null);
+        System.out.println("LUG2 is in position: " + LUG2N);
+        System.out.println(LUG2.toStringNOOS(dm));
+
+        List<FeatureTerm> rpath1 = FTRefinement.refinementPath(LUG1,f1,o,dm);
+        List<FeatureTerm> rpath2 = FTRefinement.refinementPath(LUG2,f2,o,dm);
+
+        int cost = (rpath1.size()-1)+(rpath2.size()-1);
+
+        System.out.println("Paths from LUG1 and LUG2 to terms:" + rpath1.size() + " " + rpath2.size());
+
+        // compute the amalgam:
+        List<FeatureTerm> amalgams = FTUnification.unification(LUG1, LUG2, dm);
+        List<Pair<FeatureTerm,Integer>> results = new LinkedList<Pair<FeatureTerm,Integer>>();
+        for(FeatureTerm amalgam:amalgams) {
+            results.add(new Pair<FeatureTerm,Integer>(amalgam,cost));
+        }
+
+        return results;
+    }
+ 
 }
