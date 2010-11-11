@@ -1112,20 +1112,24 @@ public class FTRefinement {
                     FeatureTerm c = o.readPath(node.m_b);
 
                     if (first) {
-                        if (c instanceof SetFeatureTerm) {
-                            for (FeatureTerm c2 : ((SetFeatureTerm) c).getSetValues()) {
-                                if ((c2.isConstant() || dm.contains(c2)) && node.m_a.subsumes(c2)) {
-                                    constants.add(c2);
+                        if (c!=null) {
+                            if (c instanceof SetFeatureTerm) {
+                                for (FeatureTerm c2 : ((SetFeatureTerm) c).getSetValues()) {
+                                    if ((c2.isConstant() || dm.contains(c2)) && node.m_a.subsumes(c2)) {
+                                        constants.add(c2);
+                                    }
                                 }
-                            }
-                        } else {
-                            if ((c.isConstant() || dm.contains(c)) && node.m_a.subsumes(c)) {
-                                constants.add(c);
+                            } else {
+                                if ((c.isConstant() || dm.contains(c)) && node.m_a.subsumes(c)) {
+                                    constants.add(c);
+                                }
                             }
                         }
                         first = false;
                     } else {
-                        if (c instanceof SetFeatureTerm) {
+                        if (c==null) {
+                            constants.clear();
+                        } else if (c instanceof SetFeatureTerm) {
                             boolean found = false;
                             List<FeatureTerm> todelete = new LinkedList<FeatureTerm>();
                             for (FeatureTerm c3 : constants) {

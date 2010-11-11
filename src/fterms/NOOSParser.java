@@ -12,10 +12,16 @@ import fterms.OntologyParser.NOOSPathRecord;
 import fterms.OntologyParser.NOOSVariableLinkRecord;
 import fterms.OntologyParser.NOOSVariableRecord;
 import fterms.exceptions.FeatureTermException;
+import java.io.StringBufferInputStream;
 
 
 public class NOOSParser extends OntologyParser {
 	
+    public static FeatureTerm parse(String str,FTKBase m,Ontology o) throws IOException, FeatureTermException
+    {
+        return parse(new RewindableInputStream(new StringBufferInputStream(str)),m,o);
+    }
+
 	public static FeatureTerm parse(RewindableInputStream fp,FTKBase m,Ontology o) throws IOException, FeatureTermException
 	{
        NOOSParser noosParser= new NOOSParser();
