@@ -10,14 +10,14 @@
 
 
 (Define-sort (STORY-ONTOLOGY SCENE)
-  (phases PHASE))
+  (phase1 ! PHASE)
+  (phase2 ! PHASE)
+  (phase3 ! PHASE))
 
 (Define-sort (STORY-ONTOLOGY PHASE)
   (entities ENTITY)
   (expressions EXPRESSION)
   (force-dynamics ! FORCE-DYNAMICS)
-  (next PHASE)
-  (previous PHASE)
 )
 
 (Define-sort (STORY-ONTOLOGY FORCE-DYNAMICS)
@@ -36,9 +36,12 @@
 (Define-sort (CLAUSE ENTITY))
 (Define-sort (ENTITY ANIMATE))
 (Define-sort (ANIMATE ANIMAL))
+(Define-sort (ANIMAL CAT))
+(Define-sort (ANIMAL BIRD))
 (Define-sort (ANIMATE ROBOT))
 (Define-sort (ENTITY INANIMATE))
 (Define-sort (INANIMATE LOCATION))
+(Define-sort (INANIMATE COLOR))
 
 
 ;; Expressions
@@ -54,6 +57,8 @@
 (Define-sort (ATTRIBUTE DEAD))
 (Define-sort (ATTRIBUTE HAPPY))
 (Define-sort (ATTRIBUTE SAD))
+(Define-sort (ATTRIBUTE RUSTY))
+(Define-sort (ATTRIBUTE AWKWARD))
 
 (Define-sort (EXPRESSION RELATION)
 	(entity1 ! ENTITY)
@@ -62,7 +67,14 @@
 
 (Define-sort (RELATION IN))
 (Define-sort (RELATION HAVE))
+(Define-sort (RELATION HAS-COLOR))
 (Define-sort (RELATION ACTION))
 (Define-sort (ACTION WALK))
 (Define-sort (ACTION SEE))
 (Define-sort (ACTION PLAY))
+(Define-sort (ACTION CHANGE))
+(Define-sort (RELATION RELATION-WITH-ACTION)
+	(action ! EXPRESSION)
+)
+(Define-sort (RELATION-WITH-ACTION force))
+(Define-sort (RELATION-WITH-ACTION accept))

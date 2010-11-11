@@ -3,11 +3,12 @@
 	;; "when he saw a cat in front of him."
 	;; "Ales hesitated for a second about what to do with the cat."
 	;; "He might be late for work if he lost too much time with the cat..."
-	(phases
+	;; ...
+	(phase1
 		(define ?PHASE1 (phase)
 			(entities
 				(define ?ALES (robot))
-				(define ?CAT (animal))
+				(define ?CAT (cat))
 				(define ?STREET (location))
 				(define ?WORK (inanimate))
 			)
@@ -32,6 +33,7 @@
 				(define (force-dynamics)
 					(agonist !ALES)
 					(antagonist !WORK)
+					(move-tendency !ALES)
 					(action !E5)
 					(stronger !ALES)
 				)
@@ -47,11 +49,11 @@
 	;; "Ales played a lot with the bird and was very happy."
 	;; "Ales was very fond of it."
 	;; "But the bird died, leaving him really sad."
-	(phases
+	(phase1
 		(define ?PHASE1 (phase)
 			(entities
 				(define ?ALES (robot))
-				(define ?BIRD (animal))
+				(define ?BIRD (bird))
 			)
 			(expressions
 				(define ?E1 (young)
@@ -75,19 +77,12 @@
 					(stronger !ALES)
 				)
 			)
-			(next !PHASE2)
 		)
+	)
+	(phase2
 		(define ?PHASE2 (phase)
-			(previous !PHASE1)
-			(entities
-				!ALES
-				!BIRD
-			)
-			(expressions
-				!E1
-				!E2
-				!E3
-				!E4
+			(entities !ALES !BIRD)
+			(expressions !E1 !E2 !E3 !E4
 				(define ?E6 (dead)
 					(entity !BIRD))
 				(define ?E7 (sad)
@@ -105,3 +100,67 @@
 		)
 	)
 )
+
+
+(define (scene :id memory-2-oil-change)
+	;; "Ales remembered the garage in which he had his first oil change, it was all red."
+	;; "His owners said he was rusty, and forced him to change his oil, he was a fool to accept."
+	;; "Ales felt very awkward afterwards, and decided that he would have to be really rusty before his next oil change."
+	;; "He wondered why no one ever complained about that."
+	(phase1
+		(define ?PHASE1 (phase)
+			(entities
+				(define ?ALES (robot))
+				(define ?OIL (inanimate))
+				(define ?GARAGE (location))
+				(define ?OWNER (animate))
+				(define ?RED (color))
+			)
+			(expressions
+				(define ?E1 (in)
+					(entity1 !ALES)
+					(entity2 !GARAGE))
+				(define ?E1 (has-color)
+					(entity1 !GARAGE)
+					(entity2 !RED))
+				(define ?E3 (change)
+					(entity1 !ALES)
+					(entity2 !OIL))
+				(define ?E4 (rusty)
+					(entity !ALES))
+				(define ?E5 (force)
+					(entity1 !OWNER)
+					(entity2 !ALES)
+					(action !E3))
+				(define ?E5 (accept)
+					(entity1 !ALES)
+					(action !E3))
+			)
+			(force-dynamics
+				(define (force-dynamics)
+					(agonist !ALES)
+					(antagonist !OWNER)
+					(move-tendency !OWNER)
+					(action !E3)
+					(stronger !OWNER)
+				)
+			)
+		)		
+	)
+	(phase2
+		(define ?PHASE2 (phase)
+			(entities !ALES !OIL !GARAGE !OWNER !RED)
+			(expressions !E1 !E2 !E3
+				(define ?E4 (awkward)
+					(entity !ALES))
+			)
+			(force-dynamics
+				(define (force-dynamics)
+					(agonist !ALES)
+					(antagonist !OWNER)
+				)
+			)
+		)
+	)
+)
+
