@@ -111,9 +111,9 @@
 		(define ?PHASE1 (phase)
 			(entities
 				(define ?ALES (robot))
-				(define ?OIL (inanimate))
+				(define ?OIL (object))
 				(define ?GARAGE (location))
-				(define ?OWNER (animate))
+				(define ?OWNER (human))
 				(define ?RED (color))
 			)
 			(expressions
@@ -164,3 +164,61 @@
 	)
 )
 
+
+
+
+(define (scene :id memory-3-tree)
+	;; "The little willow tree"
+	;; "by the pond in the playground"
+	;; "grew into a big silver tree"
+	(phase1
+		(define ?PHASE1 (phase)
+			(entities
+				(define ?TREE (vegetal))
+				(define ?PLAYGROUND (location))
+				(define ?POND (location))
+				(define ?GRAVITY (inanimate))
+			)
+			(expressions
+				(define ?E1 (in)
+					(entity1 !TREE)
+					(entity2 !PLAYGROUND))
+				(define ?E2 (by)
+					(entity1 !PLAYGROUND)
+					(entity2 !POND))
+				(define ?E3 (growing)
+					(entity !TREE))
+			)
+			(force-dynamics
+				(define (force-dynamics)
+					(agonist !TREE)
+					(antagonist !GRAVITY)
+					(move-tendency !TREE)
+					(action !E2)
+					(stronger !TREE)
+				)
+			)
+		)		
+	)
+	(phase2
+		(define ?PHASE2 (phase)
+			(entities !TREE !PLAYGROUND !POND !GRAVITY
+				(define ?SILVER (color))
+			)
+			(expressions !E1 !E2 !E3
+				(define ?E4 (has-color)
+					(entity1 !TREE)
+					(entity2 !SILVER))
+			)
+			(force-dynamics
+				(define (force-dynamics)
+					(agonist !TREE)
+					(antagonist !GRAVITY)
+					(move-tendency !TREE)
+					(action !E2)
+					(stronger !TREE)
+				)
+			)
+		)
+	)
+)

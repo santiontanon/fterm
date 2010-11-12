@@ -36,12 +36,15 @@
 (Define-sort (CLAUSE ENTITY))
 (Define-sort (ENTITY ANIMATE))
 (Define-sort (ANIMATE ANIMAL))
+(Define-sort (ANIMATE VEGETAL))
+(Define-sort (ANIMATE HUMAN))
 (Define-sort (ANIMAL CAT))
 (Define-sort (ANIMAL BIRD))
 (Define-sort (ANIMATE ROBOT))
 (Define-sort (ENTITY INANIMATE))
 (Define-sort (INANIMATE LOCATION))
 (Define-sort (INANIMATE COLOR))
+(Define-sort (INANIMATE OBJECT))
 
 
 ;; Expressions
@@ -59,6 +62,7 @@
 (Define-sort (ATTRIBUTE SAD))
 (Define-sort (ATTRIBUTE RUSTY))
 (Define-sort (ATTRIBUTE AWKWARD))
+(Define-sort (ATTRIBUTE GROWING))
 
 (Define-sort (EXPRESSION RELATION)
 	(entity1 ! ENTITY)
@@ -66,6 +70,7 @@
 )
 
 (Define-sort (RELATION IN))
+(Define-sort (RELATION BY))
 (Define-sort (RELATION HAVE))
 (Define-sort (RELATION HAS-COLOR))
 (Define-sort (RELATION ACTION))
