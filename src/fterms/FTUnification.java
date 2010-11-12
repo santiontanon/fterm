@@ -395,7 +395,7 @@ public class FTUnification {
 
         if (DEBUG>=1) System.out.println("UnificationDuplicates started...");
 
-        List<FeatureTerm> unifications = unificationDuplicates(f1,f2,dm);
+        List<FeatureTerm> unifications = unificationDuplicates(f1,f2,dm,false);
 
 /*
         if (f1.subsumes(f2)) {
@@ -454,14 +454,14 @@ public class FTUnification {
 
     
     public static FeatureTerm simpleUnification(FeatureTerm f1,FeatureTerm f2,FTKBase dm) throws FeatureTermException {
-        List<FeatureTerm> unifications = unification(f1,f2,dm);
+        List<FeatureTerm> unifications = unificationDuplicates(f1,f2,dm,true);
 
         if (unifications!=null && unifications.size()>0) return unifications.get(0);
         return null;
     }
     
 
-    public static List<FeatureTerm> unificationDuplicates(FeatureTerm f1,FeatureTerm f2,FTKBase dm) throws FeatureTermException {
+    public static List<FeatureTerm> unificationDuplicates(FeatureTerm f1,FeatureTerm f2,FTKBase dm,boolean firstResult) throws FeatureTermException {
         List<FeatureTerm> results = new LinkedList<FeatureTerm>();
         UnificationNode start = new UnificationNode(f1, f2, dm);
         List<UnificationNode> stack = new LinkedList<UnificationNode>();
@@ -501,6 +501,7 @@ public class FTUnification {
                     // it's a result!!!
                     FeatureTerm res = n2.generateResult(dm);
                     results.add(res);
+                    if (firstResult) return results;
                     toDelete.add(n2);
 
                     if (DEBUG>=2) {

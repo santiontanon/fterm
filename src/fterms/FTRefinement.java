@@ -52,14 +52,14 @@ public class FTRefinement {
         List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
+        if ((flags & EQUALITY_REFINEMENTS) != 0) {
+            refinements.addAll(variableEqualityAdditionSubsumingAll(f, dm, vp, objects));
+        }
         if ((flags & SORT_REFINEMENTS) != 0) {
             refinements.addAll(sortSpecialization(f, dm, vp));
         }
         if ((flags & FEATURE_REFINEMENTS) != 0) {
             refinements.addAll(featureIntroductionSubsumingAll(f, dm, vp, objects));
-        }
-        if ((flags & EQUALITY_REFINEMENTS) != 0) {
-            refinements.addAll(variableEqualityAdditionSubsumingAll(f, dm, vp, objects));
         }
         if ((flags & SET_REFINEMENTS) != 0) {
             refinements.addAll(setExpansionSubsumingAll(f, dm, vp, objects));
