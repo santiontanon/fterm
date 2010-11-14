@@ -141,7 +141,7 @@ public abstract class Hypothesis {
 
         do {
             end = true;
-            l = FTRefinement.getGeneralizations(pattern, domain_model, o);
+            l = FTRefinement.getSomeGeneralizationsAggressive(pattern, domain_model, o);
 //			System.out.println(l.size() + " generalizations... ");
 
             for (FeatureTerm f2 : l) {
