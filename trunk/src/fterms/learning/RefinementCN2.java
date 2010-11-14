@@ -98,6 +98,8 @@ public class RefinementCN2 extends InductiveLearner {
                         List<CN2Example> covered = new LinkedList<CN2Example>();
                         HashMap<FeatureTerm, List<CN2Example>> classifiedCovered = new HashMap<FeatureTerm, List<CN2Example>>();
 
+                        if (DEBUG >= 1) System.out.println("RefinementCN2.newRule: figuring out its solution... (1/3)");
+
                         // Find the examples covered by the rule:
                         for (CN2Example e : rule.examplesCovered) {
                             covered.add(e);
@@ -109,6 +111,8 @@ public class RefinementCN2 extends InductiveLearner {
                             }
                             l.add(e);
                         }
+
+                        if (DEBUG >= 1) System.out.println("RefinementCN2.newRule: figuring out its solution... (2/3)");
 
                         // Remove them from the remainingExamples:
                         remainingExamples.removeAll(covered);
@@ -149,10 +153,10 @@ public class RefinementCN2 extends InductiveLearner {
                                     generalPattern = Hypothesis.generalizePattern(rule.pattern, positive, negative, o, dm);
                                 }
 
+                                if (DEBUG >= 1) System.out.println("RefinementCN2.newRule: figuring out its solution... (3/3)");
+
                                 h.addRule(generalPattern, candidate, ((float) (max + 1)) / ((float) covered.size() + 2), max);
-                                if (DEBUG >= 1) {
-                                    System.out.println("RefinementCN2.newRule: " + generalPattern.toStringNOOS(dm) + "\n" + candidate.toStringNOOS(dm) + "\n" + ((float) (max + 1)) / ((float) covered.size() + 2));
-                                }
+                                if (DEBUG >= 1) System.out.println("RefinementCN2.newRule: " + generalPattern.toStringNOOS(dm) + "\n" + candidate.toStringNOOS(dm) + "\n" + ((float) (max + 1)) / ((float) covered.size() + 2));
                             } else {
                                 System.err.println("RefinementCN2: no candidate solution!");
                             }
@@ -202,9 +206,7 @@ public class RefinementCN2 extends InductiveLearner {
                 }
             }
 
-            if (DEBUG >= 1) {
-                System.out.println("RefinementCN2.findBestRule: " + newStar.size() + " new rules...");
-            }
+            if (DEBUG >= 1) System.out.println("RefinementCN2.findBestRule: " + newStar.size() + " new rules...");
 
             // Check for a new best rule:
             for (CN2Rule rule : newStar) {
@@ -217,6 +219,8 @@ public class RefinementCN2 extends InductiveLearner {
 //				}
             }
 
+            if (DEBUG >= 1) System.out.println("RefinementCN2.findBestRule: chacking for termination...");
+            
             if (bestRule.coversSingleClass()) return bestRule;
 
             if (DEBUG >= 1) {
