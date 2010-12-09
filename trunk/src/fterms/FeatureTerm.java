@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 
 import util.Pair;
 import fterms.exceptions.FeatureTermException;
+import util.FTSubsumptionRecord;
 
 public abstract class FeatureTerm {
 
@@ -271,9 +272,6 @@ public abstract class FeatureTerm {
 
     public boolean subsumes(FeatureTerm f) throws FeatureTermException {
 
-//        boolean FTsubsumptionReturn = FTSubsumption.subsumes(this,f);
-//        if (true) return FTSubsumption.subsumes(this,f);
-
         List<FeatureTerm> bindings_a = new ArrayList<FeatureTerm>();
         List<FeatureTerm> bindings_b = new ArrayList<FeatureTerm>();
         List<SubsumptionStackNode> stack = new LinkedList<SubsumptionStackNode>();
@@ -298,10 +296,15 @@ public abstract class FeatureTerm {
             return false;
         }
 
+
+//        boolean CSPsubsumptionReturn = CSPSubsumption.subsumes(this,f);
+//        if (true) return CSPSubsumption.subsumes(this,f);
+
+        
         //		System.out.println("*---- Begin Subsumption ----*");
         //		System.out.println("Pattern: " + toStringNOOS());
         //		System.out.println("Object: " + f.toStringNOOS());
-        // long start = System.currentTimeMillis();
+//        long start = System.currentTimeMillis();
 
 
         stack.add(0, new SubsumptionStackNode(this, f, 0, null, null, 0, null, 0, -1));
@@ -676,17 +679,14 @@ public abstract class FeatureTerm {
         }
         */
 
-//        if (res!=FTsubsumptionReturn) {
+//        if (res!=CSPsubsumptionReturn) {
 //            System.err.println("subsumption different!!!!!!!!!!!!!!!!!!");
 //        }
 
 //        long end = System.currentTimeMillis();
 
-//        if ((end-start)>100000) {
-//            System.out.println("!!! -> " + res + " in (" + (end-start) + ")");
-//            System.out.println(this.toStringNOOS());
-//            System.out.println(f.toStringNOOS());
-//        }
+//        FTSubsumptionRecord.register(this,f,end-start,res);
+
 
         return res;
     } // FeatureTerm::subsumes
