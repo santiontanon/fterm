@@ -2,8 +2,10 @@ package fterms.argumentation;
 
 import fterms.FTKBase;
 import fterms.FeatureTerm;
+import fterms.Path;
 import fterms.exceptions.FeatureTermException;
 import fterms.learning.Rule;
+import java.util.List;
 
 public class Argument {
 
@@ -88,5 +90,30 @@ public class Argument {
     
     public int getID() {
         return m_ID;
+    }
+
+    /*
+     * Returns the ratio of shared examples among two arguments.
+     * It only applies to RULE arguments, for other kinds, it returns 0
+     */
+    public float overlap(Argument a, List<FeatureTerm> examples, Path dp) throws FeatureTermException {
+        if (m_type == ARGUMENT_RULE) {
+            if (a.m_type == ARGUMENT_RULE) {
+                int covered_by_both = 0;
+                for(FeatureTerm e:examples) {
+                    FeatureTerm d = e.readPath(dp);
+                    if (m_rule.pattern.subsumes(d) &&
+                        a.m_rule.pattern.subsumes(d)) {
+                        covered_by_both++;
+                    }
+                }
+                if (examples.isEmpty()) return 0;
+                return ((float)covered_by_both)/examples.size();
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
     }
 }
