@@ -9,7 +9,14 @@ public class Rule {
 	public float reliability;
 	public int support;
 	
-	public Rule(FeatureTerm p,FeatureTerm s,float r,int supp) {
+	public Rule(FeatureTerm p,FeatureTerm s) {
+		pattern = p;
+		solution = s;
+		reliability = 0;
+		support = 0;
+	}
+
+    public Rule(FeatureTerm p,FeatureTerm s,float r,int supp) {
 		pattern = p;
 		solution = s;
 		reliability = r;

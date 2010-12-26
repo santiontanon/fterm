@@ -25,15 +25,15 @@ public class LabelEdgeRenderer extends EdgeRenderer {
     protected Font m_font = null; // temp font holder
 
 
-    LabelEdgeRenderer(int labelColor) {
+    public LabelEdgeRenderer(int labelColor) {
         super();
     }
 
-    LabelEdgeRenderer(int lt, int labelColor) {
+    public LabelEdgeRenderer(int lt, int labelColor) {
         super(lt);
     }
 
-    LabelEdgeRenderer(int lt,int at, int labelColor) {
+    public LabelEdgeRenderer(int lt,int at, int labelColor) {
         super(lt,at);
     }
 
