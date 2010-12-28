@@ -427,10 +427,11 @@ public class ABUI extends ArgumentationBasedLearning {
             ArgumentAcceptability aa, Ontology o, FTKBase dm) throws Exception {
 
         List<Argument> H = new LinkedList<Argument>();  // This list will contain the candidate arguments
+        if (acceptedArguments==null) acceptedArguments = new LinkedList<Argument>();
 
         ABUI_call_count++;
 
-        if (DEBUG >= 0) {
+        if (DEBUG >= 1) {
             System.out.println("ABUI2: UPD: " + uncoveredPositiveDescriptions.size() + " P/N:" + positiveDescriptions.size() + "/" + negativeDescriptions.size());
         }
 

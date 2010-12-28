@@ -31,6 +31,8 @@ import util.Sampler;
  * @author santi
  */
 public class TrainingSetUtils {
+    public static int DEBUG = 0;
+    
     public static List<List<FeatureTerm>> splitTrainingSet(Collection<FeatureTerm> examples, int n, Path dp, Path sp, FTKBase dm, double bias, double redundancy) throws FeatureTermException, Exception {
         double matrix[] = null;
         double cbias = 0;
@@ -62,8 +64,8 @@ public class TrainingSetUtils {
             }
         }
 
-        System.out.println("Desired bias: " + bias);
-        System.out.println("Initial bias: " + cbias);
+        if (DEBUG>=1) System.out.println("Desired bias: " + bias);
+        if (DEBUG>=1) System.out.println("Initial bias: " + cbias);
 
         // Adjust matrix to get closer to desired bias:
         for(int i = 0;i<1000;i++) {
@@ -108,11 +110,11 @@ public class TrainingSetUtils {
             if (stop) break;
         }
 
-        System.out.println("Adjusted bias: " + cbias);
+        if (DEBUG>=1) System.out.println("Adjusted bias: " + cbias);
 
         // Compute how many cases to distribtue according to redundancy:
         int ncases = (int)((redundancy*(examples.size())*(n-1)) + examples.size());
-        System.out.println("Redundancy " + redundancy +" -> " + ncases);
+        if (DEBUG>=1) System.out.println("Redundancy " + redundancy +" -> " + ncases);
 
         // Sample:
         List<List<FeatureTerm>> training_sets = new LinkedList<List<FeatureTerm>>();
@@ -125,7 +127,7 @@ public class TrainingSetUtils {
             List<Double> d = new LinkedList<Double>();
             for(int k = 0;k<n;k++) d.add(matrix[k*ns+i]);
             distributions.put(s,d);
-            System.out.println("Distribution for " + s.toStringNOOS(dm) + " -> " + d);
+            if (DEBUG>=1) System.out.println("Distribution for " + s.toStringNOOS(dm) + " -> " + d);
         }
 
         for(int i = 0;i<n;i++) training_sets.add(new LinkedList<FeatureTerm>());
