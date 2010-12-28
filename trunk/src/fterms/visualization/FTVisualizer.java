@@ -71,6 +71,7 @@ public class FTVisualizer extends Display {
         JFrame frame = new JFrame(name);
         frame.getContentPane().add(ad);
         frame.pack();
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         return frame;
     }
 
