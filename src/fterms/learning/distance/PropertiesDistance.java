@@ -20,6 +20,8 @@ import java.util.HashSet;
 import util.Pair;
 
 public class PropertiesDistance extends Distance {
+    
+    public static int DEBUG = 0;
 
     static boolean s_cache = true;
     boolean m_fast = false;
@@ -54,7 +56,7 @@ public class PropertiesDistance extends Distance {
         // Generate all the properties
         for (FeatureTerm object : objects) {
 
-            System.out.println("processing " + object.getName() + " ("+ count + ")");
+            if (DEBUG>=1) System.out.println("processing " + object.getName() + " ("+ count + ")");
             List<FeatureTerm> properties_tmp = Disintegration.disintegrate(object,dm,o, s_cache, m_fast);
             long start_time = System.currentTimeMillis();
 
@@ -77,7 +79,7 @@ public class PropertiesDistance extends Distance {
             }
 
             long time = System.currentTimeMillis();
-            System.out.println("Filtering time: " + (time-start_time));
+            if (DEBUG>=1) System.out.println("Filtering time: " + (time-start_time));
 
             count++;
 
@@ -85,8 +87,8 @@ public class PropertiesDistance extends Distance {
         }
 
         // The weights will be all 1 in this distance:
-        System.out.println("Properties per term: [" + min_properties + " - " + max_properties + "]");
-        System.out.println(m_propertyWeight.size() + " properties");
+        if (DEBUG>=1) System.out.println("Properties per term: [" + min_properties + " - " + max_properties + "]");
+        if (DEBUG>=1) System.out.println(m_propertyWeight.size() + " properties");
 //		for(Pair<FeatureTerm,Double> p_w:m_propertyWeight) {
 //			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
 //		}
