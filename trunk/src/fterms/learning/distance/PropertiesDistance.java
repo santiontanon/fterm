@@ -97,7 +97,7 @@ public class PropertiesDistance extends Distance {
         HashSet<FeatureTerm> cache1 = property_cache.get(f1);
 
         if (cache1==null) {
-            System.out.println("getPropertyCache: new case, testinc against " + m_propertyWeight.size() + " properties.");
+//            System.out.println("getPropertyCache: new case, testinc against " + m_propertyWeight.size() + " properties.");
             cache1 = new HashSet<FeatureTerm>();
             for (Pair<FeatureTerm, Double> p_w : m_propertyWeight)
                 if (p_w.m_a.subsumes(f1))
@@ -143,8 +143,8 @@ public class PropertiesDistance extends Distance {
         double distance = (tmp>0 ? 1.0f - (((double) (shared * 2)) / tmp):1.0);
 //		double distance = 1.0f-(((double)(shared))/((double)(shared+f1_not_shared+f2_not_shared)));
 
-		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
-		System.out.flush();
+//		System.out.println("PD: " + shared + " - " + f1_not_shared + " - " + f2_not_shared + " -> " + distance);
+//		System.out.flush();
         return distance;
     }
 }
