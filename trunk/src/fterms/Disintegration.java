@@ -190,7 +190,7 @@ public class Disintegration {
                     tmpBase.ImportNOOS(fname, o);
                     properties_tmp = new LinkedList<FeatureTerm>();
                     properties_tmp.addAll(tmpBase.getAllTerms());
-                    System.out.println(properties_tmp.size() + " properties were already extracted. Complete.");
+                    if (DEBUG>=1) System.out.println(properties_tmp.size() + " properties were already extracted. Complete.");
                 } else {
                     properties_tmp = new LinkedList<FeatureTerm>();
                     current_state = object.clone(dm, o);
@@ -245,7 +245,7 @@ public class Disintegration {
         }
 
         long disintegration_time = System.currentTimeMillis();
-        System.out.println("Disintegration time: " + (disintegration_time-start_time));
+        if (DEBUG>=1) System.out.println("Disintegration time: " + (disintegration_time-start_time));
         return properties_tmp;
     }
 
