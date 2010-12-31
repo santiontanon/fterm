@@ -155,12 +155,12 @@ public class RuleHypothesis extends Hypothesis {
 	} // Hypothesis::generate_prediction
 
 
-        public boolean coveredByAnyRule(FeatureTerm problem) throws FeatureTermException {
-            for(Rule rule:m_rules) {
-                if (rule.pattern.subsumes(problem)) return true;
-            } // while
-            return false;
-        }
+    public Rule coveredByAnyRule(FeatureTerm problem) throws FeatureTermException {
+        for(Rule rule:m_rules) {
+            if (rule.pattern.subsumes(problem)) return rule;
+        } // while
+        return null;
+    }
 
 
 	public String  toString(FTKBase dm)

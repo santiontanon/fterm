@@ -233,7 +233,7 @@ public class AMAIL {
                     for(ArgumentationAgent other:a_l) {
                         if (other!=token &&
                             !other.m_examples.contains(e) &&
-                            !other.m_hypothesis.coveredByAnyRule(e.readPath(dp))) {
+                            other.m_hypothesis.coveredByAnyRule(e.readPath(dp))==null) {
 
                             System.out.println("AMAIL: Agent " + token.m_name + " sending uncovered example " + e.getName().get() + " to " + other.m_name);
 
