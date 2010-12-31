@@ -160,7 +160,7 @@ public class AMAIL2 {
             for(FeatureTerm e:token.m_examples) {
                 if (e.readPath(sp).equivalents(solution) &&
                     !other.m_examples.contains(e) &&
-                    !other.m_hypothesis.coveredByAnyRule(e.readPath(dp))) {
+                    other.m_hypothesis.coveredByAnyRule(e.readPath(dp))==null) {
 
                     System.out.println("AMAIL: Agent " + token.m_name + " sending uncovered example " + e.getName().get() + " to " + other.m_name);
 
