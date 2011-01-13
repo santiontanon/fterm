@@ -21,6 +21,7 @@ public class FTRefinement {
     public static final int CONSTANT_REFINEMENTS = 16;
     public static final int SPECIAL_REFINEMENTS = 32;
     public static final int ALL_REFINEMENTS = SORT_REFINEMENTS | FEATURE_REFINEMENTS | EQUALITY_REFINEMENTS | SET_REFINEMENTS | CONSTANT_REFINEMENTS | SPECIAL_REFINEMENTS;
+    public static final int NO_EQUALITIES = SORT_REFINEMENTS | FEATURE_REFINEMENTS | SET_REFINEMENTS | CONSTANT_REFINEMENTS | SPECIAL_REFINEMENTS;
 
     public static List<FeatureTerm> getSpecializations(FeatureTerm f, FTKBase dm, int flags) throws FeatureTermException {
         List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
@@ -118,7 +119,7 @@ public class FTRefinement {
 
 // 			System.out.println("getSomeSpecializationSubsumingAll: " + i + " -> " + refinements.size());
 
-            {
+            if (refinements!=null) {
                 for (FeatureTerm r : refinements) {
                     boolean candidate = true;
                     for (FeatureTerm obj : objects) {

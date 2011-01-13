@@ -32,6 +32,22 @@ public class FTAntiunification {
         return null;
     } // simple_antiunification
 
+
+    public static FeatureTerm simpleAntiunification(FeatureTerm f1, FeatureTerm f2, Ontology ontology, FTKBase domain_model, int language) throws FeatureTermException {
+        List<FeatureTerm> objects = new LinkedList<FeatureTerm>(), results;
+
+        objects.add(f1);
+        objects.add(f2);
+
+        results = antiunification(objects, language, null, ontology, domain_model, true, VERSION_FAST);
+
+        if (results != null && results.size() > 0) {
+            return results.remove(0);
+        }
+        return null;
+    } // simple_antiunification
+
+
     public static FeatureTerm simpleAntiunification(List<FeatureTerm> objects, Ontology ontology, FTKBase domain_model) throws FeatureTermException {
         List<FeatureTerm> results;
 
