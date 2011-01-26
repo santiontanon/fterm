@@ -23,6 +23,7 @@ import java.util.List;
 public class PropertiesTree extends InductiveLearner {
 
     boolean m_fast = false;   // Fast disintegration or formal disintegration
+    public List<FeatureTerm> lastPropertySet = null;
 
     public PropertiesTree(boolean fast) {
         m_fast = fast;
@@ -35,6 +36,7 @@ public class PropertiesTree extends InductiveLearner {
         List<FeatureTerm> descriptions = new LinkedList<FeatureTerm>();
         for(FeatureTerm e:examples) descriptions.add(e.readPath(dp));
         List<FeatureTerm> properties = generateAllProperties(descriptions,dm,o);
+        lastPropertySet = properties;
 
         // Build the tree:
         h.m_root = generateTree(examples,dp,sp,properties,h, dm, o);
@@ -127,7 +129,7 @@ public class PropertiesTree extends InductiveLearner {
         }
     }
 
-    private List<FeatureTerm> generateAllProperties(List<FeatureTerm> objects, FTKBase dm, Ontology o) throws FeatureTermException {
+    private List<FeatureTerm> generateAllProperties(List<FeatureTerm> objects, FTKBase dm, Ontology o) throws FeatureTermException, Exception {
         int count = 0;
         List<FeatureTerm> properties = new LinkedList<FeatureTerm>();
 
@@ -137,11 +139,7 @@ public class PropertiesTree extends InductiveLearner {
             //	System.out.println(object.toStringNOOS(dm));
 
             List<FeatureTerm> properties_tmp = null;
-            if (m_fast) {
-                properties_tmp = Disintegration.disintegrateFast(object, dm, o);
-            } else {
-                properties_tmp = Disintegration.disintegrate(object, dm, o);
-            }
+            properties_tmp = Disintegration.disintegrate(object, dm, o, true, m_fast);
 
             System.out.println(properties_tmp.size() + " found, now filtering... (previous total: " + properties.size());
 

@@ -156,6 +156,10 @@ public class Disintegration {
     public static List<FeatureTerm> disintegrate(FeatureTerm object, FTKBase dm, Ontology o, boolean cache, boolean fast) throws Exception {
         long start_time = System.currentTimeMillis();
         List<FeatureTerm> properties_tmp = null;
+
+        properties_tmp = propertiesFormalTable.get(object);
+        if (properties_tmp!=null) return properties_tmp;
+
         if (object.getName()!=null && cache) {
             String fname;
             String fname_state;
@@ -236,9 +240,10 @@ public class Disintegration {
                     current_state = null;
                     tmp_state.delete();
                 }
-
-
             }
+
+            propertiesFormalTable.put(object,properties_tmp);
+
         } else {
             if (fast) properties_tmp = Disintegration.disintegrateFast(object, dm, o);
                  else properties_tmp = Disintegration.disintegrate(object, dm, o);
