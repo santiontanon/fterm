@@ -863,7 +863,11 @@ public class FTRefinement {
                             HashMap<FeatureTerm, FeatureTerm> correspondences = new HashMap<FeatureTerm, FeatureTerm>();
                             FeatureTerm clone = f.clone(dm, correspondences);
                             clone.substitute(correspondences.get(X), correspondences.get(Y));
-                            refinements.add(clone);
+                            if (correspondences.get(X)==clone) {
+                                refinements.add(correspondences.get(Y));
+                            } else {
+                                refinements.add(clone);
+                            }
                         }
                     }
                 }
