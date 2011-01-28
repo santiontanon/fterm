@@ -15,6 +15,7 @@ import fterms.exceptions.FeatureTermException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -43,6 +44,32 @@ public class PropertiesTree extends InductiveLearner {
 
         return h;
     }
+
+
+    public Hypothesis generateHypothesis(List<FeatureTerm> examples, float percetageToDisintegrate, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
+        PatternTreeHypothesis h = new PatternTreeHypothesis();
+
+        // Generate properties:
+        List<FeatureTerm> descriptions = new LinkedList<FeatureTerm>();
+
+        Random r = new Random();
+        int n = Math.max((int)(examples.size()*percetageToDisintegrate),1);
+        List<FeatureTerm> toDisintegrate = new LinkedList<FeatureTerm>();
+
+        toDisintegrate.addAll(examples);
+        while(toDisintegrate.size()>n) toDisintegrate.remove(r.nextInt(toDisintegrate.size()));
+
+        for(FeatureTerm e:toDisintegrate) descriptions.add(e.readPath(dp));
+
+        List<FeatureTerm> properties = generateAllProperties(descriptions,dm,o);
+        lastPropertySet = properties;
+
+        // Build the tree:
+        h.m_root = generateTree(examples,dp,sp,properties,h, dm, o);
+
+        return h;
+    }
+
 
     private PatternTreeHypothesis.PatternTreeNode generateTree(List<FeatureTerm> examples, Path dp, Path sp, List<FeatureTerm> properties, PatternTreeHypothesis h, FTKBase dm, Ontology o) throws FeatureTermException {
         System.out.println("PropertiesTree.generateTree: " + examples.size() + " examples and " + properties.size() + " properties.");
