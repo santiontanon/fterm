@@ -1,4 +1,6 @@
-package fterms;
+package fterms.subsumption;
+
+import fterms.FeatureTerm;
 
 public class SubsumptionStackNode {
 	FeatureTerm m_f1;

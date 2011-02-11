@@ -3,8 +3,16 @@
  * and open the template in the editor.
  */
 
-package fterms;
+package fterms.subsumption;
 
+import fterms.FTRefinement;
+import fterms.FeatureTerm;
+import fterms.FloatFeatureTerm;
+import fterms.IntegerFeatureTerm;
+import fterms.SetFeatureTerm;
+import fterms.Symbol;
+import fterms.SymbolFeatureTerm;
+import fterms.TermFeatureTerm;
 import fterms.exceptions.FeatureTermException;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,6 +48,10 @@ public class FTSubsumption {
             return false;
         }
 
+//        if (true) return CSPSubsumption.subsumes(t1, t2);
+//        if (FTRefinement.variables(t1).size()>10) return CSPSubsumption.subsumes(t1, t2);
+
+
         stack.add(0, new SubsumptionStackNode(t1, t2, 0, null, null, 0, null, 0, -1));
         while (!stack.isEmpty()) {
 
@@ -66,7 +78,7 @@ public class FTSubsumption {
 //					System.err.println(this.toStringNOOS());
 //				}
                 if (f2 != null &&
-                    (f1.getDataType() == f2.getDataType() || f1.getDataType() == Sort.DATATYPE_SPECIAL || f2.getDataType() == Sort.DATATYPE_SPECIAL)) {
+                    (f1.getDataType() == f2.getDataType())) {
                     int pos;
 
                     pos = bindings_a.indexOf(f1);
@@ -105,13 +117,13 @@ public class FTSubsumption {
 
             if (state == 0) {
                 // Test names:
-                if (f1.m_name != null) {
-                    if (f2.m_name == null) {
+                if (f1.getName() != null) {
+                    if (f2.getName() == null) {
                         if (!(f2 instanceof SetFeatureTerm)) {
                             state = 1;
                         } // if
                     } else {
-                        if (f2.m_name.equals(f1.m_name)) {
+                        if (f2.getName().equals(f1.getName())) {
                             state = 2;
                         } else {
                             state = 1;
@@ -123,8 +135,7 @@ public class FTSubsumption {
 
             if (state == 0) {
                 // Test sorts:
-                if (!(f1 instanceof SpecialFeatureTerm) &&
-                    !(f1 instanceof SetFeatureTerm) && !(f2 instanceof SetFeatureTerm) &&
+                if (!(f1 instanceof SetFeatureTerm) && !(f2 instanceof SetFeatureTerm) &&
                     f1.getSort() != null && f2.getSort() != null &&
                     !f1.getSort().isSubsort(f2.getSort())) {
                     state = 1;
@@ -134,9 +145,7 @@ public class FTSubsumption {
 
             if (state == 0 || state == 2) {
                 if (f2 != null &&
-                    (f1.getDataType() == f2.getDataType() ||
-                    f1.getDataType() == Sort.DATATYPE_SPECIAL ||
-                    f2.getDataType() == Sort.DATATYPE_SPECIAL)) {
+                    (f1.getDataType() == f2.getDataType())) {
                     bindings_a.add(0, f1);
                     bindings_b.add(0, f2);
                 } // if
@@ -148,12 +157,7 @@ public class FTSubsumption {
 
             // Subsumption:
             if (state == 0) {
-                if (f1 instanceof SpecialFeatureTerm) {
-                    if (!((SpecialFeatureTerm) f1).m_value.subsumes(f2)) {
-                        state = 1;
-                    }
-
-                } else if (f1 instanceof SetFeatureTerm || f2 instanceof SetFeatureTerm) {
+                if (f1 instanceof SetFeatureTerm || f2 instanceof SetFeatureTerm) {
                     boolean interrupted = false;
 
                     //						System.out.println("Set subsumption...");
@@ -262,7 +266,7 @@ public class FTSubsumption {
                     // Single object subsumption:
                     // System.out.println("Single object subsumption...");
 
-                    if (!f1.hasValue() && !(f1 instanceof SpecialFeatureTerm)) {
+                    if (!f1.hasValue()) {
                         if (!f1.getSort().isSubsort(f2.getSort())) {
                             state = 1;
                         }
@@ -314,7 +318,7 @@ public class FTSubsumption {
                                 Symbol fn = feature.getKey();
                                 FeatureTerm fv2 = null;
                                 if (f2 instanceof TermFeatureTerm) fv2 = f2.featureValue(fn);
-                                if (fv2 == null && !(fv instanceof SpecialFeatureTerm)) {
+                                if (fv2 == null) {
                                     state = 1;
                                     break;
                                 } // if
@@ -399,6 +403,13 @@ public class FTSubsumption {
         } // while
         //		System.out.println("*---- End Subsumption: " + (res ? "true":"false") + " ----*\n");
 
+/*        boolean res2 = CSPSubsumption.subsumes(t1, t2);
+        if (res!=res2) {
+            System.err.println("CSPsubsumption has a different result: " + res + " - " + res2);
+            System.err.println(t1.toStringNOOS());
+            System.err.println(t2.toStringNOOS());
+        }
+*/
         return res;
     }
 

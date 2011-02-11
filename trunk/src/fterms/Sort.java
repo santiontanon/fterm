@@ -13,7 +13,6 @@ import java.util.Random;
 import java.util.Set;
 
 import fterms.exceptions.FeatureTermException;
-import fterms.specialterms.SpecialTerm;
 
 
 public class Sort {
@@ -23,7 +22,6 @@ public class Sort {
 	public final static int DATATYPE_SYMBOL = 2;
 	public final static int DATATYPE_FEATURETERM = 3;
 	public final static int DATATYPE_SET = 4;
-	public final static int DATATYPE_SPECIAL = 5;
 
 	static Random s_rand = new Random();
 
@@ -42,13 +40,6 @@ public class Sort {
 	List<Sort> m_feature_sorts = new ArrayList<Sort>();
 	List<FeatureTerm> m_feature_default = new ArrayList<FeatureTerm>();
 	List<Boolean> m_feature_singleton = new ArrayList<Boolean>();		// Determines whether the feature can have a single value or if it can have many values
-
-	SpecialTerm m_seed = null;	
-	// When a sort defines a SpecialTerm, this variable is used as the "seed",		 
-	// it contains an empty SpecialTerm of the appropriate type, and to instantiate  
-	// a new SpecialTerm of this type, we only have to call the "newSpecialTerm"	 
-	// virtual method of m_seed, that will call the appropriate constructor.			 
-
 
 	Sort()
 	{
@@ -175,53 +166,16 @@ public class Sort {
 		}
 
 		case DATATYPE_FEATURETERM: // Generate a random Feature Term:  
-		case DATATYPE_SPECIAL:
-		{
-			FeatureTerm f,value;
-			Sort s;
-			boolean selected=false;
-			Symbol fn;
-			Sort fs;
-
-			// randomly choose the sort:  
-			s=this;
-			while(s.m_super!=null && !selected) {
-				if ((s_rand.nextInt(4))!=0) selected=true;
-				else s=s.m_super;
-			} // while  
-
-			if (m_data_type==DATATYPE_SPECIAL) {
-				f=new SpecialFeatureTerm(s);
-			} else {
-				f=new TermFeatureTerm(s);
-			}
-
-			// Randomly fill the features:  
-			{
-				while(s!=null) {
-					int i;
-					for(i=0;i<s.m_feature_names.size();i++) {
-						fn = s.m_feature_names.get(i);
-						fs = s.m_feature_sorts.get(i);
-						if ((s_rand.nextInt(2))==0) {
-							value=fs.random();
-							((TermFeatureTerm)f).defineFeatureValue(fn,value);									
-						} // if  
-					}							
-					s=s.m_super;
-				} // while  
-			}
-
-			if (m_data_type==DATATYPE_SPECIAL) ((SpecialFeatureTerm)f).takeValues();
-
-			return f;	
-		}
 		}
 
 		return null;
 	} // Sort::random  
 
-	public String get() {
+	public Symbol getName() {
+		return m_name;
+	}
+
+    public String get() {
 		return m_name.get();
 	}
 
@@ -471,20 +425,9 @@ public class Sort {
 				FeatureTerm f = new TermFeatureTerm((Symbol)null,this);
 				return f;				
 			}
-		case DATATYPE_SPECIAL:			
-			{
-				SpecialFeatureTerm f = new SpecialFeatureTerm((Symbol)null,this,m_seed.newSpecialTerm());
-				return f;
-			}
 		}
 		return null;
 	}
-
-	
-	public void setSpecialSeed(SpecialTerm seed)
-	{
-		m_seed=seed;
-	} // Sort::setSpecialSeed  
 	
 	
 	public String getDescription() {

@@ -120,7 +120,7 @@ public class FTermTests {
 
 		System.out.println("Ontology Load tests...");
 		domain_model_trains.ImportNOOS("NOOS/trains-ontology.noos",o);
-		if (o.getNSorts()!=14) {
+		if (o.getNSorts()!=16) {
 			int n = o.getNSorts();
 			System.out.println("Ontology Test 1 failed: N sorts in o is " + n);
 			for(Sort s:o.getSorts()) {
@@ -129,7 +129,7 @@ public class FTermTests {
 			errors++;
 		}
 		domain_model_toxicology.ImportNOOS("NOOS/toxic-eva-ontology.noos",o);
-		if (o.getNSorts()!=233) {
+		if (o.getNSorts()!=235) {
 			int n = o.getNSorts();
 			System.out.println("Ontology Test 2 failed: N sorts in o is " + n);
 			System.out.println(o.getDescription());

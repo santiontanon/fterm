@@ -1,5 +1,6 @@
 package fterms;
 
+import fterms.subsumption.FTSubsumption;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;

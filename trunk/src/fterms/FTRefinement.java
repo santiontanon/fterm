@@ -19,9 +19,8 @@ public class FTRefinement {
     public static final int EQUALITY_REFINEMENTS = 4;
     public static final int SET_REFINEMENTS = 8;
     public static final int CONSTANT_REFINEMENTS = 16;
-    public static final int SPECIAL_REFINEMENTS = 32;
-    public static final int ALL_REFINEMENTS = SORT_REFINEMENTS | FEATURE_REFINEMENTS | EQUALITY_REFINEMENTS | SET_REFINEMENTS | CONSTANT_REFINEMENTS | SPECIAL_REFINEMENTS;
-    public static final int NO_EQUALITIES = SORT_REFINEMENTS | FEATURE_REFINEMENTS | SET_REFINEMENTS | CONSTANT_REFINEMENTS | SPECIAL_REFINEMENTS;
+    public static final int ALL_REFINEMENTS = SORT_REFINEMENTS | FEATURE_REFINEMENTS | EQUALITY_REFINEMENTS | SET_REFINEMENTS | CONSTANT_REFINEMENTS;
+    public static final int NO_EQUALITIES = SORT_REFINEMENTS | FEATURE_REFINEMENTS | SET_REFINEMENTS | CONSTANT_REFINEMENTS;
 
     public static List<FeatureTerm> getSpecializations(FeatureTerm f, FTKBase dm, int flags) throws FeatureTermException {
         List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
@@ -38,9 +37,6 @@ public class FTRefinement {
         }
         if ((flags & SET_REFINEMENTS) != 0) {
             refinements.addAll(setExpansion(f, dm, vp));
-        }
-        if ((flags & SPECIAL_REFINEMENTS) != 0) {
-            refinements.addAll(specialSpecializations(f, dm, vp));
         }
         /*
         // If no set of objects is supplied, this operators might return an infinite number of refinements, so, it's not supported
@@ -67,9 +63,6 @@ public class FTRefinement {
         }
         if ((flags & CONSTANT_REFINEMENTS) != 0) {
             refinements.addAll(substitutionByConstantSubsumingAll(f, dm, o, vp, objects));
-        }
-        if ((flags & SPECIAL_REFINEMENTS) != 0) {
-            refinements.addAll(specialSpecializationsSubsumingAll(f, dm, o, vp, objects));
         }
 
         {
@@ -112,9 +105,6 @@ public class FTRefinement {
             }
             if (i == 2 && (flags & CONSTANT_REFINEMENTS) != 0) {
                 refinements = substitutionByConstantSubsumingAll(f, dm, o, vp, objects);
-            }
-            if (i == 5 && (flags & SPECIAL_REFINEMENTS) != 0) {
-                refinements = specialSpecializationsSubsumingAll(f, dm, o, vp, objects);
             }
 
 // 			System.out.println("getSomeSpecializationSubsumingAll: " + i + " -> " + refinements.size());
@@ -171,10 +161,6 @@ public class FTRefinement {
             refinements.addAll(substitutionByConstantSubsumingSome(f, dm, o, vp, objects));
         }
 //		System.out.println("[" + refinements.size() + "]");
-        if ((flags & SPECIAL_REFINEMENTS) != 0) {
-            refinements.addAll(specialSpecializationsSubsumingSome(f, dm, o, vp, objects));
-        }
-//		System.out.println("[" + refinements.size() + "]");
 
         {
             List<FeatureTerm> result = new LinkedList<FeatureTerm>();
@@ -219,8 +205,6 @@ public class FTRefinement {
 //		System.out.println("[" + refinements.size() + "]");
         refinements.addAll(ConstantGeneralization(f, dm));
 //		System.out.println("[" + refinements.size() + "]");
-        refinements.addAll(specialGeneralizations(f, dm, o, vp));
-//		System.out.println("[" + refinements.size() + "]");
 
 //		for(FeatureTerm ft:refinements) {
 //			if (f.subsumes(ft)) {
@@ -263,8 +247,6 @@ public class FTRefinement {
 //		System.out.println("[" + refinements.size() + "]");
         refinements.addAll(variableEqualityEliminationAggressive(f, dm));
 //		System.out.println("[" + refinements.size() + "]");
-        refinements.addAll(specialGeneralizations(f, dm, o, vp));
-//		System.out.println("[" + refinements.size() + "]");
 
 //		for(FeatureTerm ft:refinements) {
 //			if (f.subsumes(ft)) {
@@ -301,7 +283,7 @@ public class FTRefinement {
         List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = null;
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             if (i == 0) {
                 refinements = sortGeneralization(f, dm, o);
             }
@@ -317,10 +299,6 @@ public class FTRefinement {
             if (i == 4) {
                 refinements = variableEqualityElimination(f, dm, vp);
             }
-            if (i == 5) {
-                refinements = specialGeneralizations(f, dm, o, vp);
-            }
-
 
             if (!refinements.isEmpty()) {
                 return refinements;
@@ -337,13 +315,12 @@ public class FTRefinement {
         List<Pair<FeatureTerm, Path>> vp = variablesWithPaths(f, dm);
         List<FeatureTerm> refinements = null;
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 5; i++) {
             if (i == 0) refinements = sortGeneralization(f, dm, o);
             if (i == 1) refinements = featureElimination(f, dm, vp);
             if (i == 2) refinements = setReduction(f, dm, o);
             if (i == 3) refinements = ConstantGeneralization(f, dm);
             if (i == 4) refinements = variableEqualityEliminationAggressive(f, dm);
-            if (i == 5) refinements = specialGeneralizations(f, dm, o, vp);
 
             if (!refinements.isEmpty()) {
                 return refinements;
@@ -363,7 +340,6 @@ public class FTRefinement {
         left.add(2);
         left.add(3);
         left.add(4);
-        left.add(5);
         Random r = new Random();
 
         while(!left.isEmpty()) {
@@ -373,7 +349,6 @@ public class FTRefinement {
             if (i == 2) refinements = setReduction(f, dm, o);
             if (i == 3) refinements = ConstantGeneralization(f, dm);
             if (i == 4) refinements = variableEqualityEliminationAggressive(f, dm);
-            if (i == 5) refinements = specialGeneralizations(f, dm, o, vp);
 
             if (!refinements.isEmpty()) {
                 return refinements;
@@ -1177,99 +1152,7 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> specialSpecializations(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
-        List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
 
-        if (vp == null) {
-            vp = variablesWithPaths(f, dm);
-        }
-
-        for (Pair<FeatureTerm, Path> node : vp) {
-            if (node.m_a instanceof SpecialFeatureTerm) {
-                Ontology o = node.m_a.getSort().getOntology();
-                List<FeatureTerm> specialRefinements = ((SpecialFeatureTerm) node.m_a).specializations(dm, o);
-                for (FeatureTerm c : specialRefinements) {
-                    refinements.add(substitute(f, node.m_a, c, dm));
-                }
-            }
-        }
-
-        return refinements;
-    }
-
-    public static List<FeatureTerm> specialSpecializationsSubsumingAll(FeatureTerm f, FTKBase dm, Ontology ontology, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
-        List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
-
-//		System.out.println("FTRefinement.specialSpecializationsSubsumingAll");
-
-        if (vp == null) {
-            vp = variablesWithPaths(f, dm);
-        }
-
-        for (Pair<FeatureTerm, Path> node : vp) {
-            if (node.m_a instanceof SpecialFeatureTerm) {
-
-                List<FeatureTerm> values = new LinkedList<FeatureTerm>();
-                for (FeatureTerm o : objects) {
-                    FeatureTerm c = o.readPath(node.m_b);
-                    values.add(c);
-                }
-
-                List<FeatureTerm> specialRefinements = ((SpecialFeatureTerm) node.m_a).specializationsSubsumingAll(dm, ontology, values);
-                for (FeatureTerm c : specialRefinements) {
-                    refinements.add(substitute(f, node.m_a, c, dm));
-                }
-            }
-        }
-
-        return refinements;
-    }
-
-    public static List<FeatureTerm> specialSpecializationsSubsumingSome(FeatureTerm f, FTKBase dm, Ontology ontology, List<Pair<FeatureTerm, Path>> vp, List<FeatureTerm> objects) throws FeatureTermException {
-        List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
-
-        if (vp == null) {
-            vp = variablesWithPaths(f, dm);
-        }
-
-        for (Pair<FeatureTerm, Path> node : vp) {
-            if (node.m_a instanceof SpecialFeatureTerm) {
-
-                List<FeatureTerm> values = new LinkedList<FeatureTerm>();
-                for (FeatureTerm o : objects) {
-                    FeatureTerm c = o.readPath(node.m_b);
-                    values.add(c);
-                }
-
-                List<FeatureTerm> specialRefinements = ((SpecialFeatureTerm) node.m_a).specializationsSubsumingSome(dm, ontology, values);
-                for (FeatureTerm c : specialRefinements) {
-                    refinements.add(substitute(f, node.m_a, c, dm));
-                }
-            }
-        }
-
-        return refinements;
-    }
-
-    public static List<FeatureTerm> specialGeneralizations(FeatureTerm f, FTKBase dm, Ontology ontology, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
-        List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
-
-        if (vp == null) {
-            vp = variablesWithPaths(f, dm);
-        }
-
-        for (Pair<FeatureTerm, Path> node : vp) {
-            if (node.m_a instanceof SpecialFeatureTerm) {
-
-                List<FeatureTerm> specialRefinements = ((SpecialFeatureTerm) node.m_a).generalizations(dm, ontology);
-                for (FeatureTerm c : specialRefinements) {
-                    refinements.add(substitute(f, node.m_a, c, dm));
-                }
-            }
-        }
-
-        return refinements;
-    }
 
     public static List<FeatureTerm> variables(FeatureTerm ft) {
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
