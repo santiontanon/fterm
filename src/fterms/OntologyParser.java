@@ -154,82 +154,42 @@ public abstract class OntologyParser {
 	}
 
 	protected FeatureTerm defineSymbol(Symbol fname,List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, Sort vsort,
+			Sort vsort,
 			List<NOOSPathRecord> nprl, List<NOOSVariableLinkRecord> nvll,
 			FTKBase m, List<NOOSVariableRecord> nvl, Ontology o)
 			throws Exception {
 		FeatureTerm fvalue;
 		hierarchy.add(f);
-		fvalue=getFeatureTermInternal(m,o,vsort,hierarchy,nprl,nvl,nvll,specials);
+		fvalue = getFeatureTermInternal(m,o,vsort,hierarchy,nprl,nvl,nvll);
 		hierarchy.remove(f);
 		return fvalue;
 	}
 	protected FeatureTerm defineSymbol(List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, Sort vsort,
+			Sort vsort,
 			List<NOOSPathRecord> nprl, List<NOOSVariableLinkRecord> nvll,
 			FTKBase m, List<NOOSVariableRecord> nvl, Ontology o)
 			throws Exception {
 		FeatureTerm fvalue;
-		Symbol fname= null;
-		fvalue= this.defineSymbol(fname, hierarchy, f, specials, vsort, nprl, nvll, m, nvl, o);
+		Symbol fname = null;
+		fvalue = this.defineSymbol(fname, hierarchy, f, vsort, nprl, nvll, m, nvl, o);
 		
 		return fvalue;
 	}
  
-	protected FeatureTerm getFeatureTermInternal(FTKBase m,Ontology o,Sort vsort,List<FeatureTerm> hierarchy,List<NOOSPathRecord> nprl,List<NOOSVariableRecord> nvl,List<NOOSVariableLinkRecord> nvll,List<SpecialFeatureTerm> specials) throws Exception
+	protected FeatureTerm getFeatureTermInternal(FTKBase m,Ontology o,Sort vsort,List<FeatureTerm> hierarchy,List<NOOSPathRecord> nprl,List<NOOSVariableRecord> nvl,List<NOOSVariableLinkRecord> nvll) throws Exception
 	{
 		
 		
 		// Sort and name:  
 		prepareNextSymbol();
 		FeatureTerm f = null;
-		f=setupIdentifier(m, o, vsort, hierarchy, nprl, nvl, nvll, specials,f);
-		f=setupFeatures(hierarchy, f, specials, vsort, nprl, nvll, m, nvl, o);
+		f = setupIdentifier(m, o, vsort, hierarchy, nprl, nvl, nvll,f);
+		f = setupFeatures(hierarchy, f, vsort, nprl, nvll, m, nvl, o);
 		
 		return f;
 	} // FeatureTer
 	
-	protected FeatureTerm setupDatatypeSpecial(FTKBase m,
-			List<SpecialFeatureTerm> specials, Symbol name) {
-		FeatureTerm f;
-		if (name!=null) {
-			FeatureTerm found=null;
-			found=m.SearchUndefinedFT(name);
-	
-			if (found!=null) {
-	
-				// Delete it first, since it will be added again when returning from this function: 
-				m.DeleteFT(found);
-				f=found;
-				f.setSort(sort);
-	
-			} else {
-				if (sort==null) {
-					f=new SetFeatureTerm(name);
-				} else {
-					if (sort.getDataType()==Sort.DATATYPE_SPECIAL) {
-						f=new SpecialFeatureTerm(name,sort);
-						specials.add((SpecialFeatureTerm)f);
-					} else {
-						f=new TermFeatureTerm(name,sort);
-					} // if 
-				} // if 
-			} // if 
-	
-		} else {
-			if (sort==null) {
-				f=new SetFeatureTerm(name);
-			} else {
-				if (sort.getDataType()==Sort.DATATYPE_SPECIAL) {
-					f=new SpecialFeatureTerm(name,sort);
-					specials.add((SpecialFeatureTerm)f);
-				} else {
-					f=new TermFeatureTerm(name,sort);
-				} // if 
-			} // if 
-		} // if 
-		return f;
-	}
+
 	protected Symbol getName(String nameIdentifier)
 	throws FeatureTermException, IOException {
 		Symbol name;
@@ -338,20 +298,20 @@ public abstract class OntologyParser {
 	}
 
 	protected boolean setupOValuesAndFeatureValuesOfSpecificSort(Sort sort, List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, List<NOOSPathRecord> nprl,
+			List<NOOSPathRecord> nprl,
 			List<NOOSVariableLinkRecord> nvll, FTKBase m,
 			List<NOOSVariableRecord> nvl, Ontology o,String featureName)
 			throws Exception {
 		Symbol fname;
 		fname=new Symbol(featureName);
 		// Feature Value: (may have several values to form a SET)  
-		readValuesAndFeatureValuesOfSpecificFeature(fp, sort, hierarchy, f,specials, nprl, nvll, m, nvl, o, fname);
+		readValuesAndFeatureValuesOfSpecificFeature(fp, sort, hierarchy, f, nprl, nvll, m, nvl, o, fname);
 		return false;
 	}
 
 	protected void readValuesAndFeatureValuesOfSpecificFeature(RewindableInputStream fp,
 			Sort sort, List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, List<NOOSPathRecord> nprl,
+			List<NOOSPathRecord> nprl,
 			List<NOOSVariableLinkRecord> nvll, FTKBase m,
 			List<NOOSVariableRecord> nvl, Ontology o, Symbol fname)
 			throws Exception {
@@ -359,7 +319,7 @@ public abstract class OntologyParser {
 		List<Symbol> variables_read = new LinkedList<Symbol>();
 
 		setupFeatureValuesOfSpecificFeature(fp, sort, hierarchy,
-				f, specials, nprl, nvll, m, nvl, o, fname,
+				f, nprl, nvll, m, nvl, o, fname,
 				values_read,
 				variables_read);
 		if(error) return;
@@ -388,7 +348,7 @@ public abstract class OntologyParser {
 		} // if 
 	}
 	
-	protected FeatureTerm  setupFeatures(List<FeatureTerm>  hierarchy, FeatureTerm f, List<SpecialFeatureTerm> specials, Sort vsort, List<NOOSPathRecord> nprl, List<NOOSVariableLinkRecord> nvll, FTKBase m, List<NOOSVariableRecord> nvl, Ontology o) throws Exception
+	protected FeatureTerm  setupFeatures(List<FeatureTerm>  hierarchy, FeatureTerm f, Sort vsort, List<NOOSPathRecord> nprl, List<NOOSVariableLinkRecord> nvll, FTKBase m, List<NOOSVariableRecord> nvl, Ontology o) throws Exception
 	{
 		boolean end= false;
 		Symbol fname;
@@ -403,13 +363,13 @@ public abstract class OntologyParser {
 			FeatureTerm fvalue = null;
 			if (sort==null) 
 			{
-				end = setupSetOfElements(hierarchy, f, specials, vsort,	nprl, nvll, m, nvl, o, fvalue);
+				end = setupSetOfElements(hierarchy, f, vsort,	nprl, nvll, m, nvl, o, fvalue);
 			} 
 			else {
 			
 					
 					
-					end=error||setupOValuesAndFeatureValuesOfSpecificSort(sort, hierarchy, f,	specials, nprl, nvll, m, nvl, o,tokenName);
+					end = error||setupOValuesAndFeatureValuesOfSpecificSort(sort, hierarchy, f, nprl, nvll, m, nvl, o,tokenName);
 				} 
 			 // if 
 		}while(!end);
@@ -423,18 +383,18 @@ public abstract class OntologyParser {
 	protected abstract FeatureTerm setupIdentifier(FTKBase m, Ontology o, Sort vsort,
 			List<FeatureTerm> hierarchy, List<NOOSPathRecord> nprl,
 			List<NOOSVariableRecord> nvl, List<NOOSVariableLinkRecord> nvll,
-			List<SpecialFeatureTerm> specials, FeatureTerm f) throws IOException, FeatureTermException; 
+			FeatureTerm f) throws IOException, FeatureTermException; 
 
 	protected abstract void prepareNextSymbol() throws Exception;
 	protected abstract void setupFeatureValuesOfSpecificFeature(RewindableInputStream fp, Sort sort,
 			List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, List<NOOSPathRecord> nprl,
+			List<NOOSPathRecord> nprl,
 			List<NOOSVariableLinkRecord> nvll, FTKBase m,
 			List<NOOSVariableRecord> nvl, Ontology o, Symbol fname,
 			List<FeatureTerm> values_read, List<Symbol> variables_read)
 			throws Exception;
 	protected abstract boolean setupSetOfElements(List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, Sort vsort,
+			Sort vsort,
 			List<NOOSPathRecord> nprl, List<NOOSVariableLinkRecord> nvll,
 			FTKBase m, List<NOOSVariableRecord> nvl, Ontology o,FeatureTerm fvalue) throws Exception;
 	protected abstract boolean isEndOfSetOfFeaturesValues(); 

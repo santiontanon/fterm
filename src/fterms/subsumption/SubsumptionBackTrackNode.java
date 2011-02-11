@@ -1,4 +1,4 @@
-package fterms;
+package fterms.subsumption;
 
 import java.util.List;
 

@@ -106,8 +106,7 @@ public class NOOSParser extends OntologyParser {
 			List<NOOSPathRecord> nprl = new LinkedList<NOOSPathRecord>();
 			List<NOOSVariableRecord> nvl = new LinkedList<NOOSVariableRecord>();
 			List<NOOSVariableLinkRecord> nvll = new LinkedList<NOOSVariableLinkRecord>();
-			List<SpecialFeatureTerm> specials = new LinkedList<SpecialFeatureTerm>();
-			f=getFeatureTermInternal(m,o,o.getSort("any"),hierarchy,nprl,nvl,nvll,specials);
+			f=getFeatureTermInternal(m,o,o.getSort("any"),hierarchy,nprl,nvl,nvll);
 
 			if (f!=null) {
 
@@ -180,15 +179,6 @@ public class NOOSParser extends OntologyParser {
 				} // while 
 
 
-				// process specials: 
-				{
-					SpecialFeatureTerm f_s;
-
-					while(!specials.isEmpty()) {
-						f_s=(SpecialFeatureTerm)(specials.remove(0));
-						f_s.takeValues();
-					} // while 
-				}
 			} // if 
 
 			return f;
@@ -197,7 +187,7 @@ public class NOOSParser extends OntologyParser {
 	
 
 	protected boolean setupOValuesAndFeatureValuesOfSpecificSort(Sort sort, List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, List<NOOSPathRecord> nprl,
+			List<NOOSPathRecord> nprl,
 			List<NOOSVariableLinkRecord> nvll, FTKBase m,
 			List<NOOSVariableRecord> nvl, Ontology o,String featureName)
 			throws Exception {
@@ -216,7 +206,7 @@ public class NOOSParser extends OntologyParser {
 			} // if 
 			tokenName= t.token;
 			t=NOOSToken.getTokenNOOS(fp);
-			return super.setupOValuesAndFeatureValuesOfSpecificSort(sort, hierarchy, f,	specials, nprl, nvll, m, nvl, o,tokenName);
+			return super.setupOValuesAndFeatureValuesOfSpecificSort(sort, hierarchy, f, nprl, nvll, m, nvl, o,tokenName);
 			
 		}
 		else if (t.type==NOOSToken.TOKEN_RIGHT_PAR) {
@@ -248,7 +238,7 @@ public class NOOSParser extends OntologyParser {
 
 	protected void setupFeatureValuesOfSpecificFeature(RewindableInputStream fp, Sort sort,
 			List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, List<NOOSPathRecord> nprl,
+			List<NOOSPathRecord> nprl,
 			List<NOOSVariableLinkRecord> nvll, FTKBase m,
 			List<NOOSVariableRecord> nvl, Ontology o, Symbol fname,
 			List<FeatureTerm> values_read, List<Symbol> variables_read)
@@ -269,7 +259,7 @@ public class NOOSParser extends OntologyParser {
 				prepareNextSymbol();
 				if (t.type==NOOSToken.TOKEN_SYMBOL && t.token.equals("define")) {
 					
-					fvalue=super.defineSymbol(hierarchy, fvalue, specials, sort.featureSort(fname), nprl, nvll, m, nvl, o);
+					fvalue=super.defineSymbol(hierarchy, fvalue, sort.featureSort(fname), nprl, nvll, m, nvl, o);
 					if (fvalue==null) {
 						System.err.println("NOOS Importer: Error 9 (token: " + t.token + "): cannot parse the value of a feature\n");
 						error=true;
@@ -356,7 +346,7 @@ public class NOOSParser extends OntologyParser {
 	
 
 	protected boolean setupSetOfElements(List<FeatureTerm> hierarchy, FeatureTerm f,
-			List<SpecialFeatureTerm> specials, Sort vsort,
+			Sort vsort,
 			List<NOOSPathRecord> nprl, List<NOOSVariableLinkRecord> nvll,
 			FTKBase m, List<NOOSVariableRecord> nvl, Ontology o,FeatureTerm fvalue) throws Exception {
 		// Set elements: 
@@ -364,7 +354,7 @@ public class NOOSParser extends OntologyParser {
 		if (t.type==NOOSToken.TOKEN_LEFT_PAR) {
 			t=NOOSToken.getTokenNOOS(fp);
 			if (t.type==NOOSToken.TOKEN_SYMBOL && t.token.equals("define")) {
-				fvalue = defineSymbol(hierarchy, f, specials, vsort, nprl,nvll, m, nvl, o);
+				fvalue = defineSymbol(hierarchy, f, vsort, nprl,nvll, m, nvl, o);
 				if (fvalue==null) {
 					System.err.println("NOOS Importer: Error 1: cannot parse the first element of a set!");
 					error= true;
@@ -497,7 +487,7 @@ public class NOOSParser extends OntologyParser {
 
 	
 	private NOOSToken t;
-	protected FeatureTerm setupIdentifier(FTKBase m,Ontology o,Sort vsort,List<FeatureTerm> hierarchy,List<NOOSPathRecord> nprl,List<NOOSVariableRecord> nvl,List<NOOSVariableLinkRecord> nvll,List<SpecialFeatureTerm> specials, FeatureTerm f) throws IOException, FeatureTermException
+	protected FeatureTerm setupIdentifier(FTKBase m,Ontology o,Sort vsort,List<FeatureTerm> hierarchy,List<NOOSPathRecord> nprl,List<NOOSVariableRecord> nvl,List<NOOSVariableLinkRecord> nvll, FeatureTerm f) throws IOException, FeatureTermException
 	{
 		boolean variable = false;
 		String variablename = null;
@@ -535,7 +525,33 @@ public class NOOSParser extends OntologyParser {
 		} // if 
 	
 		// Check if there is some undefined term with the appropiate name, use it and remove it from the undefined term list: 
-		f = setupDatatypeSpecial(m, specials, name);
+		if (name!=null) {
+			FeatureTerm found=null;
+			found = m.SearchUndefinedFT(name);
+	
+			if (found!=null) {
+	
+				// Delete it first, since it will be added again when returning from this function: 
+				m.DeleteFT(found);
+				f=found;
+				f.setSort(sort);
+	
+			} else {
+				if (sort==null) {
+					f=new SetFeatureTerm(name);
+				} else {
+                    f=new TermFeatureTerm(name,sort);
+				} // if 
+			} // if 
+	
+		} else {
+			if (sort==null) {
+				f=new SetFeatureTerm(name);
+			} else {
+                f=new TermFeatureTerm(name,sort);
+			} // if 
+		} // if         
+
 		setupVariable(nvl, f, variable, variablename);
 
 	return f;	 

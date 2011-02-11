@@ -16,14 +16,11 @@ import fterms.FloatFeatureTerm;
 import fterms.NOOSParser;
 import fterms.Ontology;
 import fterms.Sort;
-import fterms.SpecialFeatureTerm;
 import fterms.Symbol;
 import fterms.TermFeatureTerm;
 import fterms.exceptions.FeatureTermException;
 import fterms.learning.Prediction;
 import fterms.learning.propositional.NOOSToWeka.ConversionRecord;
-import fterms.specialterms.FloatInterval;
-import fterms.specialterms.IFPresent;
 
 public class WekaJ48Hypothesis extends WekaHypothesis {	
 	static final int DEBUG = 0; 
@@ -92,7 +89,8 @@ public class WekaJ48Hypothesis extends WekaHypothesis {
 		while(!stack.isEmpty()) {
 			current = stack.remove(0);
 			String nodeString = searchNodeString(current.m_a,tree);
-			
+
+            /*
 			// If the current pattern does not subsume the problem, do not continue looking:
 			{
 				if (isLeaf(nodeString)) {
@@ -185,6 +183,7 @@ public class WekaJ48Hypothesis extends WekaHypothesis {
 					}
 				}
 			}
+            */
 		}		
 	}
 	

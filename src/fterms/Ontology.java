@@ -120,39 +120,7 @@ public class Ontology {
 
 		return s;
 	} // Ontology::new_sort  
-
-	public Sort newSpecialSort(String name,String a_super,String []fnames,String []fsorts) throws FeatureTermException
-	{
-		Sort s=getSortInternal(name);
-		
-		if (s==null) {
-			int i;
-			
-			s=undefined_sort_list.get(name);
-
-			if (s==null) {
-				s=new Sort();
-				sort_list.put(name,s);
-			} else {
-				undefined_sort_list.remove(name);
-				sort_list.put(name,s);
-			} /* if */ 
-			s.m_ontology=this;
-			s.m_name=new Symbol(name);
-			s.m_super=getSort(a_super);
-			if (s.m_super!=null) s.m_super.m_subsorts.add(s);
-
-			for(i=0;i<fnames.length;i++) {
-
-				s.addFeature(fnames[i],fsorts[i],null,this,false);
-			} /* for */ 
-
-			s.m_data_type=Sort.DATATYPE_SPECIAL;
-		} /* if */ 
-
-		return s;
-	} /* Ontology::new_special_sort */ 
-
+ 
 
 	public Sort getSort(Symbol n) throws FeatureTermException
 	{
@@ -192,38 +160,6 @@ public class Ontology {
 		
 		return s;
 	} /* Ontology::new_sort */ 
-
-
-
-	public Sort newSpecialSort(Symbol name,Sort a_super,Symbol []fnames,Sort []fsorts)
-	{
-		Sort s=getSortInternal(name);
-		
-		if (s==null) {
-			int i;
-
-			s=undefined_sort_list.get(name);
-			if (s==null) {
-				s=new Sort();
-				sort_list.put(name.toString(),s);
-				s.m_name=name;
-				s.m_ontology=this;
-			} else {
-				undefined_sort_list.remove(name.toString());
-				sort_list.put(name.toString(),s);
-			} /* if */ 
-			s.m_super=a_super;
-			if (s.m_super!=null) s.m_super.m_subsorts.add(s);
-
-			for(i=0;i<fnames.length;i++) {
-				s.addFeature(fnames[i],fsorts[i],null,false);
-			} /* for */ 
-
-			s.m_data_type=Sort.DATATYPE_SPECIAL;
-		} /* if */ 
-		
-		return s;
-	} /* Ontology::new_special_sort */ 
 
 
 	public void deleteSort(Sort s)
