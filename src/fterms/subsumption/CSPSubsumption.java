@@ -38,7 +38,7 @@ public class CSPSubsumption {
         // Sort constraint:
         for(int i = 0;i<n1;i++) {
             for(int j = 0;j<n2;j++) {
-                Symbol s1 = t1.variables.get(i).get(0);
+                Object s1 = t1.variables.get(i).get(0);
                 if (!t2.variables.get(j).contains(s1)) {
                     ((IntDomain)(q[i].getDomain())).remove(j);
                 }
