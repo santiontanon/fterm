@@ -5,6 +5,7 @@
 
 package fterms.subsumption;
 
+import fterms.FTKBase;
 import fterms.FTRefinement;
 import fterms.FeatureTerm;
 import fterms.Sort;
@@ -25,13 +26,13 @@ import util.Pair;
  * @author santi
  */
 public class CSPFeatureTerm {
-    public List<List<Symbol>> variables;
+    public List<List<Object>> variables;    // it might contain either constants (terms) or sorts
     public HashMap<Symbol,boolean [][]> features;
 
     public String toString() {
         String tmp = "";
         int n = 0;
-        for(List<Symbol> sorts:variables) {
+        for(List<Object> sorts:variables) {
             tmp += n + " - " + sorts + "\n";
             n++;
         }
@@ -54,19 +55,17 @@ public class CSPFeatureTerm {
         List<FeatureTerm> vl = FTRefinement.variables(f);
         HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> vpl = FTRefinement.variablesWithAllParents(f);
 
-        variables = new LinkedList<List<Symbol>>();
+        variables = new LinkedList<List<Object>>();
         features = new HashMap<Symbol, boolean[][]>();
 
         for(FeatureTerm v:vl) {
-            List<Symbol> sorts = new LinkedList<Symbol>();
+            List<Object> sorts = new LinkedList<Object>();
             if (v.isConstant()) {
-                sorts.add(new Symbol(v.toStringNOOS()));
-            } else if (v.getName()!=null) {
-                sorts.add(v.getName());
+                sorts.add(v);
             }
             Sort s = v.getSort();
             while(s!=null) {
-                sorts.add(s.getName());
+                sorts.add(s);
                 s = s.getSuper();
             }
             variables.add(sorts);
@@ -93,11 +92,56 @@ public class CSPFeatureTerm {
         }
     }
 
+
+    public CSPFeatureTerm(FeatureTerm f, FTKBase dm) throws FeatureTermException {
+        List<FeatureTerm> vl = FTRefinement.variables(f);
+        HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> vpl = FTRefinement.variablesWithAllParents(f);
+
+        variables = new LinkedList<List<Object>>();
+        features = new HashMap<Symbol, boolean[][]>();
+
+        for(FeatureTerm v:vl) {
+            List<Object> sorts = new LinkedList<Object>();
+            if (v.isConstant()) {
+                sorts.add(v);
+            } else if (dm.contains(v)) {
+                sorts.add(v);
+            }
+            Sort s = v.getSort();
+            while(s!=null) {
+                sorts.add(s);
+                s = s.getSuper();
+            }
+            variables.add(sorts);
+        }
+
+        int n1 = 0;
+        int n2 = 0;
+        for(FeatureTerm v:vl) {
+            List<Pair<TermFeatureTerm, Symbol>> parents = vpl.get(v);
+            if (parents!=null) {
+                for(Pair<TermFeatureTerm, Symbol> parent:parents) {
+                    if (parent!=null) {
+                        n1 = vl.indexOf(parent.m_a);
+                        boolean [][]matrix = features.get(parent.m_b);
+                        if (matrix==null) {
+                            matrix = new boolean[variables.size()][variables.size()];
+                            features.put(parent.m_b,matrix);
+                        }
+                        matrix[n1][n2] = true;
+                    }
+                }
+            }
+            n2++;
+        }
+    }
+
+ 
     public CSPFeatureTerm(String fileName) throws IOException, FeatureTermException {
         FileReader fr = new FileReader(fileName);
         BufferedReader br = new BufferedReader(fr);
 
-        variables = new LinkedList<List<Symbol>>();
+        variables = new LinkedList<List<Object>>();
         features = new HashMap<Symbol, boolean[][]>();
 
         int state = 0;
@@ -114,7 +158,7 @@ public class CSPFeatureTerm {
                             state = 1;
                         } else {
                             st.nextToken();
-                            List<Symbol> sorts = new LinkedList<Symbol>();
+                            List<Object> sorts = new LinkedList<Object>();
                             while(st.hasMoreTokens()) {
                                 token = st.nextToken();
                                 sorts.add(new Symbol(token));
@@ -143,6 +187,5 @@ public class CSPFeatureTerm {
             line = br.readLine();
         }
     }
-
 
 }
