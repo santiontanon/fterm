@@ -6,7 +6,9 @@
 package util;
 
 import fterms.FTKBase;
+import fterms.FTRefinement;
 import fterms.FeatureTerm;
+import fterms.SetFeatureTerm;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.LinkedList;
@@ -18,22 +20,36 @@ import java.util.List;
  *
  * This class is used to collect subsumption examples
  */
+
+class FTSRecord {
+    FeatureTerm f1,f2;
+    long time;  // time with normal subsumption
+    long CSPtime;  // time with CSP subsumption
+
+    public FTSRecord(FeatureTerm a_f1, FeatureTerm a_f2, long a_time, long a_CSPtime) {
+        f1 = a_f1;
+        f2 = a_f2;
+        time = a_time;
+        CSPtime = a_CSPtime;
+    }
+}
+
 public class FTSubsumptionRecord {
 
     static int binMax = 10; // we will store 10 terms in each bin
 
-    static List<Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>>> positive = new LinkedList<Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>>>();
-    static List<Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>>> negative = new LinkedList<Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>>>();
+    static List<Pair<Integer,List<FTSRecord>>> positive = new LinkedList<Pair<Integer,List<FTSRecord>>>();
+    static List<Pair<Integer,List<FTSRecord>>> negative = new LinkedList<Pair<Integer,List<FTSRecord>>>();
 
-    public static void register(FeatureTerm f1, FeatureTerm f2, long time, boolean result) {
+    public static void register(FeatureTerm f1, FeatureTerm f2, long time, long CSPtime, boolean result) {
         if (time>0) {
 //            System.out.println(time + " - " + result);
-            List<Pair<FeatureTerm,FeatureTerm>> bin = getBin(time,result);
+            List<FTSRecord> bin = getBin(Math.max(time,CSPtime),result);
 
             if (bin.size()<binMax) {
-                bin.add(new Pair<FeatureTerm,FeatureTerm>(f1,f2));
-
-                // append to the tile with results:
+                bin.add(new FTSRecord(f1,f2, time, CSPtime));
+/*
+                // append to the file with results:
                 try{
                     FileWriter fstream = new FileWriter("subsumption-.txt",true);
                     BufferedWriter out = new BufferedWriter(fstream);
@@ -47,54 +63,89 @@ public class FTSubsumptionRecord {
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
+ */
             }
         }
     }
 
     public static void dumpSummary() {
         System.out.println("With positive result:");
-        for(Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>> bin:positive) {
+        for(Pair<Integer,List<FTSRecord>> bin:positive) {
             System.out.println("Bin " + bin.m_a + ": " + bin.m_b.size());
         }
         System.out.println("With negative result:");
-        for(Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>> bin:negative) {
+        for(Pair<Integer,List<FTSRecord>> bin:negative) {
             System.out.println("Bin " + bin.m_a + ": " + bin.m_b.size());
+        }
+    }
+
+    public static void dumpStatistics() {
+        for(Pair<Integer,List<FTSRecord>> bin:positive) {
+            for(FTSRecord r:bin.m_b) {
+                System.out.println(FTRefinement.variables(r.f1).size() + ", " + FTRefinement.variables(r.f2).size() + ", " + maxSet(r.f1) + ", " + maxSet(r.f2) + ", " + totalSetSize(r.f1) + ", " + totalSetSize(r.f2) + ", " + r.time + ", " + r.CSPtime + ", true");
+            }
+        }
+        for(Pair<Integer,List<FTSRecord>> bin:negative) {
+            for(FTSRecord r:bin.m_b) {
+                System.out.println(FTRefinement.variables(r.f1).size() + ", " + FTRefinement.variables(r.f2).size() + ", " + maxSet(r.f1) + ", " + maxSet(r.f2) + ", " + totalSetSize(r.f1) + ", " + totalSetSize(r.f2) + ", " + r.time + ", " + r.CSPtime + ", false");
+            }
         }
     }
 
     public static void dumpTests(FTKBase dm) {
         System.out.println(";; With positive result:");
-        for(Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>> bin:positive) {
+        for(Pair<Integer,List<FTSRecord>> bin:positive) {
             System.out.println(";; Bin " + bin.m_a + ": " + bin.m_b.size());
-            for(Pair<FeatureTerm,FeatureTerm> pair:bin.m_b) {
-                System.out.println(pair.m_a.toStringNOOS(dm));
-                System.out.println(pair.m_b.toStringNOOS(dm));
+            for(FTSRecord record:bin.m_b) {
+                System.out.println(record.f1.toStringNOOS(dm));
+                System.out.println(record.f2.toStringNOOS(dm));
             }
         }
         System.out.println(";; With negative result:");
-        for(Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>> bin:negative) {
+        for(Pair<Integer,List<FTSRecord>> bin:negative) {
             System.out.println(";; Bin " + bin.m_a + ": " + bin.m_b.size());
-            for(Pair<FeatureTerm,FeatureTerm> pair:bin.m_b) {
-                System.out.println(pair.m_a.toStringNOOS(dm));
-                System.out.println(pair.m_b.toStringNOOS(dm));
+            for(FTSRecord record:bin.m_b) {
+                System.out.println(record.f1.toStringNOOS(dm));
+                System.out.println(record.f2.toStringNOOS(dm));
             }
         }
-
     }
 
-    public static List<Pair<FeatureTerm,FeatureTerm>> getBin(long time, boolean result) {
-        List<Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>>> list = null;
-        int binID = (int)(time/1000);
+    public static int maxSet(FeatureTerm t) {
+        List<SetFeatureTerm> l = FTRefinement.sets(t);
+        int maxSize = 0;
+
+        for(SetFeatureTerm s:l) {
+            if (s.getSetValues().size()>maxSize) maxSize = s.getSetValues().size();
+        }
+
+        return maxSize;
+    }
+
+    public static int totalSetSize(FeatureTerm t) {
+        List<SetFeatureTerm> l = FTRefinement.sets(t);
+        int size = 0;
+
+        for(SetFeatureTerm s:l) {
+            size += s.getSetValues().size();
+        }
+
+        return size;
+    }
+
+    public static List<FTSRecord> getBin(long time, boolean result) {
+        List<Pair<Integer,List<FTSRecord>>> list = null;
+        int binID = (int)(time/100);
         if (result) list = positive;
                else list = negative;
 
-        for(Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>> bin:list) {
+        for(Pair<Integer,List<FTSRecord>> bin:list) {
             if (bin.m_a==binID) {
                 return bin.m_b;
             }
         }
 
-        Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>> bin = new Pair<Integer,List<Pair<FeatureTerm,FeatureTerm>>>(binID,new LinkedList<Pair<FeatureTerm,FeatureTerm>>());
+        Pair<Integer,List<FTSRecord>> bin = new Pair<Integer,List<FTSRecord>>(binID,new LinkedList<FTSRecord>());
         list.add(bin);
         System.out.println("New bin created for " + binID);
         return bin.m_b;

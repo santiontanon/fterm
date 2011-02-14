@@ -17,6 +17,7 @@ import fterms.exceptions.FeatureTermException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
+import util.FTSubsumptionRecord;
 
 /**
  *
@@ -40,6 +41,7 @@ public class FTSubsumption {
         3 - continuing a previous started subsumption, so no initial tests needed */
         boolean res = true;
         int i;
+        long start = System.currentTimeMillis();
 
         if (t1 == t2) {
             return true;
@@ -48,7 +50,7 @@ public class FTSubsumption {
             return false;
         }
 
-//        if (true) return CSPSubsumption.subsumes(t1, t2);
+        if (true) return CSPSubsumption.subsumes(t1, t2);
 //        if (FTRefinement.variables(t1).size()>10) return CSPSubsumption.subsumes(t1, t2);
 
 
@@ -403,13 +405,18 @@ public class FTSubsumption {
         } // while
         //		System.out.println("*---- End Subsumption: " + (res ? "true":"false") + " ----*\n");
 
-/*        boolean res2 = CSPSubsumption.subsumes(t1, t2);
+        long end = System.currentTimeMillis();
+        boolean res2 = CSPSubsumption.subsumes(t1, t2);
+        long end2 = System.currentTimeMillis();
+        
+        FTSubsumptionRecord.register(f1, f2, (end-start), (end2-end), res);
+
         if (res!=res2) {
             System.err.println("CSPsubsumption has a different result: " + res + " - " + res2);
             System.err.println(t1.toStringNOOS());
             System.err.println(t2.toStringNOOS());
         }
-*/
+
         return res;
     }
 

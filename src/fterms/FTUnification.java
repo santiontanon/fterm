@@ -191,8 +191,13 @@ public class FTUnification {
                     if (f.f1==r.f1) {
                         for(Feature f2:n.features) {
                             if (f2.f1==r.f2 && f2.f.equals(f.f) && f.f2!=f2.f2) {
-                                Restriction nr = new Restriction(f.f2,f2.f2,!f.f1.getSort().featureSingleton(f.f) ||
-                                                                              !f2.f1.getSort().featureSingleton(f.f));
+                                Restriction nr;
+                                if (f.f2.isConstant() && f2.f2.isConstant() && f.f2.equals(f2.f2)) {
+                                    nr = new Restriction(f.f2,f2.f2,false);
+                                } else {
+                                    nr = new Restriction(f.f2,f2.f2,!f.f1.getSort().featureSingleton(f.f) ||
+                                                                                  !f2.f1.getSort().featureSingleton(f.f));
+                                }
                                 n.restrictions.add(nr);
                             }
                         }
