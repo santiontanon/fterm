@@ -25,8 +25,8 @@ import util.Pair;
  * @author santi
  */
 public class CSPFeatureTerm {
-    List<List<Symbol>> variables;
-    HashMap<Symbol,boolean [][]> features;
+    public List<List<Symbol>> variables;
+    public HashMap<Symbol,boolean [][]> features;
 
     public String toString() {
         String tmp = "";
@@ -92,5 +92,57 @@ public class CSPFeatureTerm {
             n2++;
         }
     }
+
+    public CSPFeatureTerm(String fileName) throws IOException, FeatureTermException {
+        FileReader fr = new FileReader(fileName);
+        BufferedReader br = new BufferedReader(fr);
+
+        variables = new LinkedList<List<Symbol>>();
+        features = new HashMap<Symbol, boolean[][]>();
+
+        int state = 0;
+        String line = br.readLine();
+        while(line!=null) {
+
+            switch(state) {
+                case 0:
+                    {
+                        StringTokenizer st = new StringTokenizer(line);
+                        String token = st.nextToken();
+                        int node = Integer.parseInt(token);
+                        if (node==0) {
+                            state = 1;
+                        } else {
+                            st.nextToken();
+                            List<Symbol> sorts = new LinkedList<Symbol>();
+                            while(st.hasMoreTokens()) {
+                                token = st.nextToken();
+                                sorts.add(new Symbol(token));
+                            }
+                            variables.add(sorts);
+                        }
+                    }
+                    break;
+                 case 1:
+                    {
+                        StringTokenizer st = new StringTokenizer(line);
+                        int n1 = Integer.parseInt(st.nextToken());
+                        int n2 = Integer.parseInt(st.nextToken());
+                        Symbol f = new Symbol(st.nextToken());
+
+                        boolean [][]matrix  = features.get(f);
+                        if (matrix==null) {
+                            matrix = new boolean[variables.size()][variables.size()];
+                            features.put(f, matrix);
+                        }
+                        matrix[n1-1][n2-1] = true;
+                    }
+                    break;
+            }
+
+            line = br.readLine();
+        }
+    }
+
 
 }
