@@ -50,7 +50,7 @@ public class FTSubsumption {
             return false;
         }
 
-        if (true) return CSPSubsumption.subsumes(t1, t2);
+//        if (true) return CSPSubsumption.subsumes(t1, t2);
 //        if (FTRefinement.variables(t1).size()>10) return CSPSubsumption.subsumes(t1, t2);
 
 
@@ -405,6 +405,7 @@ public class FTSubsumption {
         } // while
         //		System.out.println("*---- End Subsumption: " + (res ? "true":"false") + " ----*\n");
 
+        /*
         long end = System.currentTimeMillis();
         boolean res2 = CSPSubsumption.subsumes(t1, t2);
         long end2 = System.currentTimeMillis();
@@ -416,7 +417,8 @@ public class FTSubsumption {
             System.err.println(t1.toStringNOOS());
             System.err.println(t2.toStringNOOS());
         }
-
+        */
+        
         return res;
     }
 
