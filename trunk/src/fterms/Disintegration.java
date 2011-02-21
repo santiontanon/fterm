@@ -61,7 +61,7 @@ public class Disintegration {
                 if (property_rest.m_a!=null) properties.add(property_rest.m_a);
                 unnamed = property_rest.m_b;
 
-                System.out.println(properties.size() + " properties (term now has " + FTRefinement.variables(unnamed).size() + " variables");
+                System.out.println(properties.size() + " properties (term now has " + FTRefinement.variables(unnamed).size() + " variables)");
 
 //				System.out.println("--------------------");
 //				System.out.println(property_rest.m_a.toStringNOOS(dm));
@@ -534,7 +534,8 @@ public class Disintegration {
                 return result;
             }
         }
-        if (DEBUG>=2) System.out.println("ReminderSmart, fast failed, starting slow remainder...");
+        // if (DEBUG>=2)
+        System.out.println("ReminderSmart, fast failed, starting slow remainder...");
         result =  remainderUnification(f, refinement, dm, o);
         return result;
     }
