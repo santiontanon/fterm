@@ -81,7 +81,9 @@ public class SHAUD2 extends Distance {
 	public double distance(FeatureTerm f1, FeatureTerm f2, Ontology o,
 			FTKBase dm) throws FeatureTermException {
 
-		return 1 - SHAUD(o.getSort("any"),null,null,f1,f2,o,dm,maxdepth);
+        double tmp = SHAUD(o.getSort("any"),null,null,f1,f2,o,dm,maxdepth);
+        if (tmp>1) return 0;
+		return 1 - tmp;
 	}
 	
 	private double SHAUD(Sort mostGeneral,String rangeName,FeatureTerm au,FeatureTerm f1, FeatureTerm f2, Ontology o,
