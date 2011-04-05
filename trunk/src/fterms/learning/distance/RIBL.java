@@ -170,6 +170,11 @@ public class RIBL extends Distance {
         double similarity = 0.0;
         int card = Math.max(L_f1.size(), L_f2.size());
 
+        if (card==0) {
+            if (parameterValue1.equals(parameterValue2)) return 1.0;
+            return 0;
+        }
+
         for (Pair<Clause, Integer> p : L_f1) {
             for (Pair<Clause, Integer> p2 : L_f2) {
                 if (p.m_a.getHead().equals(p2.m_a.getHead()) &&
@@ -220,7 +225,7 @@ public class RIBL extends Distance {
         if (LA.size() < LB.size()) {
             for (Clause Lx : LA) {
                 boolean first = true;
-                double max = 0.0;
+                double max = 1.0;
                 for (Clause Ly : LB) {
                     double sim = SimL(A, B, depth, P, pos, Lx, Ly, descriptors_f1, descriptors_f2, cache_f1, cache_f2);
                     if (first || sim > max) {
@@ -234,7 +239,7 @@ public class RIBL extends Distance {
         } else {
             for (Clause Lx : LB) {
                 boolean first = true;
-                double max = 0.0;
+                double max = 1.0;
                 for (Clause Ly : LA) {
                     double sim = SimL(A, B, depth, P, pos, Ly, Lx, descriptors_f1, descriptors_f2, cache_f1, cache_f2);
                     if (first || sim > max) {
@@ -249,7 +254,7 @@ public class RIBL extends Distance {
         }
 
         if (debug) {
-            System.out.println("RIBL SimLS: " + similarity);
+            System.out.println("RIBL SimLS: (" + A + "," + B + ") " + similarity);
         }
 
         return similarity;
@@ -270,6 +275,9 @@ public class RIBL extends Distance {
                 !Ai.equals(O1) ||
                 P2.getParameterType(i) != Clause.TYPE_ID ||
                 !Bi.equals(O2)) {
+
+
+                // System.out.println(Ai + " - " + Bi + " -> " + P1.getParameterType(i));
 
                 if (depth <= max_depth) {
                     switch (P1.getParameterType(i)) {
@@ -296,11 +304,13 @@ public class RIBL extends Distance {
         }
 
         if (debug) {
-            System.out.println("RIBL SimL: " + similarity + " / " + count);
+            System.out.println("RIBL SimL: (" + O1 + "," + O2 + ") " + " (" + P1 + "," + P2 + ") " +similarity + " / " + count);
         }
 
         if (count != 0) {
             similarity /= count;
+        } else {
+            return 1;
         }
 
         return similarity;

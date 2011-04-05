@@ -14,7 +14,7 @@ import util.Pair;
 
 public class AUDistance extends Distance {
 	
-	static final boolean DEBUG = true;
+	static final boolean DEBUG = false;
 
 	public double distance(FeatureTerm f1, FeatureTerm f2,Ontology o,FTKBase dm) throws FeatureTermException {
 		FeatureTerm au;
