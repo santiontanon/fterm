@@ -172,6 +172,10 @@ public class TrainingSetUtils {
     public static final int TRAINS_DATASET = 6;
     public static final int TRAINS_82_DATASET = 61;
     public static final int TRAINS_900_DATASET = 62;
+    public static final int TRAINS_100_DATASET = 63;
+    public static final int TRAINS_1000_DATASET = 64;
+    public static final int TRAINS_10000_DATASET = 65;
+    public static final int TRAINS_100000_DATASET = 66;
     public static final int UNCLE_DATASET = 7;
     public static final int UNCLE_DATASET_SETS = 8;
     public static final int UNCLE_DATASET_BOTH = 9;
@@ -280,6 +284,38 @@ public class TrainingSetUtils {
                 dm.ImportNOOS("NOOS/trains-ontology.noos", o);
                 dm.ImportNOOS("NOOS/trains-dm.noos", o);
                 case_base.ImportNOOS("NOOS/trains-cases-900.noos", o);
+
+                ts.name = "trains";
+                ts.problem_sort = o.getSort("trains-problem");
+                break;
+            case TRAINS_100_DATASET:
+                dm.ImportNOOS("NOOS/trains-ontology.noos", o);
+                dm.ImportNOOS("NOOS/trains-dm.noos", o);
+                case_base.ImportNOOS("NOOS/trains-cases-100.noos", o);
+
+                ts.name = "trains";
+                ts.problem_sort = o.getSort("trains-problem");
+                break;
+            case TRAINS_1000_DATASET:
+                dm.ImportNOOS("NOOS/trains-ontology.noos", o);
+                dm.ImportNOOS("NOOS/trains-dm.noos", o);
+                case_base.ImportNOOS("NOOS/trains-cases-1000.noos", o);
+
+                ts.name = "trains";
+                ts.problem_sort = o.getSort("trains-problem");
+                break;
+            case TRAINS_10000_DATASET:
+                dm.ImportNOOS("NOOS/trains-ontology.noos", o);
+                dm.ImportNOOS("NOOS/trains-dm.noos", o);
+                case_base.ImportNOOS("NOOS/trains-cases-10000.noos", o);
+
+                ts.name = "trains";
+                ts.problem_sort = o.getSort("trains-problem");
+                break;
+            case TRAINS_100000_DATASET:
+                dm.ImportNOOS("NOOS/trains-ontology.noos", o);
+                dm.ImportNOOS("NOOS/trains-dm.noos", o);
+                case_base.ImportNOOS("NOOS/trains-cases-100000.noos", o);
 
                 ts.name = "trains";
                 ts.problem_sort = o.getSort("trains-problem");

@@ -23,7 +23,7 @@ public class PropertiesDistance extends Distance {
     
     public static int DEBUG = 0;
 
-    static boolean s_cache = true;
+    static boolean s_cache = false;
     boolean m_fast = false;
     List<FeatureTerm> descriptions = new LinkedList<FeatureTerm>();
     protected List<Pair<FeatureTerm, Double>> m_propertyWeight = null;;
@@ -87,8 +87,10 @@ public class PropertiesDistance extends Distance {
         }
 
         // The weights will be all 1 in this distance:
-        if (DEBUG>=1) System.out.println("Properties per term: [" + min_properties + " - " + max_properties + "]");
-        if (DEBUG>=1) System.out.println(m_propertyWeight.size() + " properties");
+        // if (DEBUG>=1)
+            System.out.println("Properties per term: [" + min_properties + " - " + max_properties + "]");
+        // if (DEBUG>=1)
+            System.out.println(m_propertyWeight.size() + " properties");
 //		for(Pair<FeatureTerm,Double> p_w:m_propertyWeight) {
 //			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
 //		}
