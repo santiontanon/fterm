@@ -63,7 +63,7 @@ public class WeightedPropertiesDistance extends PropertiesDistance {
             }
             Pair<Float,Integer> tmp = InformationMeasurement.h_information_gain(solutions,s1,s2,different_solutions);
             p_w.m_b = (double)(tmp.m_a);
-            System.out.println(p_w.m_b + " [" + s1.size() + "," + s2.size() + "]" + " -> " + p_w.m_a.toStringNOOS(dm));
+//            System.out.println(p_w.m_b + " [" + s1.size() + "," + s2.size() + "]" + " -> " + p_w.m_a.toStringNOOS(dm));
 		}
 
 		
