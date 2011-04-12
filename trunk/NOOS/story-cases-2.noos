@@ -132,7 +132,7 @@
 					(entity1 !OWNER)
 					(entity2 !ALES)
 					(action !E3))
-				(define ?E5 (accept)
+				(define ?E6 (accept)
 					(entity1 !ALES)
 					(action !E3))
 			)
@@ -151,7 +151,7 @@
 		(define ?PHASE2 (phase)
 			(entities !ALES !OIL !GARAGE !OWNER !RED)
 			(expressions !E1 !E2 !E3
-				(define ?E4 (awkward)
+				(define ?E7 (awkward)
 					(entity !ALES))
 			)
 			(force-dynamics
