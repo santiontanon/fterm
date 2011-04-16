@@ -49,6 +49,7 @@ public class PropertiesDistance extends Distance {
 
     void generateAllProperties(List<FeatureTerm> objects, FTKBase dm, Ontology o) throws Exception {
         int count = 0;
+        long start = System.currentTimeMillis();
         Integer max_properties = null;
         Integer min_properties = null;
         m_propertyWeight = new LinkedList<Pair<FeatureTerm, Double>>();
@@ -90,7 +91,7 @@ public class PropertiesDistance extends Distance {
         // if (DEBUG>=1)
             System.out.println("Properties per term: [" + min_properties + " - " + max_properties + "]");
         // if (DEBUG>=1)
-            System.out.println(m_propertyWeight.size() + " properties");
+            System.out.println(m_propertyWeight.size() + " properties (in " + (System.currentTimeMillis()-start) + "ms)");
 //		for(Pair<FeatureTerm,Double> p_w:m_propertyWeight) {
 //			System.out.println(p_w.m_a.toStringNOOS(dm) + "\n" + p_w.m_b);
 //		}
