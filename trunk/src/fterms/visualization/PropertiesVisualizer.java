@@ -132,7 +132,7 @@ public class PropertiesVisualizer extends Display {
         ForceDirectedLayout fdl = new ForceDirectedLayout(GRAPH, true);
         ForceSimulator m_fsim = new ForceSimulator();
         m_fsim.addForce(new NBodyForce());
-        m_fsim.addForce(new SpringForce(1E-4f,100));
+        m_fsim.addForce(new SpringForce(1E-4f,50));
         m_fsim.addForce(new DragForce());
         fdl.setForceSimulator(m_fsim);
 

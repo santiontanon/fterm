@@ -219,5 +219,5 @@ public class PropertiesTree extends InductiveLearner {
 
         return gain;
     }
-    
+        
 }

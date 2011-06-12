@@ -51,7 +51,8 @@ public class FTSubsumption {
         }
 
 //        if (true) return CSPSubsumption.subsumes(t1, t2);
-//        if (FTRefinement.variables(t1).size()>10) return CSPSubsumption.subsumes(t1, t2);
+//        if (FTRefinement.variables(t1).size()>20) return CSPSubsumption.subsumes(t1, t2);
+//        if (FTRefinement.variables(t1).size()>20 && FTRefinement.sets(t1).size()>0) return CSPSubsumption.subsumes(t1, t2);
 
 
         stack.add(0, new SubsumptionStackNode(t1, t2, 0, null, null, 0, null, 0, -1));

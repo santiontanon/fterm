@@ -16,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -215,6 +216,47 @@ public class CSPFeatureTerm {
         }
 
         return vars.get(0);
+    }
+
+
+    public int variablesInSets() {
+        HashSet<Integer> inSets = new HashSet<Integer>();
+
+        for(Symbol f:features.keySet()) {
+            boolean [][]links = features.get(f);
+            for(int i = 0;i<links.length;i++) {
+                int v = -1;
+                for(int j = 0;j<links[i].length;j++) {
+                    if (links[i][j]) {
+                        if (v==-1) {
+                            v = j;
+                        } else {
+                            inSets.add(v);
+                            inSets.add(j);
+                        }
+                    }
+                }
+            }
+        }
+
+        return inSets.size();
+    }
+
+     public int largestSet() {
+        int largestSet = 0;
+
+        for(Symbol f:features.keySet()) {
+            boolean [][]links = features.get(f);
+            for(int i = 0;i<links.length;i++) {
+                int v = 0;
+                for(int j = 0;j<links[i].length;j++) {
+                    if (links[i][j]) v++;
+                }
+                if (v>largestSet) largestSet = v;
+            }
+        }
+
+        return largestSet;
     }
 
 }
