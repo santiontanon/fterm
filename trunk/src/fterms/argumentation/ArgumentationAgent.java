@@ -9,6 +9,7 @@ import fterms.FTKBase;
 import fterms.FeatureTerm;
 import fterms.Ontology;
 import fterms.Path;
+import fterms.exceptions.FeatureTermException;
 import fterms.learning.Rule;
 import fterms.learning.RuleHypothesis;
 import java.util.Collection;
@@ -27,6 +28,7 @@ public class ArgumentationAgent {
     public ArgumentAcceptability m_aa;
     public RuleHypothesis m_hypothesis;
     public ArgumentationBasedLearning m_learning;
+    public boolean m_credulous = true;
 
     public ArgumentationAgent(String name,Collection<FeatureTerm> examples, ArgumentAcceptability aa, RuleHypothesis h, ArgumentationBasedLearning l) {
         m_name = name;
@@ -34,28 +36,66 @@ public class ArgumentationAgent {
         m_examples.addAll(examples);
         m_alreadySentExamples = new HashMap<String,List<FeatureTerm>>();
         m_aa = aa;
+        m_aa.updateExamples(m_examples);
         m_hypothesis = h;
         m_learning = l;
+        m_credulous = true;
     }
 
+    public ArgumentationAgent(String name,Collection<FeatureTerm> examples, ArgumentAcceptability aa, RuleHypothesis h, ArgumentationBasedLearning l, boolean credulous) {
+        m_name = name;
+        m_examples = new LinkedList<FeatureTerm>();
+        m_examples.addAll(examples);
+        m_alreadySentExamples = new HashMap<String,List<FeatureTerm>>();
+        m_aa = aa;
+        m_aa.updateExamples(m_examples);
+        m_hypothesis = h;
+        m_learning = l;
+        m_credulous = credulous;
+    }
 
-    public void sendExample(ArgumentationAgent other,FeatureTerm example, ArgumentationState state) {
-        other.m_examples.add(example);
-        other.m_aa.updateExamples(other.m_examples);
+    public boolean sendExample(ArgumentationAgent other,FeatureTerm example, ArgumentationState state) {
+        System.out.println("sendExample: " + m_name + " -> " + other.m_name + " (" + example.getName() + ")");
 
-        List<FeatureTerm> l = m_alreadySentExamples.get(other);
+        List<FeatureTerm> l = m_alreadySentExamples.get(other.m_name);
         if (l==null) {
             l = new LinkedList<FeatureTerm>();
             m_alreadySentExamples.put(other.m_name,l);
-        } else {
-            if (l.contains(example)) {
-                System.err.println("ArgumentationAgent.sendExample: example had already been sent to this agent!!!!");
-            }
         }
-        l.add(example);
+        if (l.contains(example)) {
+            System.err.println("ArgumentationAgent.sendExample: example had already been sent to this agent!!!!");
+        } else {
+            l.add(example);
+        }
+
+        if (other.m_examples.contains(example)) return false;
+        other.m_examples.add(example);
+        other.m_aa.updateExamples(other.m_examples);
+
         state.unSettle(other.m_name);
+        return true;
     }
 
+
+    public String coveredExamples(Argument a, Path dp, Path sp) throws FeatureTermException {
+        if (a.m_type == Argument.ARGUMENT_RULE) {
+            FeatureTerm pattern = a.m_rule.pattern;
+            FeatureTerm solution = a.m_rule.solution;
+            int np = 0;
+            int nn = 0;
+            for(FeatureTerm example:m_examples) {
+                FeatureTerm d = example.readPath(dp);
+                FeatureTerm s = example.readPath(sp);
+                if (pattern.subsumes(d)) {
+                    if (solution.equivalents(s)) np++;
+                                            else nn++;
+                }
+            }
+            return "(" + np + "," + nn + ")";
+        } else {
+            return "";
+        }
+    }
     
     public void beliefRevision(ArgumentationState state, FeatureTerm solution, Path dp, Path sp, Ontology o, FTKBase dm,boolean recover, List<ArgumentationAgent> agents) throws Exception {
         System.out.println("beliefRevision: " + m_name);
