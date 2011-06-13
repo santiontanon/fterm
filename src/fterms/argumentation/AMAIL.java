@@ -19,6 +19,7 @@ import java.util.List;
 import fterms.argumentation.ArgumentationAgent;
 import fterms.argumentation.ArgumentationState;
 import fterms.argumentation.ArgumentationTree;
+import java.util.HashMap;
 import util.Pair;
 
 
@@ -27,11 +28,14 @@ import util.Pair;
  */
 public class AMAIL {
 
-    public int last_ce_sent = 0;
+    public int last_counterexamples_sent = 0;
+    public int last_uncoveredexamples_sent = 0;
+    public int last_skepticalexamples_sent = 0;
     public int last_rules_sent = 0;
     public boolean VISUALIZE_EVALUATION_AFTER_REVISION = false;
 
     public List<ArgumentationAgent> a_l = new LinkedList<ArgumentationAgent>();
+    HashMap<String,ArgumentationAgent> agentNameTable = new HashMap<String,ArgumentationAgent>();
     ArgumentationAgent token = null;
     public ArgumentationState state = null;
     Path dp = null, sp = null;
@@ -46,11 +50,13 @@ public class AMAIL {
                  List<List<FeatureTerm>> l_examples,
                  List<ArgumentAcceptability> l_aa,
                  List<ArgumentationBasedLearning> l_l,
+                 boolean credulous,
                  Path a_dp, Path a_sp, Ontology a_o, FTKBase a_dm) {
 
         for(int i = 0;i<l_h.size();i++) {
-            ArgumentationAgent a = new ArgumentationAgent("Agent " + (i+1), l_examples.get(i), l_aa.get(i), new RuleHypothesis(l_h.get(i)), l_l.get(i));
+            ArgumentationAgent a = new ArgumentationAgent("Agent " + (i+1), l_examples.get(i), l_aa.get(i), new RuleHypothesis(l_h.get(i)), l_l.get(i), credulous);
             a_l.add(a);
+            agentNameTable.put(a.m_name,a);
         }
         token = a_l.get(0);
 
@@ -71,6 +77,7 @@ public class AMAIL {
 
 
     // This constructor is only useful so that it can be swapped with the AMAIL2 one:
+    // AMAIL2 assumed "credulous" agents, and so does this constructor:
     public AMAIL(RuleHypothesis h1, RuleHypothesis h2, FeatureTerm a_solution,
         Collection<FeatureTerm> examples1, Collection<FeatureTerm> examples2,
         ArgumentAcceptability aa1, ArgumentAcceptability aa2,
@@ -78,6 +85,8 @@ public class AMAIL {
         Path a_dp, Path a_sp, Ontology a_o, FTKBase a_dm) {
         a_l.add(new ArgumentationAgent("Agent 1", examples1, aa1, new RuleHypothesis(h1), l1));
         a_l.add(new ArgumentationAgent("Agent 2", examples2, aa2, new RuleHypothesis(h2), l2));
+        agentNameTable.put(a_l.get(0).m_name,a_l.get(0));
+        agentNameTable.put(a_l.get(1).m_name,a_l.get(1));
         token = a_l.get(0);
 
         // Initial state of argumentation:
@@ -163,15 +172,10 @@ public class AMAIL {
             for(Pair<Argument,Argument> attack:attacks) {
                 at.addAttack(attack.m_a, attack.m_b);
                 if (attack.m_b.m_type == Argument.ARGUMENT_EXAMPLE) {
-                    ArgumentationAgent other = null;
-                    for(ArgumentationAgent a_tmp:a_l) {
-                        if (a_tmp.m_name.equals(attack.m_a.m_agent)) {
-                            other = a_tmp;
-                            break;
-                        }
-                    }
+                    ArgumentationAgent other = agentNameTable.get(attack.m_a.m_agent);
                     if (other!=null) {
-                        token.sendExample(other, attack.m_b.m_example, state);
+                        if (token.sendExample(other, attack.m_b.m_example, state))
+                            last_counterexamples_sent++;
                     } else {
                         System.err.println("Couldn't find the agent corresponding to attack.m_a.m_agent!!");
                     }
@@ -194,26 +198,51 @@ public class AMAIL {
         if (!singleMessage || !anyAttack) {
             List<Pair<Argument, ArgumentationTree>> unacceptable = state.getUnacceptable(token.m_name, token.m_aa, a_l);
             System.out.println("AMAIL: agent " + token.m_name + " finds " + unacceptable.size() + " arguments of the other agent unacceptable");
+            boolean anyExampleReceived = false;
             for (Pair<Argument, ArgumentationTree> a : unacceptable) {
                 // Attack argument:
                 Argument b = findSingleCounterArgument(a.m_a, token, state, a.m_b, dp, sp, o, dm, a_l);
                 if (b == null) {
-                    a.m_b.settle(a.m_a, token.m_name);
-                    System.out.println("AMAIL: agent " + token.m_name + " settling for an opponent root!");
+                    if (token.m_credulous) {
+                        // Credulous agents believe in arguments they cannot attack:
+                        a.m_b.settle(a.m_a, token.m_name);
+                        System.out.println("AMAIL: credulous agent " + token.m_name + " settling for an opponent root.");
+                    } else {
+                        // Skeptical agents ask for evidence for arguments they cannot attack:
+                        ArgumentationAgent other = agentNameTable.get(a.m_a.m_agent);
+                        // If some example has alredy been sent, maybe the argument is already acceptable, so, we have to check again:
+                        if (!anyExampleReceived || !token.m_aa.accepted(a.m_a)) {
+                            if (other!=null) {
+                                List<FeatureTerm> examples = generateEndorsingExamples(a.m_a,other.m_examples,other.m_alreadySentExamples.get(token.m_name),dp,sp,dm,o);
+                                if (examples.isEmpty()) {
+                                    List<FeatureTerm> tmp = generateEndorsingExamples(a.m_a,other.m_examples,null,dp,sp,dm,o);
+                                    System.err.println("AMAIL: skeptical agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root, but couldn't find any!!!");
+                                    System.err.println("AMAIL: " + tmp.size() + " examples available, but all were already sent.");
+                                    for(FeatureTerm tmp_e:tmp) {
+                                        System.err.println("AMAIL: " + tmp_e.getName() + "(" + token.m_examples.contains(tmp_e) + "," + token.m_aa.m_examples.contains(tmp_e) + ")");
+                                    }
+                                    System.err.println("AMAIL: argument profile for " + a.m_a);
+                                    System.err.println("AMAIL: argument profile for " + token.m_name + ": " + token.coveredExamples(a.m_a, dp, sp) + " (AA: " + token.m_aa.degree(a.m_a) + " -> " + token.m_aa.accepted(a.m_a) + ")");
+                                    System.err.println("AMAIL: argument profile for " + other.m_name + ": " + other.coveredExamples(a.m_a, dp, sp) + " (AA: " + other.m_aa.degree(a.m_a) + " -> " + other.m_aa.accepted(a.m_a)+ ")");
+                                    System.exit(1);
+                                } else {
+                                    if (other.sendExample(token, examples.get(0), state))
+                                        last_skepticalexamples_sent++;
+                                    System.out.println("AMAIL: skeptical agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root.");
+                                    anyExampleReceived = true;;
+                                }
+                            }
+                        }
+                    }
                 } else {
                     if (b.m_type == Argument.ARGUMENT_EXAMPLE) System.out.println("AMAIL: agent " + token.m_name + " sending an counterexample attack to " + a.m_a.m_agent + "!");
                                                           else System.out.println("AMAIL: agent " + token.m_name + " sending a rule attack to " + a.m_a.m_agent + "!");
                     a.m_b.addAttack(a.m_a, b);
                     if (b.m_type == Argument.ARGUMENT_EXAMPLE) {
-                        ArgumentationAgent other = null;
-                        for(ArgumentationAgent a_tmp:a_l) {
-                            if (a_tmp.m_name.equals(a.m_a.m_agent)) {
-                                other = a_tmp;
-                                break;
-                            }
-                        }
+                        ArgumentationAgent other = agentNameTable.get(a.m_a.m_agent);
                         if (other!=null) {
-                            token.sendExample(other, b.m_example, state);
+                            if (token.sendExample(other, b.m_example, state))
+                                last_counterexamples_sent++;
                         } else {
                             System.err.println("Couldn't find the agent corresponding to a.m_a.m_agent!!");
                         }
@@ -237,8 +266,8 @@ public class AMAIL {
 
                             System.out.println("AMAIL: Agent " + token.m_name + " sending uncovered example " + e.getName().get() + " to " + other.m_name);
 
-                            token.sendExample(other,e, state);
-                            last_ce_sent++;
+                            if (token.sendExample(other,e, state))
+                            last_uncoveredexamples_sent++;
                             anyAttack = true;
                             break;
                         }
@@ -280,9 +309,10 @@ public class AMAIL {
                                              List<List<FeatureTerm>> l_examples,
                                              List<ArgumentAcceptability> l_aa,
                                              List<ArgumentationBasedLearning> l_l,
+                                             boolean credulous,
                                              Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
 
-        AMAIL argumentation = new AMAIL(l_h,a_solution,l_examples,l_aa,l_l,dp,sp,o,dm);
+        AMAIL argumentation = new AMAIL(l_h,a_solution,l_examples,l_aa,l_l,credulous,dp,sp,o,dm);
         while(argumentation.moreRoundsP()) argumentation.round(false);
 
         System.out.println("Argumentation state at the end of AMAIL:");
@@ -313,7 +343,7 @@ public class AMAIL {
             if (argumentToAttack.m_agent==null) {
                 System.err.println("Argument agent generator is null!!!");
             }
-            List<Argument> counterArguments = generateCounterExamples(argumentToAttack, attacker.m_examples, attacker.m_alreadySentExamples.get(argumentToAttack.m_agent), settled, attacker.m_aa, dp, sp, dm, o);
+            List<Argument> counterArguments = generateCounterExamples(argumentToAttack, attacker.m_examples, attacker.m_alreadySentExamples.get(argumentToAttack.m_agent), dp, sp, dm, o);
             if (counterArguments != null && counterArguments.size() > 0) {
                 counterArguments.get(0).m_agent = attacker.m_name;
                 return counterArguments.get(0);
@@ -377,8 +407,7 @@ public class AMAIL {
     }
 
     
-    public static List<Argument> generateCounterExamples(Argument a, Collection<FeatureTerm> examples1, Collection<FeatureTerm> already_sent, Collection<Argument> acceptedArguments, ArgumentAcceptability aa, Path dp, Path sp, FTKBase dm, Ontology o) throws FeatureTermException {
-
+    public static List<Argument> generateCounterExamples(Argument a, Collection<FeatureTerm> examples1, Collection<FeatureTerm> already_sent, Path dp, Path sp, FTKBase dm, Ontology o) throws FeatureTermException {
         List<Argument> counterArguments = new LinkedList<Argument>();
 
         if (a.m_type != Argument.ARGUMENT_RULE) {
@@ -399,5 +428,29 @@ public class AMAIL {
         }
 
         return counterArguments;
+    }
+
+
+    public static List<FeatureTerm> generateEndorsingExamples(Argument a, Collection<FeatureTerm> examples1, Collection<FeatureTerm> already_sent, Path dp, Path sp, FTKBase dm, Ontology o) throws FeatureTermException {
+        List<FeatureTerm> endorsingArguments = new LinkedList<FeatureTerm>();
+
+        if (a.m_type != Argument.ARGUMENT_RULE) {
+            return null;
+        }
+
+        for (FeatureTerm e : examples1) {
+            if (already_sent==null || !already_sent.contains(e)) {
+                FeatureTerm d = e.readPath(dp);
+                FeatureTerm s = e.readPath(sp);
+
+                if (a.m_rule.pattern.subsumes(d)) {
+                    if (a.m_rule.solution.equivalents(s)) {
+                        endorsingArguments.add(e);
+                    }
+                }
+            }
+        }
+
+        return endorsingArguments;
     }
 }
