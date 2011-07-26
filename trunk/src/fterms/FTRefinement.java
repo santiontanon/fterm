@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 
 import util.Pair;
 import fterms.exceptions.FeatureTermException;
+import fterms.exceptions.SingletonFeatureTermException;
 import java.util.LinkedHashMap;
 import java.util.Random;
 
@@ -123,6 +124,11 @@ public class FTRefinement {
 //					System.out.println(candidate);
 
                     if (candidate) {
+//                        if (!f.subsumes(r)) {
+//                            System.err.println("ops in " + i);
+//                            System.err.println("Original:\n" + f.toStringNOOS(dm));
+//                            System.err.println("Refinement:\n" + r.toStringNOOS(dm));
+//                        }
                         result.add(r);
                     }
                 }
@@ -824,7 +830,7 @@ public class FTRefinement {
             if (!dm.contains(X)) {
                 for (Pair<FeatureTerm, Path> p2 : vp) {
                     FeatureTerm Y = p2.m_a;
-                    if (Y != X && X.subsumes(Y) && !dm.contains(Y)) {
+                    if (Y != X && X.getSort().isSubsort(Y.getSort()) && !dm.contains(Y)) {
                         boolean appear_together = false;
                         for (SetFeatureTerm set : sets) {
                             if (set.getSetValues().contains(X) &&
@@ -835,14 +841,8 @@ public class FTRefinement {
                         }
 
                         if (!appear_together) {
-                            HashMap<FeatureTerm, FeatureTerm> correspondences = new HashMap<FeatureTerm, FeatureTerm>();
-                            FeatureTerm clone = f.clone(dm, correspondences);
-                            clone.substitute(correspondences.get(X), correspondences.get(Y));
-                            if (correspondences.get(X)==clone) {
-                                refinements.add(correspondences.get(Y));
-                            } else {
-                                refinements.add(clone);
-                            }
+                            FeatureTerm clone = variableEquality(f,X,Y,dm);
+                            if (clone!=null) refinements.add(clone);
                         }
                     }
                 }
@@ -867,7 +867,7 @@ public class FTRefinement {
             if (!X.isConstant() && !dm.contains(X)) {
                 for (Pair<FeatureTerm, Path> p2 : vp) {
                     FeatureTerm Y = p2.m_a;
-                    if (Y != X && !Y.isConstant() && X.subsumes(Y) && !dm.contains(Y)) {
+                    if (Y != X && !Y.isConstant() && X.getSort().isSubsort(Y.getSort()) && !dm.contains(Y)) {
                         boolean appear_together = false;
                         boolean appear_in_all_objects = true;
 
@@ -891,10 +891,8 @@ public class FTRefinement {
                             }
 
                             if (!appear_together) {
-                                HashMap<FeatureTerm, FeatureTerm> correspondences = new HashMap<FeatureTerm, FeatureTerm>();
-                                FeatureTerm clone = f.clone(dm, correspondences);
-                                clone.substitute(correspondences.get(X), correspondences.get(Y));
-                                refinements.add(clone);
+                                FeatureTerm clone = variableEquality(f,X,Y,dm);
+                                if (clone!=null) refinements.add(clone);
 
 //                                System.out.println("Adding variable equality refinement making these two values equal:");
 //                                System.out.println(X.toStringNOOS(dm));
@@ -911,6 +909,61 @@ public class FTRefinement {
 
         return refinements;
     }
+
+
+    public static FeatureTerm variableEquality(FeatureTerm f, FeatureTerm X, FeatureTerm Y, FTKBase dm) throws FeatureTermException {
+        HashMap<FeatureTerm, FeatureTerm> correspondences = new HashMap<FeatureTerm, FeatureTerm>();
+        FeatureTerm clone = f.clone(dm, correspondences);
+
+        // Create a clone node which has all the features of X and Y, and the most specific sort:
+        Sort s = null;
+        if (X.getSort().isSubsort(Y.getSort())) {
+            s = Y.getSort();
+        } else if (X.getSort().isSubsort(Y.getSort())) {
+            s = X.getSort();
+        } else {
+            return null;
+        }
+
+        FeatureTerm newNode = s.createFeatureTerm();
+        try {
+            for(Symbol feature:s.getFeatures()) {
+                List<FeatureTerm> vl = X.featureValues(feature);
+                for(FeatureTerm v:vl) {
+                    if (v==X || v==Y) {
+                        ((TermFeatureTerm)newNode).addFeatureValue(feature, newNode);
+                    } else {
+                        ((TermFeatureTerm)newNode).addFeatureValue(feature, correspondences.get(v));
+                    }
+                }
+                vl = Y.featureValues(feature);
+                for(FeatureTerm v:vl) {
+                    if (v==X || v==Y) {
+                        ((TermFeatureTerm)newNode).addFeatureValue(feature, newNode);
+                    } else {
+                        ((TermFeatureTerm)newNode).addFeatureValue(feature, correspondences.get(v));
+                    }
+                }
+            }
+        } catch (SingletonFeatureTermException e) {
+            return null;
+        }
+
+//        System.out.println("Creating a variable equality in:\n" + clone.toStringNOOS(dm));
+//        System.out.println("X:\n" + X.toStringNOOS(dm));
+//        System.out.println("Y:\n" + Y.toStringNOOS(dm));
+//        System.out.println("newNode:\n" + newNode.toStringNOOS(dm));
+        clone.substitute(correspondences.get(X), newNode);
+//        System.out.println("After doing X -> newNode:\n" + clone.toStringNOOS(dm));
+        clone.substitute(correspondences.get(Y), newNode);
+//        System.out.println("After doing Y -> newNode:\n" + clone.toStringNOOS(dm));
+        if (f==X || f==Y) {
+            return newNode;
+        } else {
+            return clone;
+        }
+    }
+
 
     public static List<FeatureTerm> setExpansion(FeatureTerm f, FTKBase dm, List<Pair<FeatureTerm, Path>> vp) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();

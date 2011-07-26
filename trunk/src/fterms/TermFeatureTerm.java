@@ -1,6 +1,7 @@
 package fterms;
 
 import fterms.exceptions.FeatureTermException;
+import fterms.exceptions.SingletonFeatureTermException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -54,15 +55,19 @@ public class TermFeatureTerm extends FeatureTerm {
     } // FeatureTerm::defineFeatureValue
 
 
-    public void addFeatureValue(Symbol feature, FeatureTerm value) {
+    public void addFeatureValue(Symbol feature, FeatureTerm value) throws SingletonFeatureTermException {
         FeatureTerm t = m_features.get(feature);
 
         if (t==null) {
             m_features.put(feature, value);
         } else {
             if (t instanceof SetFeatureTerm) {
+                if (((SetFeatureTerm)t).getSetValues().contains(value)) return;
+                if (m_sort.featureSingleton(feature)) throw new SingletonFeatureTermException("in addFeatureValue");
                 ((SetFeatureTerm)t).addSetValue(value);
             } else {
+                if (t == value) return;
+                if (m_sort.featureSingleton(feature)) throw new SingletonFeatureTermException("in addFeatureValue");
                 SetFeatureTerm t2 = new SetFeatureTerm();
                 t2.addSetValue(t);
                 t2.addSetValue(value);
@@ -71,15 +76,19 @@ public class TermFeatureTerm extends FeatureTerm {
         }
     }
 
-    public void addFeatureValueSecure(Symbol feature, FeatureTerm value) {
+    public void addFeatureValueSecure(Symbol feature, FeatureTerm value) throws SingletonFeatureTermException {
         FeatureTerm t = m_features.get(feature);
 
         if (t==null) {
             defineFeatureValueSecure(feature,value);
         } else {
             if (t instanceof SetFeatureTerm) {
+                if (((SetFeatureTerm)t).getSetValues().contains(value)) return;
+                if (m_sort.featureSingleton(feature)) throw new SingletonFeatureTermException("in addFeatureValue");
                 ((SetFeatureTerm)t).addSetValue(value);
             } else {
+                if (t == value) return;
+                if (m_sort.featureSingleton(feature)) throw new SingletonFeatureTermException("in addFeatureValue");
                 SetFeatureTerm t2 = new SetFeatureTerm();
                 t2.addSetValue(t);
                 t2.addSetValue(value);

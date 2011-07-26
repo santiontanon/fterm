@@ -231,28 +231,9 @@ public class FTAntiunification {
         while (!generalizations_to_process.isEmpty()) {
 
 //			System.out.println("AU: " + iterations + " - Generalizations: " + generalizations.size() + ", " + generalizations_to_process.size());
-	/*
-            {
-            char *s;
-            FeatureTerm *f;
-
-            printf("Generalizations: \n");
-            generalizations.Rewind();
-            while(generalizations.Iterate(f)) {
-            s=f.toStringNOOS(domain_model);
-            printf("%s\n",s);
-            delete []s;
-            } // while
-            printf("Generalizations to process: \n");
-            generalizations_to_process.Rewind();
-            while(generalizations_to_process.Iterate(f)) {
-            s=f.toStringNOOS(domain_model);
-            printf("%s\n",s);
-            delete []s;
-            } // while
-            }
-             */
-
+//            if (iterations>20000) {
+//                for(FeatureTerm f:generalizations_to_process) System.out.println(f.toStringNOOS(dm));
+//            }
 
             {
                 current = generalizations_to_process.remove(0);

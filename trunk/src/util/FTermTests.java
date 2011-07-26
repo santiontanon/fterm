@@ -354,6 +354,83 @@ public class FTermTests {
 				}
 				errors++;
 			}
+
+            {
+                o.newSort("s", "any", new String[]{"f","g"}, new String[]{"s","s"});
+                
+                FeatureTerm f1 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define ?X1 (s) " +
+                        "  (f (define ?X2 (s) " +
+                        "       (f (define (s) " +
+                        "            (f (define (set) " +
+                        "                 !X1 " +
+                        "                 !X2 " +
+                        "                 (define (s) " +
+                        "                  (f (define (s)))))))))))")),base_domain_model,o);
+
+                List<FeatureTerm> veRefinements = FTRefinement.variableEqualityAddition(f1, base_domain_model, null);
+                for(FeatureTerm r:veRefinements) {
+                    if (!f1.subsumes(r)) {
+    					System.out.println("Error in variable Equality Addition refinement!\nOriginal term:\n" + f1.toStringNOOS());
+    					System.out.println("Refinement:\n" + r.toStringNOOS());
+                        errors++;
+                    }
+                }
+
+
+                System.out.println("Trying to generate a loop of 2 out of a loop of 4 by variable equality refinement...");
+                FeatureTerm f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define ?X1 (s) " +
+                        "  (f (define (s) " +
+                        "    (f (define (s) " +
+                        "      (f (define (s) " +
+                        "        (f !X1))))))))")),base_domain_model,o);
+/*
+                FeatureTerm f2 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream(
+                        "(define ?X1 (s) " +
+                        "  (f (define (set) " +
+                        "    (define (s) " +
+                        "      (f !X1)) " +
+                        "    (define (s) " +
+                        "      (f !X1)))))")),base_domain_model,o);
+*/
+                List<FeatureTerm> open = new LinkedList<FeatureTerm>();
+                List<FeatureTerm> closed = new LinkedList<FeatureTerm>();
+                open.add(f2);
+                while(!open.isEmpty()) {
+                    FeatureTerm f = open.remove(0);
+                    closed.add(f);
+                    System.out.println("original:" + f.toStringNOOS());
+                    List<FeatureTerm> l = FTRefinement.variableEqualityAddition(f, base_domain_model, null);
+//                    List<FeatureTerm> l = FTRefinement.getSpecializations(f, base_domain_model, FTRefinement.ALL_REFINEMENTS);
+                    for(FeatureTerm r:l) {
+                        System.out.println("refinement:" + r.toStringNOOS());
+                        boolean found = false;
+                        for(FeatureTerm tmp:open) {
+                            if (tmp.equivalents(r)) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found)
+                            for(FeatureTerm tmp:closed) {
+                                if (tmp.equivalents(r)) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        if (!found) open.add(r);
+                    }
+                }
+                System.out.println("Generating variable equality refinements of a 4 loop, found " + closed.size());
+                for(FeatureTerm f:closed) {
+                    System.out.println(f.toStringNOOS());
+                }
+
+            }
+
+
+
 		}
 
 		/*
