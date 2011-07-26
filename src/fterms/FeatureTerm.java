@@ -235,6 +235,7 @@ public abstract class FeatureTerm {
 
         visited.add(this);
         open_nodes.add(this);
+        open_nodes.add(f2);
 
         while (!open_nodes.isEmpty()) {
             node = open_nodes.remove(0);
