@@ -190,32 +190,62 @@ public class FTermTests {
 			FeatureTerm f3 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream("\"bye\"")),case_base,o);
 			FeatureTerm f4 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream("\"hello\"")),case_base,o);
 
+            FeatureTerm f5 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream("(define (set))")),case_base,o);
+            FeatureTerm f6 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream("(define (car))")),case_base,o);
+            FeatureTerm f7 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream("(define (car) (infront (define (set))))")),case_base,o);
+			FeatureTerm f8 = NOOSParser.parse(new RewindableInputStream(new StringBufferInputStream("(define (car) (infront (define (car))))")),case_base,o);
+
+            System.out.println("f5: " + f5.toStringNOOS(case_base));
+            System.out.println("f6: " + f6.toStringNOOS(case_base));
+            System.out.println("f7: " + f7.toStringNOOS(case_base));
+            System.out.println("f8: " + f8.toStringNOOS(case_base));
+
 			if (!f1.subsumes(f2)) {
 				errors++;
-				System.out.println("a generic Symbol does not subsume a constant symbol!");
+				System.out.println("Failed: a generic Symbol does not subsume a constant symbol!");
 			}
 
 			if (!f2.subsumes(f4)) {
 				errors++;
-				System.out.println("Two identical constant symbols do not subsume each other!");
+				System.out.println("Failed: Two identical constant symbols do not subsume each other!");
 			}
 
 			if (f2.subsumes(f3)) {
 				errors++;
-				System.out.println("Two different constant symbols subsume each other!");
+				System.out.println("Failed: Two different constant symbols subsume each other!");
 			}
 
 			if (!f2.equals(f4)) {
 				errors++;
-				System.out.println("Two identical constant symbols are not equals!");
+				System.out.println("Failed: Two identical constant symbols are not equals!");
 			}
 
 			if (f2.equals(f3)) {
 				errors++;
-				System.out.println("Two different constant symbols are equals!");
+				System.out.println("Failed: Two different constant symbols are equals!");
 			}
 
-			List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+			if (!f5.subsumes(f6)) {
+				errors++;
+				System.out.println("Failed: An empty set does not subsume a feature term!");
+			}
+
+			if (!f6.subsumes(f7)) {
+				errors++;
+				System.out.println("Failed: An empty feature does not subsume an empty set!");
+			}
+
+            if (!f7.subsumes(f6)) {
+				errors++;
+				System.out.println("Failed: Defining a feature with an empty set is different than not having a value!");
+			}
+
+            if (!f7.subsumes(f8)) {
+				errors++;
+				System.out.println("Failed: Defining a feature with an empty set does not subsume something with a value!");
+			}
+
+            List<FeatureTerm> l = new LinkedList<FeatureTerm>();
 			HashSet<FeatureTerm> s = new HashSet<FeatureTerm>();
 
 			if (!l.contains(f1)) l.add(f1);
@@ -224,7 +254,7 @@ public class FTermTests {
 			if (!l.contains(f4)) l.add(f4);
 			if (l.size()!=3) {
 				errors++;
-				System.out.println("List containment failure!");
+				System.out.println("Failed: List containment failure!");
 			}
 
 			if (!s.contains(f1)) s.add(f1);
@@ -233,7 +263,7 @@ public class FTermTests {
 			if (!s.contains(f4)) s.add(f4);
 			if (s.size()!=3) {
 				errors++;
-				System.out.println("HashSet containment failure!");
+				System.out.println("Failed: HashSet containment failure!");
 			}
 
 
@@ -255,11 +285,11 @@ public class FTermTests {
 
 				if (!f1.subsumes(f2)) {
 					errors++;
-					System.out.println("Sponge subsumption failure 1!!");
+					System.out.println("Failed: Sponge subsumption failure 1!!");
 				}
 				if (f2.subsumes(f1)) {
 					errors++;
-					System.out.println("Sponge subsumption failure 2!!");
+					System.out.println("Failed: Sponge subsumption failure 2!!");
 				}
 
 			}
@@ -308,7 +338,7 @@ public class FTermTests {
 
 			List<FeatureTerm> variables = FTRefinement.variables(x1);
 			if (variables.size()!=4) {
-				System.out.println("Specialization Refinements Test 1 failed: N variables is " + variables.size());
+				System.out.println("Failed: Specialization Refinements Test 1 failed: N variables is " + variables.size());
 				for(FeatureTerm f:variables) {
 					if (f.getName()!=null) {
 						System.out.println(f.getName().get());
@@ -321,7 +351,7 @@ public class FTermTests {
 
 			List<FeatureTerm> sortRefinements = FTRefinement.sortSpecialization(x1,base_domain_model,null);
 			if (sortRefinements.size()!=4) {
-				System.out.println("Specialization Refinements Test 2 failed: N sort refinements is " + sortRefinements.size());
+				System.out.println("Failed: Specialization Refinements Test 2 failed: N sort refinements is " + sortRefinements.size());
 				for(FeatureTerm f:sortRefinements) {
 					System.out.println(f.toStringNOOS(base_domain_model));
 				}
@@ -330,7 +360,7 @@ public class FTermTests {
 
 			List<FeatureTerm> featureRefinements = FTRefinement.featureIntroduction(x1,base_domain_model,null);
 			if (featureRefinements.size()!=20) {
-				System.out.println("Specialization Refinements Test 3 failed: N feature refinements is " + featureRefinements.size());
+				System.out.println("Failed: Specialization Refinements Test 3 failed: N feature refinements is " + featureRefinements.size());
 				for(FeatureTerm f:featureRefinements) {
 					System.out.println(f.toStringNOOS(base_domain_model));
 				}
@@ -338,8 +368,8 @@ public class FTermTests {
 			}
 
 			List<FeatureTerm> equalityRefinements = FTRefinement.variableEqualityAddition(x1,base_domain_model,null);
-			if (equalityRefinements.size()!=2) {
-				System.out.println("Specialization Refinements Test 4 failed: N equality refinements is " + equalityRefinements.size());
+			if (equalityRefinements.size()!=4) {
+				System.out.println("Failed: Specialization Refinements Test 4 failed: N equality refinements is " + equalityRefinements.size());
 				for(FeatureTerm f:equalityRefinements) {
 					System.out.println(f.toStringNOOS(base_domain_model));
 				}
@@ -348,7 +378,7 @@ public class FTermTests {
 
 			List<FeatureTerm> setRefinements = FTRefinement.setExpansion(x1,base_domain_model,null);
 			if (setRefinements.size()!=2) {
-				System.out.println("Specialization Refinements Test 5 failed: N set refinements is " + setRefinements.size());
+				System.out.println("Failed: Specialization Refinements Test 5 failed: N set refinements is " + setRefinements.size());
 				for(FeatureTerm f:setRefinements) {
 					System.out.println(f.toStringNOOS(base_domain_model));
 				}
@@ -400,11 +430,11 @@ public class FTermTests {
                 while(!open.isEmpty()) {
                     FeatureTerm f = open.remove(0);
                     closed.add(f);
-                    System.out.println("original:" + f.toStringNOOS());
+//                    System.out.println("original:" + f.toStringNOOS());
                     List<FeatureTerm> l = FTRefinement.variableEqualityAddition(f, base_domain_model, null);
 //                    List<FeatureTerm> l = FTRefinement.getSpecializations(f, base_domain_model, FTRefinement.ALL_REFINEMENTS);
                     for(FeatureTerm r:l) {
-                        System.out.println("refinement:" + r.toStringNOOS());
+//                        System.out.println("refinement:" + r.toStringNOOS());
                         boolean found = false;
                         for(FeatureTerm tmp:open) {
                             if (tmp.equivalents(r)) {
@@ -449,7 +479,7 @@ public class FTermTests {
 			{
 				Set<FeatureTerm> l = cb_families.SearchFT(new Symbol("victoria"));
 				if (l.size()!=1) {
-					System.out.println("Generalization Refinements Test 1 failed: There is more than 1 roberto in the case base!");
+					System.out.println("Failed: Generalization Refinements Test 1 failed: There is more than 1 roberto in the case base!");
 					errors++;
 				}
 				root1 = l.iterator().next();
@@ -457,7 +487,7 @@ public class FTermTests {
 			{
 				Set<FeatureTerm> l = cb_trains.SearchFT(new Symbol("t1"));
 				if (l.size()!=1) {
-					System.out.println("Generalization Refinements Test 2 failed: There is more than 1 roberto in the case base!");
+					System.out.println("Failed: Generalization Refinements Test 2 failed: There is more than 1 roberto in the case base!");
 					errors++;
 				}
 				root2 = l.iterator().next();
@@ -467,12 +497,12 @@ public class FTermTests {
 			List<FeatureTerm> generalizations1 = FTRefinement.getGeneralizations(root1, domain_model_families, o);
 			System.out.println(generalizations1.size() + " generalizations");
 			if (generalizations1.size()!=9) {
-				System.out.println("Generalization Refinements Test 3 failed: not 9 generalizations of victoria!");
+				System.out.println("Failed: Generalization Refinements Test 3 failed: not 9 generalizations of victoria!");
 				errors++;
 			}
 			for(FeatureTerm g:generalizations1) {
 				if (!g.subsumes(root1)) {
-					System.out.println("Generalization Refinements Test 4 failed: Generalization does not subsume original!");
+					System.out.println("Failed: Generalization Refinements Test 4 failed: Generalization does not subsume original!");
 					System.out.println(g.toStringNOOS());
 					errors++;
 				}
@@ -482,12 +512,12 @@ public class FTermTests {
 			List<FeatureTerm> generalizations2 = FTRefinement.getGeneralizations(root2, domain_model_trains, o);
 			System.out.println(generalizations2.size() + " generalizations");
 			if (generalizations1.size()!=9) {
-				System.out.println("Generalization Refinements Test 5 failed: not 9 generalizations of T1!");
+				System.out.println("Failed: Generalization Refinements Test 5 failed: not 9 generalizations of T1!");
 				errors++;
 			}
 			for(FeatureTerm g:generalizations2) {
 				if (!g.subsumes(root2)) {
-					System.out.println("Generalization Refinements Test 6 failed: Generalization does not subsume original!");
+					System.out.println("Failed: Generalization Refinements Test 6 failed: Generalization does not subsume original!");
 					System.out.println(g.toStringNOOS());
 					errors++;
 				}
@@ -581,7 +611,7 @@ public class FTermTests {
                 if (FTUnification.isUnification(last,property_term.m_a,property_term.m_b,dm,o)) {
                     System.out.println("remainder is correct!");
                 } else {
-                    System.out.println("remainder is incorrect!!!!!");
+                    System.out.println("Failed: remainder is incorrect!!!!!");
                     errors++;
                     anyproblem = true;
                 }
