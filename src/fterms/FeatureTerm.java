@@ -232,6 +232,7 @@ public abstract class FeatureTerm {
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
         List<FeatureTerm> open_nodes = new LinkedList<FeatureTerm>();
         FeatureTerm node;
+        boolean beautifySets = false;
 
         visited.add(this);
         open_nodes.add(this);
@@ -255,18 +256,42 @@ public abstract class FeatureTerm {
             } // if
 
             if (node instanceof SetFeatureTerm) {
-                for (FeatureTerm ft2 : ((SetFeatureTerm) node).getSetValues()) {
-                    if (ft2.equals(f1)) {
-                        ((SetFeatureTerm) node).getSetValues().set(((SetFeatureTerm) node).getSetValues().indexOf(ft2), f2);
-                    } else {
+                List<FeatureTerm> setValues = ((SetFeatureTerm) node).getSetValues();
+                if (setValues.contains(f2)) {
+                    setValues.remove(f1);
+                    if (setValues.size()==1) beautifySets = true;
+                    for (FeatureTerm ft2 : setValues) {
                         if (!visited.contains(ft2)) {
                             visited.add(ft2);
                             open_nodes.add(ft2);
                         }
-                    }
-                } // for
+                    } // for
+                } else {
+                    for (FeatureTerm ft2 : setValues) {
+                        if (ft2.equals(f1)) {
+                            ((SetFeatureTerm) node).getSetValues().set(((SetFeatureTerm) node).getSetValues().indexOf(ft2), f2);
+                        } else {
+                            if (!visited.contains(ft2)) {
+                                visited.add(ft2);
+                                open_nodes.add(ft2);
+                            }
+                        }
+                    } // for
+                }
             } // if/
         } // while
+
+        if (beautifySets) {
+            HashMap<SetFeatureTerm, Set<Pair<TermFeatureTerm, Symbol>>> m = FTRefinement.setsWithAllParents(this);
+            for(SetFeatureTerm set:m.keySet()) {
+                if (set.getSetValues().size()==1) {
+                    Set<Pair<TermFeatureTerm, Symbol>> parents = m.get(set);
+                    for(Pair<TermFeatureTerm, Symbol> parent:parents) {
+                        parent.m_a.defineFeatureValue(parent.m_b, set.getSetValues().get(0));
+                    }
+                }
+            }
+        }
 
     } // substitute
 

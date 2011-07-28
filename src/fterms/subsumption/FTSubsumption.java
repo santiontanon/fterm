@@ -322,8 +322,10 @@ public class FTSubsumption {
                                 FeatureTerm fv2 = null;
                                 if (f2 instanceof TermFeatureTerm) fv2 = f2.featureValue(fn);
                                 if (fv2 == null) {
-                                    state = 1;
-                                    break;
+                                    if (!(fv instanceof SetFeatureTerm) || ((SetFeatureTerm)fv).getSetValues().size()!=0) {
+                                        state = 1;
+                                        break;
+                                    }
                                 } // if
                                 stack.add(0, new SubsumptionStackNode(fv, fv2, 0, null, null, 0, null, 0, -1));
                             }

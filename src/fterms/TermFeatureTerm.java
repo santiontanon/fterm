@@ -128,7 +128,7 @@ public class TermFeatureTerm extends FeatureTerm {
 
         singleton = m_sort.featureSingleton(feature);
 
-        if (singleton && value instanceof SetFeatureTerm) {
+        if (singleton && (value instanceof SetFeatureTerm) && ((SetFeatureTerm)value).getSetValues().size()>1) {
             System.err.println("defineFeatureValueSecure: error 4 in feature " + feature.get() + " - " + value.toStringNOOS());
             if (STRICT_SECURE) {
                 return false;
