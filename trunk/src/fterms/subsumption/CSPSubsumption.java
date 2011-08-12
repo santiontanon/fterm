@@ -6,6 +6,7 @@
 package fterms.subsumption;
 
 import fterms.FeatureTerm;
+import fterms.SetFeatureTerm;
 import fterms.Symbol;
 import fterms.exceptions.FeatureTermException;
 import java.util.LinkedList;
@@ -21,6 +22,7 @@ import jp.ac.kobe_u.cs.cream.*;
 public class CSPSubsumption {
 
     public static boolean subsumes(FeatureTerm f1, FeatureTerm f2) throws FeatureTermException {
+        if (f1 instanceof SetFeatureTerm || f2 instanceof SetFeatureTerm) return FTSubsumption.subsumes(f1,f2);
         return subsumes(new CSPFeatureTerm(f1), new CSPFeatureTerm(f2));
     }
 
