@@ -311,7 +311,7 @@ public abstract class FeatureTerm {
         //		System.out.println("Object: " + f.toStringNOOS());
 //        long start = System.currentTimeMillis();
 
-        return FTSubsumption.subsumptionWithBindings(this,f,bindings_a,bindings_b);
+        return FTSubsumption.subsumptionWithBindings(this,f,bindings_a,bindings_b,0);
 
        /*
         if (res == true) {
