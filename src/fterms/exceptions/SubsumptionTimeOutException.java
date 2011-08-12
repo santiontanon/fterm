@@ -9,8 +9,8 @@ package fterms.exceptions;
  *
  * @author santi
  */
-public class SubsumptionTimeOutExecption extends FeatureTermException {
-	public SubsumptionTimeOutExecption(String string) {
+public class SubsumptionTimeOutException extends FeatureTermException {
+	public SubsumptionTimeOutException(String string) {
 		super(string);
 	}
 
