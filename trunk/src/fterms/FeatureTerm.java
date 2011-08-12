@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 
 import util.Pair;
 import fterms.exceptions.FeatureTermException;
+import fterms.subsumption.CSPSubsumption;
 import util.FTSubsumptionRecord;
 
 public abstract class FeatureTerm {
@@ -302,38 +303,17 @@ public abstract class FeatureTerm {
         List<FeatureTerm> bindings_a = new ArrayList<FeatureTerm>();
         List<FeatureTerm> bindings_b = new ArrayList<FeatureTerm>();
 
-//        boolean CSPsubsumptionReturn = CSPSubsumption.subsumes(this,f);
-//        if (true) return CSPSubsumption.subsumes(this,f);
-
-
-        //		System.out.println("*---- Begin Subsumption ----*");
-        //		System.out.println("Pattern: " + toStringNOOS());
-        //		System.out.println("Object: " + f.toStringNOOS());
 //        long start = System.currentTimeMillis();
-
-        return FTSubsumption.subsumptionWithBindings(this,f,bindings_a,bindings_b,0);
-
-       /*
-        if (res == true) {
-            System.out.println("- subsumption = true -------------");
-            System.out.println("- bindings -------------");
-            List<FeatureTerm> variables1 = FTRefinement.variables(this);
-            List<FeatureTerm> variables2 = FTRefinement.variables(f);
-            for(i=0;i<bindings_a.size();i++) {
-                System.out.println((variables1.indexOf(bindings_a.get(i))+1) + " -> " +
-                                   (variables2.indexOf(bindings_b.get(i))+1));
-            }
-        }
-        */
-
-//        if (res!=CSPsubsumptionReturn) {
-//            System.err.println("subsumption different!!!!!!!!!!!!!!!!!!");
-//        }
-
+        boolean res = FTSubsumption.subsumptionWithBindings(this,f,bindings_a,bindings_b,0);
 //        long end = System.currentTimeMillis();
+//        long startCSP = System.currentTimeMillis();
+//        CSPSubsumption.subsumes(this,f);
+//        long endCSP = System.currentTimeMillis();
 
-//        FTSubsumptionRecord.register(this,f,end-start,res);
+//        if (res!=resCSP) System.err.println("subsumption different!!!!!!!!!!!!!!!!!!");
 
+//        FTSubsumptionRecord.register(this,f,end-start,endCSP-startCSP,res);
+        return res;
     }
 
 
