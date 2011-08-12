@@ -252,13 +252,17 @@ public abstract class FeatureTerm {
             if (node instanceof TermFeatureTerm) {
                 for (Entry<Symbol, FeatureTerm> feature2 : ((TermFeatureTerm) node).getFeatures()) {
                     FeatureTerm ft2 = feature2.getValue();
-                    if (ft2.equals(f1)) {
-                        ((TermFeatureTerm) node).defineFeatureValue(feature2.getKey(), f2);
-                    } else {
-                        if (!visited.contains(ft2)) {
-                            visited.add(ft2);
-                            open_nodes.add(ft2);
+                    if (ft2!=null) {
+                        if (ft2.equals(f1)) {
+                            ((TermFeatureTerm) node).defineFeatureValue(feature2.getKey(), f2);
+                        } else {
+                            if (!visited.contains(ft2)) {
+                                visited.add(ft2);
+                                open_nodes.add(ft2);
+                            }
                         }
+                    } else {
+                        System.err.println("Warning: feature has null value!");
                     }
                 }
             } // if
