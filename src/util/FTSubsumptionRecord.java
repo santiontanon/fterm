@@ -36,6 +36,7 @@ class FTSRecord {
 
 public class FTSubsumptionRecord {
 
+    static int count = 0;
     static int binMax = 10; // we will store 10 terms in each bin
 
     static List<Pair<Integer,List<FTSRecord>>> positive = new LinkedList<Pair<Integer,List<FTSRecord>>>();
@@ -48,8 +49,8 @@ public class FTSubsumptionRecord {
 
             if (bin.size()<binMax) {
                 bin.add(new FTSRecord(f1,f2, time, CSPtime));
-/*
-                // append to the file with results:
+
+                // save test to summary file:
                 try{
                     FileWriter fstream = new FileWriter("subsumption-.txt",true);
                     BufferedWriter out = new BufferedWriter(fstream);
@@ -63,7 +64,7 @@ public class FTSubsumptionRecord {
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
- */
+ 
             }
         }
     }
