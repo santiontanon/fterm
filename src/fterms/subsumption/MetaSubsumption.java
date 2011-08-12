@@ -22,7 +22,7 @@ public class MetaSubsumption {
             if (f1 instanceof SetFeatureTerm || f2 instanceof SetFeatureTerm) {
                 return FTSubsumption.subsumes(f1,f2);
             } else {
-                return FTSubsumption.subsumes(f1, f2, 500);
+                return FTSubsumption.subsumes(f1, f2, 200);
             }
         }catch(SubsumptionTimeOutException e) {
             return CSPSubsumption.subsumes(f1,f2);

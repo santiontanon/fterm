@@ -58,6 +58,10 @@ public class TermFeatureTerm extends FeatureTerm {
     public void addFeatureValue(Symbol feature, FeatureTerm value) throws SingletonFeatureTermException {
         FeatureTerm t = m_features.get(feature);
 
+        if (value==null) {
+            System.err.println("Warning: TermFeatureTerm.addFeatureValue -> value is null");
+        }
+
         if (t==null) {
             m_features.put(feature, value);
         } else {
@@ -85,7 +89,7 @@ public class TermFeatureTerm extends FeatureTerm {
             if (t instanceof SetFeatureTerm) {
                 if (((SetFeatureTerm)t).getSetValues().contains(value)) return;
                 if (m_sort.featureSingleton(feature)) throw new SingletonFeatureTermException("in addFeatureValue");
-                ((SetFeatureTerm)t).addSetValue(value);
+                ((SetFeatureTerm)t).addSetValueSecure(value);
             } else {
                 if (t == value) return;
                 if (m_sort.featureSingleton(feature)) throw new SingletonFeatureTermException("in addFeatureValue");
@@ -213,7 +217,8 @@ public class TermFeatureTerm extends FeatureTerm {
         correspondences.put(this, f);
 
         for (Symbol s : m_features.keySet()) {
-            f.m_features.put(s, m_features.get(s).cloneInternal(correspondences, dm, o));
+            FeatureTerm v = m_features.get(s);
+            if (v!=null) f.m_features.put(s,v.cloneInternal(correspondences, dm, o));
         }
 
         return f;

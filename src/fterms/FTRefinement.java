@@ -919,6 +919,7 @@ public class FTRefinement {
         FeatureTerm NX = correspondences.get(X);
         FeatureTerm NY = correspondences.get(Y);
         List<FeatureTerm> results = new LinkedList<FeatureTerm>();
+        FeatureTerm newNode = null;
 
         // clone the pending equalities list:
         List<Pair<FeatureTerm,FeatureTerm>> pendingEqualities = new LinkedList<Pair<FeatureTerm,FeatureTerm>>();
@@ -926,56 +927,91 @@ public class FTRefinement {
             pendingEqualities.add(new Pair<FeatureTerm,FeatureTerm>(pe.m_a,pe.m_b));
         }
 
-        // Create a clone node which has all the features of X and Y, and the most specific sort:
-        Sort s = null;
-        if (X.getSort().isSubsort(Y.getSort())) {
-            s = Y.getSort();
-        } else if (X.getSort().isSubsort(Y.getSort())) {
-            s = X.getSort();
-        } else {
-            return results;
+        if (NX==null || NY==null) {
+            // One of the two variables is a constant from the domain model:
+            if (NX==null && NY==null) return results;   // if both are constants, variable equality cannot be done
+            if (NX==null) {
+                NX = X;
+                newNode = X;
+            }
+            if (NY==null) {
+                NY = Y;
+                newNode = Y;
+            }
         }
 
-        FeatureTerm newNode = s.createFeatureTerm();
-        try {
-            for(Symbol feature:s.getFeatures()) {
-                List<FeatureTerm> vl1 = X.featureValues(feature);
-                List<FeatureTerm> vl2 = Y.featureValues(feature);
-                for(FeatureTerm v:vl1) {
-                    if (v==X || v==Y) {
-                        ((TermFeatureTerm)newNode).addFeatureValue(feature, newNode);
-                    } else {
-                        ((TermFeatureTerm)newNode).addFeatureValue(feature, correspondences.get(v));
+        if (newNode==null) {
+            // Create a clone node which has all the features of X and Y, and the most specific sort:
+            Sort s = null;
+            if (X.getSort().isSubsort(Y.getSort())) {
+                s = Y.getSort();
+            } else if (X.getSort().isSubsort(Y.getSort())) {
+                s = X.getSort();
+            } else {
+                return results;
+            }
+
+            newNode = s.createFeatureTerm();
+            try {
+                for(Symbol feature:s.getFeatures()) {
+                    List<FeatureTerm> vl1 = X.featureValues(feature);
+                    List<FeatureTerm> vl2 = Y.featureValues(feature);
+                    for(FeatureTerm v:vl1) {
+                        if (v==X || v==Y) {
+                            ((TermFeatureTerm)newNode).addFeatureValueSecure(feature, newNode);
+                        } else {
+                            FeatureTerm Nv =  correspondences.get(v);
+                            if (Nv==null) {
+                                // v was part of the domain model:
+                                ((TermFeatureTerm)newNode).addFeatureValueSecure(feature, v);
+                            } else {
+                                ((TermFeatureTerm)newNode).addFeatureValueSecure(feature, Nv);
+                            }
+                        }
                     }
-                }
-                for(FeatureTerm v:vl2) {
-                    if (v==X || v==Y) {
-                        ((TermFeatureTerm)newNode).addFeatureValue(feature, newNode);
-                    } else {
-                        ((TermFeatureTerm)newNode).addFeatureValue(feature, correspondences.get(v));
+                    for(FeatureTerm v:vl2) {
+                        if (v==X || v==Y) {
+                            ((TermFeatureTerm)newNode).addFeatureValueSecure(feature, newNode);
+                        } else {
+                            FeatureTerm Nv =  correspondences.get(v);
+                            if (Nv==null) {
+                                // v was part of the domain model:
+                                ((TermFeatureTerm)newNode).addFeatureValueSecure(feature, v);
+                            } else {
+                                ((TermFeatureTerm)newNode).addFeatureValueSecure(feature, Nv);
+                            }
+                        }
                     }
-                }
-                // check for any recursive variable equalities that might be needed:
-                for(FeatureTerm V1:vl1) {
-                    for(FeatureTerm V2:vl2) {
-                        if (V1!=V2) {
-                            if (!appearTogetherInASet(f, V1, V2)) {
-                                // Found a pair that needs to be treated recursively:
-                                pendingEqualities.add(new Pair<FeatureTerm,FeatureTerm>(V1,V2));
+                    // check for any recursive variable equalities that might be needed:
+                    for(FeatureTerm V1:vl1) {
+                        for(FeatureTerm V2:vl2) {
+                            if (V1!=V2) {
+                                if (!appearTogetherInASet(f, V1, V2)) {
+                                    // Found a pair that needs to be treated recursively:
+                                    pendingEqualities.add(new Pair<FeatureTerm,FeatureTerm>(V1,V2));
+                                }
                             }
                         }
                     }
                 }
+            } catch (SingletonFeatureTermException e) {
+                return results;
             }
-        } catch (SingletonFeatureTermException e) {
-            return results;
         }
 
         for(Pair<FeatureTerm,FeatureTerm> pe:pendingEqualities) {
-            if (pe.m_a == X || pe.m_a == Y) pe.m_a = newNode;
-                                       else pe.m_a = correspondences.get(pe.m_a);
-            if (pe.m_b == X || pe.m_b == Y) pe.m_b = newNode;
-                                       else pe.m_b = correspondences.get(pe.m_b);
+            if (pe.m_a == X || pe.m_a == Y) {
+                pe.m_a = newNode;
+            } else {
+                FeatureTerm tmp = correspondences.get(pe.m_a);
+                if (tmp!=null) pe.m_a = tmp;
+            }
+            if (pe.m_b == X || pe.m_b == Y) {
+                pe.m_b = newNode;
+            } else {
+                FeatureTerm tmp = correspondences.get(pe.m_b);
+                if (tmp!=null) pe.m_b = tmp;
+            }
         }
 
 

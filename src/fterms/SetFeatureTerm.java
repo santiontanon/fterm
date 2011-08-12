@@ -35,7 +35,20 @@ public class SetFeatureTerm extends FeatureTerm {
 		m_set.add(f);
 	}
 	
-	public void removeSetValue(FeatureTerm f) {
+	public void addSetValueSecure(FeatureTerm f) {
+		if (f == null) {
+			System.err.println("SetFeatureTerm::addSetValue: adding a null element to a set!");
+		}
+		if (f instanceof SetFeatureTerm) {
+			System.err.println("SetFeatureTerm::addSetValue: adding a set to a set!!! some methods do not support this...");
+			if (f==this) {
+				System.err.println("SetFeatureTerm::addSetValue: circular recursion in a set!!!");
+			}
+		}
+                if (!m_set.contains(f)) m_set.add(f);
+	}
+
+        public void removeSetValue(FeatureTerm f) {
 		m_set.remove(f);
 	}
 
