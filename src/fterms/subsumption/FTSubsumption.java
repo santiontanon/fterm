@@ -14,6 +14,7 @@ import fterms.Symbol;
 import fterms.SymbolFeatureTerm;
 import fterms.TermFeatureTerm;
 import fterms.exceptions.FeatureTermException;
+import fterms.exceptions.SubsumptionTimeOutExecption;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -25,7 +26,18 @@ import util.FTSubsumptionRecord;
  */
 public class FTSubsumption {
 
-    public static boolean subsumptionWithBindings(FeatureTerm t1, FeatureTerm t2,List<FeatureTerm> bindings_a,List<FeatureTerm> bindings_b) throws FeatureTermException {
+    public static final int STATE_NORMAL = 0;
+    public static final int STATE_FALSE = 1;
+    public static final int STATE_TRUE = 2;
+    public static final int STATE_CONTINUING = 3;
+
+    /*
+     * You can provide a "maxTime" parameter to this method, after which it will generate a time out exception.
+     * If a time out of 0 or lower is specified, then this parameter is ignored, and the method runs
+     * for as long as needed.
+     */
+
+    public static boolean subsumptionWithBindings(FeatureTerm t1, FeatureTerm t2,List<FeatureTerm> bindings_a,List<FeatureTerm> bindings_b, int maxTime) throws FeatureTermException {
 
         List<SubsumptionStackNode> stack = new LinkedList<SubsumptionStackNode>();
         SubsumptionStackNode stack_node;
@@ -35,10 +47,7 @@ public class FTSubsumption {
         int set1l = 0, set2l = 0;
         int[] assignment = null;
         int assignment_pos = 0;
-        int state;	/*	0 - normal,
-        1 - already known to be false,
-        2 - already known to be true,
-        3 - continuing a previous started subsumption, so no initial tests needed */
+        int state;
         boolean res = true;
         int i;
         long start = System.currentTimeMillis();
@@ -50,13 +59,13 @@ public class FTSubsumption {
             return false;
         }
 
-//        if (true) return CSPSubsumption.subsumes(t1, t2);
-//        if (FTRefinement.variables(t1).size()>20) return CSPSubsumption.subsumes(t1, t2);
-//        if (FTRefinement.variables(t1).size()>20 && FTRefinement.sets(t1).size()>0) return CSPSubsumption.subsumes(t1, t2);
-
-
         stack.add(0, new SubsumptionStackNode(t1, t2, 0, null, null, 0, null, 0, -1));
         while (!stack.isEmpty()) {
+
+            if (maxTime>0) {
+                long current = System.currentTimeMillis();
+                if ((current-start)>maxTime) throw new SubsumptionTimeOutExecption("");
+            }
 
             stack_node = stack.remove(0);
             f1 = stack_node.m_f1;
@@ -74,7 +83,7 @@ public class FTSubsumption {
             //			System.out.println("f1: " + f1.toStringNOOS());
             //			System.out.println("f2: " + f2.toStringNOOS());
 
-            if (state == 0) {
+            if (state == STATE_NORMAL) {
                 // Test for path equalties:
 //				if (f1==null || f2==null) {
 //					System.err.println("WTF! f1: " + f1 + " , f2: " + f2);
@@ -88,28 +97,28 @@ public class FTSubsumption {
                     if (pos != -1) {
                         if (bindings_b.get(pos).equals(f2)) {
                             // already known to be true:
-                            state = 2;
+                            state = STATE_TRUE;
                         } else {
                             FeatureTerm ftc = bindings_b.get(pos);
                             if (f1 instanceof IntegerFeatureTerm && f2 instanceof IntegerFeatureTerm) {
                                 if (ftc instanceof IntegerFeatureTerm &&
                                     ((IntegerFeatureTerm) f2).getValue() != null &&
                                     ((IntegerFeatureTerm) f2).getValue() == ((IntegerFeatureTerm) f1).getValue()) {
-                                    state = 2;
+                                    state = STATE_TRUE;
                                 } else {
-                                    state = 1;
+                                    state = STATE_FALSE;
                                 } // if
                             } else {
                                 if (f1 instanceof FloatFeatureTerm && f2 instanceof FloatFeatureTerm) {
                                     if (ftc instanceof FloatFeatureTerm &&
                                         ((FloatFeatureTerm) f2).getValue() != null &&
                                         ((FloatFeatureTerm) f2).getValue() == ((FloatFeatureTerm) f1).getValue()) {
-                                        state = 2;
+                                        state = STATE_TRUE;
                                     } else {
-                                        state = 1;
+                                        state = STATE_FALSE;
                                     } // if
                                 } else {
-                                    state = 1;
+                                    state = STATE_FALSE;
                                 }
                             }
                         } // if
@@ -118,35 +127,35 @@ public class FTSubsumption {
                 //				System.out.println("path test completed...");
             } // if
 
-            if (state == 0) {
+            if (state == STATE_NORMAL) {
                 // Test names:
                 if (f1.getName() != null) {
                     if (f2.getName() == null) {
                         if (!(f2 instanceof SetFeatureTerm)) {
-                            state = 1;
+                            state = STATE_FALSE;
                         } // if
                     } else {
                         if (f2.getName().equals(f1.getName())) {
-                            state = 2;
+                            state = STATE_TRUE;
                         } else {
-                            state = 1;
+                            state = STATE_FALSE;
                         }
                     } // if
                 } // if
                 //				System.out.println("name test completed...");
             } // if
 
-            if (state == 0) {
+            if (state == STATE_NORMAL) {
                 // Test sorts:
                 if (!(f1 instanceof SetFeatureTerm) && !(f2 instanceof SetFeatureTerm) &&
                     f1.getSort() != null && f2.getSort() != null &&
                     !f1.getSort().isSubsort(f2.getSort())) {
-                    state = 1;
+                    state = STATE_FALSE;
                 }
                 //				System.out.println("sort test completed...");
             } // if
 
-            if (state == 0 || state == 2) {
+            if (state == STATE_NORMAL || state == STATE_TRUE) {
                 if (f2 != null &&
                     (f1.getDataType() == f2.getDataType())) {
                     bindings_a.add(0, f1);
@@ -154,12 +163,12 @@ public class FTSubsumption {
                 } // if
             } // if
 
-            if (state == 3) {
-                state = 0;
+            if (state == STATE_CONTINUING) {
+                state = STATE_NORMAL;
             }
 
             // Subsumption:
-            if (state == 0) {
+            if (state == STATE_NORMAL) {
                 if (f1 instanceof SetFeatureTerm || f2 instanceof SetFeatureTerm) {
                     boolean interrupted = false;
 
@@ -201,15 +210,15 @@ public class FTSubsumption {
                         //							System.out.println("Set1: " + set1l + "\nSet2: " + set2l);
 
                         if (set1l == 0) {
-                            state = 2;
+                            state = STATE_TRUE;
                         }
                         if (set1l > set2l) {
-                            state = 1;
+                            state = STATE_FALSE;
                         }
                     } // if
 
                     // Assign an element of the set2 to each element of the set1:
-                    if (state == 0) {
+                    if (state == STATE_NORMAL) {
 
                         if (assignment == null) {
                             assignment = new int[set1l];
@@ -220,7 +229,7 @@ public class FTSubsumption {
                         } // if
 
                         if (assignment_pos >= set1l) {
-                            state = 2;
+                            state = STATE_TRUE;
                         } else {
                             // create a backtracking node:
                             //								System.out.println("Backtrack node created at set position: " + assignment_pos);
@@ -271,19 +280,19 @@ public class FTSubsumption {
 
                     if (!f1.hasValue()) {
                         if (!f1.getSort().isSubsort(f2.getSort())) {
-                            state = 1;
+                            state = STATE_FALSE;
                         }
                     } else {
                         if (f1 instanceof IntegerFeatureTerm) {
                             if (((IntegerFeatureTerm) f1).getValue() == null) {
                                 if (!(f2 instanceof IntegerFeatureTerm)) {
-                                    state = 1;
+                                    state = STATE_FALSE;
                                 }
                             } else {
                                 if (!(f2 instanceof IntegerFeatureTerm) ||
                                     ((IntegerFeatureTerm) f2).getValue() == null ||
                                     !((IntegerFeatureTerm) f2).getValue().equals(((IntegerFeatureTerm) f1).getValue())) {
-                                    state = 1;
+                                    state = STATE_FALSE;
                                 }
                             }
                         } else if (f1 instanceof FloatFeatureTerm) {
@@ -300,17 +309,17 @@ public class FTSubsumption {
                             } else {
                                 if (f_value == null ||
                                     !f_value.equals(((FloatFeatureTerm) f1).getValue())) {
-                                    state = 1;
+                                    state = STATE_FALSE;
                                 }
                             }
                         } else if (f1 instanceof SymbolFeatureTerm) {
                             if (((SymbolFeatureTerm) f1).getValue() != null) {
                                 if (!(f2 instanceof SymbolFeatureTerm) ||
                                     ((SymbolFeatureTerm) f2).getValue() == null) {
-                                    state = 1;
+                                    state = STATE_FALSE;
                                 } else {
                                     if (!((SymbolFeatureTerm) f2).getValue().equals(((SymbolFeatureTerm) f1).getValue())) {
-                                        state = 1;
+                                        state = STATE_FALSE;
                                     }
                                 } // if
                             } // if
@@ -323,7 +332,7 @@ public class FTSubsumption {
                                 if (f2 instanceof TermFeatureTerm) fv2 = f2.featureValue(fn);
                                 if (fv2 == null) {
                                     if (!(fv instanceof SetFeatureTerm) || ((SetFeatureTerm)fv).getSetValues().size()!=0) {
-                                        state = 1;
+                                        state = STATE_FALSE;
                                         break;
                                     }
                                 } // if
@@ -337,7 +346,7 @@ public class FTSubsumption {
 
             } // if
 
-            if (state == 1) {
+            if (state == STATE_FALSE) {
                 //					System.out.println("Fail");
 
                 if (!stack_backtracking.isEmpty()) {
@@ -408,8 +417,11 @@ public class FTSubsumption {
         } // while
         //		System.out.println("*---- End Subsumption: " + (res ? "true":"false") + " ----*\n");
 
-        /*
         long end = System.currentTimeMillis();
+        if ((end-start)>1000) {
+            System.out.println("subsumption: " + (end-start));
+        }
+        /*
         boolean res2 = CSPSubsumption.subsumes(t1, t2);
         long end2 = System.currentTimeMillis();
         
