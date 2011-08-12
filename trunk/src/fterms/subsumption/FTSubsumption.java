@@ -14,7 +14,8 @@ import fterms.Symbol;
 import fterms.SymbolFeatureTerm;
 import fterms.TermFeatureTerm;
 import fterms.exceptions.FeatureTermException;
-import fterms.exceptions.SubsumptionTimeOutExecption;
+import fterms.exceptions.SubsumptionTimeOutException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -30,6 +31,18 @@ public class FTSubsumption {
     public static final int STATE_FALSE = 1;
     public static final int STATE_TRUE = 2;
     public static final int STATE_CONTINUING = 3;
+
+    public static boolean subsumes(FeatureTerm f1, FeatureTerm f2) throws FeatureTermException {
+        List<FeatureTerm> bindings_a = new ArrayList<FeatureTerm>();
+        List<FeatureTerm> bindings_b = new ArrayList<FeatureTerm>();
+        return FTSubsumption.subsumptionWithBindings(f1,f2,bindings_a,bindings_b,0);
+    }
+
+    public static boolean subsumes(FeatureTerm f1, FeatureTerm f2, int maxTime) throws FeatureTermException {
+        List<FeatureTerm> bindings_a = new ArrayList<FeatureTerm>();
+        List<FeatureTerm> bindings_b = new ArrayList<FeatureTerm>();
+        return FTSubsumption.subsumptionWithBindings(f1,f2,bindings_a,bindings_b,maxTime);
+    }
 
     /*
      * You can provide a "maxTime" parameter to this method, after which it will generate a time out exception.
@@ -64,7 +77,7 @@ public class FTSubsumption {
 
             if (maxTime>0) {
                 long current = System.currentTimeMillis();
-                if ((current-start)>maxTime) throw new SubsumptionTimeOutExecption("");
+                if ((current-start)>maxTime) throw new SubsumptionTimeOutException("");
             }
 
             stack_node = stack.remove(0);
@@ -417,10 +430,10 @@ public class FTSubsumption {
         } // while
         //		System.out.println("*---- End Subsumption: " + (res ? "true":"false") + " ----*\n");
 
-        long end = System.currentTimeMillis();
-        if ((end-start)>1000) {
-            System.out.println("subsumption: " + (end-start));
-        }
+//        long end = System.currentTimeMillis();
+//        if ((end-start)>1000) {
+//            System.out.println("subsumption: " + (end-start));
+//        }
         /*
         boolean res2 = CSPSubsumption.subsumes(t1, t2);
         long end2 = System.currentTimeMillis();

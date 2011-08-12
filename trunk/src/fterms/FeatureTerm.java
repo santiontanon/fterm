@@ -12,9 +12,16 @@ import java.util.Map.Entry;
 import util.Pair;
 import fterms.exceptions.FeatureTermException;
 import fterms.subsumption.CSPSubsumption;
+import fterms.subsumption.MetaSubsumption;
 import util.FTSubsumptionRecord;
 
 public abstract class FeatureTerm {
+    
+    public static final int SUBSUMPTION_NORMAL = 0;
+    public static final int SUBSUMPTION_CSP = 1;
+    public static final int SUBSUMPTION_META = 2;
+
+    public static int SUBSUMPTON_METHOD = SUBSUMPTION_NORMAL;
 
     Symbol m_name = null;
     Sort m_sort;
@@ -300,20 +307,12 @@ public abstract class FeatureTerm {
 
     
     public boolean subsumes(FeatureTerm f) throws FeatureTermException {
-        List<FeatureTerm> bindings_a = new ArrayList<FeatureTerm>();
-        List<FeatureTerm> bindings_b = new ArrayList<FeatureTerm>();
-
-//        long start = System.currentTimeMillis();
-        boolean res = FTSubsumption.subsumptionWithBindings(this,f,bindings_a,bindings_b,0);
-//        long end = System.currentTimeMillis();
-//        long startCSP = System.currentTimeMillis();
-//        CSPSubsumption.subsumes(this,f);
-//        long endCSP = System.currentTimeMillis();
-
-//        if (res!=resCSP) System.err.println("subsumption different!!!!!!!!!!!!!!!!!!");
-
-//        FTSubsumptionRecord.register(this,f,end-start,endCSP-startCSP,res);
-        return res;
+        switch(SUBSUMPTON_METHOD) {
+        case SUBSUMPTION_CSP: return CSPSubsumption.subsumes(this,f);
+        case SUBSUMPTION_META: return MetaSubsumption.subsumes(this,f);
+        default:
+                 return FTSubsumption.subsumes(this, f);
+        }
     }
 
 
