@@ -837,7 +837,7 @@ public class FTRefinement {
                         }
 
                         if (!appearTogetherInASet(f,X,Y,sets)) {
-                            List<FeatureTerm> tmpl = variableEquality(f,X,Y,dm);
+                            List<FeatureTerm> tmpl = variableEquality(f,X,Y,dm, false);
                             for(FeatureTerm tmp:tmpl) {
                                 if (f.subsumes(tmp)) refinements.add(tmp);
                             }
@@ -892,7 +892,7 @@ public class FTRefinement {
                             }
 
                             if (!appear_together) {
-                                List<FeatureTerm> tmpl = variableEquality(f,X,Y,dm);
+                                List<FeatureTerm> tmpl = variableEquality(f,X,Y,dm, false);
                                 for(FeatureTerm tmp:tmpl) {
                                     if (f.subsumes(tmp)) refinements.add(tmp);
                                 }
@@ -908,12 +908,12 @@ public class FTRefinement {
         return refinements;
     }
 
-    public static List<FeatureTerm> variableEquality(FeatureTerm f, FeatureTerm X, FeatureTerm Y, FTKBase dm) throws FeatureTermException {
-        return variableEquality(f,X,Y,dm,new LinkedList<Pair<FeatureTerm,FeatureTerm>>());
+    public static List<FeatureTerm> variableEquality(FeatureTerm f, FeatureTerm X, FeatureTerm Y, FTKBase dm, boolean recursive) throws FeatureTermException {
+        return variableEquality(f,X,Y,dm,new LinkedList<Pair<FeatureTerm,FeatureTerm>>(), recursive);
     }
 
     public static List<FeatureTerm> variableEquality(FeatureTerm f, FeatureTerm X, FeatureTerm Y, FTKBase dm,
-                                                     List<Pair<FeatureTerm,FeatureTerm>> pendingEqualitiesInput) throws FeatureTermException {
+                                                     List<Pair<FeatureTerm,FeatureTerm>> pendingEqualitiesInput, boolean recursive) throws FeatureTermException {
         HashMap<FeatureTerm, FeatureTerm> correspondences = new HashMap<FeatureTerm, FeatureTerm>();
         FeatureTerm clone = f.clone(dm, correspondences);
         FeatureTerm NX = correspondences.get(X);
@@ -1081,9 +1081,11 @@ public class FTRefinement {
                 System.err.println(n1 + "==" + n2);
             }
 */
-            while(!pendingEqualities.isEmpty()) {
-                Pair<FeatureTerm,FeatureTerm> first = pendingEqualities.remove(0);
-                results.addAll(variableEquality(base,first.m_a,first.m_b,dm,pendingEqualities));
+            if (recursive) {
+                while(!pendingEqualities.isEmpty()) {
+                    Pair<FeatureTerm,FeatureTerm> first = pendingEqualities.remove(0);
+                    results.addAll(variableEquality(base,first.m_a,first.m_b,dm,pendingEqualities, recursive));
+                }
             }
         }
 
