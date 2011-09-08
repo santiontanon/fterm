@@ -1372,6 +1372,50 @@ public class FTRefinement {
         return variables;
     } // variables
 
+
+    public static List<FeatureTerm> reachable(TermFeatureTerm ft) {
+        HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
+        List<FeatureTerm> reachable = new LinkedList<FeatureTerm>();
+        List<FeatureTerm> open_nodes = new LinkedList<FeatureTerm>();
+        FeatureTerm node;
+
+        // do not consider "ft" to be part of reachable, so start with its children:
+        for (FeatureTerm ft2 : ft.getFeatureValues()) {
+            if (!visited.contains(ft2)) {
+                visited.add(ft2);
+                open_nodes.add(ft2);
+            }
+        }
+
+        while (!open_nodes.isEmpty()) {
+            node = open_nodes.remove(0);
+            if (!(node instanceof SetFeatureTerm)) {
+                reachable.add(node);
+            }
+
+            if (node instanceof TermFeatureTerm) {
+                for (FeatureTerm ft2 : ((TermFeatureTerm) node).getFeatureValues()) {
+                    if (!visited.contains(ft2)) {
+                        visited.add(ft2);
+                        open_nodes.add(ft2);
+                    }
+                }
+            } // if
+
+            if (node instanceof SetFeatureTerm) {
+                for (FeatureTerm ft2 : ((SetFeatureTerm) node).getSetValues()) {
+                    if (!visited.contains(ft2)) {
+                        visited.add(ft2);
+                        open_nodes.add(ft2);
+                    }
+                } // for
+            } // if/
+        } // while
+
+        return reachable;
+    } // reachable
+
+
     public static List<Pair<FeatureTerm, Path>> variablesWithPaths(FeatureTerm ft, FTKBase dm) {
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
         List<Pair<FeatureTerm, Path>> variablesPaths = new LinkedList<Pair<FeatureTerm, Path>>();
