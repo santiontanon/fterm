@@ -4277,10 +4277,7 @@
                                                                   (define ?X14 (amine)))))
                                                      (define (relative-position)
                                                       (distance 3)
-                                                      (radicals (define (set)
-                                                                  !X10
-                                                                  !X10
-                                                                  )))))
+                                                      (radicals !X10))))
                                         (radical-set (define (set)
                                                        !X9
                                                        !X10
@@ -13596,7 +13593,6 @@
                                         (radical-set (define (set)
                                                        !X6
                                                        !X10
-                                                       !X14
                                                        !X14
                                                        ))))
                  (tests (define (test-results)
