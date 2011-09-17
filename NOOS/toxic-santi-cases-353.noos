@@ -1412,7 +1412,7 @@
                                                         (p-radicals (define (position-radical)
                                                                       (radicals (define ?X26 (amine)
                                                                                   (p-radicals (define (position-radical)
-                                                                                                (radicals X26)))
+                                                                                                (radicals !X26)))
                                                                                   (radical-set (define (set)
                                                                                                  (define (ethane)
                                                                                                   (p-radicals (define (position-radical)
