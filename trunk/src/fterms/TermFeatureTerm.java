@@ -71,7 +71,7 @@ public class TermFeatureTerm extends FeatureTerm {
                 ((SetFeatureTerm)t).addSetValue(value);
             } else {
                 if (t == value) return;
-                if (m_sort.featureSingleton(feature)) throw new SingletonFeatureTermException("in addFeatureValue");
+                if (m_sort.featureSingleton(feature)) throw new SingletonFeatureTermException("in addFeatureValue in feature " + feature);
                 SetFeatureTerm t2 = new SetFeatureTerm();
                 t2.addSetValue(t);
                 t2.addSetValue(value);

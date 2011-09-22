@@ -459,12 +459,20 @@ public class FTUnification {
 
     
     public static FeatureTerm simpleUnification(FeatureTerm f1,FeatureTerm f2,FTKBase dm) throws FeatureTermException {
-        List<FeatureTerm> unifications = unificationDuplicates(f1,f2,dm,true);
+        List<FeatureTerm> unifications = unification(f1,f2,dm);
 
         if (unifications!=null && unifications.size()>0) return unifications.get(0);
         return null;
     }
     
+    // This methos is very fast, but does not ensure that the term that is retunred is the most general possible
+    public static FeatureTerm simpleUnificationUnsafe(FeatureTerm f1,FeatureTerm f2,FTKBase dm) throws FeatureTermException {
+        List<FeatureTerm> unifications = unificationDuplicates(f1,f2,dm,true);
+
+        if (unifications!=null && unifications.size()>0) return unifications.get(0);
+        return null;
+    }
+
 
     public static List<FeatureTerm> unificationDuplicates(FeatureTerm f1,FeatureTerm f2,FTKBase dm,boolean firstResult) throws FeatureTermException {
         List<FeatureTerm> results = new LinkedList<FeatureTerm>();
