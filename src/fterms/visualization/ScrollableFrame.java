@@ -5,8 +5,6 @@
 
 package fterms.visualization;
 
-import fterms.FTKBase;
-import fterms.FeatureTerm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
