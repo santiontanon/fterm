@@ -63,7 +63,11 @@ public class CSPFeatureTerm {
             List<Object> sorts = new LinkedList<Object>();
             if (v.isConstant()) {
                 sorts.add(v);
+            } else if (v.getName()!=null && v.isLeaf()) {
+                // assume it's part of the domain model:
+                sorts.add(v);
             }
+                    
             Sort s = v.getSort();
             while(s!=null) {
                 sorts.add(s);
@@ -98,6 +102,9 @@ public class CSPFeatureTerm {
         List<FeatureTerm> vl = FTRefinement.variables(f);
         HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> vpl = FTRefinement.variablesWithAllParents(f);
 
+
+        System.out.println(f.toStringNOOS(dm));
+        
         variables = new LinkedList<List<Object>>();
         features = new HashMap<Symbol, boolean[][]>();
 

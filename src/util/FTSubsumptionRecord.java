@@ -24,13 +24,11 @@ import java.util.List;
 class FTSRecord {
     FeatureTerm f1,f2;
     long time;  // time with normal subsumption
-    long CSPtime;  // time with CSP subsumption
 
-    public FTSRecord(FeatureTerm a_f1, FeatureTerm a_f2, long a_time, long a_CSPtime) {
+    public FTSRecord(FeatureTerm a_f1, FeatureTerm a_f2, long a_time) {
         f1 = a_f1;
         f2 = a_f2;
         time = a_time;
-        CSPtime = a_CSPtime;
     }
 }
 
@@ -42,13 +40,13 @@ public class FTSubsumptionRecord {
     static List<Pair<Integer,List<FTSRecord>>> positive = new LinkedList<Pair<Integer,List<FTSRecord>>>();
     static List<Pair<Integer,List<FTSRecord>>> negative = new LinkedList<Pair<Integer,List<FTSRecord>>>();
 
-    public static void register(FeatureTerm f1, FeatureTerm f2, long time, long CSPtime, boolean result) {
+    public static void register(FeatureTerm f1, FeatureTerm f2, long time, boolean result) {
         if (time>0) {
 //            System.out.println(time + " - " + result);
-            List<FTSRecord> bin = getBin(Math.max(time,CSPtime),result);
+            List<FTSRecord> bin = getBin(time,result);
 
             if (bin.size()<binMax) {
-                bin.add(new FTSRecord(f1,f2, time, CSPtime));
+                bin.add(new FTSRecord(f1,f2, time));
 
                 // save test to summary file:
                 try{
@@ -83,12 +81,12 @@ public class FTSubsumptionRecord {
     public static void dumpStatistics() {
         for(Pair<Integer,List<FTSRecord>> bin:positive) {
             for(FTSRecord r:bin.m_b) {
-                System.out.println(FTRefinement.variables(r.f1).size() + ", " + FTRefinement.variables(r.f2).size() + ", " + maxSet(r.f1) + ", " + maxSet(r.f2) + ", " + totalSetSize(r.f1) + ", " + totalSetSize(r.f2) + ", " + r.time + ", " + r.CSPtime + ", true");
+                System.out.println(FTRefinement.variables(r.f1).size() + ", " + FTRefinement.variables(r.f2).size() + ", " + maxSet(r.f1) + ", " + maxSet(r.f2) + ", " + totalSetSize(r.f1) + ", " + totalSetSize(r.f2) + ", " + r.time + ", true");
             }
         }
         for(Pair<Integer,List<FTSRecord>> bin:negative) {
             for(FTSRecord r:bin.m_b) {
-                System.out.println(FTRefinement.variables(r.f1).size() + ", " + FTRefinement.variables(r.f2).size() + ", " + maxSet(r.f1) + ", " + maxSet(r.f2) + ", " + totalSetSize(r.f1) + ", " + totalSetSize(r.f2) + ", " + r.time + ", " + r.CSPtime + ", false");
+                System.out.println(FTRefinement.variables(r.f1).size() + ", " + FTRefinement.variables(r.f2).size() + ", " + maxSet(r.f1) + ", " + maxSet(r.f2) + ", " + totalSetSize(r.f1) + ", " + totalSetSize(r.f2) + ", " + r.time + ", false");
             }
         }
     }
@@ -136,7 +134,7 @@ public class FTSubsumptionRecord {
 
     public static List<FTSRecord> getBin(long time, boolean result) {
         List<Pair<Integer,List<FTSRecord>>> list = null;
-        int binID = (int)(time/100);
+        int binID = (int)(time/200);
         if (result) list = positive;
                else list = negative;
 
