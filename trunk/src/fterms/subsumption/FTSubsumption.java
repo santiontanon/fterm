@@ -431,22 +431,12 @@ public class FTSubsumption {
         //		System.out.println("*---- End Subsumption: " + (res ? "true":"false") + " ----*\n");
 
 //        long end = System.currentTimeMillis();
+//        FTSubsumptionRecord.register(t1, t2, (end-start), res);
 //        if ((end-start)>1000) {
 //            System.out.println("subsumption: " + (end-start));
 //        }
-        /*
-        boolean res2 = CSPSubsumption.subsumes(t1, t2);
-        long end2 = System.currentTimeMillis();
-        
-        FTSubsumptionRecord.register(f1, f2, (end-start), (end2-end), res);
-
-        if (res!=res2) {
-            System.err.println("CSPsubsumption has a different result: " + res + " - " + res2);
-            System.err.println(t1.toStringNOOS());
-            System.err.println(t2.toStringNOOS());
-        }
-        */
-        
+                
+                
         return res;
     }
 
