@@ -14,7 +14,7 @@ import jp.ac.kobe_u.cs.cream.*;
  *
  * @author santi
  */
-public class CSPSubsumption {
+public class CSPSubsumptionSymmetry {
 
     public static boolean subsumes(FeatureTerm f1, FeatureTerm f2, FTKBase dm) throws FeatureTermException {
         if (f1 instanceof SetFeatureTerm || f2 instanceof SetFeatureTerm) {
@@ -90,7 +90,7 @@ public class CSPSubsumption {
             }
         }
 
-        // Set constraints
+        // Set constraints:
         for (Symbol f : t1.features.keySet()) {
             for (int i1 = 0; i1 < n1; i1++) {
                 boolean[][] matrix1 = t1.features.get(f);
@@ -113,6 +113,43 @@ public class CSPSubsumption {
             }
         }
 
+
+        // symmetry constraints:
+        int numSymConstraints = 0;
+        for (int i1 = 0; i1 < n1; i1++) {
+            for (int i2 = i1 + 1; i2 < n1; i2++) {
+                boolean same = true;
+                for (Symbol f : t1.features.keySet()) {
+                    boolean[][] matrix1 = t1.features.get(f);
+                    if (matrix1 != null) {
+                        for (int j1 = 0; j1 < n1; j1++) {
+                            if (matrix1[j1][i1] != matrix1[j1][i2]) {
+                                same = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!same) {
+                        break;
+                    }
+                }
+                if (same) {
+                    Object type1 = t1.variables.get(i1).get(0);
+                    Object type2 = t1.variables.get(i2).get(0);
+                    boolean equivalents = equivalentsForSymmetry(i1, i2, type1, type2, t1);
+                    if (equivalents) {
+                        // Add Symmetry constraints:
+//                        System.out.println("V" + i1 + " (" + type1 + ") = V" + i2 + " (" + type2 + ")");
+                        new IntComparison(net, IntComparison.LE, q[i1], q[i2]);
+                        numSymConstraints++;
+                    }
+                }
+            }
+        }
+//        System.out.println(numSymConstraints + " symmetry constraints");
+
+
+
         Solver solver = new DefaultSolver(net);
         solver.start();
         solver.waitNext();
@@ -131,5 +168,66 @@ public class CSPSubsumption {
 //        System.out.println();
 
         return true;
+    }
+
+    public static boolean equivalentsForSymmetry(int i1, int i2, Object type1, Object type2, CSPFeatureTerm t1) {
+        boolean equivalents = false;
+//        System.out.println("testing V" + i1 + " (" + type1 + ") = V" + i2 + " (" + type2 + ")");
+
+        if ((type1 instanceof FeatureTerm) && (type2 instanceof FeatureTerm)) {
+            // text if they are the same constant
+            if ((type1 instanceof IntegerFeatureTerm)
+                    && (type2 instanceof IntegerFeatureTerm)) {
+                if (((IntegerFeatureTerm) type1).getValue() == ((IntegerFeatureTerm) type2).getValue()) {
+                    equivalents = true;
+                }
+            } else if ((type1 instanceof FloatFeatureTerm)
+                    && (type2 instanceof FloatFeatureTerm)) {
+                if (((FloatFeatureTerm) type1).getValue() == ((FloatFeatureTerm) type2).getValue()) {
+                    equivalents = true;
+                }
+            } else if ((type1 instanceof SymbolFeatureTerm)
+                    && (type2 instanceof SymbolFeatureTerm)) {
+                if (((SymbolFeatureTerm) type1).getValue().equals(((SymbolFeatureTerm) type2).getValue())) {
+                    equivalents = true;
+                }
+            } else if ((type1 instanceof TermFeatureTerm)
+                    && (type2 instanceof TermFeatureTerm)) {
+                if (((TermFeatureTerm) type1).getName().equals(((TermFeatureTerm) type2).getName())) {
+                    equivalents = true;
+                }
+            }
+        } else if ((type1 instanceof Sort) && (type2 instanceof Sort)) {
+            Sort s1 = (Sort) type1;
+            Sort s2 = (Sort) type2;
+            // Test if they have the same sort:
+            if (s1 == s2) {
+                // Test if they have the same feature values:
+                equivalents = true;
+                for (Symbol s : s1.getFeatures()) {
+                    boolean[][] features1 = t1.features.get(s);
+                    boolean[][] features2 = t1.features.get(s);
+
+                    if (features1 == null && features2 == null) {
+                        continue;
+                    }
+                    if (features1 == null || features2 == null) {
+                        equivalents = false;
+                        break;
+                    }
+
+                    for (int i = 0; i < features1[i1].length; i++) {
+                        if (features1[i1][i] != features2[i2][i]) {
+                            equivalents = false;
+                            break;
+                        }
+                    }
+                    if (!equivalents) {
+                        break;
+                    }
+                }
+            }
+        }
+        return equivalents;
     }
 }
