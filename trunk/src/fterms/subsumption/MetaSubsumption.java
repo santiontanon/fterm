@@ -27,7 +27,7 @@ public class MetaSubsumption {
             }
         }catch(SubsumptionTimeOutException e) {
             System.out.println("Timed out!");
-            return CSPSubsumption.subsumes(f1,f2,dm);
+            return CSPSubsumptionSymmetry.subsumes(f1,f2,dm);
         }
     }
 
@@ -43,7 +43,7 @@ public class MetaSubsumption {
             }
         }catch(SubsumptionTimeOutException e) {
             System.out.println("Timed out!");
-            return CSPSubsumption.subsumes(f1,f2);
+            return CSPSubsumptionSymmetry.subsumes(f1,f2);
         }
     }    
 }
