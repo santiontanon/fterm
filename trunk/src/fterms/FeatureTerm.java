@@ -12,6 +12,7 @@ import java.util.Map.Entry;
 import util.Pair;
 import fterms.exceptions.FeatureTermException;
 import fterms.subsumption.CSPSubsumption;
+import fterms.subsumption.CSPSubsumptionSymmetry;
 import fterms.subsumption.MetaSubsumption;
 import util.FTSubsumptionRecord;
 
@@ -19,9 +20,10 @@ public abstract class FeatureTerm {
     
     public static final int SUBSUMPTION_NORMAL = 0;
     public static final int SUBSUMPTION_CSP = 1;
-    public static final int SUBSUMPTION_META = 2;
+    public static final int SUBSUMPTION_CSP_SYMMETRY = 2;
+    public static final int SUBSUMPTION_META = 3;
 
-    public static int SUBSUMPTON_METHOD = SUBSUMPTION_NORMAL;
+    public static int SUBSUMPTON_METHOD = SUBSUMPTION_META;
 
     Symbol m_name = null;
     Sort m_sort;
@@ -313,6 +315,7 @@ public abstract class FeatureTerm {
     public boolean subsumes(FeatureTerm f) throws FeatureTermException {
         switch(SUBSUMPTON_METHOD) {
         case SUBSUMPTION_CSP: return CSPSubsumption.subsumes(this,f);
+        case SUBSUMPTION_CSP_SYMMETRY: return CSPSubsumptionSymmetry.subsumes(this,f);
         case SUBSUMPTION_META: return MetaSubsumption.subsumes(this,f);
         default:
                  return FTSubsumption.subsumes(this, f);
