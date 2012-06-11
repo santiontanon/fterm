@@ -23,10 +23,10 @@ public class MetaSubsumption {
             if (f1 instanceof SetFeatureTerm || f2 instanceof SetFeatureTerm) {
                 return FTSubsumption.subsumes(f1,f2);
             } else {
-                return FTSubsumption.subsumes(f1, f2, 200);
+                return FTSubsumption.subsumes(f1, f2, 100);
             }
         }catch(SubsumptionTimeOutException e) {
-            System.out.println("Timed out!");
+//            System.out.println("Timed out!");
             return CSPSubsumptionSymmetry.subsumes(f1,f2,dm);
         }
     }
@@ -39,10 +39,10 @@ public class MetaSubsumption {
             if (f1 instanceof SetFeatureTerm || f2 instanceof SetFeatureTerm) {
                 return FTSubsumption.subsumes(f1,f2);
             } else {
-                return FTSubsumption.subsumes(f1, f2, 200);
+                return FTSubsumption.subsumes(f1, f2, 100);
             }
         }catch(SubsumptionTimeOutException e) {
-            System.out.println("Timed out!");
+//            System.out.println("Timed out!");
             return CSPSubsumptionSymmetry.subsumes(f1,f2);
         }
     }    

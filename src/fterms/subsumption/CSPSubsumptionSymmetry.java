@@ -142,7 +142,8 @@ public class CSPSubsumptionSymmetry {
 //                        System.out.println("V" + i1 + " (" + type1 + ") = V" + i2 + " (" + type2 + ")");
                         new IntComparison(net, IntComparison.LE, q[i1], q[i2]);
                         numSymConstraints++;
-                    }
+                    }                    
+                    break;  // once variable 'i1' has been found equivalent once, there is no use to check it again (the rest should check against 'i2')
                 }
             }
         }
