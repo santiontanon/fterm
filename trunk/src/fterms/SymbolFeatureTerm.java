@@ -52,7 +52,7 @@ public class SymbolFeatureTerm extends FeatureTerm {
 			if (m_value==null) {
 				return "!X" + (ID+1);
 			} else {
-				return "" + m_value;				
+				return "\"" + m_value + "\"";
 			}
 		} // if  
 	} // FeatureTerm::toStringNOOSInternal 

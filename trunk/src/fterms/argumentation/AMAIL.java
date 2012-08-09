@@ -30,8 +30,9 @@ public class AMAIL {
 
     public int last_counterexamples_sent = 0;
     public int last_uncoveredexamples_sent = 0;
-    public int last_skepticalexamples_sent = 0;
+    public int last_empiricistexamples_sent = 0;
     public int last_rules_sent = 0;
+    public int last_rules_sent_in_last_step = 0;
     public boolean VISUALIZE_EVALUATION_AFTER_REVISION = false;
 
     public List<ArgumentationAgent> a_l = new LinkedList<ArgumentationAgent>();
@@ -50,11 +51,11 @@ public class AMAIL {
                  List<List<FeatureTerm>> l_examples,
                  List<ArgumentAcceptability> l_aa,
                  List<ArgumentationBasedLearning> l_l,
-                 boolean credulous,
+                 boolean rationalist,
                  Path a_dp, Path a_sp, Ontology a_o, FTKBase a_dm) {
 
         for(int i = 0;i<l_h.size();i++) {
-            ArgumentationAgent a = new ArgumentationAgent("Agent " + (i+1), l_examples.get(i), l_aa.get(i), new RuleHypothesis(l_h.get(i)), l_l.get(i), credulous);
+            ArgumentationAgent a = new ArgumentationAgent("Agent " + (i+1), l_examples.get(i), l_aa.get(i), new RuleHypothesis(l_h.get(i)), l_l.get(i), rationalist);
             a_l.add(a);
             agentNameTable.put(a.m_name,a);
         }
@@ -77,7 +78,7 @@ public class AMAIL {
 
 
     // This constructor is only useful so that it can be swapped with the AMAIL2 one:
-    // AMAIL2 assumed "credulous" agents, and so does this constructor:
+    // AMAIL2 assumed "rationalist" agents, and so does this constructor:
     public AMAIL(RuleHypothesis h1, RuleHypothesis h2, FeatureTerm a_solution,
         Collection<FeatureTerm> examples1, Collection<FeatureTerm> examples2,
         ArgumentAcceptability aa1, ArgumentAcceptability aa2,
@@ -125,6 +126,14 @@ public class AMAIL {
     }
 
     public boolean moreRoundsP() {
+        if (round>2000) {
+            System.err.println("ERROR: Maximum number of rounds reached!!!");
+            System.err.println("List of undefeated arguments:");
+            for(Argument a:state.getUndefeatedArguments()) {
+                System.err.println(a.toStringNOOS(dm));
+            }
+            return false;
+        }
         return anotherRound>0;
     }
 
@@ -203,12 +212,12 @@ public class AMAIL {
                 // Attack argument:
                 Argument b = findSingleCounterArgument(a.m_a, token, state, a.m_b, dp, sp, o, dm, a_l);
                 if (b == null) {
-                    if (token.m_credulous) {
-                        // Credulous agents believe in arguments they cannot attack:
+                    if (token.m_rationalist) {
+                        // rationalist agents believe in arguments they cannot attack:
                         a.m_b.settle(a.m_a, token.m_name);
-                        System.out.println("AMAIL: credulous agent " + token.m_name + " settling for an opponent root.");
+                        System.out.println("AMAIL: rationalist agent " + token.m_name + " settling for an opponent root.");
                     } else {
-                        // Skeptical agents ask for evidence for arguments they cannot attack:
+                        // empiricist agents ask for evidence for arguments they cannot attack:
                         ArgumentationAgent other = agentNameTable.get(a.m_a.m_agent);
                         // If some example has alredy been sent, maybe the argument is already acceptable, so, we have to check again:
                         if (!anyExampleReceived || !token.m_aa.accepted(a.m_a)) {
@@ -216,7 +225,7 @@ public class AMAIL {
                                 List<FeatureTerm> examples = generateEndorsingExamples(a.m_a,other.m_examples,other.m_alreadySentExamples.get(token.m_name),dp,sp,dm,o);
                                 if (examples.isEmpty()) {
                                     List<FeatureTerm> tmp = generateEndorsingExamples(a.m_a,other.m_examples,null,dp,sp,dm,o);
-                                    System.err.println("AMAIL: skeptical agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root, but couldn't find any!!!");
+                                    System.err.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root, but couldn't find any!!!");
                                     System.err.println("AMAIL: " + tmp.size() + " examples available, but all were already sent.");
                                     for(FeatureTerm tmp_e:tmp) {
                                         System.err.println("AMAIL: " + tmp_e.getName() + "(" + token.m_examples.contains(tmp_e) + "," + token.m_aa.m_examples.contains(tmp_e) + ")");
@@ -227,8 +236,8 @@ public class AMAIL {
                                     System.exit(1);
                                 } else {
                                     if (other.sendExample(token, examples.get(0), state))
-                                        last_skepticalexamples_sent++;
-                                    System.out.println("AMAIL: skeptical agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root.");
+                                        last_empiricistexamples_sent++;
+                                    System.out.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root.");
                                     anyExampleReceived = true;;
                                 }
                             }
@@ -255,6 +264,8 @@ public class AMAIL {
             }
         }
 
+        /*
+         * This is the old version (the way it was forhte JMLR 2011 submission that got rejected)
         if (!anyAttack) {
             // Check for uncovered:
             for(FeatureTerm e:token.m_examples) {
@@ -276,7 +287,42 @@ public class AMAIL {
                 }
             }
         }
+        */
 
+        // This is a new version that just sends examples that are not covered by anyone:
+        if (!anyAttack) {
+            // Check for uncovered:
+            for(FeatureTerm e:token.m_examples) {
+                if (e.readPath(sp).equivalents(solution)) {
+                    ArgumentationAgent first = null;
+                    boolean coveredByAnyone = false;
+                    for(ArgumentationAgent other:a_l) {
+                        if (other!=token) {
+                            if (other.m_hypothesis.coveredByAnyRule(e.readPath(dp))==null) {                            
+                                if (!other.m_examples.contains(e)) {
+                                    if (first==null) first = other;
+                                }
+                            } else {
+                                coveredByAnyone = true;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (!coveredByAnyone && first!=null) {
+                        System.out.println("AMAIL: Agent " + token.m_name + " sending uncovered example " + e.getName().get() + " to " + first.m_name);
+
+                        if (token.sendExample(first,e, state))
+                        last_uncoveredexamples_sent++;
+                        anyAttack = true;
+                        break;                        
+                    }
+                }
+            }
+        }
+        
+        
+        
         // Belief Revision:
         for(ArgumentationAgent a:a_l) {
             if (a==token) a.beliefRevision(state, solution, dp, sp, o, dm, true, a_l);
@@ -294,6 +340,41 @@ public class AMAIL {
         token = a_l.get(pos);
         round++;
     }
+    
+    
+    // This function finalizes the protocol, and executes any last operations that need to be executed before the agnets can use their obtained hypotheses:
+    public void finalStep() throws FeatureTermException {
+        // "Suggest" message: (notice that the suggest messages can all be sent at the end of the protocol, so that's what we are doing here)
+        boolean changes;
+        
+        do {
+            changes = false;
+            for(ArgumentationAgent token:a_l) {
+                for(ArgumentationAgent other:a_l) {
+                    if (other!=token) {
+                        for(FeatureTerm e:token.m_examples) {
+                            if (e.readPath(sp).equivalents(solution) && 
+                                !other.m_examples.contains(e) &&
+                                other.m_hypothesis.coveredByAnyRule(e.readPath(dp))==null) {
+                                
+                                Rule r = token.m_hypothesis.coveredByAnyRule(e.readPath(dp));
+                                
+                                if (r!=null) {
+                                    System.out.println("AMAIL: Agent " + token.m_name + " suggesting an argument to " + other.m_name);
+                                    other.m_hypothesis.addRule(r);
+                                    last_rules_sent_in_last_step++;
+                                    changes = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (changes) break;
+                    }
+                }                
+            }
+        }while(changes);                
+    }
+    
 
     public List<RuleHypothesis> result() {
         List<RuleHypothesis> ret = new LinkedList<RuleHypothesis>();
@@ -309,10 +390,10 @@ public class AMAIL {
                                              List<List<FeatureTerm>> l_examples,
                                              List<ArgumentAcceptability> l_aa,
                                              List<ArgumentationBasedLearning> l_l,
-                                             boolean credulous,
+                                             boolean rationalist,
                                              Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
 
-        AMAIL argumentation = new AMAIL(l_h,a_solution,l_examples,l_aa,l_l,credulous,dp,sp,o,dm);
+        AMAIL argumentation = new AMAIL(l_h,a_solution,l_examples,l_aa,l_l,rationalist,dp,sp,o,dm);
         while(argumentation.moreRoundsP()) argumentation.round(false);
 
         System.out.println("Argumentation state at the end of AMAIL:");

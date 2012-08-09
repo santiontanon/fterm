@@ -285,12 +285,12 @@ public class FTAmalgam {
 
         // compute the LUGs:
         Pair<FeatureTerm,Integer> LUG1P = LUG(au,f1,f2,dm,o);
-        System.out.println("LUG1 is in position: " + LUG1P.m_b);
-        System.out.println(LUG1P.m_a.toStringNOOS(dm));
+        if (DEBUG>=1) System.out.println("LUG1 is in position: " + LUG1P.m_b);
+        if (DEBUG>=1) System.out.println(LUG1P.m_a.toStringNOOS(dm));
 
         Pair<FeatureTerm,Integer> LUG2P = LUG(au,f2,f1,dm,o);
-        System.out.println("LUG2 is in position: " + LUG2P.m_b);
-        System.out.println(LUG2P.m_a.toStringNOOS(dm));
+        if (DEBUG>=1) System.out.println("LUG2 is in position: " + LUG2P.m_b);
+        if (DEBUG>=1) System.out.println(LUG2P.m_a.toStringNOOS(dm));
 
         // make the Amalgam Maximal: RESULT = unification(A,B), A = LUG(f1,LUG2), B = LUG(f2,A)
         Pair<FeatureTerm,Integer> AP = LUG(LUG1P.m_a,f1,LUG2P.m_a,dm,o);
@@ -301,7 +301,7 @@ public class FTAmalgam {
 
         int cost = (rpath1.size()-1)+(rpath2.size()-1);
 
-        System.out.println("Paths from A and B to terms:" + (rpath1.size()-1) + " " + (rpath2.size()-1));
+        if (DEBUG>=1) System.out.println("Paths from A and B to terms:" + (rpath1.size()-1) + " " + (rpath2.size()-1));
 
         // compute the amalgam:
         List<FeatureTerm> amalgams = FTUnification.unification(AP.m_a, BP.m_a, dm);
@@ -312,6 +312,31 @@ public class FTAmalgam {
 
         return results;
     }
+    
+    
+    public static List<Pair<FeatureTerm,Integer>> assimetricAmalgamRefinements(FeatureTerm source, FeatureTerm target, Ontology o, FTKBase dm) throws FeatureTermException, Exception {
+        FeatureTerm au = FTAntiunification.simpleAntiunification(source, target, o, dm);
+
+        // compute the LUGs:
+        Pair<FeatureTerm,Integer> LUG1P = LUG(au,source,target,dm,o);
+        if (DEBUG>=1) System.out.println("LUG1 is in position: " + LUG1P.m_b);
+        if (DEBUG>=1) System.out.println(LUG1P.m_a.toStringNOOS(dm));
+
+        List<FeatureTerm> rpath1 = FTRefinement.refinementPath(LUG1P.m_a,source,o,dm);
+
+        int cost = (rpath1.size()-1);
+
+        if (DEBUG>=1) System.out.println("Path from LUG1 to source:" + rpath1.size());
+
+        // compute the amalgam:
+        List<FeatureTerm> amalgams = FTUnification.unification(LUG1P.m_a, target, dm);
+        List<Pair<FeatureTerm,Integer>> results = new LinkedList<Pair<FeatureTerm,Integer>>();
+        for(FeatureTerm amalgam:amalgams) {
+            results.add(new Pair<FeatureTerm,Integer>(amalgam,cost));
+        }
+
+        return results;
+    }    
 
  
 }
