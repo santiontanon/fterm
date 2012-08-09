@@ -28,7 +28,7 @@ public class ArgumentationAgent {
     public ArgumentAcceptability m_aa;
     public RuleHypothesis m_hypothesis;
     public ArgumentationBasedLearning m_learning;
-    public boolean m_credulous = true;
+    public boolean m_rationalist = true;
 
     public ArgumentationAgent(String name,Collection<FeatureTerm> examples, ArgumentAcceptability aa, RuleHypothesis h, ArgumentationBasedLearning l) {
         m_name = name;
@@ -39,7 +39,7 @@ public class ArgumentationAgent {
         m_aa.updateExamples(m_examples);
         m_hypothesis = h;
         m_learning = l;
-        m_credulous = true;
+        m_rationalist = true;
     }
 
     public ArgumentationAgent(String name,Collection<FeatureTerm> examples, ArgumentAcceptability aa, RuleHypothesis h, ArgumentationBasedLearning l, boolean credulous) {
@@ -51,7 +51,7 @@ public class ArgumentationAgent {
         m_aa.updateExamples(m_examples);
         m_hypothesis = h;
         m_learning = l;
-        m_credulous = credulous;
+        m_rationalist = credulous;
     }
 
     public boolean sendExample(ArgumentationAgent other,FeatureTerm example, ArgumentationState state) {
