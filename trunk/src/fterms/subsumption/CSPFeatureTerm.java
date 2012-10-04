@@ -26,7 +26,8 @@ import util.Pair;
  *
  * @author santi
  */
-public class CSPFeatureTerm {
+public class CSPFeatureTerm {    
+    public List<FeatureTerm> originalVariables = null; // only set if the term was constructed from a FeatureTerm, if it was loaded from disk, it will be null
     public List<List<Object>> variables;    // it might contain either constants (terms) or sorts
     public HashMap<Symbol,boolean [][]> features;
 
@@ -53,13 +54,13 @@ public class CSPFeatureTerm {
 
 
     public CSPFeatureTerm(FeatureTerm f) throws FeatureTermException {
-        List<FeatureTerm> vl = FTRefinement.variables(f);
+        originalVariables = FTRefinement.variables(f);
         HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> vpl = FTRefinement.variablesWithAllParents(f);
 
         variables = new LinkedList<List<Object>>();
         features = new HashMap<Symbol, boolean[][]>();
 
-        for(FeatureTerm v:vl) {
+        for(FeatureTerm v:originalVariables) {
             List<Object> sorts = new LinkedList<Object>();
             if (v.isConstant()) {
                 sorts.add(v);
@@ -78,12 +79,12 @@ public class CSPFeatureTerm {
 
         int n1 = 0;
         int n2 = 0;
-        for(FeatureTerm v:vl) {
+        for(FeatureTerm v:originalVariables) {
             List<Pair<TermFeatureTerm, Symbol>> parents = vpl.get(v);
             if (parents!=null) {
                 for(Pair<TermFeatureTerm, Symbol> parent:parents) {
                     if (parent!=null) {
-                        n1 = vl.indexOf(parent.m_a);
+                        n1 = originalVariables.indexOf(parent.m_a);
                         boolean [][]matrix = features.get(parent.m_b);
                         if (matrix==null) {
                             matrix = new boolean[variables.size()][variables.size()];
@@ -99,16 +100,16 @@ public class CSPFeatureTerm {
 
 
     public CSPFeatureTerm(FeatureTerm f, FTKBase dm) throws FeatureTermException {
-        List<FeatureTerm> vl = FTRefinement.variables(f);
+        originalVariables = FTRefinement.variables(f);
         HashMap<FeatureTerm, List<Pair<TermFeatureTerm, Symbol>>> vpl = FTRefinement.variablesWithAllParents(f);
 
 
-        System.out.println(f.toStringNOOS(dm));
+//        System.out.println(f.toStringNOOS(dm));
         
         variables = new LinkedList<List<Object>>();
         features = new HashMap<Symbol, boolean[][]>();
 
-        for(FeatureTerm v:vl) {
+        for(FeatureTerm v:originalVariables) {
             List<Object> sorts = new LinkedList<Object>();
             if (v.isConstant()) {
                 sorts.add(v);
@@ -125,12 +126,12 @@ public class CSPFeatureTerm {
 
         int n1 = 0;
         int n2 = 0;
-        for(FeatureTerm v:vl) {
+        for(FeatureTerm v:originalVariables) {
             List<Pair<TermFeatureTerm, Symbol>> parents = vpl.get(v);
             if (parents!=null) {
                 for(Pair<TermFeatureTerm, Symbol> parent:parents) {
                     if (parent!=null) {
-                        n1 = vl.indexOf(parent.m_a);
+                        n1 = originalVariables.indexOf(parent.m_a);
                         boolean [][]matrix = features.get(parent.m_b);
                         if (matrix==null) {
                             matrix = new boolean[variables.size()][variables.size()];
