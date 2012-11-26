@@ -55,7 +55,7 @@ public class ArgumentationAgent {
     }
 
     public boolean sendExample(ArgumentationAgent other,FeatureTerm example, ArgumentationState state) {
-        System.out.println("sendExample: " + m_name + " -> " + other.m_name + " (" + example.getName() + ")");
+        if (AMAIL.DEBUG>=2) System.out.println("sendExample: " + m_name + " -> " + other.m_name + " (" + example.getName() + ")");
 
         List<FeatureTerm> l = m_alreadySentExamples.get(other.m_name);
         if (l==null) {
@@ -98,7 +98,7 @@ public class ArgumentationAgent {
     }
     
     public void beliefRevision(ArgumentationState state, FeatureTerm solution, Path dp, Path sp, Ontology o, FTKBase dm,boolean recover, List<ArgumentationAgent> agents) throws Exception {
-        System.out.println("beliefRevision: " + m_name);
+        if (AMAIL.DEBUG>=2) System.out.println("beliefRevision: " + m_name);
         List<Rule> toDelete = new LinkedList<Rule>();
         boolean anyNewExample = false;
 
@@ -118,7 +118,8 @@ public class ArgumentationAgent {
         for(Rule r:m_hypothesis.getRules()) {
             if (!m_aa.accepted(new Argument(r))) toDelete.add(r);
         }
-        if (toDelete.size()>0) System.out.println("Removed " + toDelete.size() + " rules due to not meeting acceptance criterion.");
+        if (AMAIL.DEBUG>=2) 
+            if (toDelete.size()>0) System.out.println("Removed " + toDelete.size() + " rules due to not meeting acceptance criterion.");
 
         for(Rule r:toDelete) {
             m_hypothesis.removeRule(r);
@@ -145,7 +146,8 @@ public class ArgumentationAgent {
                 }
             }
         }
-        if (toDelete.size()>0) System.out.println("Removed " + toDelete.size() + " rules due to being defeated.");
+        if (AMAIL.DEBUG>=2) 
+            if (toDelete.size()>0) System.out.println("Removed " + toDelete.size() + " rules due to being defeated.");
 
         for(Rule r:toDelete) {
             m_hypothesis.removeRule(r);
@@ -158,7 +160,8 @@ public class ArgumentationAgent {
             }
         }
         int removedRoots = state.retractUnacceptable(m_name, m_aa);
-        if (removedRoots>0) System.out.println("Removed " + removedRoots + " additional roots from the state due propagation of rules not meeting acceptance criterion.");
+        if (AMAIL.DEBUG>=2) 
+            if (removedRoots>0) System.out.println("Removed " + removedRoots + " additional roots from the state due propagation of rules not meeting acceptance criterion.");
 
         // Recover uncovered examples:
         if (recover) {

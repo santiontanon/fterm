@@ -33,6 +33,8 @@ public class AMAIL {
     public int last_empiricistexamples_sent = 0;
     public int last_rules_sent = 0;
     public int last_rules_sent_in_last_step = 0;
+    
+    public static int DEBUG = 1;
     public boolean VISUALIZE_EVALUATION_AFTER_REVISION = false;
 
     public List<ArgumentationAgent> a_l = new LinkedList<ArgumentationAgent>();
@@ -142,28 +144,29 @@ public class AMAIL {
         boolean anyAttack = false;
         anotherRound--;
 
-        System.out.println("");
-        System.out.println("AMAIL: agent " + token.m_name + " has the token in round " + round);
+        if (DEBUG>=1) System.out.println("");
+        if (DEBUG>=1) System.out.println("AMAIL: agent " + token.m_name + " has the token in round " + round);
 
-
-        for(ArgumentationAgent a:a_l) {
-            if (a!=token) {
-                for(Rule r:a.m_hypothesis.getRules()) {
-                    ArgumentationTree at = state.getTree(r);
-                    System.out.println("AA of A"+state.getRoot(r).m_ID+" (by A" + a.m_name + "): " + token.m_aa.degree(new Argument(r)) + " (Tree size: " + at.getSize() + ")");
+        if (DEBUG>=2) {
+            for(ArgumentationAgent a:a_l) {
+                if (a!=token) {
+                    for(Rule r:a.m_hypothesis.getRules()) {
+                        ArgumentationTree at = state.getTree(r);
+                        System.out.println("AA of A"+state.getRoot(r).m_ID+" (by A" + a.m_name + "): " + token.m_aa.degree(new Argument(r)) + " (Tree size: " + at.getSize() + ")");
+                    }
                 }
             }
         }
 
         // Try to defend all of the self arguments which are currently defeated:
         List<ArgumentationTree> toDefend = state.getDefeated(token.m_name);
-        System.out.println("AMAIL: agent " + token.m_name + " has to defend " + toDefend.size() + " roots");
+        if (DEBUG>=1) System.out.println("AMAIL: agent " + token.m_name + " has to defend " + toDefend.size() + " roots");
         for (ArgumentationTree at : toDefend) {
             // Defend argument:
             // Get all the arguments that have to be attacked:
             List<Argument> challengers = at.getChallengers();
             List<Pair<Argument,Argument>> attacks = new LinkedList<Pair<Argument,Argument>>();
-            System.out.println("AMAIL: agent " + token.m_name + " has to attack " + challengers.size() + " arguments to defend its root");
+            if (DEBUG>=1) System.out.println("AMAIL: agent " + token.m_name + " has to attack " + challengers.size() + " arguments to defend its root");
             for (Argument a : challengers) {
                 Argument b = findSingleCounterArgument(a, token, state, at, dp, sp, o, dm, a_l);
                 if (b == null) {
@@ -175,7 +178,7 @@ public class AMAIL {
                 }
             }
 
-            System.out.println("AMAIL: agent " + token.m_name + " can send " + attacks.size() + " attacks for this root!");
+            if (DEBUG>=1) System.out.println("AMAIL: agent " + token.m_name + " can send " + attacks.size() + " attacks for this root!");
 
             // Send the attacks!
             for(Pair<Argument,Argument> attack:attacks) {
@@ -206,7 +209,7 @@ public class AMAIL {
         // Find unacceptable arguments "I", and attack one:
         if (!singleMessage || !anyAttack) {
             List<Pair<Argument, ArgumentationTree>> unacceptable = state.getUnacceptable(token.m_name, token.m_aa, a_l);
-            System.out.println("AMAIL: agent " + token.m_name + " finds " + unacceptable.size() + " arguments of the other agent unacceptable");
+            if (DEBUG>=1) System.out.println("AMAIL: agent " + token.m_name + " finds " + unacceptable.size() + " arguments of the other agent unacceptable");
             boolean anyExampleReceived = false;
             for (Pair<Argument, ArgumentationTree> a : unacceptable) {
                 // Attack argument:
@@ -215,7 +218,7 @@ public class AMAIL {
                     if (token.m_rationalist) {
                         // rationalist agents believe in arguments they cannot attack:
                         a.m_b.settle(a.m_a, token.m_name);
-                        System.out.println("AMAIL: rationalist agent " + token.m_name + " settling for an opponent root.");
+                        if (DEBUG>=2) System.out.println("AMAIL: rationalist agent " + token.m_name + " settling for an opponent root.");
                     } else {
                         // empiricist agents ask for evidence for arguments they cannot attack:
                         ArgumentationAgent other = agentNameTable.get(a.m_a.m_agent);
@@ -237,7 +240,7 @@ public class AMAIL {
                                 } else {
                                     if (other.sendExample(token, examples.get(0), state))
                                         last_empiricistexamples_sent++;
-                                    System.out.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root.");
+                                    if (DEBUG>=2) System.out.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root.");
                                     anyExampleReceived = true;;
                                 }
                             }
@@ -264,8 +267,8 @@ public class AMAIL {
             }
         }
 
-        /*
-         * This is the old version (the way it was forhte JMLR 2011 submission that got rejected)
+        
+        // This is the old version (the way it was forhte JMLR 2011 submission that got rejected)
         if (!anyAttack) {
             // Check for uncovered:
             for(FeatureTerm e:token.m_examples) {
@@ -287,9 +290,10 @@ public class AMAIL {
                 }
             }
         }
-        */
+        
 
         // This is a new version that just sends examples that are not covered by anyone:
+        /*
         if (!anyAttack) {
             // Check for uncovered:
             for(FeatureTerm e:token.m_examples) {
@@ -310,7 +314,7 @@ public class AMAIL {
                     }
                     
                     if (!coveredByAnyone && first!=null) {
-                        System.out.println("AMAIL: Agent " + token.m_name + " sending uncovered example " + e.getName().get() + " to " + first.m_name);
+                        if (DEBUG>=2) System.out.println("AMAIL: Agent " + token.m_name + " sending uncovered example " + e.getName().get() + " to " + first.m_name);
 
                         if (token.sendExample(first,e, state))
                         last_uncoveredexamples_sent++;
@@ -320,7 +324,7 @@ public class AMAIL {
                 }
             }
         }
-        
+        */
         
         
         // Belief Revision:
@@ -360,7 +364,7 @@ public class AMAIL {
                                 Rule r = token.m_hypothesis.coveredByAnyRule(e.readPath(dp));
                                 
                                 if (r!=null) {
-                                    System.out.println("AMAIL: Agent " + token.m_name + " suggesting an argument to " + other.m_name);
+                                    if (DEBUG>=2) System.out.println("AMAIL: Agent " + token.m_name + " suggesting an argument to " + other.m_name);
                                     other.m_hypothesis.addRule(r);
                                     last_rules_sent_in_last_step++;
                                     changes = true;
@@ -411,7 +415,7 @@ public class AMAIL {
 //        System.out.println("findSingleCounterArgument: " + settled.size() + " settled arguments.");
 
         try {
-            System.out.println("findSingleCounterArgument: looking for counterarguments...");
+            if (DEBUG>=2) System.out.println("findSingleCounterArgument: looking for counterarguments...");
             Argument counterArgument = ABUI.generateBestCounterArgumentABUI(argumentToAttack, attacker.m_examples, settled, attacker.m_aa, dp, sp, dm, o);
 
             if (counterArgument != null && !context.containsEquivalent(counterArgument)) {
@@ -420,7 +424,7 @@ public class AMAIL {
             }
 
 
-            System.out.println("findSingleCounterArgument: no counterargument found, looking for counterexamples...");
+            if (DEBUG>=2) System.out.println("findSingleCounterArgument: no counterargument found, looking for counterexamples...");
             if (argumentToAttack.m_agent==null) {
                 System.err.println("Argument agent generator is null!!!");
             }
@@ -430,7 +434,7 @@ public class AMAIL {
                 return counterArguments.get(0);
             }
 
-            System.out.println("findSingleCounterArgument: no counterexamples found either");
+            if (DEBUG>=2) System.out.println("findSingleCounterArgument: no counterexamples found either");
 
             return null;
         } catch (FeatureTermException ex) {

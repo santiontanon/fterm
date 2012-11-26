@@ -256,7 +256,7 @@ public class ABUI extends ArgumentationBasedLearning {
             }
         }
 
-        if (DEBUG >= 0) {
+        if (DEBUG >= 1) {
             System.out.println("coverUncoveredExamplesABUI: starting with class " + solution.toStringNOOS(dm) + " with " + positive.size() + "/" + negative.size() + " examples and " + acceptedArguments.size() + " accepted arguments.");
             System.out.println("coverUncoveredExamplesABUI: aa has " + aa.m_examples.size() + " examples.");
         }
@@ -291,7 +291,7 @@ public class ABUI extends ArgumentationBasedLearning {
         }
 
 
-        if (DEBUG >= 0) {
+        if (DEBUG >= 1) {
             System.out.println("coverUncoveredExamplesABUI: done with class " + solution.toStringNOOS(dm) + " leaving  " + positive.size() + " uncovered.");
         }
 
