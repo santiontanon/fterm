@@ -29,6 +29,8 @@ public class ABUI extends ArgumentationBasedLearning {
 
     public static int ABUI_call_count = 0;
     public static int ABUI_VERSION = 1;
+    public static boolean GREEDY_ABUI = true; // If this is set to true, ABUI will stop as soon as it finds the first acceptable rule
+                                         // otherwise, it will continue trying all the seeds and then select the best one found.
 
     public static Argument generateBestCounterArgumentABUI(Argument a, Collection<FeatureTerm> examples, Collection<Argument> acceptedArguments,
             ArgumentAcceptability aa, Path dp, Path sp, FTKBase dm, Ontology o) throws FeatureTermException, Exception {
@@ -309,13 +311,11 @@ public class ABUI extends ArgumentationBasedLearning {
      * This is the ABUI induction algorithm as explained in our "Concept Convergence" paper submitted to AAMAS 2010:
      * - returns an argument which is more specific than "g", and which is not attacked by any argument in "acceptedArguments"
      *
-     * NOTE: this algorithm uses the definition of "attack" present in the paper, not the one in "Common"
      */
 
     public Argument ABUI(List<FeatureTerm> positiveDescriptions, List<FeatureTerm> negativeDescriptions, FeatureTerm solution,
             Collection<Argument> acceptedArguments, FeatureTerm g,
             ArgumentAcceptability aa, Ontology o, FTKBase dm) throws Exception {
-
         List<Argument> H = new LinkedList<Argument>();  // This list will contain the candidate arguments
 
         ABUI_call_count++;
@@ -396,6 +396,8 @@ public class ABUI extends ArgumentationBasedLearning {
                         }
                     }
                 }
+                
+                if (GREEDY_ABUI && !H.isEmpty()) break;
             }
         }
 
@@ -417,10 +419,10 @@ public class ABUI extends ArgumentationBasedLearning {
 
 
     /*
-     * This is the ABUI induction algorithm as explained in our "Concept Convergence" paper submitted to AAMAS 2010:
+     * This is a modification on the original ABUI algorithm. Instead of generalizing by generating generalization refinements,
+     * it generalizes by unifying the current term with each of the uncovered positive examples
      * - returns an argument which is more specific than "g", and which is not attacked by any argument in "acceptedArguments"
      *
-     * NOTE: this algorithm uses the definition of "attack" present in the paper, not the one in "Common"
      */
     public Argument ABUI2(List<FeatureTerm> uncoveredPositiveDescriptions, List<FeatureTerm> negativeDescriptions, List<FeatureTerm> positiveDescriptions, FeatureTerm solution,
             Collection<Argument> acceptedArguments, FeatureTerm g,
@@ -529,6 +531,7 @@ public class ABUI extends ArgumentationBasedLearning {
                     }
                 }
             }
+            if (GREEDY_ABUI && !H.isEmpty()) break;            
         }
 
         {
