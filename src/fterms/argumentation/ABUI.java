@@ -29,7 +29,7 @@ public class ABUI extends ArgumentationBasedLearning {
 
     public static int ABUI_call_count = 0;
     public static int ABUI_VERSION = 1;
-    public static boolean GREEDY_ABUI = true; // If this is set to true, ABUI will stop as soon as it finds the first acceptable rule
+    public static boolean GREEDY_ABUI = false; // If this is set to true, ABUI will stop as soon as it finds the first acceptable rule
                                          // otherwise, it will continue trying all the seeds and then select the best one found.
 
     public static Argument generateBestCounterArgumentABUI(Argument a, Collection<FeatureTerm> examples, Collection<Argument> acceptedArguments,
