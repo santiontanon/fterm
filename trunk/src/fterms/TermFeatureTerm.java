@@ -54,6 +54,9 @@ public class TermFeatureTerm extends FeatureTerm {
         m_features.put(feature, value);
     } // FeatureTerm::defineFeatureValue
 
+    public void defineFeatureValue(String feature, FeatureTerm value) throws FeatureTermException {
+        m_features.put(new Symbol(feature), value);
+    } // FeatureTerm::defineFeatureValue
 
     public void addFeatureValue(Symbol feature, FeatureTerm value) throws SingletonFeatureTermException {
         FeatureTerm t = m_features.get(feature);

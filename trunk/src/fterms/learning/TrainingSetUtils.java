@@ -200,6 +200,7 @@ public class TrainingSetUtils {
     public static final int MUTAGENESIS_NOL_DISCRETIZED = 26;
     public static final int MUTAGENESIS_EASY_NOL_DISCRETIZED = 27;
     public static final int RIU_STORIES = 28;
+    public static final int RIU_STORIES_EVENING_TIDE = 30;
 
     public static TrainingSetProperties loadTrainingSet(int DATASET, Ontology o, FTKBase dm, FTKBase case_base) throws FeatureTermException, IOException
     {
@@ -627,6 +628,16 @@ public class TrainingSetUtils {
                 case_base.ImportNOOS("NOOS/story-cases-2.noos", o);
 
                 ts.name = "riu-stories";
+                ts.problem_sort = o.getSort("scene");
+
+                ts.description_path.features.clear();
+                ts.solution_path.features.clear();
+                break;
+            case RIU_STORIES_EVENING_TIDE:
+                dm.ImportNOOS("NOOS/story-ontology.noos", o);
+                case_base.ImportNOOS("NOOS/story-cases-EveningTide-20.noos", o);
+
+                ts.name = "riu-stories-eveningtide";
                 ts.problem_sort = o.getSort("scene");
 
                 ts.description_path.features.clear();
