@@ -357,4 +357,31 @@ public abstract class FeatureTerm {
 
         return true;
     }
+    
+    
+    public Path shortestPathTo(FeatureTerm v) throws FeatureTermException {
+        HashSet<FeatureTerm> closed = new HashSet<FeatureTerm>();
+        List<Pair<FeatureTerm,Path>> open = new LinkedList<Pair<FeatureTerm,Path>>();
+        open.add(new Pair<FeatureTerm,Path>(this, new Path()));
+        
+        while(!open.isEmpty()) {
+            Pair<FeatureTerm,Path> current = open.remove(0);            
+            if (current.m_a==v) return current.m_b;
+            closed.add(current.m_a);
+            if (current.m_a instanceof TermFeatureTerm) {
+                for(Symbol f:((TermFeatureTerm)current.m_a).getFeatureNames()) {
+                    List<FeatureTerm> l = current.m_a.featureValues(f);
+                    for(FeatureTerm v2:l) {
+                        if (!closed.contains(v2)) {
+                            Path p2 = new Path(current.m_b);
+                            p2.features.add(f);
+                            open.add(new Pair<FeatureTerm,Path>(v2,p2));
+                        }
+                    }
+                }
+            }
+        }
+        
+        return null;
+    }
 }
