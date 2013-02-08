@@ -309,6 +309,12 @@ public class Sort {
 	} // Sort::Unification  
 
 
+        public boolean subsumes(Sort s) {
+            if (s==this || this.isSubsort(s)) return true;
+            
+            return false;
+        }
+        
 	/*
 	 * Returns true if 's' is subsort of 'this'
 	 */
