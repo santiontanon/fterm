@@ -209,7 +209,7 @@ public class FTAntiunification {
 
                                 for (FeatureTerm ft3 : result) {
                                     ft2 = object.clone(dm, o);
-                                    if (ft2.getSort() != s && ft2.getSort().isSubsort(s)) {
+                                    if (ft2.getSort() != s && ft2.getSort().subsumes(s)) {
                                         ft2.setSort(s);
                                     }
                                     ((TermFeatureTerm) ft2).defineFeatureValue(fn, ft3);
@@ -572,7 +572,7 @@ public class FTAntiunification {
 
                                 for (Pair<FeatureTerm, Integer> ft3_steps : result) {
                                     ft2 = object_steps.m_a.clone(dm, o);
-                                    if (ft2.getSort() != s && ft2.getSort().isSubsort(s)) {
+                                    if (ft2.getSort() != s && ft2.getSort().subsumes(s)) {
                                         ft2.setSort(s);
                                     }
                                     ((TermFeatureTerm) ft2).defineFeatureValue(fn, ft3_steps.m_a);

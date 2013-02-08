@@ -297,7 +297,7 @@ public class LID {
                                                 ((TermFeatureTerm) pointer1).defineFeatureValue(feature, ft);
                                                 pointer2 = null;
                                             } else {
-                                                if (ft2.getSort().isSubsort(ft1.getSort())) {
+                                                if (ft2.getSort().subsumes(ft1.getSort())) {
                                                     pointer1 = ft1;
                                                     pointer2 = ft2;
                                                 } else {

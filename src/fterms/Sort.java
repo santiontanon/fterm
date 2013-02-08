@@ -293,7 +293,7 @@ public class Sort {
 		if (s==null) return null;
 
 		while(au!=null) {
-			if (au.isSubsort(s)) return au;
+			if (au.subsumes(s)) return au;
 			au=au.m_super;
 		} // while  
 		return null;
@@ -302,27 +302,21 @@ public class Sort {
 
 	public Sort Unification(Sort s)
 	{
-		if (this.isSubsort(s)) return s;
-		if (s.isSubsort(this)) return this;
+		if (this.subsumes(s)) return s;
+		if (s.subsumes(this)) return this;
 
 		return null;
 	} // Sort::Unification  
 
-
-        public boolean subsumes(Sort s) {
-            if (s==this || this.isSubsort(s)) return true;
-            
-            return false;
-        }
-        
+       
 	/*
 	 * Returns true if 's' is subsort of 'this'
 	 */
-	public boolean isSubsort(Sort s)
+	public boolean subsumes(Sort s)
 	{
 		if (s==null) return false;
 		if (s==this) return true;
-		if (s.m_super!=null) return isSubsort(s.m_super);
+		if (s.m_super!=null) return subsumes(s.m_super);
 		
 		return false;
 	} // Sort::isSubsort  

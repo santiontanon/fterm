@@ -125,7 +125,7 @@ public class TermFeatureTerm extends FeatureTerm {
             }
         } // if
         if (!m_sort.featureSort(feature).inSort(value)) {
-            System.err.println("defineFeatureValueSecure: error 3");
+            System.err.println("defineFeatureValueSecure: error 3 setting feature '" + feature + "' of a term of sort '" + m_sort + "'");
             System.err.println(value.toStringNOOS());
             System.err.println("is not of the sort " + m_sort.featureSort(feature).get());
             if (STRICT_SECURE) {
