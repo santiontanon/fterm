@@ -945,7 +945,7 @@ public class FTRefinement {
             Sort s = null;
             if (X.getSort().subsumes(Y.getSort())) {
                 s = Y.getSort();
-            } else if (X.getSort().subsumes(Y.getSort())) {
+            } else if (Y.getSort().subsumes(X.getSort())) {
                 s = X.getSort();
             } else {
                 return results;
