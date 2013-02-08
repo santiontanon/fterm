@@ -162,7 +162,7 @@ public class FTSubsumption {
                 // Test sorts:
                 if (!(f1 instanceof SetFeatureTerm) && !(f2 instanceof SetFeatureTerm) &&
                     f1.getSort() != null && f2.getSort() != null &&
-                    !f1.getSort().isSubsort(f2.getSort())) {
+                    !f1.getSort().subsumes(f2.getSort())) {
                     state = STATE_FALSE;
                 }
                 //				System.out.println("sort test completed...");
@@ -292,7 +292,7 @@ public class FTSubsumption {
                     // System.out.println("Single object subsumption...");
 
                     if (!f1.hasValue()) {
-                        if (!f1.getSort().isSubsort(f2.getSort())) {
+                        if (!f1.getSort().subsumes(f2.getSort())) {
                             state = STATE_FALSE;
                         }
                     } else {

@@ -434,7 +434,7 @@ public class FTRefinement {
 
             for (Pair<TermFeatureTerm, Symbol> parent : sp.get(S)) {
                 Sort s = parent.m_a.getSort().featureSort(parent.m_b);
-                if (most_general.isSubsort(s)) {
+                if (most_general.subsumes(s)) {
                     most_general = s;
                 }
             }
@@ -706,7 +706,7 @@ public class FTRefinement {
                     for (Pair<TermFeatureTerm, Symbol> parent : vp.get(X)) {
                         if (parent != null) {
                             Sort s = parent.m_a.getSort().featureSort(parent.m_b);
-                            if (most_general.isSubsort(s)) {
+                            if (most_general.subsumes(s)) {
                                 most_general = s;
                             }
                         }
@@ -831,8 +831,8 @@ public class FTRefinement {
             if (!dm.contains(X)) {
                 for (Pair<FeatureTerm, Path> p2 : vp) {
                     FeatureTerm Y = p2.m_a;
-                    if (Y != X && X.getSort().isSubsort(Y.getSort()) && !dm.contains(Y)) {
-                        if (!dm.contains(X) && Y.getSort().isSubsort(X.getSort())) {
+                    if (Y != X && X.getSort().subsumes(Y.getSort()) && !dm.contains(Y)) {
+                        if (!dm.contains(X) && Y.getSort().subsumes(X.getSort())) {
                             if (vp.indexOf(p)<vp.indexOf(p2)) continue; // prevent duplicated refinements
                         }
 
@@ -865,8 +865,8 @@ public class FTRefinement {
             if (!X.isConstant() && !dm.contains(X)) {
                 for (Pair<FeatureTerm, Path> p2 : vp) {
                     FeatureTerm Y = p2.m_a;
-                    if (Y != X && !Y.isConstant() && X.getSort().isSubsort(Y.getSort()) && !dm.contains(Y)) {
-                        if (!X.isConstant() && !dm.contains(X) && Y.getSort().isSubsort(X.getSort())) {
+                    if (Y != X && !Y.isConstant() && X.getSort().subsumes(Y.getSort()) && !dm.contains(Y)) {
+                        if (!X.isConstant() && !dm.contains(X) && Y.getSort().subsumes(X.getSort())) {
                             if (vp.indexOf(p)<vp.indexOf(p2)) continue; // prevent duplicated refinements
                         }
                         boolean appear_together = false;
@@ -943,9 +943,9 @@ public class FTRefinement {
         if (newNode==null) {
             // Create a clone node which has all the features of X and Y, and the most specific sort:
             Sort s = null;
-            if (X.getSort().isSubsort(Y.getSort())) {
+            if (X.getSort().subsumes(Y.getSort())) {
                 s = Y.getSort();
-            } else if (X.getSort().isSubsort(Y.getSort())) {
+            } else if (X.getSort().subsumes(Y.getSort())) {
                 s = X.getSort();
             } else {
                 return results;

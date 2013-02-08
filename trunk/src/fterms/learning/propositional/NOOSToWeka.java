@@ -87,8 +87,8 @@ public class NOOSToWeka {
 				
 				// The solution class cannot be numeric, so the first attributed (index = 0) is treated specially:
 				if (index!=0 && 
-					(integerSort.isSubsort(featureSort) ||
-					 floatSort.isSubsort(featureSort))) {
+					(integerSort.subsumes(featureSort) ||
+					 floatSort.subsumes(featureSort))) {
 					a = new Attribute(featureName);
 //					System.out.println("Numeric feature: " + featureName);
 				} else {

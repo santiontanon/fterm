@@ -593,7 +593,7 @@ public class Disintegration {
                     for (Pair<TermFeatureTerm, Symbol> parent : vap.get(X)) {
                         if (parent != null) {
                             Sort s = parent.m_a.getSort().featureSort(parent.m_b);
-                            if (most_general.isSubsort(s)) {
+                            if (most_general.subsumes(s)) {
                                 most_general = s;
                             }
                         }
@@ -745,7 +745,7 @@ public class Disintegration {
 
                 for (Pair<TermFeatureTerm, Symbol> parent : sp.get(S)) {
                     Sort s = parent.m_a.getSort().featureSort(parent.m_b);
-                    if (most_general.isSubsort(s)) {
+                    if (most_general.subsumes(s)) {
                         most_general = s;
                     }
                 }
