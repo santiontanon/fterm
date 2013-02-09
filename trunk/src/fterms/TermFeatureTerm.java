@@ -2,19 +2,14 @@ package fterms;
 
 import fterms.exceptions.FeatureTermException;
 import fterms.exceptions.SingletonFeatureTermException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class TermFeatureTerm extends FeatureTerm {
 
     static final boolean STRICT_SECURE = false;	// If set to false, the defineFeatureValueSecure only prints warnings, but
     // does the assignment anyway.
-//	List<Symbol> m_feature_name = new ArrayList<Symbol>();
-//	List<FeatureTerm> m_feature_value = new ArrayList<FeatureTerm>();
-    HashMap<Symbol, FeatureTerm> m_features = new HashMap<Symbol, FeatureTerm>();
+    LinkedHashMap<Symbol, FeatureTerm> m_features = new LinkedHashMap<Symbol, FeatureTerm>();
 
     public TermFeatureTerm(Sort s) {
         m_sort = s;
