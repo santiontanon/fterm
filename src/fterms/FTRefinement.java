@@ -912,6 +912,9 @@ public class FTRefinement {
         return variableEquality(f,X,Y,dm,new LinkedList<Pair<FeatureTerm,FeatureTerm>>(), recursive);
     }
 
+    
+    // TODO:
+    // This method should be replaced by simply doing an "unification" of X and Y, that replaces both X and Y
     public static List<FeatureTerm> variableEquality(FeatureTerm f, FeatureTerm X, FeatureTerm Y, FTKBase dm,
                                                      List<Pair<FeatureTerm,FeatureTerm>> pendingEqualitiesInput, boolean recursive) throws FeatureTermException {
         HashMap<FeatureTerm, FeatureTerm> correspondences = new HashMap<FeatureTerm, FeatureTerm>();
