@@ -367,6 +367,12 @@ public class FTRefinement {
 
     public static List<FeatureTerm> ConstantGeneralization(FeatureTerm f, FTKBase dm) throws FeatureTermException {
         List<FeatureTerm> refinements = new LinkedList<FeatureTerm>();
+        
+        if (f.isConstant() || dm.contains(f)) {
+            refinements.add(f.getSort().createFeatureTerm());
+            return refinements;
+        }
+                
 
         HashSet<FeatureTerm> visited = new HashSet<FeatureTerm>();
         List<FeatureTerm> open_nodes = new LinkedList<FeatureTerm>();
