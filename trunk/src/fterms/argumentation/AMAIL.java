@@ -184,18 +184,7 @@ public class AMAIL {
                         if (!anyExampleReceived || !token.m_aa.accepted(a)) {
                             if (other!=null) {
                                 List<FeatureTerm> examples = generateEndorsingExamples(a,other.m_examples,other.m_alreadySentExamples.get(token.m_name),dp,sp,dm,o);
-                                if (examples.isEmpty()) {
-                                    List<FeatureTerm> tmp = generateEndorsingExamples(a,other.m_examples,null,dp,sp,dm,o);
-                                    System.err.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_agent + " for positive examples of a root, but couldn't find any!!!");
-                                    System.err.println("AMAIL: " + tmp.size() + " examples available, but all were already sent.");
-                                    for(FeatureTerm tmp_e:tmp) {
-                                        System.err.println("AMAIL: " + tmp_e.getName() + "(" + token.m_examples.contains(tmp_e) + "," + token.m_aa.m_examples.contains(tmp_e) + ")");
-                                    }
-                                    System.err.println("AMAIL: argument profile for " + a);
-                                    System.err.println("AMAIL: argument profile for " + token.m_name + ": " + token.coveredExamples(a, dp, sp) + " (AA: " + token.m_aa.degree(a) + " -> " + token.m_aa.accepted(a) + ")");
-                                    System.err.println("AMAIL: argument profile for " + other.m_name + ": " + other.coveredExamples(a, dp, sp) + " (AA: " + other.m_aa.degree(a) + " -> " + other.m_aa.accepted(a)+ ")");
-                                    System.exit(1);
-                                } else {
+                                if (!examples.isEmpty()) {
                                     if (other.sendExample(token, examples.get(0), state))
                                         last_empiricistexamples_sent++;
                                     if (DEBUG>=1) System.out.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_agent + " for positive examples of an attack.");
