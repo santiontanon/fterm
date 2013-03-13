@@ -241,7 +241,11 @@ public class ArgumentationTree {
         return args;
     }
 
+    
+    // I've removed the concept of "settled arguments"
+    // TODO: remove the function altogether, and all the things that refer to it
     public void settle(Argument a,String agent) {
+        /*
         if (m_arguments.contains(a)) {
             List<String> l = m_partially_settled.get(a);
             if (l==null) {
@@ -250,6 +254,8 @@ public class ArgumentationTree {
             }
             l.add(agent);
         }
+        * 
+        */
     }
 
     public void unSettle(Argument a, String agent) {
@@ -286,7 +292,15 @@ public class ArgumentationTree {
         return true;
     }
 
+    public boolean settledP(Argument a) {
+        List<String> l = m_partially_settled.get(a);
+        if (l==null || l.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 
+    
     public boolean retractUnacceptable(String agent, ArgumentAcceptability aa) throws FeatureTermException {
         List<Argument> toDelete = new LinkedList<Argument>();
         boolean retractedRoot = false;
