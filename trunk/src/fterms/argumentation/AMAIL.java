@@ -141,7 +141,7 @@ public class AMAIL {
 
     public void round(boolean singleMessage) throws Exception
     {
-        boolean anyAttack = false;
+        boolean protocolAdvances = false;
         anotherRound--;
 
         if (DEBUG>=1) System.out.println("");
@@ -183,12 +183,14 @@ public class AMAIL {
                         // If some example has alredy been sent, maybe the argument is already acceptable, so, we have to check again:
                         if (!anyExampleReceived || !token.m_aa.accepted(a)) {
                             if (other!=null) {
+                                if (DEBUG>=1) System.out.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_agent + " for positive examples of an attack.");
                                 List<FeatureTerm> examples = generateEndorsingExamples(a,other.m_examples,other.m_alreadySentExamples.get(token.m_name),dp,sp,dm,o);
                                 if (!examples.isEmpty()) {
                                     if (other.sendExample(token, examples.get(0), state))
                                         last_empiricistexamples_sent++;
-                                    if (DEBUG>=1) System.out.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_agent + " for positive examples of an attack.");
-                                    anyExampleReceived = true;;
+                                    if (DEBUG>=1) System.out.println("       Example successfully sent.");
+                                    anyExampleReceived = true;
+                                    protocolAdvances = true;
                                 }
                             }
                         }
@@ -214,10 +216,10 @@ public class AMAIL {
                 } else {
                     last_rules_sent++;
                 }
-                anyAttack = true;
+                protocolAdvances = true;
                 if (singleMessage) break;
             }
-            if (singleMessage && anyAttack) break;
+            if (singleMessage && protocolAdvances) break;
         }
 
         // Settle all the arguments of the other agent which are acceptable:
@@ -227,7 +229,7 @@ public class AMAIL {
         }
 
         // Find unacceptable arguments "I", and attack one:
-        if (!singleMessage || !anyAttack) {
+        if (!singleMessage || !protocolAdvances) {
             List<Pair<Argument, ArgumentationTree>> unacceptable = state.getUnacceptable(token.m_name, token.m_aa, a_l);
             if (DEBUG>=1) System.out.println("AMAIL: agent " + token.m_name + " finds " + unacceptable.size() + " arguments of the other agent unacceptable");
             for (Pair<Argument, ArgumentationTree> a : unacceptable) {
@@ -244,6 +246,7 @@ public class AMAIL {
                         // If some example has alredy been sent, maybe the argument is already acceptable, so, we have to check again:
                         if (!anyExampleReceived || !token.m_aa.accepted(a.m_a)) {
                             if (other!=null) {
+                                if (DEBUG>=1) System.out.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root.");
                                 List<FeatureTerm> examples = generateEndorsingExamples(a.m_a,other.m_examples,other.m_alreadySentExamples.get(token.m_name),dp,sp,dm,o);
                                 if (examples.isEmpty()) {
                                     List<FeatureTerm> tmp = generateEndorsingExamples(a.m_a,other.m_examples,null,dp,sp,dm,o);
@@ -259,8 +262,9 @@ public class AMAIL {
                                 } else {
                                     if (other.sendExample(token, examples.get(0), state))
                                         last_empiricistexamples_sent++;
-                                    if (DEBUG>=1) System.out.println("AMAIL: empiricist agent " + token.m_name + " asking opponent " + a.m_a.m_agent + " for positive examples of a root.");
+                                    if (DEBUG>=1) System.out.println("       Example successfully sent.");
                                     anyExampleReceived = true;;
+                                    protocolAdvances = true;
                                 }
                             }
                         }
@@ -280,7 +284,7 @@ public class AMAIL {
                     } else {
                         last_rules_sent++;
                     }
-                    anyAttack = true;
+                    protocolAdvances = true;
                     break;
                 }
             }
@@ -288,7 +292,7 @@ public class AMAIL {
 
         
         // This is the old version (the way it was forhte JMLR 2011 submission that got rejected)
-        if (!anyAttack) {
+        if (!protocolAdvances) {
             // Check for uncovered:
             for(FeatureTerm e:token.m_examples) {
                 if (e.readPath(sp).equivalents(solution)) {
@@ -301,11 +305,11 @@ public class AMAIL {
 
                             if (token.sendExample(other,e, state))
                             last_uncoveredexamples_sent++;
-                            anyAttack = true;
+                            protocolAdvances = true;
                             break;
                         }
                     }
-                    if (anyAttack) break;
+                    if (protocolAdvances) break;
                 }
             }
         }
@@ -352,7 +356,7 @@ public class AMAIL {
                      else a.beliefRevision(state, solution, dp, sp, o, dm, false, a_l);
         }
 
-        if (anyAttack) {
+        if (protocolAdvances) {
             anotherRound = a_l.size();
         }
 
