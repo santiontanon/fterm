@@ -81,6 +81,7 @@ public class FTAntiunification {
         int iterations = 0, nodes_checked = 0;
         List<FeatureTerm> generalizations = new LinkedList<FeatureTerm>();
 
+        /*
 	System.out.println("Starting antiunification:");
         System.out.println("Objects:");
         for(FeatureTerm obj:objects) {
@@ -92,7 +93,8 @@ public class FTAntiunification {
                 System.out.println(obj.toStringNOOS(dm));
             }
         }
-
+        */
+        
         if (objects.isEmpty()) {
             return null;
         }
