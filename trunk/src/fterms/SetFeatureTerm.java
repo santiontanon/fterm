@@ -83,6 +83,7 @@ public class SetFeatureTerm extends FeatureTerm {
 		} /* while */ 
 		
 		if (nvalues==1) return lastValue;
+                if (nvalues==0) return null;
 
 		return result;
 	} /* FeatureTerm::featureValue */ 
@@ -92,11 +93,26 @@ public class SetFeatureTerm extends FeatureTerm {
 	{
 		SetFeatureTerm result = new SetFeatureTerm();
 		FeatureTerm f2;
+		int nvalues = 0;
+		FeatureTerm lastValue = null;
 
 		for(FeatureTerm f:m_set) {			
 			f2=f.featureValue(feature);
-			if (f2!=null) result.addSetValue(f2);
+			if (f2!=null) {
+                            if (f2 instanceof SetFeatureTerm) {
+                                    for(FeatureTerm f3:((SetFeatureTerm) f2).getSetValues()) {
+                                            result.addSetValue(f3);
+                                    }
+                            } else {
+                                    result.addSetValue(f2);					
+                            }
+                            lastValue = f2;
+                            nvalues++;
+                        }
 		} /* while */ 
+	
+                if (nvalues==1) return lastValue;
+                if (nvalues==0) return null;
 
 		return result;
 	} /* FeatureTerm::featureValue */ 

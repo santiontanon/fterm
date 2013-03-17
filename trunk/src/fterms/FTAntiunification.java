@@ -24,6 +24,7 @@ public class FTAntiunification {
         objects.add(f1);
         objects.add(f2);
 
+//        results = antiunification(objects, 0, null, ontology, domain_model, false, VERSION_FAST);
         results = antiunification(objects, 0, null, ontology, domain_model, true, VERSION_FAST);
 
         if (results != null && results.size() > 0) {
@@ -80,7 +81,17 @@ public class FTAntiunification {
         int iterations = 0, nodes_checked = 0;
         List<FeatureTerm> generalizations = new LinkedList<FeatureTerm>();
 
-//		System.out.println("Starting AU");
+	System.out.println("Starting antiunification:");
+        System.out.println("Objects:");
+        for(FeatureTerm obj:objects) {
+            System.out.println(obj.toStringNOOS(dm));
+        }
+        System.out.println("Initial Terms:");
+        if (initial_terms!=null) {
+            for(FeatureTerm obj:initial_terms) {
+                System.out.println(obj.toStringNOOS(dm));
+            }
+        }
 
         if (objects.isEmpty()) {
             return null;
