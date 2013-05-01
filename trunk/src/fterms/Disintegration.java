@@ -331,9 +331,7 @@ public class Disintegration {
 
 
     /*
-     * This method computes the remainder by using the "unification" method. It returns the correct result, but it's very, very slow.
-     * It's here just because it's implemented in the exact way in which the operation is defined in our submissino to the Machine Learning
-     * Journal.
+     * This method computes the remainder by using the "unification" method. It returns the correct result, but it's very slow.
      */
     public static FeatureTerm remainderUnification(FeatureTerm f, FeatureTerm refinement, FTKBase dm, Ontology o) throws FeatureTermException {
         FeatureTerm oldRemainder = null;
