@@ -29,8 +29,8 @@ public class ABUI extends ArgumentationBasedLearning {
 
     public static int ABUI_call_count = 0;
     public static int ABUI_VERSION = 1;
-    public static boolean GREEDY_ABUI = false; // If this is set to true, ABUI will stop as soon as it finds the first acceptable rule
-                                         // otherwise, it will continue trying all the seeds and then select the best one found.
+    public static boolean GREEDY_ABUI = false; // If this is set to true, ABUI will stop as soon as it finds a seed that produces a an acceptable rule
+                                               // otherwise, it will continue trying all the seeds and then select the best one found.
 
     public static Argument generateBestCounterArgumentABUI(Argument a, Collection<FeatureTerm> examples, Collection<Argument> acceptedArguments,
             ArgumentAcceptability aa, Path dp, Path sp, FTKBase dm, Ontology o) throws FeatureTermException, Exception {
@@ -322,7 +322,7 @@ public class ABUI extends ArgumentationBasedLearning {
 
         for (FeatureTerm e : positiveDescriptions) {
             if (DEBUG >= 2) {
-                System.out.println("New seed...");
+                System.out.println("New seed... (" + positiveDescriptions.indexOf(e) + "/" + positiveDescriptions.size() + ")  +/-: " + positiveDescriptions.size() + "/" + negativeDescriptions.size());
             }
             if (g.subsumes(e)) {
                 FeatureTerm c = e.clone(dm, o);
@@ -332,7 +332,7 @@ public class ABUI extends ArgumentationBasedLearning {
                 while (c != null) {
 
                     Argument a = new Argument(new Rule(c, solution, 0.0f, 0));
-                    if (DEBUG >= 2) {
+                    if (DEBUG >= 3) {
                         System.out.println(c.toStringNOOS(dm));
                     }
                     if (DEBUG >= 2) {

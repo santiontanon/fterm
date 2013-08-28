@@ -171,6 +171,7 @@ public class CSPSubsumptionSymmetry {
         return true;
     }
 
+    
     public static boolean equivalentsForSymmetry(int i1, int i2, Object type1, Object type2, CSPFeatureTerm t1) {
         boolean equivalents = false;
 //        System.out.println("testing V" + i1 + " (" + type1 + ") = V" + i2 + " (" + type2 + ")");
