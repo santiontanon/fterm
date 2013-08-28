@@ -22,7 +22,7 @@ import java.util.Random;
  * @author santi
  */
 public class PropertiesTree extends InductiveLearner {
-
+    public static int DEBUG = 0;
     boolean m_fast = false;   // Fast disintegration or formal disintegration
     public List<FeatureTerm> lastPropertySet = null;
 
@@ -65,7 +65,10 @@ public class PropertiesTree extends InductiveLearner {
         lastPropertySet = properties;
 
         // Build the tree:
+        long time1 = System.currentTimeMillis();
         h.m_root = generateTree(examples,dp,sp,properties,h, dm, o);
+        long time2 = System.currentTimeMillis();
+        if (DEBUG>=1) System.out.println("Time to learn: " + (time2 - time1));
 
         return h;
     }
