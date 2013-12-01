@@ -23,7 +23,7 @@ public class PropertiesDistance extends Distance {
     
     public static int DEBUG = 0;
 
-    static boolean s_cache = false;
+    static boolean s_cache = true;
     boolean m_fast = false;
     List<FeatureTerm> descriptions = new LinkedList<FeatureTerm>();
     protected List<Pair<FeatureTerm, Double>> m_propertyWeight = null;;
