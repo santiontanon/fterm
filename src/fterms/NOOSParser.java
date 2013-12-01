@@ -340,11 +340,6 @@ public class NOOSParser extends OntologyParser {
         return t.type != NOOSToken.TOKEN_RIGHT_PAR;
     }
 
-    protected void initialize_Symbol_Error(Symbol n) throws FeatureTermException {
-
-        errorMessage = "NOOSParser: Error 14, more than one named term of the proper sort, with name: '" + n.get() + "'";
-
-    }
 
     protected boolean setupSetOfElements(List<FeatureTerm> hierarchy, FeatureTerm f,
         Sort vsort,
@@ -407,7 +402,7 @@ public class NOOSParser extends OntologyParser {
     protected FeatureTerm setupSymbol(Sort vsort, FTKBase m) throws FeatureTermException {
         FeatureTerm fvalue = null;
         if (vsort != null) {
-            fvalue = super.setupSymbol(vsort, m, t.token, errorMessage);
+            fvalue = super.setupSymbol(vsort, m, t.token);
             if (num[0] != 0 && num[0] != 1) {
                 System.err.println(errorMessage);
                 fvalue = null;
