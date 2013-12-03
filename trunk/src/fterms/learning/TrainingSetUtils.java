@@ -181,6 +181,7 @@ public class TrainingSetUtils {
     public static final int UNCLE_DATASET_BOTH = 9;
     public static final int CARS_DATASET = 10;
     public static final int MUSHROOM_DATASET = 29;
+    public static final int LYMPHOGRAPHY_148_DATASET = 33;
     
     public static final int TOXICOLOGY_DATASET_MRATS = 11;
     public static final int TOXICOLOGY_DATASET_FRATS = 12;
@@ -365,6 +366,14 @@ public class TrainingSetUtils {
 
                 ts.name = "mushroom";
                 ts.problem_sort = o.getSort("mushroom-problem");
+                break;
+            case LYMPHOGRAPHY_148_DATASET:
+                dm.ImportNOOS("NOOS/lymphography-ontology.noos", o);
+                dm.ImportNOOS("NOOS/lymphography-dm.noos", o);
+                case_base.ImportNOOS("NOOS/lymphography-cases148.noos", o);
+
+                ts.name = "lymphography";
+                ts.problem_sort = o.getSort("lymphography-problem");
                 break;
 
             case TOXICOLOGY_DATASET_MRATS:

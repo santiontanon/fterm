@@ -3,7 +3,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH ROUGH) 
                  (SURFACE EVEN)
                  (GROWING
@@ -195,12 +195,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -274,12 +274,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -350,12 +350,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -425,12 +425,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -505,12 +505,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -585,12 +585,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -664,12 +664,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -743,12 +743,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -822,12 +822,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -896,12 +896,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -975,12 +975,12 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) TOUGH BREAKABLE))
-                 (TOUCH (DEFINE (SET) HISPID ROUGH))
+                 (HAND (DEFINE (SET) H_TOUGH BREAKABLE))
+                 (TOUCH (DEFINE (SET) T_HISPID ROUGH))
                  (SURFACE
                   (DEFINE (SET)
                           INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS
-                          HISPID
+                          S_HISPID
                           EVEN))
                  (GROWING
                   (DEFINE (GROWING)
@@ -1055,8 +1055,8 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND (DEFINE (SET) BREAKABLE TOUGH))
-                 (TOUCH HISPID)
+                 (HAND (DEFINE (SET) BREAKABLE H_TOUGH))
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -1986,7 +1986,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
-                 (HAND FLEXIBLE)
+                 (HAND H_FLEXIBLE)
                  (SURFACE EVEN)
                  (GROWING
                   (DEFINE (GROWING)
@@ -2157,8 +2157,8 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
-                 (TOUCH HISPID)
+                 (HAND H_TOUGH)
+                 (TOUCH T_HISPID)
                  (SURFACE SHEET)
                  (GROWING
                   (DEFINE (GROWING)
@@ -2683,7 +2683,7 @@
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
                  (HAND BREAKABLE)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -2760,7 +2760,7 @@
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
                  (HAND BREAKABLE)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -2834,7 +2834,7 @@
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
                  (HAND BREAKABLE)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -2909,7 +2909,7 @@
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY SOFT)
                  (HAND BREAKABLE)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -2985,7 +2985,7 @@
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY SOFT)
                  (HAND BREAKABLE)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -3058,7 +3058,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -3153,7 +3153,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND FLESHY)
+                 (HAND H_FLESHY)
                  (TOUCH SMOOTH-TOUCH)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -3293,7 +3293,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE EVEN)
                  (GROWING
@@ -3367,7 +3367,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE EVEN)
                  (GROWING
@@ -3428,7 +3428,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -3603,9 +3603,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE BIG)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
-                 (TOUCH (DEFINE (SET) HISPID VELVETRY))
-                 (SURFACE (DEFINE (SET) HISPID EVEN))
+                 (HAND H_TOUGH)
+                 (TOUCH (DEFINE (SET) T_HISPID VELVETRY))
+                 (SURFACE (DEFINE (SET) S_HISPID EVEN))
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -3673,9 +3673,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE BIG)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
-                 (TOUCH (DEFINE (SET) HISPID VELVETRY))
-                 (SURFACE (DEFINE (SET) HISPID EVEN))
+                 (HAND H_TOUGH)
+                 (TOUCH (DEFINE (SET) T_HISPID VELVETRY))
+                 (SURFACE (DEFINE (SET) S_HISPID EVEN))
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -3743,9 +3743,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE BIG)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
-                 (TOUCH (DEFINE (SET) HISPID VELVETRY))
-                 (SURFACE (DEFINE (SET) HISPID EVEN))
+                 (HAND H_TOUGH)
+                 (TOUCH (DEFINE (SET) T_HISPID VELVETRY))
+                 (SURFACE (DEFINE (SET) S_HISPID EVEN))
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -3813,9 +3813,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
-                 (TOUCH (DEFINE (SET) HISPID VELVETRY))
-                 (SURFACE (DEFINE (SET) HISPID EVEN))
+                 (HAND H_TOUGH)
+                 (TOUCH (DEFINE (SET) T_HISPID VELVETRY))
+                 (SURFACE (DEFINE (SET) S_HISPID EVEN))
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -3883,9 +3883,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
-                 (TOUCH (DEFINE (SET) HISPID VELVETRY))
-                 (SURFACE (DEFINE (SET) HISPID EVEN))
+                 (HAND H_TOUGH)
+                 (TOUCH (DEFINE (SET) T_HISPID VELVETRY))
+                 (SURFACE (DEFINE (SET) S_HISPID EVEN))
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -3953,7 +3953,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -4002,7 +4002,7 @@
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
                  (HAND BREAKABLE)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE CONULOSE)
                  (GROWING
                   (DEFINE (GROWING)
@@ -4178,8 +4178,8 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
-                 (TOUCH HISPID)
+                 (HAND H_TOUGH)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -4231,7 +4231,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE EVEN)
                  (GROWING
@@ -4297,7 +4297,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY SOFT)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE EVEN)
                  (GROWING
@@ -4404,9 +4404,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (SURFACE
-                  (DEFINE (SET) INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS HISPID))
+                  (DEFINE (SET) INCRUSTED-PEBBLES-OR-CALCAREOUS-DEBRIS S_HISPID))
                  (GROWING
                   (DEFINE (GROWING)
                           (LINE-FORM
@@ -4784,7 +4784,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND FLEXIBLE)
+                 (HAND H_FLEXIBLE)
                  (TOUCH VELVETY)
                  (SURFACE EVEN)
                  (GROWING
@@ -4843,7 +4843,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH ROUGH)
                  (SURFACE EVEN)
                  (GROWING
@@ -4944,7 +4944,7 @@
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
                  (CONSISTENCY FIRM)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING (DEFINE (GROWING) (GROW ERECT)))
@@ -5041,7 +5041,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5104,7 +5104,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE EVEN)
                  (GROWING
@@ -5166,7 +5166,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5228,7 +5228,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5290,7 +5290,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5352,7 +5352,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5416,7 +5416,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5478,7 +5478,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5540,7 +5540,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY STONY)
-                 (HAND TOUGH)
+                 (HAND H_TOUGH)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5602,7 +5602,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY FIRM)
-                 (HAND (DEFINE (SET) RUBBERY TOUGH))
+                 (HAND (DEFINE (SET) RUBBERY H_TOUGH))
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5702,7 +5702,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY (DEFINE (SET) SOFT FIRM))
-                 (HAND (DEFINE (SET) TOUGH FLEXIBLE))
+                 (HAND (DEFINE (SET) H_TOUGH H_FLEXIBLE))
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5758,7 +5758,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY FIRM)
-                 (HAND FLEXIBLE)
+                 (HAND H_FLEXIBLE)
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5807,7 +5807,7 @@
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -5853,8 +5853,8 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY FIRM)
-                 (HAND FLEXIBLE)
-                 (TOUCH HISPID)
+                 (HAND H_FLEXIBLE)
+                 (TOUCH T_HISPID)
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -5900,7 +5900,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE BIG)
                  (CONSISTENCY (DEFINE (SET) SOFT FIRM))
-                 (HAND (DEFINE (SET) FLEXIBLE TOUGH))
+                 (HAND (DEFINE (SET) H_FLEXIBLE H_TOUGH))
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -5950,7 +5950,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE BIG)
                  (CONSISTENCY FIRM)
-                 (HAND (DEFINE (SET) FLEXIBLE TOUGH))
+                 (HAND (DEFINE (SET) H_FLEXIBLE H_TOUGH))
                  (TOUCH VELVETY)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -6000,7 +6000,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY FIRM)
-                 (HAND FLEXIBLE)
+                 (HAND H_FLEXIBLE)
                  (TOUCH VILLOSE)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -6046,8 +6046,8 @@
 (define-episode (sponge :ID SPONGE-231)
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
-                 (HAND (DEFINE (SET) FLEXIBLE RUBBERY))
-                 (TOUCH HISPID)
+                 (HAND (DEFINE (SET) H_FLEXIBLE RUBBERY))
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -6097,7 +6097,7 @@
         (EXTERNAL-FEATURES
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
-                 (TOUCH HISPID)
+                 (TOUCH T_HISPID)
                  (SURFACE BRISTLY)
                  (GROWING
                   (DEFINE (GROWING)
@@ -6724,7 +6724,7 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY (DEFINE (SET) SOFT FIRM))
-                 (HAND (DEFINE (SET) TOUGH FLEXIBLE))
+                 (HAND (DEFINE (SET) H_TOUGH H_FLEXIBLE))
                  (TOUCH ROUGH)
                  (SURFACE BRISTLY)
                  (GROWING
@@ -6783,8 +6783,8 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY SOFT)
-                 (HAND FLEXIBLE)
-                 (TOUCH (DEFINE (SET) HISPID SMOOTH-TOUCH))
+                 (HAND H_FLEXIBLE)
+                 (TOUCH (DEFINE (SET) T_HISPID SMOOTH-TOUCH))
                  (SURFACE EVEN)
                  (GROWING
                   (DEFINE (GROWING)
@@ -6944,9 +6944,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY (DEFINE (SET) SOFT FIRM))
-                 (HAND (DEFINE (SET) TOUGH FLEXIBLE))
-                 (TOUCH HISPID)
-                 (SURFACE (DEFINE (SET) HISPID CONULOSE))
+                 (HAND (DEFINE (SET) H_TOUGH H_FLEXIBLE))
+                 (TOUCH T_HISPID)
+                 (SURFACE (DEFINE (SET) S_HISPID CONULOSE))
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -6999,9 +6999,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE BIG)
                  (CONSISTENCY (DEFINE (SET) SOFT FIRM))
-                 (HAND (DEFINE (SET) TOUGH FLEXIBLE))
-                 (TOUCH HISPID)
-                 (SURFACE (DEFINE (SET) HISPID CONULOSE))
+                 (HAND (DEFINE (SET) H_TOUGH H_FLEXIBLE))
+                 (TOUCH T_HISPID)
+                 (SURFACE (DEFINE (SET) S_HISPID CONULOSE))
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -7061,9 +7061,9 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE BIG)
                  (CONSISTENCY (DEFINE (SET) SOFT FIRM))
-                 (HAND (DEFINE (SET) TOUGH FLEXIBLE))
-                 (TOUCH HISPID)
-                 (SURFACE (DEFINE (SET) HISPID CONULOSE))
+                 (HAND (DEFINE (SET) H_TOUGH H_FLEXIBLE))
+                 (TOUCH T_HISPID)
+                 (SURFACE (DEFINE (SET) S_HISPID CONULOSE))
                  (GROWING
                   (DEFINE (GROWING)
                           (GROW ERECT)
@@ -7116,8 +7116,8 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE MEDIUM)
                  (CONSISTENCY SOFT)
-                 (HAND FLEXIBLE)
-                 (TOUCH (DEFINE (SET) HISPID SMOOTH-TOUCH))
+                 (HAND H_FLEXIBLE)
+                 (TOUCH (DEFINE (SET) T_HISPID SMOOTH-TOUCH))
                  (SURFACE EVEN)
                  (GROWING
                   (DEFINE (GROWING)
@@ -7176,8 +7176,8 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
-                 (HAND FLEXIBLE)
-                 (TOUCH (DEFINE (SET) HISPID SMOOTH-TOUCH))
+                 (HAND H_FLEXIBLE)
+                 (TOUCH (DEFINE (SET) T_HISPID SMOOTH-TOUCH))
                  (SURFACE EVEN)
                  (GROWING
                   (DEFINE (GROWING)
@@ -7236,8 +7236,8 @@
          (DEFINE (EXTERNAL-FEATURES)
                  (BODY-SIZE SMALL)
                  (CONSISTENCY SOFT)
-                 (HAND FLEXIBLE)
-                 (TOUCH (DEFINE (SET) HISPID SMOOTH-TOUCH))
+                 (HAND H_FLEXIBLE)
+                 (TOUCH (DEFINE (SET) T_HISPID SMOOTH-TOUCH))
                  (SURFACE EVEN)
                  (GROWING
                   (DEFINE (GROWING)
