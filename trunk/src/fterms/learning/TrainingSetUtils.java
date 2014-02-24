@@ -204,6 +204,7 @@ public class TrainingSetUtils {
     public static final int RIU_STORIES_EVENING_TIDE = 30;
     public static final int PAIRS_50_DATASET = 31;
     public static final int STRAIGHT_50_DATASET = 32;
+    public static final int PIZZA_DATASET = 34;
 
     public static TrainingSetProperties loadTrainingSet(int DATASET, Ontology o, FTKBase dm, FTKBase case_base) throws FeatureTermException, IOException
     {
@@ -374,6 +375,16 @@ public class TrainingSetUtils {
 
                 ts.name = "lymphography";
                 ts.problem_sort = o.getSort("lymphography-problem");
+                break;
+            case PIZZA_DATASET:
+                dm.ImportNOOS("NOOS/pizza-ontology.noos", o);
+                case_base.ImportNOOS("NOOS/pizza-instances.noos", o);
+
+                ts.name = "pizza";
+                ts.problem_sort = o.getSort("pizza-problem");
+                
+                ts.description_path.features.clear();
+                ts.description_path.features.add(new Symbol("problem"));
                 break;
 
             case TOXICOLOGY_DATASET_MRATS:

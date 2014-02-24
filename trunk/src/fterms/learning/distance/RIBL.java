@@ -74,6 +74,9 @@ public class RIBL extends Distance {
     public double distance(FeatureTerm f1, FeatureTerm f2, Ontology o,
         FTKBase dm) throws FeatureTermException {
 
+//        System.out.println(f1.toStringNOOS(dm));
+//        System.out.println(f2.toStringNOOS(dm));
+        
         List<Clause> clauses_f1 = HornClauses.toClauses(f1, o, dm, "X");
         List<Clause> clauses_f2 = HornClauses.toClauses(f2, o, dm, "X");
 
