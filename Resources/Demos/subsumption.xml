@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+<demos>
+	<demo>
+		<nid>0</nid>
+		<domain>trains</domain>
+		<ft1>(define (symbol))</ft1>
+		<ft2>\"hello\"</ft2>
+	</demo>
+	<demo>
+		<nid>1</nid>
+		<domain>trains</domain>
+		<ft1>\"hello\"</ft1>
+		<ft2>\"hello\"</ft2>
+	</demo>
+	<demo>
+		<nid>2</nid>
+		<domain>trains</domain>
+		<ft1>\"hello\"</ft1>
+		<ft2>\"bye\"</ft2>
+	</demo>
+<!-- 	<demo> -->
+<!-- 		<nid>3</nid> -->
+<!-- 		<domain>trains</domain> -->
+<!-- 		<ft1>(define (set))</ft1> -->
+<!-- 		<ft2>(define (car))</ft2> -->
+<!-- 	</demo> -->
+	<demo>
+		<nid>4</nid>
+		<domain>trains</domain>
+		<ft1>(define (car))</ft1>
+		<ft2>(define (car) (infront (define (set))))</ft2>
+	</demo>
+<!-- 	<demo> -->
+<!-- 		<nid>6</nid> -->
+<!-- 		<domain>trains</domain> -->
+<!-- 		<ft1>(define (set))</ft1> -->
+<!-- 		<ft2>(define (car) (infront (define (set))))</ft2> -->
+<!-- 	</demo> -->
+<!-- 	<demo> -->
+<!-- 		<nid>7</nid> -->
+<!-- 		<domain>trains</domain> -->
+<!-- 		<ft1>(define (car) (infront (define (set))))</ft1> -->
+<!-- 		<ft2>(define (set))</ft2> -->
+<!-- 	</demo> -->
+	<demo>
+		<nid>8</nid>
+		<domain>trains</domain>
+		<ft1>(define (car) (infront (define (set))))</ft1>
+		<ft2>(define (car) (infront (define (car))))</ft2>
+	</demo>
+	<demo>
+		<nid>9</nid>
+		<domain>sponge</domain>
+		<ft1>(define (megascleres) (acanthose (define (acanthose))))</ft1>
+		<ft2>(define (megascleres) (acanthose no-acanthose))</ft2>
+	</demo>
+	<demo>
+		<nid>10</nid>
+		<domain>sponge</domain>
+		<ft1>(define (megascleres) (acanthose no-acanthose))</ft1>
+		<ft2>(define (megascleres) (acanthose (define (acanthose))))</ft2>
+	</demo>
+</demos>
+</xml>

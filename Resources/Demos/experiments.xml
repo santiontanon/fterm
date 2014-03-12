@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+<demos>
+	<demo>
+		<nid>0</nid>
+		<domain>casa</domain>
+		<ft1>playa</ft1>
+		<ft2>ciudad</ft2>
+	</demo>
+	<demo>
+		<nid>1</nid>
+		<domain>perros</domain>
+		<ft1>hot dog</ft1>
+		<ft2>bulldog</ft2>
+	</demo>
+	<demo>
+		<nid>2</nid>
+		<domain>comida</domain>
+		<ft1>pasta</ft1>
+		<ft2>ensalada</ft2>
+	</demo>
+</demos>
+</xml>

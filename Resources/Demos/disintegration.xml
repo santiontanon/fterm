@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+<demos>
+	<demo>
+		<nid>0</nid>
+		<domain>ZOOLOGY_DATASET</domain>
+		<ft1>zp-1680</ft1>
+		<ft2>Language L0, zoology</ft2>
+	</demo>
+	<demo>
+		<nid>1</nid>
+		<domain>UNCLE_DATASET</domain>
+		<ft1>e1</ft1>
+		<ft2>Language Lc, uncle, no sets</ft2>
+	</demo>
+	<demo>
+		<nid>2</nid>
+		<domain>TRAINS_DATASET</domain>
+		<ft1>tr6</ft1>
+		<ft2>Language L, trains</ft2>
+	</demo>
+</demos>
+</xml>
