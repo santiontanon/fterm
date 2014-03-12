@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+<demos>
+	<demo>
+		<nid>0</nid>
+		<domain>family</domain>
+		<ft1>(define ?X1 (male)     (son (define (male)            (father !X1))     )   )</ft1>
+		<ft2>(define (male))</ft2>
+	</demo>
+	<demo>
+		<nid>1</nid>
+		<domain>family</domain>
+		<ft1>(define ?X1 (male)     (son (define (male)            (wife (define (female)))            (father !X1))     ) 
+				 )</ft1>
+		<ft2>(define (male)     (son (define (male)            (father (define (male))))     ))</ft2>
+	</demo>
+	<demo>
+		<nid>2</nid>
+		<domain>family</domain>
+		<ft1>(define (person)     (son (define ?X1 (male)))     (grandfather !X1)   )</ft1>
+		<ft2>(define (male)     (son (define (male)            (uncle (define (male)))))     (grandfather (define (male) 
+				             (mother (define (female)))))   )</ft2>
+	</demo>
+	<demo>
+		<nid>3</nid>
+		<domain>sponge</domain>
+		<ft1>(define (sponge-problem)    (description (define (sponge)    (spiculate-skeleton (define (spiculate-skeleton) 
+				  (megascleres (define (megascleres)    (smooth-form style))))))))</ft1>
+		<ft2>(define (sponge-problem)    (description (define (sponge)    (spiculate-skeleton (define (spiculate-skeleton) 
+				  (megascleres (define (megascleres)    (smooth-form oxea))))))))</ft2>
+	</demo>
+	<demo>
+		<nid>4</nid>
+		<domain>family</domain>
+		<ft1>(define (female)                        (brother (define (male) 
+				                                 (father (define (male))))))</ft1>
+		<ft2>(define ?X3 (female)                        (brother (define ?X4 (male)                                   (sister !X3))) 
+				                      (father (define (male)                                  (son !X4) 
+				                                (daughter !X3))))</ft2>
+	</demo>
+	<demo>
+		<nid>5</nid>
+		<domain>family</domain>
+		<ft1>(define (female)                    (mother (define (female) 
+				                            (husband (define ?X5 (male)))))                    (brother (define (male) 
+				                             (father !X5))))</ft1>
+		<ft2>(define ?X3 (female)                    (father (define ?X4 (male)                              (daughter !X3) 
+				                            (son (define ?X5 (male)                                     (sister !X3) 
+				                                   (father !X4)                                     (mother (define ?X7 (female) 
+				                                             (husband (define (male)))))))                              (wife !X7))) 
+				                  (mother !X7)                    (brother !X5))</ft2>
+	</demo>
+	<demo>
+		<nid>6</nid>
+		<domain>trains</domain>
+		<ft1>(define (trains-description)     (cars (define (car)            (nwhl 2))))</ft1>
+		<ft2>(define (trains-description)     (cars (define (set)             (define (car)              (infront (define ?X4 (car) 
+				                       (nwhl (define (integer)))                         (loc 2)                         (npl 3) 
+				                       (cshape closedrect)                         (infront (define ?X8 (car) 
+				                                  (lcont (define (trianglod)))                                    (nwhl 2) 
+				                                  (ln short)                                    (loc 3)                                    (npl 1) 
+				                                  (cshape openrect))))))             !X4             !X8)))</ft2>
+	</demo>
+	<demo>
+		<nid>7</nid>
+		<domain>trains</domain>
+		<ft1>(define (trains-description)     (ncar 3)     (cars (define (set)             (define (car) 
+				            (infront (define ?X5 (car)                         (lcont (define (set) 
+				                                (define (circlelod))                                  (define (circlelod)) 
+				                                ))                         (infront (define ?X7 (car) 
+				                                  (lcont (define (trianglod)))                                    (npl 1) 
+				                                  (nwhl 2)                                    (loc 3) 
+				                                  (cshape openrect)                                    (ln short)))                         (npl 3) 
+				                       (nwhl 2)                         (loc 2)                         (cshape closedrect) 
+				                       (ln long)))              (npl 0)              (nwhl 2)              (loc 1)              (cshape engine) 
+				            (ln long))             !X5             !X7)))</ft1>
+		<ft2>(define (trains-description)     (ncar 3)     (cars (define (set)             (define (car) 
+				            (infront (define ?X5 (car)                         (lcont (define (circlelod))) 
+				                       (infront (define ?X6 (car)                                    (lcont (define (trianglod))) 
+				                                  (npl 1)                                    (loc 3)                                    (nwhl 2) 
+				                                  (cshape openrect)                                    (ln short)))                         (npl 3) 
+				                       (loc 2)                         (nwhl 2)                         (cshape closedrect) 
+				                       (ln long)))              (npl 0)              (loc 1)              (nwhl 2)              (cshape engine) 
+				            (ln long))             !X5             !X6)))</ft2>
+	</demo>
+	<demo>
+		<nid>8</nid>
+		<domain>trains</domain>
+		<ft1>(define (car)    (lcont (define (set)      (define (load))      (define (load))      (define (circlelod))))  )</ft1>
+		<ft2>(define (car)    (lcont (define (set)      (define (load))      (define (circlelod))      (define (circlelod))))  )</ft2>
+	</demo>
+	<demo>
+		<nid>9</nid>
+		<domain>trains</domain>
+		<ft1>(define (trains-description)     (cars (define (set)             (define (car) 
+				            (infront (define ?X4 (car)                         (infront (define ?X5 (car))))))             !X4             !X5 
+				           (define (car)))))</ft1>
+		<ft2>(define (trains-description)     (cars (define (set)             (define (car)              (infront (define ?X8 (car)))) 
+				           !X8)))</ft2>
+	</demo>
+	<demo>
+		<nid>10</nid>
+		<domain>trains</domain>
+		<ft1>(define (trains-description)     (cars (define (set)             (define (car) 
+				            (infront (define ?X4 (car)                         (infront (define ?X5 (car) 
+				                                  (infront (define ?X6 (car))))))))             !X4             !X5             !X6 
+				           (define (car)))))</ft1>
+		<ft2>(define (trains-description)     (cars (define (set)             (define (car)              (infront (define ?X4 (car)))) 
+				           !X4             (define (car)              (infront (define (car))))             (define (car) 
+				            (infront (define ?X8 (car))))             !X8)))</ft2>
+	</demo>
+</demos>
+</xml>

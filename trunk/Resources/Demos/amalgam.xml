@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+<demos>
+	<demo>
+		<nid>0</nid>
+		<domain>TRAINS_82_DATASET</domain>
+		<ft1>train-problem-1</ft1>
+		<ft2>train-problem-8</ft2>
+	</demo>
+	<demo>
+		<nid>1</nid>
+		<domain>TRAINS_82_DATASET</domain>
+		<ft1>train-problem-10</ft1>
+		<ft2>train-problem-20</ft2>
+	</demo>
+	<demo>
+		<nid>2</nid>
+		<domain>TRAINS_82_DATASET</domain>
+		<ft1>train-problem-30</ft1>
+		<ft2>train-problem-50</ft2>
+	</demo>
+	<demo>
+		<nid>3</nid>
+		<domain>TRAINS_82_DATASET</domain>
+		<ft1>train-problem-33</ft1>
+		<ft2>train-problem-40</ft2>
+	</demo>
+</demos>
+</xml>
