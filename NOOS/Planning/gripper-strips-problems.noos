@@ -1,0 +1,172 @@
+(define (Planning-Problem :id strips-gripper-x-0a)
+  (objects 
+    (define (set)
+        "rooma"
+        "roomb"
+        "ball1"
+        "left"
+    )
+  )
+
+  (initial-state
+    (define (and)
+      (predicates
+        (define (room) (room "rooma"))
+        (define (room) (room "roomb"))
+        (define (ball) (ball "ball1"))
+        (define (at-robby) (room "rooma"))        
+        (define (free) (free "left"))
+        (define (at) (ball "ball1") (room "rooma"))
+        (define (gripper) (gripper "left"))
+      )
+    )
+  )
+
+  (goal
+    (define (and)
+      (predicates
+        (define (at) (ball "ball1") (room "roomb"))
+      )
+    )
+  )  
+)
+
+
+(define (Planning-Problem :id strips-gripper-x-0b)
+  (objects 
+    (define (set)
+        "rooma"
+        "roomb"
+        "ball1"
+        "ball2"
+        "left"
+    )
+  )
+
+  (initial-state
+    (define (and)
+      (predicates
+        (define (room) (room "rooma"))
+        (define (room) (room "roomb"))
+        (define (ball) (ball "ball1"))
+        (define (ball) (ball "ball2"))
+        (define (at-robby) (room "rooma"))        
+        (define (free) (free "left"))
+        (define (at) (ball "ball1") (room "rooma"))
+        (define (at) (ball "ball2") (room "rooma"))
+        (define (gripper) (gripper "left"))
+      )
+    )
+  )
+
+  (goal
+    (define (and)
+      (predicates
+        (define (at) (ball "ball1") (room "roomb"))
+        (define (at) (ball "ball2") (room "roomb"))
+      )
+    )
+  )  
+)
+
+
+(define (Planning-Problem :id strips-gripper-x-1)
+  (objects 
+    (define (set)
+        "rooma"
+        "roomb"
+        "ball4"
+        "ball3"
+        "ball2"
+        "ball1"
+        "left"
+        "right"
+    )
+  )
+  (initial-state
+    (define (and)
+      (predicates
+        (define (room) (room "rooma"))
+        (define (room) (room "roomb"))
+        (define (ball) (ball "ball4"))
+        (define (ball) (ball "ball3"))
+        (define (ball) (ball "ball2"))
+        (define (ball) (ball "ball1"))
+        (define (at-robby) (room "rooma"))        
+        (define (free) (free "left"))
+        (define (free) (free "right"))        
+        (define (at) (ball "ball4") (room "rooma"))
+        (define (at) (ball "ball3") (room "rooma"))
+        (define (at) (ball "ball2") (room "rooma"))
+        (define (at) (ball "ball1") (room "rooma"))
+        (define (gripper) (gripper "left"))
+        (define (gripper) (gripper "right"))
+      )
+    )
+  )
+  (goal
+    (define (and)
+      (predicates
+        (define (at) (ball "ball4") (room "roomb"))
+        (define (at) (ball "ball3") (room "roomb"))
+        (define (at) (ball "ball2") (room "roomb"))
+        (define (at) (ball "ball1") (room "roomb"))
+      )
+    )
+  )  
+)
+
+
+(define (Planning-Problem :id strips-gripper-x-2)
+  (objects 
+    (define (set)
+        "rooma"
+        "roomb"
+        "ball6"
+        "ball5"
+        "ball4"
+        "ball3"
+        "ball2"
+        "ball1"
+        "left"
+        "right"
+    )
+  )
+  (initial-state
+    (define (and)
+      (predicates
+        (define (room) (room "rooma"))
+        (define (room) (room "roomb"))
+        (define (ball) (ball "ball6"))
+        (define (ball) (ball "ball5"))
+        (define (ball) (ball "ball4"))
+        (define (ball) (ball "ball3"))
+        (define (ball) (ball "ball2"))
+        (define (ball) (ball "ball1"))
+        (define (at-robby) (room "rooma"))        
+        (define (free) (free "left"))
+        (define (free) (free "right"))        
+        (define (at) (ball "ball6") (room "rooma"))
+        (define (at) (ball "ball5") (room "rooma"))
+        (define (at) (ball "ball4") (room "rooma"))
+        (define (at) (ball "ball3") (room "rooma"))
+        (define (at) (ball "ball2") (room "rooma"))
+        (define (at) (ball "ball1") (room "rooma"))
+        (define (gripper) (gripper "left"))
+        (define (gripper) (gripper "right"))
+      )
+    )
+  )
+  (goal
+    (define (and)
+      (predicates
+        (define (at) (ball "ball6") (room "roomb"))
+        (define (at) (ball "ball5") (room "roomb"))
+        (define (at) (ball "ball4") (room "roomb"))
+        (define (at) (ball "ball3") (room "roomb"))
+        (define (at) (ball "ball2") (room "roomb"))
+        (define (at) (ball "ball1") (room "roomb"))
+      )
+    )
+  )  
+)

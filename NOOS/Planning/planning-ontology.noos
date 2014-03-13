@@ -1,0 +1,48 @@
+(Define-Ontology PLANNING-ONTOLOGY
+  (creator "Santi Ontañón Villar")
+  (description "Planning Ontology"))
+
+(Define-sort (PLANNING-ONTOLOGY Predicate)
+)
+
+(Define-sort (Predicate not)
+  (predicate ! Predicate)
+)
+
+(Define-sort (Predicate and)
+  (predicates Predicate)
+)
+
+(Define-sort (Predicate or)
+  (predicates Predicate)
+)
+
+(Define-sort (Predicate when)
+  (condition ! Predicate)
+  (effect ! Predicate)
+)
+
+(Define-sort (Predicate unless)
+  (condition ! Predicate)
+  (effect ! Predicate)
+)
+
+(Define-sort (Predicate if)
+  (condition ! Predicate)
+  (positive-effect ! Predicate)
+  (negative-effect ! Predicate)
+)
+
+(Define-sort (PLANNING-ONTOLOGY Operator)
+  (name ! Symbol)
+  (parameters Predicate)
+  (variables Predicate)
+  (precondition ! Predicate)
+  (effect ! Predicate)
+)
+
+(Define-sort (PLANNING-ONTOLOGY Planning-Problem)
+  (objects any)
+  (initial-state ! Predicate)
+  (goal ! Predicate)
+)
