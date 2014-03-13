@@ -1,0 +1,33 @@
+(Define-Ontology PLANNING-ONTOLOGY
+  (creator "Santi Ontañón Villar")
+  (description "Operators for the gripper planning domain"))
+
+(Define-sort (Predicate room)
+  (room ! Symbol)
+)
+
+(Define-sort (Predicate ball)
+  (ball ! Symbol)
+)
+
+(Define-sort (Predicate gripper)
+  (gripper ! Symbol)
+)
+
+(Define-sort (Predicate at-robby)
+  (room ! Symbol)
+)
+
+(Define-sort (Predicate at)
+  (ball ! Symbol)
+  (room ! Symbol)
+)
+
+(Define-sort (Predicate free)
+  (free ! Symbol)
+)
+
+(Define-sort (Predicate carry)
+  (ball ! Symbol)
+  (gripper ! Symbol)
+)

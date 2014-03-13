@@ -1,0 +1,88 @@
+(define-Domain-Model PLANNING-GRIPPER-STRIPS-DM
+  (creator "Santi Ontañón Villar")
+  (description "Operators for the gripper planning domain")
+  (uses planning-ontology))
+
+(Define (Operator)
+  (name "move")
+  (parameters
+    (define ?FROM (symbol))
+    (define ?TO (symbol))
+  )
+  (precondition  
+    (define (and) 
+      (predicates
+        (define (room) (room !FROM))
+        (define (room) (room !TO))
+        (define (at-robby) (room !FROM))
+      )
+    )
+  )
+  (effect 
+    (define (and) 
+      (predicates
+        (define (not) (predicate (define (at-robby) (room !FROM))))
+        (define (at-robby) (room !TO))
+      )
+    )
+  )
+)
+
+(Define (Operator)
+  (name "pick")
+  (parameters
+    (define ?ROOM (Symbol))
+    (define ?OBJ (Symbol))
+    (define ?GRIPPER (Symbol))
+  )
+  (precondition  
+    (define (and) 
+      (predicates
+        (define (room) (room !ROOM))
+        (define (ball) (ball !OBJ))
+        (define (gripper) (gripper !GRIPPER))
+        (define (at) (ball !OBJ) (room !ROOM))
+        (define (at-robby) (room !ROOM))
+        (define (free) (free !GRIPPER))
+      )
+    )
+  )
+  (effect 
+    (define (and) 
+      (predicates
+        (define (carry) (ball !OBJ) (gripper !GRIPPER))
+        (define (not) (predicate (define (at) (ball !OBJ) (room !ROOM))))
+        (define (not) (predicate (define (free) (free !GRIPPER))))
+      )
+    )
+  )
+)
+
+(Define (Operator)
+  (name "drop")
+  (parameters
+    (define ?ROOM (Symbol))
+    (define ?OBJ (Symbol))
+    (define ?GRIPPER (Symbol))
+  )
+  (precondition  
+    (define (and) 
+      (predicates
+        (define (room) (room !ROOM))
+        (define (ball) (ball !OBJ))
+        (define (gripper) (gripper !GRIPPER))
+        (define (carry) (ball !OBJ) (gripper !GRIPPER))
+        (define (at-robby) (room !ROOM))
+      )
+    )
+  )
+  (effect 
+    (define (and) 
+      (predicates
+        (define (at) (ball !OBJ) (room !ROOM))
+        (define (free) (free !GRIPPER))
+        (define (not) (predicate (define (carry) (ball !OBJ) (gripper !GRIPPER))))
+      )
+    )
+  )
+)

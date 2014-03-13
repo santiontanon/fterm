@@ -771,8 +771,8 @@ public class TrainingSetUtils {
             case MUTAGENESIS:
                 dm.importNOOS(NOOSpath + "/mutagenesis-ontology.noos", o);
                 dm.importNOOS(NOOSpath + "/mutagenesis-dm.noos", o);
-                // case_base.ImportNOOS(NOOSpath + "/mutagenesis-b4-230-cases.noos", o);
-                case_base.importNOOS(NOOSpath + "/mutagenesis-b4-25-cases.noos", o);
+                case_base.importNOOS(NOOSpath + "/mutagenesis-b4-230-cases.noos", o);
+                //case_base.importNOOS(NOOSpath + "/mutagenesis-b4-25-cases.noos", o);
 
                 ts.name = "mutagenesis-b4";
                 ts.problem_sort = o.getSort("mutagenesis-problem");

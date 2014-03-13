@@ -599,8 +599,4 @@ public class FTKBase implements Serializable {
 		return index.size();
 	}
 
-    public void ImportNOOS(String nooStoxicevaontologynoos, Ontology o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
