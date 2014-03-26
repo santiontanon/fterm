@@ -115,7 +115,7 @@ public class FTSubsumption {
 	 * @throws FeatureTermException
 	 *             the feature term exception
 	 */
-	private static boolean subsumptionWithBindings(FeatureTerm t1, FeatureTerm t2, List<FeatureTerm> bindings_a, List<FeatureTerm> bindings_b, int maxTime)
+	public static boolean subsumptionWithBindings(FeatureTerm t1, FeatureTerm t2, List<FeatureTerm> bindings_a, List<FeatureTerm> bindings_b, int maxTime)
 			throws FeatureTermException {
 
 		List<SubsumptionStackNode> stack = new LinkedList<SubsumptionStackNode>();
