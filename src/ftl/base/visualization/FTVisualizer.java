@@ -131,28 +131,48 @@ public class FTVisualizer extends Display {
 		FTKBase base_domain_model = new FTKBase();
 
 		base_domain_model.create_boolean_objects(base_ontology);
-		dm.importNOOS("Resources/DATA/family-ontology.noos", o);
-		dm.importNOOS("Resources/DATA/family-dm.noos", o);
-		dm.importNOOS("Resources/DATA/zoology-ontology.noos", o);
-		dm.importNOOS("Resources/DATA/zoology-dm.noos", o);
-		dm.importNOOS("Resources/DATA/sponge-ontology.noos", o);
-		dm.importNOOS("Resources/DATA/sponge-dm.noos", o);
-		dm.importNOOS("Resources/DATA/trains-ontology.noos", o);
-		dm.importNOOS("Resources/DATA/trains-dm.noos", o);
+		dm.importNOOS("NOOS/family-ontology.noos", o);
+		dm.importNOOS("NOOS/family-dm.noos", o);
+		dm.importNOOS("NOOS/zoology-ontology.noos", o);
+		dm.importNOOS("NOOS/zoology-dm.noos", o);
+		dm.importNOOS("NOOS/sponge-ontology.noos", o);
+		dm.importNOOS("NOOS/sponge-dm.noos", o);
+		dm.importNOOS("NOOS/trains-ontology.noos", o);
+		dm.importNOOS("NOOS/trains-dm.noos", o);
 		case_base.uses(dm);
 		// String var = "(define (person)    (son (define ?X1 (male)))   " + "	(grandfather !X1)   )";
 
-		String var = "(define (trains-description)     " + "         (ncar 3) " + "(cars (define (set)             "
-				+ "     (define (car) (infront (define ?X5 (car)" + "         (lcont (define (set) " + "		       (define (circlelod)) "
-				+ "              (define (circlelod)) ))  " + "     (infront (define ?X7 (car) " + "		  (lcont (define (trianglod))) "
-				+ "          (npl 1) " + "		   (nwhl 2) " + "          (loc 3) " + "		   (cshape openrect)      "
-				+ "          (ln short)))" + "          (npl 3) " + "		   (nwhl 2)   " + "          (loc 2) "
-				+ "          (cshape closedrect) " + "		   (ln long)))    " + "(npl 0)  " + "(nwhl 2)" + "(loc 1) " + "(cshape engine) "
-				+ "(ln long))  " + "!X5 " + "!X7)))";
+		String var = "(define (trains-description)     " + 
+                             "  (ncar 3) " + 
+                             "  (cars (define (set)             " +
+                             "    (define (car) " +
+                             "      (infront (define ?X5 (car)" + 
+                             "                 (lcont (define (set) " + 
+                             "	                        (define (circlelod)) " +
+			     "                          (define (circlelod)) ))  " + 
+                             "                 (infront (define ?X7 (car) " + 
+                             "	                          (lcont (define (trianglod))) " +
+			     "                            (npl 1) " + 
+                             "	                          (nwhl 2) " + 
+                             "                            (loc 3) " + 
+                             "	                          (cshape openrect) " +
+			     "                            (ln short)))" + 
+                             "                 (npl 3) " + 
+                             "	               (nwhl 2)   " + 
+                             "                 (loc 2) " +
+			     "                 (cshape closedrect) " + 
+                             "	               (ln long)))    " + 
+                             "      (npl 0)  " + 
+                             "      (nwhl 2)" + 
+                             "      (loc 1) " + 
+                             "      (cshape engine) " +
+                             "      (ln long))  " + 
+                             "    !X5 " + 
+                             "    !X7)))";
 
 		FeatureTerm f = NOOSParser.parse(new RewindableInputStream(new ByteArrayInputStream(var.getBytes("UTF-8"))), case_base, o);
 
-		FTVisualizer ad = new FTVisualizer(1000, 1000, f, dm, true, true);
+		FTVisualizer ad = new FTVisualizer(800,600, f, dm, true, true);
 		JFrame frame = new JFrame("TEST");
 		frame.getContentPane().add(ad);
 		frame.pack();
@@ -188,7 +208,7 @@ public class FTVisualizer extends Display {
 		} catch (Exception e) {
 			FTLGUI.writeConsole(e.toString());
 			e.printStackTrace();
-			return new Dimension(1000, 800);
+			return new Dimension(800,600);
 		}
 	}
 
@@ -215,7 +235,7 @@ public class FTVisualizer extends Display {
 	 */
 	public static JFrame newWindow(String name, int dx, int dy, FeatureTerm f, FTKBase dm, boolean separateConstants, boolean groupSets)
 			throws FeatureTermException {
-		FTVisualizer ad = new FTVisualizer(1000, 1000, f, dm, separateConstants, groupSets);
+		FTVisualizer ad = new FTVisualizer(dx,dy, f, dm, separateConstants, groupSets);
 		JFrame frame = new JFrame(name);
 		frame.getContentPane().add(ad);
 		frame.pack();
