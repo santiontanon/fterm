@@ -792,7 +792,9 @@ public abstract class OntologyParser {
 		// Features:
 		do {
 
-			prepareNextSymbol();
+			if (prepareNextSymbol()==null) {
+                            throw new Exception("setupFeatures: no more tokens when setting up features for a term of sort " + vsort);
+                        }
 
 			// System.out.println("(" + t.token + "," + t.type + ")");
 
@@ -842,7 +844,7 @@ public abstract class OntologyParser {
 	 * @throws Exception
 	 *             the exception
 	 */
-	protected abstract void prepareNextSymbol() throws Exception;
+	protected abstract NOOSToken prepareNextSymbol() throws Exception;
 
 	/**
 	 * Setup feature values of specific feature.
