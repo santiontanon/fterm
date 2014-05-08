@@ -42,10 +42,12 @@ import ftl.base.utils.FeatureTermException;
  */
 public class Amalgam {
         
+    public static int DEBUG = 0;
+    
       /*
      * This function uses a simple greedy search algorithm to reach an amalgam that maximizes a given criterion
      */
-    public static List<AmalgamResult> amalgamRefinementsGreedy(FeatureTerm f1, FeatureTerm f2, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm) throws FeatureTermException {
+    public static List<AmalgamResult> amalgamRefinementsGreedy(FeatureTerm f1, FeatureTerm f2, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm, boolean systematicUnification) throws FeatureTermException {
         List<FeatureTerm> l1 = new LinkedList<FeatureTerm>();
         List<FeatureTerm> l2 = new LinkedList<FeatureTerm>();
         l1.add(f1);
@@ -74,7 +76,7 @@ public class Amalgam {
 //        FeatureTerm transfer2 = LUG2P.m_a;
         FeatureTerm transfer1 = au;
         FeatureTerm transfer2 = au;
-        int bestResultsScore = 0;
+        double bestResultsScore = 0;
         List<AmalgamResult> bestResults = new LinkedList<AmalgamResult>();
         AmalgamResult best = null;
         do {
@@ -82,16 +84,32 @@ public class Amalgam {
             List<FeatureTerm> nextTransfers1 = FTRefinement.getSpecializationsSubsumingAll(transfer1, dm, o, FTRefinement.ALL_REFINEMENTS, l1);
             List<FeatureTerm> nextTransfers2 = FTRefinement.getSpecializationsSubsumingAll(transfer2, dm, o, FTRefinement.ALL_REFINEMENTS, l2);
             List<AmalgamResult> nextResults = new LinkedList<AmalgamResult>();
+            if (DEBUG>=1) System.out.println("amalgamRefinementsGreedy: nextTransfers1 " + nextTransfers1.size());
             for(FeatureTerm nextTransfer1:nextTransfers1) {
-                List<FeatureTerm> tmpl = FTUnification.unification(nextTransfer1, transfer2, dm);
-                for(FeatureTerm tmp:tmpl) {
+                if (DEBUG>=2) System.out.println("amalgamRefinementsGreedy: transfer1 " + nextTransfers1.indexOf(nextTransfer1) + "/" + nextTransfers1.size());
+                if (systematicUnification) {
+                    List<FeatureTerm> tmpl = FTUnification.unification(nextTransfer1, transfer2, dm);
+                    for(FeatureTerm tmp:tmpl) {
+                        explored++;
+                        nextResults.add(new AmalgamResult(tmp,ef.evaluate(tmp, nextTransfer1, transfer2, dm, o), nextTransfer1, transfer2));
+                    }
+                } else {
+                    FeatureTerm tmp = FTUnification.simpleUnification(nextTransfer1, transfer2, dm);
                     explored++;
                     nextResults.add(new AmalgamResult(tmp,ef.evaluate(tmp, nextTransfer1, transfer2, dm, o), nextTransfer1, transfer2));
                 }
             }
+            if (DEBUG>=1) System.out.println("amalgamRefinementsGreedy: nextTransfers2 " + nextTransfers2.size());
             for(FeatureTerm nextTransfer2:nextTransfers2) {
-                List<FeatureTerm> tmpl = FTUnification.unification(transfer1, nextTransfer2, dm);
-                for(FeatureTerm tmp:tmpl) {
+                if (DEBUG>=2) System.out.println("amalgamRefinementsGreedy: transfer2 " + nextTransfers2.indexOf(nextTransfer2) + "/" + nextTransfers2.size());
+                if (systematicUnification) {
+                    List<FeatureTerm> tmpl = FTUnification.unification(transfer1, nextTransfer2, dm);
+                    for(FeatureTerm tmp:tmpl) {
+                        explored++;
+                        nextResults.add(new AmalgamResult(tmp,ef.evaluate(tmp, transfer1, nextTransfer2, dm, o), transfer1, nextTransfer2));
+                    }
+                } else {
+                    FeatureTerm tmp = FTUnification.simpleUnification(transfer1, nextTransfer2, dm);
                     explored++;
                     nextResults.add(new AmalgamResult(tmp,ef.evaluate(tmp, transfer1, nextTransfer2, dm, o), transfer1, nextTransfer2));
                 }
@@ -102,7 +120,7 @@ public class Amalgam {
                 if (best==null || n.evaluation>best.evaluation) best = n;
             }
             if (best!=null) {
-                System.out.println("amalgamRefinementsGreedy: best in this iteration " + best.evaluation + "  (explored so far " + explored + ")");
+                if (DEBUG>=1) System.out.println("amalgamRefinementsGreedy: best in this iteration " + best.evaluation + "  (explored so far " + explored + ")");
                 
                 transfer1 = best.transfer1;
                 transfer2 = best.transfer2;
@@ -132,7 +150,8 @@ public class Amalgam {
         int explored = 0;
         
         FeatureTerm au = FTAntiunification.simpleAntiunification(source, target, o, dm);
-       
+        if (DEBUG>=1) System.out.println("assymetricAmalgamRefinementsGreedy: antiunification\n" + au.toStringNOOS(dm));
+            
         // Initial results:
         List<FeatureTerm> baseAmalgams = new LinkedList<FeatureTerm>();
 //        baseAmalgams.addAll(FTUnification.unification(LUG1P.m_a, LUG2P.m_a, dm));
@@ -140,8 +159,8 @@ public class Amalgam {
         List<AmalgamResult> results = new LinkedList<AmalgamResult>();
         for(FeatureTerm amalgam:baseAmalgams) {
             results.add(new AmalgamResult(amalgam,ef.evaluate(amalgam, au, target, dm, o), au, target));
-//            System.out.println("assymetricAmalgamRefinementsGreedy: base result");
-//            System.out.println(amalgam.toStringNOOS(dm));
+            if (DEBUG>=1) System.out.println("assymetricAmalgamRefinementsGreedy: base result");
+            if (DEBUG>=1) System.out.println(amalgam.toStringNOOS(dm));
         }
         
         // perform greedy search:
@@ -149,13 +168,14 @@ public class Amalgam {
 //        FeatureTerm transfer2 = LUG2P.m_a;
         FeatureTerm transfer1 = au;
         FeatureTerm transfer2 = target;
-        int bestResultsScore = 0;
+        double bestResultsScore = 0;
         List<AmalgamResult> bestResults = new LinkedList<AmalgamResult>();
         AmalgamResult best = null;
         do {
             List<FeatureTerm> nextTransfers1 = FTRefinement.getSpecializationsSubsumingAll(transfer1, dm, o, FTRefinement.ALL_REFINEMENTS, l1);
             List<AmalgamResult> nextResults = new LinkedList<AmalgamResult>();
             for(FeatureTerm nextTransfer1:nextTransfers1) {
+                if (DEBUG>=1) System.out.println("assymetricAmalgamRefinementsGreedy: testing transfer " + nextTransfers1.indexOf(nextTransfer1) + "/" + nextTransfers1.size());
                 List<FeatureTerm> tmpl = FTUnification.unification(nextTransfer1, transfer2, dm);
                 for(FeatureTerm tmp:tmpl) {
                     explored++;
@@ -167,7 +187,7 @@ public class Amalgam {
                 if (best==null || n.evaluation>best.evaluation) best = n;
             }
             if (best!=null) {
-//                System.out.println("assymetricAmalgamRefinementsGreedy: best in this iteration " + best.evaluation + "  (explored so far " + explored + ")");
+                if (DEBUG>=1) System.out.println("assymetricAmalgamRefinementsGreedy: best in this iteration " + best.evaluation + "  (explored so far " + explored + ")");
                 
                 transfer1 = best.transfer1;
                 transfer2 = best.transfer2;
@@ -189,7 +209,7 @@ public class Amalgam {
 
 
 
-    public static List<AmalgamResult> amalgamRefinementsGreedy(List<FeatureTerm> lf, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm) throws FeatureTermException {
+    public static List<AmalgamResult> amalgamRefinementsGreedy(List<FeatureTerm> lf, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm, boolean systematicUnification) throws FeatureTermException {
         List<AmalgamResult> results = new LinkedList<AmalgamResult>();
         
         if (lf.size()==1) {
@@ -199,12 +219,12 @@ public class Amalgam {
         
         FeatureTerm f1 = lf.get(0);
         FeatureTerm f2 = lf.get(1);
-        results = amalgamRefinementsGreedy(f1,f2,ef,o,dm);
+        results = amalgamRefinementsGreedy(f1,f2,ef,o,dm, systematicUnification);
         for(int i = 0;i<lf.size()-2;i++) {
             AmalgamResult best = null;
             List<AmalgamResult> nextResults = new LinkedList<AmalgamResult>();
             for(AmalgamResult result:results) {
-                List<AmalgamResult> tmpResults = amalgamRefinementsGreedy(result.amalgam,lf.get(i+2),ef,o,dm);
+                List<AmalgamResult> tmpResults = amalgamRefinementsGreedy(result.amalgam,lf.get(i+2),ef,o,dm, systematicUnification);
                 for(AmalgamResult result2:tmpResults) {
                     if (best==null || result2.evaluation>best.evaluation) best = result2;
                 }
@@ -221,8 +241,8 @@ public class Amalgam {
     }
 
     
-    public static List<AmalgamResult> assymetricAmalgamRefinementsGreedy(List<FeatureTerm> lf, FeatureTerm target, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm) throws FeatureTermException {
-        List<AmalgamResult> leftAmalgams = amalgamRefinementsGreedy(lf,ef,o, dm);
+    public static List<AmalgamResult> assymetricAmalgamRefinementsGreedy(List<FeatureTerm> lf, FeatureTerm target, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm, boolean systematicUnification) throws FeatureTermException {
+        List<AmalgamResult> leftAmalgams = amalgamRefinementsGreedy(lf,ef,o, dm, systematicUnification);
         List<AmalgamResult> amalgams = new LinkedList<AmalgamResult>();
         
         for(AmalgamResult leftAmalgam:leftAmalgams) {

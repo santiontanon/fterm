@@ -31,7 +31,7 @@ import ftl.base.core.FeatureTerm;
  * @author santi
  */
 public class AmalgamResult {
-    public AmalgamResult(FeatureTerm a, int e, FeatureTerm t1, FeatureTerm t2) {
+    public AmalgamResult(FeatureTerm a, double e, FeatureTerm t1, FeatureTerm t2) {
         amalgam = a;
         evaluation = e;
         transfer1 = t1;
@@ -39,7 +39,7 @@ public class AmalgamResult {
     }
 
     FeatureTerm amalgam;
-    int evaluation;
+    double evaluation;
     FeatureTerm transfer1;
     FeatureTerm transfer2;
 	/**
@@ -57,7 +57,7 @@ public class AmalgamResult {
 	/**
 	 * @return the evaluation
 	 */
-	public int getEvaluation() {
+	public double getEvaluation() {
 		return evaluation;
 	}
 	/**

@@ -3984,7 +3984,7 @@ public class FTLGUI extends JFrame {
 					AmalgamEvaluationFunction ef = new FTEFCompactness();
 
 					textArea.append("\nLoading...");
-					List<AmalgamResult> amalgams = Amalgam.amalgamRefinementsGreedy(f1, f2, ef, o, dm);
+					List<AmalgamResult> amalgams = Amalgam.amalgamRefinementsGreedy(f1, f2, ef, o, dm, true);
 
 					if (amalgams != null && !amalgams.isEmpty()) {
 						textArea.append("\nAmalgam successful!");
@@ -4375,7 +4375,7 @@ public class FTLGUI extends JFrame {
 									f2 = operationsDemoFT2;
 								}
 								AmalgamEvaluationFunction ef = new FTEFCompactness();
-								List<AmalgamResult> amalgams = Amalgam.amalgamRefinementsGreedy(f1, f2, ef, o, dm);
+								List<AmalgamResult> amalgams = Amalgam.amalgamRefinementsGreedy(f1, f2, ef, o, dm, true);
 
 								System.out.println("SIZE: " + amalgams.size());
 								if (amalgams != null && !amalgams.isEmpty()) {
