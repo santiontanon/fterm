@@ -715,10 +715,10 @@ public class NOOSParser extends OntologyParser {
      * 
      * @see csic.iiia.ftl.base.bridges.OntologyParser#prepareNextSymbol()
      */
-    protected void prepareNextSymbol() throws IOException {
+    protected NOOSToken prepareNextSymbol() throws IOException {
 
         t = NOOSToken.getTokenNOOS(fp);
-
+        return t;
     }
 
 }

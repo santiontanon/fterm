@@ -48,6 +48,12 @@ public class Amalgam {
      * This function uses a simple greedy search algorithm to reach an amalgam that maximizes a given criterion
      */
     public static List<AmalgamResult> amalgamRefinementsGreedy(FeatureTerm f1, FeatureTerm f2, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm, boolean systematicUnification) throws FeatureTermException {
+        return amalgamRefinementsGreedy(f1, f2, null, null, ef, o, dm, systematicUnification);
+    }
+    
+    
+    /* This is the same method, but ensuring that we never generalize t1 beyond pattern1, or t2 beyond pattern2: */
+    public static List<AmalgamResult> amalgamRefinementsGreedy(FeatureTerm f1, FeatureTerm f2, FeatureTerm pattern1, FeatureTerm pattern2, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm, boolean systematicUnification) throws FeatureTermException {
         List<FeatureTerm> l1 = new LinkedList<FeatureTerm>();
         List<FeatureTerm> l2 = new LinkedList<FeatureTerm>();
         l1.add(f1);
@@ -76,6 +82,10 @@ public class Amalgam {
 //        FeatureTerm transfer2 = LUG2P.m_a;
         FeatureTerm transfer1 = au;
         FeatureTerm transfer2 = au;
+        
+        if (pattern1!=null && !pattern1.subsumes(au)) transfer1 = pattern1;
+        if (pattern2!=null && !pattern2.subsumes(au)) transfer2 = pattern2;
+        
         double bestResultsScore = 0;
         List<AmalgamResult> bestResults = new LinkedList<AmalgamResult>();
         AmalgamResult best = null;
@@ -139,7 +149,8 @@ public class Amalgam {
         }while(best!=null);
         
         return bestResults;
-    }
+    }    
+    
 
     
     public static List<AmalgamResult> assymetricAmalgamRefinementsGreedy(FeatureTerm source, FeatureTerm target, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm) throws FeatureTermException {
