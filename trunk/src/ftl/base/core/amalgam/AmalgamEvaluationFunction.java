@@ -34,5 +34,5 @@ import ftl.base.core.Ontology;
  * @author santi
  */
 public interface AmalgamEvaluationFunction {
-    int evaluate(FeatureTerm amalgam, FeatureTerm transfer1, FeatureTerm transfer2, FTKBase dm, Ontology o);            
+    double evaluate(FeatureTerm amalgam, FeatureTerm transfer1, FeatureTerm transfer2, FTKBase dm, Ontology o);            
 }

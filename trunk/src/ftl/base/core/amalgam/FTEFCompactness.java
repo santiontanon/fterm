@@ -37,7 +37,7 @@ import ftl.base.core.Ontology;
  */
 public class FTEFCompactness implements AmalgamEvaluationFunction {
 
-    public int evaluate(FeatureTerm t, FeatureTerm transfer1, FeatureTerm transfer2, FTKBase dm, Ontology o) {
+    public double evaluate(FeatureTerm t, FeatureTerm transfer1, FeatureTerm transfer2, FTKBase dm, Ontology o) {
         List<FeatureTerm> variables = FTRefinement.variables(t);
         
         return FTEFSize.size(transfer1,dm,o) + FTEFSize.size(transfer2,dm,o) - variables.size();

@@ -252,6 +252,10 @@ public abstract class OntologyParser {
 		Set<FeatureTerm> l;
 		Symbol n = new Symbol(tokenName);
 
+                if (vsort==null) {
+                    throw new FeatureTermException("Cannot find symbol with name '" + tokenName + "'");
+                }
+                
 		l = m.searchFT(n);
 		for (FeatureTerm f2 : l) {
 			if (vsort.inSort(f2)) {
@@ -526,13 +530,15 @@ public abstract class OntologyParser {
 		Symbol n = new Symbol(name);
 		s = sort.featureSort(fname);
 
-		if (sort != null) {
+		if (s != null) {
 			fvalue = setupSymbol(s, m, name);
 			if (num[0] != 0 && num[0] != 1) {
 				System.err.println(errorMessage);
 				fvalue = null;
 			}
-		}
+		} else {
+                    throw new FeatureTermException("OntologyParser: cannot find sort of feature '" + fname + "' of sort '" + sort + "'");
+                }
 
 		return fvalue;
 	}

@@ -38,7 +38,7 @@ import ftl.base.utils.FeatureTermException;
  */
 public class FTEFSize implements AmalgamEvaluationFunction {
 
-    public int evaluate(FeatureTerm t, FeatureTerm transfer1, FeatureTerm transfer2, FTKBase dm, Ontology o) {
+    public double evaluate(FeatureTerm t, FeatureTerm transfer1, FeatureTerm transfer2, FTKBase dm, Ontology o) {
         return size(t,dm,o);
     }
     
