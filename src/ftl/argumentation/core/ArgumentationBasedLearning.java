@@ -24,10 +24,6 @@
   
  package ftl.argumentation.core;
 
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-
 import ftl.base.core.FTAntiunification;
 import ftl.base.core.FTKBase;
 import ftl.base.core.FTRefinement;
@@ -38,6 +34,9 @@ import ftl.base.utils.FeatureTermException;
 import ftl.learning.core.Hypothesis;
 import ftl.learning.core.Rule;
 import ftl.learning.core.RuleHypothesis;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -105,7 +104,7 @@ public class ArgumentationBasedLearning {
 	 * Generate hypothesis.
 	 * 
 	 */
-	public RuleHypothesis generateHypothesis(List<Argument> arguments, Collection<FeatureTerm> examples, ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
+	public Hypothesis generateHypothesis(List<Argument> arguments, Collection<FeatureTerm> examples, ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
 		RuleHypothesis h = new RuleHypothesis(false);
 
 		h.setDefaultSolution(Hypothesis.mostCommonSolution(examples, sp));
@@ -560,7 +559,7 @@ public class ArgumentationBasedLearning {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public RuleHypothesis coverUncoveredExamples(List<FeatureTerm> examples, FeatureTerm solution, RuleHypothesis h, List<Argument> acceptedArguments,
+	public Hypothesis coverUncoveredExamples(List<FeatureTerm> examples, FeatureTerm solution, RuleHypothesis h, List<Argument> acceptedArguments,
 			ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
 		List<FeatureTerm> uncovered = uncoveredExamples(examples, h, acceptedArguments, dp, sp);
 		List<Argument> newArguments = coverExamplesBottomUp(uncovered, acceptedArguments, aa, dp, sp, o, dm);
