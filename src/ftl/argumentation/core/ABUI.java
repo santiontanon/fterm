@@ -74,6 +74,33 @@ public class ABUI extends ArgumentationBasedLearning {
      */
     public static boolean GREEDY_ABUI = false;
 
+    
+    
+    public RuleHypothesis generateHypothesis(List<Argument> arguments, Collection<FeatureTerm> examples, ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
+            RuleHypothesis h = new RuleHypothesis(false);
+            h.setDefaultSolution(Hypothesis.mostCommonSolution(examples, sp));
+            List<FeatureTerm> differentSolutions = Hypothesis.differentSolutions(examples, sp);
+
+            for (Argument a : arguments) {
+                    if (a.m_type == Argument.ARGUMENT_RULE) {
+                            h.addRule(a.m_rule);
+                    }
+            }
+                       
+            for(FeatureTerm solution:differentSolutions) {
+                RuleHypothesis sh = learnConceptABUI(examples, solution, arguments, aa, dp, sp, o, dm);
+                System.out.println("  Learning concept " + solution.toStringNOOS(dm) + " -> " + sh.getRules().size() + " rules.");
+                for(Rule r:sh.getRules()) {
+//                    System.out.println(r.toStringNOOS(dm));
+                    h.addRule(r);
+                }
+            }
+
+            return h;
+    }
+    
+    
+    
     /**
      * Generate best counter argument abui.
      *

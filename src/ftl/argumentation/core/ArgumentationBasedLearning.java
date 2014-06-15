@@ -104,19 +104,8 @@ public class ArgumentationBasedLearning {
 	/**
 	 * Generate hypothesis.
 	 * 
-	 * @param arguments
-	 *            the arguments
-	 * @param examples
-	 *            the examples
-	 * @param dp
-	 *            the dp
-	 * @param sp
-	 *            the sp
-	 * @return the rule hypothesis
-	 * @throws Exception
-	 *             the exception
 	 */
-	public RuleHypothesis generateHypothesis(List<Argument> arguments, Collection<FeatureTerm> examples, Path dp, Path sp) throws Exception {
+	public RuleHypothesis generateHypothesis(List<Argument> arguments, Collection<FeatureTerm> examples, ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
 		RuleHypothesis h = new RuleHypothesis(false);
 
 		h.setDefaultSolution(Hypothesis.mostCommonSolution(examples, sp));
@@ -579,6 +568,6 @@ public class ArgumentationBasedLearning {
 		System.out.println("Uncovered examples " + uncovered.size() + " covered by " + newArguments.size() + " new rules.");
 		for (Rule r : h.getRules())
 			newArguments.add(new Argument(r));
-		return generateHypothesis(newArguments, examples, dp, sp);
+		return generateHypothesis(newArguments, examples, aa, dp, sp, o, dm);
 	}
 }
