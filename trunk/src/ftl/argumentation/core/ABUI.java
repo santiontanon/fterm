@@ -76,8 +76,9 @@ public class ABUI extends ArgumentationBasedLearning {
 
     
     
-    public RuleHypothesis generateHypothesis(List<Argument> arguments, Collection<FeatureTerm> examples, ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
-            RuleHypothesis h = new RuleHypothesis(false);
+    public Hypothesis generateHypothesis(List<Argument> arguments, Collection<FeatureTerm> examples, ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
+        
+        RuleHypothesis h = new RuleHypothesis(false);
             h.setDefaultSolution(Hypothesis.mostCommonSolution(examples, sp));
             List<FeatureTerm> differentSolutions = Hypothesis.differentSolutions(examples, sp);
 
@@ -262,7 +263,7 @@ public class ABUI extends ArgumentationBasedLearning {
      * @return the list
      * @throws Exception the exception
      */
-    public List<Argument> coverExamplesABUI(List<FeatureTerm> examples, Collection<Argument> acceptedArguments, ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
+    public List<Argument> coverExamplesABUI(Collection<FeatureTerm> examples, Collection<Argument> acceptedArguments, ArgumentAcceptability aa, Path dp, Path sp, Ontology o, FTKBase dm) throws Exception {
         List<Argument> args = new LinkedList<Argument>();
         FeatureTerm any = o.getSort("any").createFeatureTerm();
 

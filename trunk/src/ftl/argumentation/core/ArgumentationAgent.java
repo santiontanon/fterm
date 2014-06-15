@@ -290,7 +290,7 @@ public class ArgumentationAgent {
 		if (recover) {
 			// List<Argument> acceptedArguments = state.getSettled(agents);
 			List<Argument> acceptedArguments = state.getUndefeatedArguments();
-			m_hypothesis = m_learning.coverUncoveredExamples(m_examples, solution, m_hypothesis, acceptedArguments, m_aa, dp, sp, o, dm);
+			m_hypothesis = (RuleHypothesis)m_learning.coverUncoveredExamples(m_examples, solution, m_hypothesis, acceptedArguments, m_aa, dp, sp, o, dm);
 
 			for (Rule r : m_hypothesis.getRules()) {
 				boolean found = false;
