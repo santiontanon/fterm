@@ -148,6 +148,20 @@ public class Amalgam {
             
         }while(best!=null);
         
+        // filter duplicates:
+        List<FeatureTerm> l = new LinkedList<FeatureTerm>();
+        List<AmalgamResult> toDelete = new LinkedList<AmalgamResult>();
+        for(AmalgamResult r:bestResults) {
+            for(FeatureTerm a:l) {
+                if (a.equivalents(r.amalgam)) {
+                    toDelete.add(r);
+                    break;
+                }
+            }
+            l.add(r.amalgam);
+        }
+        bestResults.removeAll(toDelete);
+        
         return bestResults;
     }    
     

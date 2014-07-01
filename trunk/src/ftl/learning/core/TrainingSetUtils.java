@@ -244,211 +244,51 @@ public class TrainingSetUtils {
         return training_sets;
     }
 
-    /**
-     * The Constant ARTIFICIAL_DATASET.
-     */
     public static final int ARTIFICIAL_DATASET = 0;
-
-    /**
-     * The Constant ZOOLOGY_DATASET.
-     */
     public static final int ZOOLOGY_DATASET = 1;
-
-    /**
-     * The Constant SOYBEAN_DATASET.
-     */
     public static final int SOYBEAN_DATASET = 2;
-
-    /**
-     * The Constant DEMOSPONGIAE_503_DATASET.
-     */
     public static final int DEMOSPONGIAE_503_DATASET = 3;
-
-    /**
-     * The Constant DEMOSPONGIAE_280_DATASET.
-     */
     public static final int DEMOSPONGIAE_280_DATASET = 4;
-
-    /**
-     * The Constant DEMOSPONGIAE_120_DATASET.
-     */
     public static final int DEMOSPONGIAE_120_DATASET = 5;
-
-    /**
-     * The Constant TRAINS_DATASET.
-     */
     public static final int TRAINS_DATASET = 6;
-
-    /**
-     * The Constant TRAINS_82_DATASET.
-     */
     public static final int TRAINS_82_DATASET = 61;
-
-    /**
-     * The Constant TRAINS_900_DATASET.
-     */
     public static final int TRAINS_900_DATASET = 62;
-
-    /**
-     * The Constant TRAINS_100_DATASET.
-     */
     public static final int TRAINS_100_DATASET = 63;
-
-    /**
-     * The Constant TRAINS_1000_DATASET.
-     */
     public static final int TRAINS_1000_DATASET = 64;
-
-    /**
-     * The Constant TRAINS_10000_DATASET.
-     */
     public static final int TRAINS_10000_DATASET = 65;
-
-    /**
-     * The Constant TRAINS_100000_DATASET.
-     */
     public static final int TRAINS_100000_DATASET = 66;
-
-    /**
-     * The Constant UNCLE_DATASET.
-     */
     public static final int UNCLE_DATASET = 7;
-
-    /**
-     * The Constant UNCLE_DATASET_SETS.
-     */
     public static final int UNCLE_DATASET_SETS = 8;
-
-    /**
-     * The Constant UNCLE_DATASET_BOTH.
-     */
     public static final int UNCLE_DATASET_BOTH = 9;
-
-    /**
-     * The Constant CARS_DATASET.
-     */
     public static final int CARS_DATASET = 10;
-
-    /**
-     * The Constant TOXICOLOGY_DATASET_MRATS.
-     */
     public static final int TOXICOLOGY_DATASET_MRATS = 11;
-
-    /**
-     * The Constant TOXICOLOGY_DATASET_FRATS.
-     */
     public static final int TOXICOLOGY_DATASET_FRATS = 12;
-
-    /**
-     * The Constant TOXICOLOGY_DATASET_MMICE.
-     */
     public static final int TOXICOLOGY_DATASET_MMICE = 13;
-
-    /**
-     * The Constant TOXICOLOGY_DATASET_FMICE.
-     */
     public static final int TOXICOLOGY_DATASET_FMICE = 14;
-
-    /**
-     * The Constant TOXICOLOGY_OLD_DATASET_MRATS.
-     */
     public static final int TOXICOLOGY_OLD_DATASET_MRATS = 15;
-
-    /**
-     * The Constant TOXICOLOGY_OLD_DATASET_FRATS.
-     */
     public static final int TOXICOLOGY_OLD_DATASET_FRATS = 16;
-
-    /**
-     * The Constant TOXICOLOGY_OLD_DATASET_MMICE.
-     */
     public static final int TOXICOLOGY_OLD_DATASET_MMICE = 17;
-
-    /**
-     * The Constant TOXICOLOGY_OLD_DATASET_FMICE.
-     */
     public static final int TOXICOLOGY_OLD_DATASET_FMICE = 18;
-
-    /**
-     * The Constant KR_VS_KP_DATASET.
-     */
     public static final int KR_VS_KP_DATASET = 19;
-
-    /**
-     * The Constant FINANCIAL.
-     */
     public static final int FINANCIAL = 20;
-
-    /**
-     * The Constant FINANCIAL_NO_TRANSACTIONS.
-     */
     public static final int FINANCIAL_NO_TRANSACTIONS = 21;
-
-    /**
-     * The Constant MUTAGENESIS.
-     */
     public static final int MUTAGENESIS = 22;
-
-    /**
-     * The Constant MUTAGENESIS_EASY.
-     */
     public static final int MUTAGENESIS_EASY = 23;
-
-    /**
-     * The Constant MUTAGENESIS_DISCRETIZED.
-     */
     public static final int MUTAGENESIS_DISCRETIZED = 24;
-
-    /**
-     * The Constant MUTAGENESIS_EASY_DISCRETIZED.
-     */
     public static final int MUTAGENESIS_EASY_DISCRETIZED = 25;
-
-    /**
-     * The Constant MUTAGENESIS_NOL_DISCRETIZED.
-     */
     public static final int MUTAGENESIS_NOL_DISCRETIZED = 26;
-
-    /**
-     * The Constant MUTAGENESIS_EASY_NOL_DISCRETIZED.
-     */
     public static final int MUTAGENESIS_EASY_NOL_DISCRETIZED = 27;
-
-    /**
-     * The Constant RIU_STORIES.
-     */
     public static final int RIU_STORIES = 28;
-
-    /**
-     * The Constant MUSHROOM_DATASET.
-     */
     public static final int MUSHROOM_DATASET = 29;
-
-    /**
-     * The Constant RIU_STORIES_EVENING_TIDE.
-     */
     public static final int RIU_STORIES_EVENING_TIDE = 30;
-
-    /**
-     * The Constant PAIRS_50_DATASET.
-     */
     public static final int PAIRS_50_DATASET = 31;
-
-    /**
-     * The Constant STRAIGHT_50_DATASET.
-     */
     public static final int STRAIGHT_50_DATASET = 32;
-
-    /**
-     * The Constant LYMPHOGRAPHY_148_DATASET.
-     */
     public static final int LYMPHOGRAPHY_148_DATASET = 33;
-
-    /**
-     * The Constant PIZZA_DATASET.
-     */
     public static final int PIZZA_DATASET = 34;
+    public static final int BREASTCANCER_DATASET = 35;
+    public static final int SPECT_DATASET = 36;
 
+    
     /**
      * Load training set.
      *
@@ -944,6 +784,22 @@ public class TrainingSetUtils {
                 ts.problem_sort = o.getSort("straight-problem");
                 ts.description_path.features.clear();
                 ts.description_path.features.add(new Symbol("problem"));
+                break;
+            case BREASTCANCER_DATASET:
+                dm.importNOOS(NOOSpath + "/breast-cancer-ontology.noos", o);
+                dm.importNOOS(NOOSpath + "/breast-cancer-dm.noos", o);
+                case_base.importNOOS(NOOSpath + "/breast-cancer-cases-286.noos", o);
+
+                ts.name = "breast-cancer";
+                ts.problem_sort = o.getSort("breast-cancer-problem");
+                break;
+            case SPECT_DATASET:
+                dm.importNOOS(NOOSpath + "/spect-ontology.noos", o);
+                dm.importNOOS(NOOSpath + "/spect-dm.noos", o);
+                case_base.importNOOS(NOOSpath + "/spect-cases-267.noos", o);
+
+                ts.name = "spect";
+                ts.problem_sort = o.getSort("spect-problem");
                 break;
             default:
                 return null;
