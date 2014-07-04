@@ -287,6 +287,9 @@ public class TrainingSetUtils {
     public static final int PIZZA_DATASET = 34;
     public static final int BREASTCANCER_DATASET = 35;
     public static final int SPECT_DATASET = 36;
+    public static final int PROMOTERS_DATASET = 37;
+    public static final int BRIDGES_DATASET = 38;
+    public static final int PRIMARY_TUMOR_DATASET = 39;
 
     
     /**
@@ -800,6 +803,30 @@ public class TrainingSetUtils {
 
                 ts.name = "spect";
                 ts.problem_sort = o.getSort("spect-problem");
+                break;
+            case PROMOTERS_DATASET:
+                dm.importNOOS(NOOSpath + "/promoters-ontology.noos", o);
+                dm.importNOOS(NOOSpath + "/promoters-dm.noos", o);
+                case_base.importNOOS(NOOSpath + "/promoters-cases-106.noos", o);
+
+                ts.name = "promoters";
+                ts.problem_sort = o.getSort("promoters-problem");
+                break;
+            case BRIDGES_DATASET:
+                dm.importNOOS(NOOSpath + "/bridges-ontology.noos", o);
+                dm.importNOOS(NOOSpath + "/bridges-dm.noos", o);
+                case_base.importNOOS(NOOSpath + "/bridges-cases-105.noos", o);
+
+                ts.name = "bridges-version2";
+                ts.problem_sort = o.getSort("bridges-version2-problem");
+                break;
+            case PRIMARY_TUMOR_DATASET:
+                dm.importNOOS(NOOSpath + "/primary-tumor-ontology.noos", o);
+                dm.importNOOS(NOOSpath + "/primary-tumor-dm.noos", o);
+                case_base.importNOOS(NOOSpath + "/primary-tumor-cases-123.noos", o);
+
+                ts.name = "primary-tumor";
+                ts.problem_sort = o.getSort("primary-tumor-problem");
                 break;
             default:
                 return null;
