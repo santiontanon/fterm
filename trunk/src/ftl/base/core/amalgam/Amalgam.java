@@ -48,49 +48,68 @@ public class Amalgam {
      * This function uses a simple greedy search algorithm to reach an amalgam that maximizes a given criterion
      */
     public static List<AmalgamResult> amalgamRefinementsGreedy(FeatureTerm f1, FeatureTerm f2, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm, boolean systematicUnification) throws FeatureTermException {
-        return amalgamRefinementsGreedy(f1, f2, null, null, ef, o, dm, systematicUnification);
+        return amalgamRefinementsGreedy(f1, f2, null, null, ef, o, dm, systematicUnification, FTAntiunification.VERSION_FAST);
     }
-    
+
     
     /* This is the same method, but ensuring that we never generalize t1 beyond pattern1, or t2 beyond pattern2: */
-    public static List<AmalgamResult> amalgamRefinementsGreedy(FeatureTerm f1, FeatureTerm f2, FeatureTerm pattern1, FeatureTerm pattern2, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm, boolean systematicUnification) throws FeatureTermException {
+    public static List<AmalgamResult> amalgamRefinementsGreedy(FeatureTerm f1, FeatureTerm f2, FeatureTerm pattern1, FeatureTerm pattern2, AmalgamEvaluationFunction ef, Ontology o, FTKBase dm, boolean systematicUnification, int AUType) throws FeatureTermException {
         List<FeatureTerm> l1 = new LinkedList<FeatureTerm>();
         List<FeatureTerm> l2 = new LinkedList<FeatureTerm>();
         l1.add(f1);
         l2.add(f2);
         int explored = 0;
        
-        FeatureTerm au = FTAntiunification.simpleAntiunification(f1, f2, o, dm);
-      
         // Initial results:
-        List<FeatureTerm> baseAmalgams = new LinkedList<FeatureTerm>();
-//        baseAmalgams.addAll(FTUnification.unification(LUG1P.m_a, LUG2P.m_a, dm));
-        baseAmalgams.add(au);
-        List<AmalgamResult> results = new LinkedList<AmalgamResult>();
-        for(FeatureTerm amalgam:baseAmalgams) {
-            results.add(new AmalgamResult(amalgam, ef.evaluate(amalgam, au, au, dm, o), au, au));
-//            System.out.println("amalgamRefinementsGreedy: base transfer1");
-//            System.out.println(LUG1P.m_a.toStringNOOS(dm));
-//            System.out.println("amalgamRefinementsGreedy: base transfer2");
-//            System.out.println(LUG2P.m_a.toStringNOOS(dm));
-            System.out.println("amalgamRefinementsGreedy: base result");
-            System.out.println(amalgam.toStringNOOS(dm));
+        List<FeatureTerm> baseAmalgams;
+        {
+            List<FeatureTerm> tmp = new LinkedList<FeatureTerm>();
+            tmp.add(f1);
+            tmp.add(f2);
+            baseAmalgams = FTAntiunification.antiunification(tmp, FTRefinement.ALL_REFINEMENTS, null, o, dm, true, AUType);
         }
-
-        // perform greedy search:
-//        FeatureTerm transfer1 = LUG1P.m_a;
-//        FeatureTerm transfer2 = LUG2P.m_a;
-        FeatureTerm transfer1 = au;
-        FeatureTerm transfer2 = au;
         
-        if (pattern1!=null && !pattern1.subsumes(au)) transfer1 = pattern1;
-        if (pattern2!=null && !pattern2.subsumes(au)) transfer2 = pattern2;
-        
+        FeatureTerm transfer1 = null;
+        FeatureTerm transfer2 = null;
+        List<AmalgamResult> results = new LinkedList<AmalgamResult>();       
         double bestResultsScore = 0;
         List<AmalgamResult> bestResults = new LinkedList<AmalgamResult>();
         AmalgamResult best = null;
+        
+        // filter among the set of base results:
+        {
+            List<AmalgamResult> nextResults = new LinkedList<AmalgamResult>();
+            for(FeatureTerm amalgam:baseAmalgams) {
+                nextResults.add(new AmalgamResult(amalgam, ef.evaluate(amalgam, amalgam, amalgam, dm, o), amalgam, amalgam));
+                explored++;
+                if (DEBUG>=1) {
+                    System.out.println("amalgamRefinementsGreedy: base result");
+                    System.out.println(amalgam.toStringNOOS(dm));
+                }
+            }
+            best = null;
+            for(AmalgamResult n:nextResults) {
+                if (best==null || n.getEvaluation()>best.getEvaluation()) best = n;
+            }
+            if (best!=null) {
+                if (DEBUG>=1) System.out.println("amalgamRefinementsGreedy: best in this iteration " + best.getEvaluation() + "  (explored so far " + explored + ")");
+
+                transfer1 = best.getTransfer1();
+                transfer2 = best.getTransfer2();
+                results.clear();
+                if (bestResults.isEmpty() || best.getEvaluation()>bestResultsScore) {
+                    bestResults.clear();
+                    bestResultsScore = best.getEvaluation()-1;
+                }
+                for(AmalgamResult n:nextResults) {
+                    if (n.getEvaluation()>=best.getEvaluation()) results.add(n);
+                    if (n.getEvaluation()>bestResultsScore) bestResults.add(n);
+                }
+                bestResultsScore = Math.max(bestResultsScore,best.getEvaluation());
+            }      
+        }
+        
         do {
-        	
             List<FeatureTerm> nextTransfers1 = FTRefinement.getSpecializationsSubsumingAll(transfer1, dm, o, FTRefinement.ALL_REFINEMENTS, l1);
             List<FeatureTerm> nextTransfers2 = FTRefinement.getSpecializationsSubsumingAll(transfer2, dm, o, FTRefinement.ALL_REFINEMENTS, l2);
             List<AmalgamResult> nextResults = new LinkedList<AmalgamResult>();
