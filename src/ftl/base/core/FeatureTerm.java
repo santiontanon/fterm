@@ -344,11 +344,16 @@ public abstract class FeatureTerm implements Serializable {
 	 * @return the string
 	 */
 	String toStringNOOSInternal(List<FeatureTerm> bindings, int tabs, FTKBase dm) {
-		String tmp = "";
+            StringBuffer tmp = new StringBuffer("");
+            toStringNOOSInternal(tmp, bindings, tabs, dm);
+            return tmp.toString();
+        }
+        
+	void toStringNOOSInternal(StringBuffer tmp, List<FeatureTerm> bindings, int tabs, FTKBase dm) {
 		int ID = -1;
 
 		if (m_name != null && dm != null && dm.contains(this)) {
-			return tmp + m_name.get();
+			tmp.append(m_name.get());
 		}
 
 		ID = bindings.indexOf(this);
@@ -356,15 +361,15 @@ public abstract class FeatureTerm implements Serializable {
 			bindings.add(this);
 			ID = bindings.indexOf(this);
 
-			tmp += "(define ?X" + (ID + 1) + " (" + m_sort.get();
+			tmp.append("(define ?X" + (ID + 1) + " (" + m_sort.get());
 
 			if (m_name != null) {
-				tmp += " :id " + m_name.get();
+				tmp.append(" :id " + m_name.get());
 			} // if
 
-			return tmp + "))";
+			tmp.append("))");
 		} else {
-			return "!X" + (ID + 1);
+			tmp.append("!X" + (ID + 1));
 		} // if
 	} // FeatureTerm::toStringNOOSInternal
 

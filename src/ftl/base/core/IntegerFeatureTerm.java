@@ -112,12 +112,14 @@ public class IntegerFeatureTerm extends FeatureTerm {
 	 * 
 	 * @see csic.iiia.ftl.base.core.FeatureTerm#toStringNOOSInternal(java.util.List, int,
 	 * csic.iiia.ftl.base.core.FTKBase)
-	 */
-	String toStringNOOSInternal(List<FeatureTerm> bindings, int tabs, FTKBase dm) {
+	 */        
+	void toStringNOOSInternal(StringBuffer tmp, List<FeatureTerm> bindings, int tabs, FTKBase dm) {
 		int ID = -1;
 
-		if (m_name != null && dm != null && dm.contains(this))
-			return m_name.get();
+		if (m_name != null && dm != null && dm.contains(this)) {
+			tmp.append(m_name.get());
+                        return;
+                }
 
 		ID = bindings.indexOf(this);
 
@@ -126,15 +128,15 @@ public class IntegerFeatureTerm extends FeatureTerm {
 			ID = bindings.indexOf(this);
 
 			if (mValue == null) {
-				return "(define ?X" + (ID + 1) + " (" + m_sort.get() + "))";
+				tmp.append("(define ?X" + (ID + 1) + " (" + m_sort.get() + "))");
 			} else {
-				return "" + mValue;
+				tmp.append("" + mValue);
 			} // if
 		} else {
 			if (mValue == null) {
-				return "!X" + (ID + 1);
+				tmp.append("!X" + (ID + 1));
 			} else {
-				return "" + mValue;
+				tmp.append("" + mValue);
 			}
 		} // if
 	} // FeatureTerm::toStringNOOSInternal
