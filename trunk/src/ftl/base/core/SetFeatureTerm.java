@@ -204,13 +204,14 @@ public class SetFeatureTerm extends FeatureTerm {
 	 * @see csic.iiia.ftl.base.core.FeatureTerm#toStringNOOSInternal(java.util.List, int,
 	 * csic.iiia.ftl.base.core.FTKBase)
 	 */
-	String toStringNOOSInternal(List<FeatureTerm> bindings, int tabs, FTKBase dm) {
+	void toStringNOOSInternal(StringBuffer tmp, List<FeatureTerm> bindings, int tabs, FTKBase dm) {
 		int i;
-		String tmp = "";
 		int ID = -1;
 
-		if (m_name != null && dm != null && dm.contains(this))
-			return m_name.get();
+		if (m_name != null && dm != null && dm.contains(this)) {
+			tmp.append(m_name.get());
+                        return;
+                }
 
 		ID = bindings.indexOf(this);
 
@@ -218,30 +219,30 @@ public class SetFeatureTerm extends FeatureTerm {
 			bindings.add(this);
 			ID = bindings.indexOf(this);
 
-			tmp += "(define ?X" + (ID + 1) + " (set)";
+			tmp.append("(define ?X" + (ID + 1) + " (set)");
 
 			if (!m_set.isEmpty()) {
-				tmp += "\n";
+				tmp.append("\n");
 				for (i = 0; i < tabs + 2; i++)
-					tmp += " ";
+					tmp.append(" ");
 			}
 
 			for (FeatureTerm f : m_set) {
-				tmp += f.toStringNOOSInternal(bindings, tabs + 1, dm);
+				tmp.append(f.toStringNOOSInternal(bindings, tabs + 1, dm));
 
 				if (m_set.indexOf(f) != m_set.size() - 1) {
-					tmp += "\n";
+					tmp.append("\n");
 					for (i = 0; i < tabs + 2; i++)
-						tmp += " ";
+						tmp.append(" ");
 				} // if
 			} // for
 
-			return tmp + ")";
+			tmp.append(")");
 		} else {
 			if (m_set.isEmpty()) {
-				return "(define (set))";
+				tmp.append("(define (set))");
 			} else {
-				return "!X" + (ID + 1);
+				tmp.append("!X" + (ID + 1));
 			}
 		} // if
 

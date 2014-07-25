@@ -103,11 +103,13 @@ public class SymbolFeatureTerm extends FeatureTerm {
 	 * @see csic.iiia.ftl.base.core.FeatureTerm#toStringNOOSInternal(java.util.List, int,
 	 * csic.iiia.ftl.base.core.FTKBase)
 	 */
-	String toStringNOOSInternal(List<FeatureTerm> bindings, int tabs, FTKBase dm) {
+	void toStringNOOSInternal(StringBuffer tmp, List<FeatureTerm> bindings, int tabs, FTKBase dm) {
 		int ID = -1;
 
-		if (m_name != null && dm != null && dm.contains(this))
-			return m_name.get();
+		if (m_name != null && dm != null && dm.contains(this)) {
+			tmp.append(m_name.get());
+                        return;
+                }
 
 		ID = bindings.indexOf(this);
 
@@ -116,15 +118,15 @@ public class SymbolFeatureTerm extends FeatureTerm {
 			ID = bindings.indexOf(this);
 
 			if (m_value == null) {
-				return "(define ?X" + (ID + 1) + " (symbol))";
+				tmp.append("(define ?X" + (ID + 1) + " (symbol))");
 			} else {
-				return "?X" + (ID + 1) + " \"" + m_value + "\"";
+				tmp.append("?X" + (ID + 1) + " \"" + m_value + "\"");
 			} // if
 		} else {
 			if (m_value == null) {
-				return "!X" + (ID + 1);
+				tmp.append("!X" + (ID + 1));
 			} else {
-				return "\"" + m_value + "\"";
+				tmp.append("\"" + m_value + "\"");
 			}
 		} // if
 	} // FeatureTerm::toStringNOOSInternal

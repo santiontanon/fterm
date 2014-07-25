@@ -314,18 +314,42 @@ public class TermFeatureTerm extends FeatureTerm {
 		m_features.remove(feature);
 	} // FeatureTerm::removeFeatureValue
 
+	/**
+	 * Removes the feature value.
+	 * 
+	 * @param feature
+	 *            the feature to remove from
+	 * @param value
+	 *            the value to remove
+	 */
+	public void removeFeatureValue(Symbol feature, FeatureTerm value) {
+            FeatureTerm t = m_features.get(feature);
+            if (t instanceof SetFeatureTerm) {
+                SetFeatureTerm st = (SetFeatureTerm)t;
+                st.m_set.remove(value);
+                if (st.m_set.isEmpty()) {
+                    m_features.remove(feature);
+                }
+            } else {
+                if (t==value) {
+                    m_features.remove(feature);
+                }
+            }
+	} // FeatureTerm::removeFeatureValue
+        
+        
 	/*
 	 * (non-Javadoc)
 	 * 
 	 * @see csic.iiia.ftl.base.core.FeatureTerm#toStringNOOSInternal(java.util.List, int,
 	 * csic.iiia.ftl.base.core.FTKBase)
 	 */
-	String toStringNOOSInternal(List<FeatureTerm> bindings, int tabs, FTKBase dm) {
-		String tmp = "";
+	void toStringNOOSInternal(StringBuffer tmp, List<FeatureTerm> bindings, int tabs, FTKBase dm) {
 		int ID = -1;
 
 		if (m_name != null && dm != null && dm.contains(this)) {
-			return tmp + m_name.get();
+			tmp.append(m_name.get());
+                        return;
 		}
 		ID = bindings.indexOf(this);
 
@@ -335,18 +359,18 @@ public class TermFeatureTerm extends FeatureTerm {
 
 			FeatureTerm f;
 
-			tmp += "(define ?X" + (ID + 1) + " (" + m_sort.get();
+			tmp.append("(define ?X" + (ID + 1) + " (" + m_sort.get());
 
 			if (m_name != null) {
-				tmp += " :id " + m_name.get();
+				tmp.append(" :id " + m_name.get());
 			} // if
 
-			tmp += ")";
+			tmp.append(")");
 
 			if (!m_features.isEmpty()) {
-				tmp += "\n";
+				tmp.append("\n");
 				for (int i = 0; i < tabs + 2; i++) {
-					tmp += " ";
+					tmp.append(" ");
 				}
 			}
 
@@ -356,23 +380,25 @@ public class TermFeatureTerm extends FeatureTerm {
 				f = m_features.get(s);
 
 				if (f == null) {
-					tmp += "(" + s.get() + " null)";
+					tmp.append("(" + s.get() + " null)");
 				} else {
-					tmp += "(" + s.get() + " " + f.toStringNOOSInternal(bindings, tabs + s.get().length() + 4, dm) + ")";
+					tmp.append("(" + s.get() + " ");
+                                        f.toStringNOOSInternal(tmp, bindings, tabs + s.get().length() + 4, dm);
+                                        tmp.append(")");
 				}
 				i++;
 
 				if (i != l) {
-					tmp += "\n";
+					tmp.append("\n");
 					for (int j = 0; j < tabs + 2; j++) {
-						tmp += " ";
+						tmp.append(" ");
 					}
 				} // if
 			} // while
 
-			return tmp + ")";
+			tmp.append(")");
 		} else {
-			return "!X" + (ID + 1);
+			tmp.append("!X" + (ID + 1));
 		} // if
 	} // FeatureTerm::toStringNOOSInternal
 
