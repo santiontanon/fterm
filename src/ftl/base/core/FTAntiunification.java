@@ -32,7 +32,7 @@ import ftl.base.utils.Pair;
 public class FTAntiunification {
 
 	/** The Constant DEBUG. */
-	public static final boolean DEBUG = false;
+	public static boolean DEBUG = false;
 
 	/** The Constant VERSION_FAST. */
 	public static final int VERSION_FAST = 0;

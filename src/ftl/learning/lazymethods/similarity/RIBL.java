@@ -64,7 +64,7 @@ public class RIBL extends Distance {
 	int max_depth = 3;
 
 	/** The debug. */
-	boolean debug = false;
+	public static boolean debug = false;
 
 	/**
 	 * Instantiates a new rIBL.

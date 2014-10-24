@@ -38,7 +38,17 @@ import ftl.base.utils.Pair;
 public class AUDistance extends Distance {
 
 	/** The Constant DEBUG. */
-	static final boolean DEBUG = false;
+	static public boolean DEBUG = false;
+        
+        int language = FTRefinement.ALL_REFINEMENTS;
+        
+        public AUDistance() {
+            
+        }
+        
+        public AUDistance(int a_language) {
+            language = a_language;
+        }
 
 	/*
 	 * (non-Javadoc)
@@ -64,7 +74,7 @@ public class AUDistance extends Distance {
 			List<FeatureTerm> results;
 			objects.add(f1);
 			objects.add(f2);
-			results = FTAntiunification.antiunification(objects, FTRefinement.ALL_REFINEMENTS, null, o, dm, true, FTAntiunification.VERSION_FAST);
+			results = FTAntiunification.antiunification(objects, language, null, o, dm, true, FTAntiunification.VERSION_FAST);
 			objects.clear();
 			au = results.get(0);
 
@@ -87,7 +97,7 @@ public class AUDistance extends Distance {
 			List<Pair<FeatureTerm, Integer>> startl = new LinkedList<Pair<FeatureTerm, Integer>>();
 			objects.add(f1);
 			startl.add(new Pair<FeatureTerm, Integer>(au, 0));
-			results = FTAntiunification.antiunificationCountingSteps(objects, FTRefinement.ALL_REFINEMENTS, startl, o, dm, false,
+			results = FTAntiunification.antiunificationCountingSteps(objects, language, startl, o, dm, false,
 					FTAntiunification.VERSION_FAST);
 			objects.clear();
 			startl.clear();
@@ -107,7 +117,7 @@ public class AUDistance extends Distance {
 			List<Pair<FeatureTerm, Integer>> startl = new LinkedList<Pair<FeatureTerm, Integer>>();
 			objects.add(f2);
 			startl.add(new Pair<FeatureTerm, Integer>(au, 0));
-			results = FTAntiunification.antiunificationCountingSteps(objects, FTRefinement.ALL_REFINEMENTS, startl, o, dm, false,
+			results = FTAntiunification.antiunificationCountingSteps(objects, language, startl, o, dm, false,
 					FTAntiunification.VERSION_FAST);
 			objects.clear();
 			startl.clear();
