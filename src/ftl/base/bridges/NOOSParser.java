@@ -372,7 +372,7 @@ public class NOOSParser extends OntologyParser {
                     }
                     fvalue = super.defineSymbol(hierarchy, fvalue, fsort, nprl, nvll, m, nvl, o);
                     if (fvalue == null) {
-                        System.err.println("NOOS Importer: Error 9 (token: " + t.token + "): cannot parse the value of a feature\n");
+                        System.err.println("NOOS Importer: Error 9 (token: " + t.token + "): cannot parse the value of feature '" + fname + "'");
                         error = true;
                     } // if
                 } else if (t.type == NOOSToken.TOKEN_ROOT) {
