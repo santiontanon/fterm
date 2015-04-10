@@ -306,7 +306,7 @@ public class NOOSParser extends OntologyParser {
         } else if (t.type == NOOSToken.TOKEN_RIGHT_PAR) {
             return true;
         } else {
-            System.err.println("NOOS Importer: Error 17");
+            System.err.println("NOOS Importer: Error 17 when creating term of sort " + sort);
             error = true;
             return error;
 
