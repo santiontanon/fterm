@@ -38,12 +38,22 @@ public class AmalgamResult {
 
     public AmalgamResult(FeatureTerm a, double e, FeatureTerm t1, FeatureTerm t2) {
         amalgam = a;
+        argumentEvaluation = 0;
         evaluation = e;
         transfer1 = t1;
         transfer2 = t2;
     }
+    
+    public AmalgamResult(FeatureTerm a, int ae, double e, FeatureTerm t1, FeatureTerm t2) {
+        amalgam = a;
+        argumentEvaluation = ae;
+        evaluation = e;
+        transfer1 = t1;
+        transfer2 = t2;
+    }    
 
     FeatureTerm amalgam;
+    int argumentEvaluation;
     double evaluation;
     FeatureTerm transfer1;
     FeatureTerm transfer2;
@@ -60,6 +70,17 @@ public class AmalgamResult {
      */
     public void setAmalgam(FeatureTerm amalgam) {
         this.amalgam = amalgam;
+    }
+
+    /**
+     * @return the argumentEvaluation
+     */
+    public int getArgumentEvaluation() {
+        return argumentEvaluation;
+    }
+
+    public void setArgumentEvaluation(int ae) {
+        argumentEvaluation = ae;
     }
 
     /**
