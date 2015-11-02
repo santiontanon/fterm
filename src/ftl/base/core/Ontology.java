@@ -77,6 +77,11 @@ public class Ontology implements Serializable {
 	public void uses(Ontology o) {
 		m_super.add(o);
 	}
+        
+        
+        public List<Ontology> getUsedOntologies() {
+            return m_super;
+        }
 
 	/**
 	 * Gets the sort internal.
