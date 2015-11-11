@@ -6708,10 +6708,10 @@
                  (tests (define (test-results)
                           (ames negative)))))
   (solution (define (solution)
-              (f-rats (define ?X12 (evidence :id inadequated)))
+              (f-rats inadequate)
               (f-mice positive)
-              (m-mice !X12)
-              (m-rats !X12))))
+              (m-mice inadequate)
+              (m-rats inadequate))))
 
 (define (toxic-problem :id tr-santi-381)
   (description (define (chemical-compound :id cc-santi-381)
