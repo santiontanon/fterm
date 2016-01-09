@@ -407,6 +407,18 @@ public class Sort implements Serializable {
 		} // if
 	} // Sort::featureSort
 
+        
+	public void setFeatureSort(Symbol name, Sort s) {
+		Integer pos = -1;
+		pos = m_feature_position.get(name.get());
+		if (pos != null) {
+                    m_feature_sorts.set(pos, s);
+		} else {
+                    if (m_super != null) m_super.setFeatureSort(name, s);
+		} // if
+	} // featureSort
+
+        
 	/**
 	 * Feature default value.
 	 * 
